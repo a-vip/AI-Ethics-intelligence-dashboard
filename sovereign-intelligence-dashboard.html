@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sovereign Intelligence &amp; Ethics Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<style>
+  :root {
+    --bg: #f8f7f4;
+    --bg2: #f1f0ec;
+    --bg3: #e8e6e0;
+    --surface: #ffffff;
+    --border: rgba(0,0,0,0.1);
+    --border2: rgba(0,0,0,0.18);
+    --text: #1a1a18;
+    --text2: #4a4a46;
+    --text3: #8a8a84;
+    --accent: #1a1a18;
+    --red: #c0392b; --red-bg: #fdf0ef; --red-text: #8b2218;
+    --amber: #b8580a; --amber-bg: #fef6ec; --amber-text: #7a3a05;
+    --green: #2e7d32; --green-bg: #f0f7f0; --green-text: #1b4d1d;
+    --blue: #1565a0; --blue-bg: #eef5fc; --blue-text: #0d3f6e;
+    --purple: #5b21b6; --purple-bg: #f3f0fe; --purple-text: #3b1378;
+    --teal: #0f766e; --teal-bg: #f0faf9; --teal-text: #064e4a;
+    --font-mono: 'IBM Plex Mono', monospace;
+    --font-sans: 'IBM Plex Sans', sans-serif;
+    --r: 4px;
+    --transition: 0.2s ease;
+  }
+  [data-theme="dark"] {
+    --bg: #0f0f0e;
+    --bg2: #161614;
+    --bg3: #1e1e1b;
+    --surface: #1a1a18;
+    --border: rgba(255,255,255,0.08);
+    --border2: rgba(255,255,255,0.15);
+    --text: #e8e6e0;
+    --text2: #a8a8a0;
+    --text3: #606058;
+    --accent: #e8e6e0;
+    --red: #e05a4e; --red-bg: #2a1210; --red-text: #f09088;
+    --amber: #e8901e; --amber-bg: #241608; --amber-text: #f0b870;
+    --green: #4caf50; --green-bg: #0d1f0e; --green-text: #80d084;
+    --blue: #5b9bd5; --blue-bg: #0a1929; --blue-text: #90bfe8;
+    --purple: #9b6bde; --purple-bg: #1a0f2e; --purple-text: #c4a4f0;
+    --teal: #2dd4bf; --teal-bg: #031916; --teal-text: #5eead4;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { font-size: 13px; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-mono);
+    line-height: 1.5;
+    transition: background var(--transition), color var(--transition);
+  }
+
+  .dash-wrapper {
+    max-width: 1400px;
+    margin: 0 auto;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    transition: background var(--transition), border-color var(--transition);
+  }
+
+  /* ── TOP BAR ── */
+  .topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg2);
+    gap: 12px;
+    flex-wrap: wrap;
+    transition: background var(--transition), border-color var(--transition);
+  }
+  .topbar-left { display: flex; align-items: center; gap: 16px; }
+  .topbar-brand { font-size: 10px; font-weight: 500; letter-spacing: 0.14em; color: var(--text2); text-transform: uppercase; }
+  .topbar-version { font-size: 9px; color: var(--text3); border: 1px solid var(--border); padding: 1px 6px; border-radius: var(--r); }
+  .topbar-right { display: flex; align-items: center; gap: 12px; }
+  .live-badge { display: flex; align-items: center; gap: 5px; font-size: 9px; color: var(--green); font-weight: 500; letter-spacing: 0.08em; }
+  .live-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.4;} }
+  .clock { font-size: 10px; color: var(--text3); letter-spacing: 0.06em; }
+  .dark-toggle {
+    display: flex; align-items: center; gap: 6px;
+    background: var(--bg3); border: 1px solid var(--border2);
+    border-radius: var(--r); padding: 4px 10px; cursor: pointer;
+    font-family: var(--font-mono); font-size: 9px; font-weight: 500;
+    color: var(--text2); letter-spacing: 0.08em; text-transform: uppercase;
+    transition: background var(--transition), border-color var(--transition), color var(--transition);
+  }
+  .dark-toggle:hover { background: var(--border); }
+  .toggle-icon { font-size: 11px; }
+
+  /* ── STAT STRIP ── */
+  .stat-strip {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-bottom: 1px solid var(--border);
+    transition: border-color var(--transition);
+  }
+  .stat-cell {
+    padding: 10px 20px;
+    border-right: 1px solid var(--border);
+    transition: border-color var(--transition);
+  }
+  .stat-cell:last-child { border-right: none; }
+  .stat-label { font-size: 9px; color: var(--text3); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 4px; }
+  .stat-value { font-size: 22px; font-weight: 500; color: var(--text); line-height: 1; }
+  .stat-value.red { color: var(--red); }
+  .stat-value.amber { color: var(--amber); }
+  .stat-value.green { color: var(--green); }
+  .stat-value.blue { color: var(--blue); }
+  .stat-sub { font-size: 9px; color: var(--text3); margin-top: 3px; }
+
+  /* ── FILTER BAR ── */
+  .filter-bar {
+    display: flex; align-items: center; gap: 6px;
+    padding: 8px 20px; border-bottom: 1px solid var(--border);
+    background: var(--bg2); flex-wrap: wrap;
+    transition: background var(--transition), border-color var(--transition);
+  }
+  .filter-group { display: flex; align-items: center; gap: 5px; }
+  .filter-group-label { font-size: 9px; color: var(--text3); letter-spacing: 0.1em; text-transform: uppercase; margin-right: 2px; }
+  .fbtn {
+    font-size: 9px; padding: 3px 9px;
+    border: 1px solid var(--border); border-radius: var(--r);
+    background: transparent; color: var(--text2);
+    cursor: pointer; font-family: var(--font-mono); letter-spacing: 0.06em;
+    transition: all var(--transition); white-space: nowrap;
+  }
+  .fbtn:hover { background: var(--bg3); color: var(--text); }
+  .fbtn.active { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+  .filter-sep { width: 1px; height: 16px; background: var(--border); margin: 0 4px; flex-shrink: 0; }
+
+  /* ── MAIN GRID ── */
+  .main-layout { display: grid; grid-template-columns: 1fr 1fr 240px; }
+
+  /* ── MODULE ── */
+  .module {
+    border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    display: flex; flex-direction: column;
+    transition: border-color var(--transition);
+  }
+  .module.full { grid-column: 1 / 3; }
+  .module.no-right { border-right: none; }
+  .module.no-bottom { border-bottom: none; }
+  .mod-head {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 8px 16px; border-bottom: 1px solid var(--border);
+    background: var(--bg2);
+    transition: background var(--transition), border-color var(--transition);
+  }
+  .mod-title { font-size: 9px; font-weight: 500; letter-spacing: 0.12em; color: var(--text2); text-transform: uppercase; }
+  .mod-tag { font-size: 8px; padding: 2px 7px; border-radius: 2px; letter-spacing: 0.06em; font-weight: 500; text-transform: uppercase; }
+  .tag-r { background: var(--red-bg); color: var(--red-text); }
+  .tag-p { background: var(--purple-bg); color: var(--purple-text); }
+  .tag-g { background: var(--green-bg); color: var(--green-text); }
+  .tag-a { background: var(--amber-bg); color: var(--amber-text); }
+  .mod-body { padding: 12px 16px; flex: 1; }
+
+  /* ── LAWS TABLE ── */
+  .laws-table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+  .laws-table th { font-size: 8px; color: var(--text3); letter-spacing: 0.1em; text-transform: uppercase; padding: 4px 6px 6px; border-bottom: 1px solid var(--border); font-weight: 400; text-align: left; white-space: nowrap; }
+  .laws-table td { font-size: 10px; color: var(--text); padding: 6px 6px; border-bottom: 1px solid var(--border); vertical-align: middle; }
+  .laws-table tr:last-child td { border-bottom: none; }
+  .laws-table .col-flag { width: 28px; }
+  .laws-table .col-name { width: auto; }
+  .laws-table .col-auton { width: 80px; }
+  .laws-table .col-status { width: 72px; }
+  .laws-table .col-theater { width: 88px; }
+  .laws-table .col-sev { width: 56px; }
+  .laws-flag { font-size: 9px; color: var(--text3); }
+  .laws-name { font-size: 10px; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: block; }
+  .auton-wrap { display: flex; align-items: center; gap: 5px; }
+  .auton-track { flex: 1; height: 3px; background: var(--bg3); border-radius: 2px; }
+  .auton-fill { height: 3px; border-radius: 2px; }
+  .auton-pct { font-size: 8px; color: var(--text3); white-space: nowrap; flex-shrink: 0; }
+  .badge { font-size: 8px; padding: 2px 6px; border-radius: 2px; font-weight: 500; white-space: nowrap; display: inline-block; }
+  .b-legal { background: var(--green-bg); color: var(--green-text); }
+  .b-partial { background: var(--amber-bg); color: var(--amber-text); }
+  .b-unclear { background: var(--bg3); color: var(--text3); }
+  .b-illegal { background: var(--red-bg); color: var(--red-text); }
+  .theater { font-size: 8px; color: var(--text3); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; display: block; }
+
+  /* ── SURVEILLANCE HEAT ── */
+  .heat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+  .heat-cell { border-radius: 3px; padding: 8px 10px; cursor: default; transition: filter var(--transition); }
+  .heat-cell:hover { filter: brightness(0.96); }
+  .heat-cell .h-label { font-size: 9px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; }
+  .heat-cell .h-sub { font-size: 8px; margin-top: 1px; opacity: 0.7; }
+  .heat-cell .h-score { font-size: 20px; font-weight: 500; display: block; margin-top: 4px; }
+  .heat-cell .h-region { font-size: 8px; margin-top: 2px; opacity: 0.65; }
+  .hc1 { background: var(--red-bg); } .hc1 .h-label,.hc1 .h-score { color: var(--red-text); }
+  .hc2 { background: var(--amber-bg); } .hc2 .h-label,.hc2 .h-score { color: var(--amber-text); }
+  .hc3 { background: #fefce8; } .hc3 .h-label,.hc3 .h-score { color: #713f12; }
+  .hc4 { background: var(--green-bg); } .hc4 .h-label,.hc4 .h-score { color: var(--green-text); }
+  .hc5 { background: var(--bg3); } .hc5 .h-label,.hc5 .h-score { color: var(--text2); }
+  [data-theme="dark"] .hc3 { background: #1c1500; } [data-theme="dark"] .hc3 .h-label, [data-theme="dark"] .hc3 .h-score { color: #f0c040; }
+
+  /* ── REPO ── */
+  .repo-search-wrap { position: relative; margin-bottom: 10px; }
+  .repo-search-icon { position: absolute; left: 9px; top: 50%; transform: translateY(-50%); font-size: 11px; color: var(--text3); pointer-events: none; }
+  .repo-search {
+    width: 100%; padding: 6px 9px 6px 28px;
+    font-size: 10px; border: 1px solid var(--border);
+    border-radius: var(--r); background: var(--bg2); color: var(--text);
+    font-family: var(--font-mono);
+    transition: all var(--transition);
+    outline: none;
+  }
+  .repo-search:focus { border-color: var(--border2); background: var(--surface); }
+  .repo-item { padding: 7px 0; border-bottom: 1px solid var(--border); cursor: pointer; transition: background var(--transition); }
+  .repo-item:last-child { border-bottom: none; }
+  .repo-title { font-size: 10px; color: var(--text); line-height: 1.4; }
+  .repo-meta { display: flex; gap: 6px; margin-top: 4px; flex-wrap: wrap; }
+  .repo-badge { font-size: 8px; padding: 1px 5px; border-radius: 2px; background: var(--bg3); color: var(--text3); border: 1px solid var(--border); }
+  .repo-badge.src-icrc { background: var(--red-bg); color: var(--red-text); }
+  .repo-badge.src-un { background: var(--blue-bg); color: var(--blue-text); }
+  .repo-badge.src-nature { background: var(--teal-bg); color: var(--teal-text); }
+  .no-results { font-size: 10px; color: var(--text3); padding: 12px 0; text-align: center; }
+
+  /* ── RISK CHART ── */
+  .chart-canvas-wrap { position: relative; width: 100%; height: 220px; }
+  .radar-legend { display: flex; flex-wrap: wrap; gap: 6px 12px; margin-top: 10px; }
+  .rl-item { display: flex; align-items: center; gap: 5px; font-size: 9px; color: var(--text3); }
+  .rl-sq { width: 8px; height: 8px; border-radius: 1px; flex-shrink: 0; }
+
+  /* ── SIDEBAR ── */
+  .sidebar {
+    border-right: none; border-bottom: 1px solid var(--border);
+    display: flex; flex-direction: column; grid-row: span 2;
+    transition: border-color var(--transition);
+  }
+  .feed-head {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 8px 12px; border-bottom: 1px solid var(--border);
+    background: var(--bg2);
+    transition: background var(--transition), border-color var(--transition);
+  }
+  .feed-title { font-size: 9px; font-weight: 500; letter-spacing: 0.12em; color: var(--text2); text-transform: uppercase; }
+  .feed-count { font-size: 8px; background: var(--red-bg); color: var(--red-text); padding: 1px 5px; border-radius: 2px; font-weight: 500; }
+  .feed-body { flex: 1; overflow-y: auto; max-height: 640px; }
+  .feed-item {
+    padding: 9px 12px; border-bottom: 1px solid var(--border);
+    transition: background var(--transition), border-color var(--transition);
+    animation: fadeIn 0.5s ease;
+  }
+  .feed-item.new-item { background: var(--bg3); }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+  .feed-item-header { display: flex; align-items: center; gap: 6px; margin-bottom: 4px; }
+  .feed-dot { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; }
+  .feed-dot.alert { background: var(--red); }
+  .feed-dot.new { background: var(--green); }
+  .feed-dot.info { background: var(--blue); }
+  .feed-time { font-size: 8px; color: var(--text3); }
+  .feed-type { font-size: 7px; padding: 1px 4px; border-radius: 2px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.06em; }
+  .feed-type.alert { background: var(--red-bg); color: var(--red-text); }
+  .feed-type.new { background: var(--green-bg); color: var(--green-text); }
+  .feed-type.info { background: var(--blue-bg); color: var(--blue-text); }
+  .feed-text { font-size: 9px; color: var(--text2); line-height: 1.5; }
+
+  /* ── FOOTER ── */
+  .dash-footer {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 8px 20px; border-top: 1px solid var(--border);
+    background: var(--bg2); font-size: 8px; color: var(--text3);
+    flex-wrap: wrap; gap: 8px;
+    transition: background var(--transition), border-color var(--transition);
+  }
+
+  @media (max-width: 900px) {
+    .main-layout { grid-template-columns: 1fr; }
+    .module.full { grid-column: 1; }
+    .sidebar { grid-row: auto; max-height: 300px; }
+    .stat-strip { grid-template-columns: 1fr 1fr; }
+    .heat-grid { grid-template-columns: repeat(2, 1fr); }
+    .laws-table .col-theater, .laws-table .col-sev { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="dash-wrapper" id="dash">
+
+  <!-- TOP BAR -->
+  <div class="topbar">
+    <div class="topbar-left">
+      <span class="topbar-brand">Sovereign Intelligence &amp; Ethics Dashboard</span>
+      <span class="topbar-version">v2.2</span>
+    </div>
+    <div class="topbar-right">
+      <span class="live-badge"><span class="live-dot"></span>Live Feed</span>
+      <span class="clock" id="clock">00:00:00 UTC</span>
+      <button class="dark-toggle" onclick="toggleDark()" aria-label="Toggle dark mode">
+        <span class="toggle-icon" id="toggle-icon">&#9790;</span>
+        <span id="toggle-label">Dark mode</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- STAT STRIP -->
+  <div class="stat-strip">
+    <div class="stat-cell">
+      <div class="stat-label">LAWS tracked</div>
+      <div class="stat-value blue" id="stat-laws">8</div>
+      <div class="stat-sub">active deployments</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-label">Critical alerts</div>
+      <div class="stat-value red" id="stat-critical">4</div>
+      <div class="stat-sub">severity &#62; 85</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-label">Unclear legal status</div>
+      <div class="stat-value amber" id="stat-unclear">5</div>
+      <div class="stat-sub">no Art. 36 review</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-label">Repository entries</div>
+      <div class="stat-value green" id="stat-repo">10</div>
+      <div class="stat-sub">indexed documents</div>
+    </div>
+  </div>
+
+  <!-- FILTER BAR -->
+  <div class="filter-bar">
+    <div class="filter-group">
+      <span class="filter-group-label">Region</span>
+      <button class="fbtn active" data-f="region" data-v="ALL" onclick="setFilter('region','ALL',this)">All</button>
+      <button class="fbtn" data-f="region" data-v="EU" onclick="setFilter('region','EU',this)">EU</button>
+      <button class="fbtn" data-f="region" data-v="USA" onclick="setFilter('region','USA',this)">USA</button>
+      <button class="fbtn" data-f="region" data-v="ASIA" onclick="setFilter('region','ASIA',this)">Asia</button>
+      <button class="fbtn" data-f="region" data-v="MENA" onclick="setFilter('region','MENA',this)">MENA</button>
+    </div>
+    <div class="filter-sep"></div>
+    <div class="filter-group">
+      <span class="filter-group-label">Severity</span>
+      <button class="fbtn active" data-f="sev" data-v="ALL" onclick="setFilter('sev','ALL',this)">All</button>
+      <button class="fbtn" data-f="sev" data-v="CRITICAL" onclick="setFilter('sev','CRITICAL',this)">Critical</button>
+      <button class="fbtn" data-f="sev" data-v="HIGH" onclick="setFilter('sev','HIGH',this)">High</button>
+      <button class="fbtn" data-f="sev" data-v="MOD" onclick="setFilter('sev','MOD',this)">Moderate</button>
+    </div>
+    <div class="filter-sep"></div>
+    <div class="filter-group">
+      <span class="filter-group-label">Framework</span>
+      <button class="fbtn active" data-f="fw" data-v="ALL" onclick="setFilter('fw','ALL',this)">All</button>
+      <button class="fbtn" data-f="fw" data-v="IHL" onclick="setFilter('fw','IHL',this)">IHL</button>
+      <button class="fbtn" data-f="fw" data-v="DEONT" onclick="setFilter('fw','DEONT',this)">Deontological</button>
+      <button class="fbtn" data-f="fw" data-v="UTIL" onclick="setFilter('fw','UTIL',this)">Utilitarian</button>
+    </div>
+  </div>
+
+  <!-- MAIN LAYOUT -->
+  <div class="main-layout">
+
+    <!-- MODULE I: LAWS -->
+    <div class="module">
+      <div class="mod-head">
+        <span class="mod-title">I &mdash; LAWS Deployment Tracker</span>
+        <span class="mod-tag tag-r">Art. 36 Review</span>
+      </div>
+      <div class="mod-body">
+        <table class="laws-table">
+          <thead>
+            <tr>
+              <th class="col-flag"></th>
+              <th class="col-name">System</th>
+              <th class="col-auton">Autonomy</th>
+              <th class="col-status">Status</th>
+              <th class="col-theater">Theater</th>
+              <th class="col-sev">Sev.</th>
+            </tr>
+          </thead>
+          <tbody id="laws-list"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- MODULE II: SURVEILLANCE -->
+    <div class="module no-right">
+      <div class="mod-head">
+        <span class="mod-title">II &mdash; Domestic Surveillance Matrix</span>
+        <span class="mod-tag tag-p">Heat Index</span>
+      </div>
+      <div class="mod-body">
+        <div style="font-size:8px;color:var(--text3);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:8px;">Risk score 0&#8211;100 | Color = severity tier</div>
+        <div class="heat-grid" id="surv-grid"></div>
+      </div>
+    </div>
+
+    <!-- SIDEBAR: FEED -->
+    <div class="sidebar module no-right no-bottom">
+      <div class="feed-head">
+        <span class="feed-title">Intelligence Feed</span>
+        <span class="feed-count" id="feed-count">LIVE</span>
+      </div>
+      <div class="feed-body" id="feed-body"></div>
+    </div>
+
+    <!-- MODULE III: REPOSITORY -->
+    <div class="module no-bottom">
+      <div class="mod-head">
+        <span class="mod-title">III &mdash; Academic &amp; Legal Repository</span>
+        <span class="mod-tag tag-g">Searchable</span>
+      </div>
+      <div class="mod-body">
+        <div class="repo-search-wrap">
+          <span class="repo-search-icon">&#9906;</span>
+          <input class="repo-search" id="repo-q" placeholder="Search title, source, framework&#8230;" oninput="renderRepo()">
+        </div>
+        <div id="repo-list"></div>
+      </div>
+    </div>
+
+    <!-- MODULE IV: RISK RADAR -->
+    <div class="module no-right no-bottom">
+      <div class="mod-head">
+        <span class="mod-title">IV &mdash; Risk Assessment Visualizer</span>
+        <span class="mod-tag tag-a">Radar Matrix</span>
+      </div>
+      <div class="mod-body">
+        <div class="chart-canvas-wrap">
+          <canvas id="radarChart" role="img" aria-label="Radar chart comparing technological sophistication versus ethical and legal accountability for five actors: US DoD, China MSS, Private AI, UN GGE, EU AI Office.">Radar chart: US DoD high sophistication low accountability; China MSS highest scale lowest compliance; Private AI high sophistication moderate accountability; UN GGE low sophistication high oversight; EU AI Office moderate sophistication high compliance.</canvas>
+        </div>
+        <div class="radar-legend" id="radar-legend"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <div class="dash-footer">
+    <span>Data sources: UN GGE, ICRC, SIPRI, HRW, Nature Machine Intelligence, EJIL &mdash; For research and policy reference only.</span>
+    <span id="last-update">Last updated: &#8212;</span>
+  </div>
+
+</div>
+
+<script>
+var isDark = false;
+function toggleDark() {
+  isDark = !isDark;
+  document.documentElement.setAttribute('data-theme', isDark ? 'dark' : '');
+  document.getElementById('toggle-icon').textContent = isDark ? '\u2600' : '\u263E';
+  document.getElementById('toggle-label').textContent = isDark ? 'Light mode' : 'Dark mode';
+  if (radarChartInstance) {
+    updateRadarColors();
+  }
+}
+
+var filters = { region: 'ALL', sev: 'ALL', fw: 'ALL' };
+function setFilter(key, val, btn) {
+  filters[key] = val;
+  document.querySelectorAll('[data-f="' + key + '"]').forEach(function(b) {
+    b.classList.toggle('active', b.getAttribute('data-v') === val);
+  });
+  renderAll();
+}
+
+var LAWS = [
+  { flag:'IL', name:'Harop Loitering Munition', region:'MENA', autonomy:85, status:'unclear', theater:'Active/MENA', sev:'CRITICAL', fw:'IHL' },
+  { flag:'KR', name:'SGR-A1 Sentry System', region:'ASIA', autonomy:72, status:'partial', theater:'DMZ static', sev:'HIGH', fw:'IHL' },
+  { flag:'TR', name:'Kargu-2 Autonomous UAV', region:'MENA', autonomy:78, status:'unclear', theater:'Libya/Syria', sev:'CRITICAL', fw:'IHL' },
+  { flag:'US', name:'MQ-9 Reaper (semi-auto)', region:'USA', autonomy:45, status:'legal', theater:'Multi-theater', sev:'MOD', fw:'UTIL' },
+  { flag:'US', name:'Phalanx CIWS (auto-def)', region:'USA', autonomy:60, status:'legal', theater:'Naval', sev:'MOD', fw:'IHL' },
+  { flag:'GB', name:'Taranis UCAV', region:'EU', autonomy:55, status:'partial', theater:'R&D phase', sev:'MOD', fw:'DEONT' },
+  { flag:'RU', name:'Uran-9 Ground Robot', region:'ASIA', autonomy:50, status:'unclear', theater:'Syria (tested)', sev:'HIGH', fw:'IHL' },
+  { flag:'US', name:'DARPA OFFSET Drone Swarm', region:'USA', autonomy:90, status:'unclear', theater:'Development', sev:'HIGH', fw:'UTIL' },
+];
+
+var SURV = [
+  { label:'Facial Recog.', sub:'Public space mass', region:'ASIA', sev:'CRITICAL', score:98, cls:'hc1' },
+  { label:'Social Credit', sub:'Citizen scoring', region:'ASIA', sev:'CRITICAL', score:95, cls:'hc1' },
+  { label:'Genocidal Logistics', sub:'Algorithmic coord.', region:'ASIA', sev:'CRITICAL', score:91, cls:'hc1' },
+  { label:'Mass Biometric', sub:'Refugee tracking', region:'MENA', sev:'CRITICAL', score:88, cls:'hc1' },
+  { label:'Predictive Policing', sub:'Algorithmic LEA', region:'USA', sev:'HIGH', score:72, cls:'hc2' },
+  { label:'CCTV Network', sub:'Urban density', region:'MENA', sev:'HIGH', score:70, cls:'hc2' },
+  { label:'Palantir Gotham', sub:'Civil targeting', region:'USA', sev:'HIGH', score:68, cls:'hc2' },
+  { label:'Facial Recog.', sub:'LEA biometric', region:'EU', sev:'HIGH', score:65, cls:'hc3' },
+  { label:'Social Media AI', sub:'Sentiment surv.', region:'EU', sev:'MOD', score:45, cls:'hc4' },
+];
+
+var REPO = [
+  { title:'Autonomous Weapons Systems and the Laws of Armed Conflict', source:'UN GGE', srcClass:'src-un', year:2023, fw:'IHL', region:'ALL', sev:'CRITICAL' },
+  { title:'ICRC Position on Autonomous Weapon Systems', source:'ICRC', srcClass:'src-icrc', year:2023, fw:'IHL', region:'ALL', sev:'HIGH' },
+  { title:'Meaningful Human Control over Force Decisions', source:'Nature MI', srcClass:'src-nature', year:2022, fw:'DEONT', region:'EU', sev:'HIGH' },
+  { title:'Algorithmic Accountability in Predictive Policing', source:'J.IHA', srcClass:'', year:2023, fw:'UTIL', region:'USA', sev:'MOD' },
+  { title:'GGE/2023/CRP.1 — Report on Lethal Autonomous Weapons', source:'UN GGE', srcClass:'src-un', year:2023, fw:'IHL', region:'ALL', sev:'CRITICAL' },
+  { title:'AI and Mass Surveillance: ECHR Implications', source:'EJIL', srcClass:'', year:2022, fw:'DEONT', region:'EU', sev:'HIGH' },
+  { title:'Dual-Use AI in Non-International Armed Conflicts', source:'IRRC', srcClass:'', year:2021, fw:'IHL', region:'MENA', sev:'HIGH' },
+  { title:'The Trolley Problem at Scale: Utilitarian AI Ethics in Warfare', source:'Ethics & IT', srcClass:'', year:2022, fw:'UTIL', region:'ALL', sev:'MOD' },
+  { title:'AI-Enabled Targeting and Proportionality Assessment', source:'Nature MI', srcClass:'src-nature', year:2023, fw:'IHL', region:'ALL', sev:'CRITICAL' },
+  { title:'Social Credit Systems as Human Rights Violations', source:'HRL Rev', srcClass:'', year:2021, fw:'DEONT', region:'ASIA', sev:'CRITICAL' },
+];
+
+var FEED = [
+  { type:'alert', text:'CRITICAL: Autonomous drone swarm deployment confirmed — Eastern Ukraine theatre.' },
+  { type:'new', text:'UN GGE emergency session convened — LAWS treaty binding framework under discussion.' },
+  { type:'info', text:'Nature MI pre-print: "Ethical Alignment Failures in Military AI Systems (2025 survey)."' },
+  { type:'new', text:'EU AI Act enforcement guidance issued — ban on real-time biometric systems extended.' },
+  { type:'alert', text:'HIGH: Predictive policing algorithm flagged by ACLU — Chicago PD racial disparity audit.' },
+  { type:'info', text:'ICRC updates LAWS statement — calls for binding treaty by 2026 with verification mechanism.' },
+  { type:'new', text:'J.IHA publishes: "Accountability Gaps in Fully Autonomous Targeting Systems."' },
+  { type:'alert', text:'CRITICAL: Mass biometric breach — 4.2M refugee records exposed in MENA database.' },
+  { type:'info', text:'Stanford HAI releases new risk taxonomy framework for autonomous weapons (v3.1).' },
+  { type:'new', text:'UK MoD releases revised Article 36 criteria — redacted portions under FOIA challenge.' },
+  { type:'alert', text:'HIGH: Social credit pilot expanded to 14 additional municipalities — oversight absent.' },
+  { type:'info', text:'IEEE Spectrum: "The Autonomy Threshold" — systems crossing 75% autonomy benchmark.' },
+  { type:'new', text:'SIPRI annual report: global LAWS spending up 34% YoY — governance mechanisms stalled.' },
+  { type:'alert', text:'CRITICAL: Facial recognition deployed at mass protest event — no legal authorization confirmed.' },
+  { type:'info', text:'HRW report: social scoring systems linked to detention of 890,000+ individuals in 2024.' },
+];
+
+function matchItem(item) {
+  var r = filters.region === 'ALL' || item.region === filters.region || item.region === 'ALL';
+  var s = filters.sev === 'ALL' || item.sev === filters.sev || item.severity === filters.sev;
+  var f = filters.fw === 'ALL' || item.fw === filters.fw || item.framework === filters.fw;
+  return r && s && f;
+}
+
+function renderLaws() {
+  var list = document.getElementById('laws-list');
+  var filtered = LAWS.filter(matchItem);
+  if (!filtered.length) {
+    list.innerHTML = '<tr><td colspan="6" style="font-size:10px;color:var(--text3);padding:12px 0;text-align:center;">No systems match current filters.</td></tr>';
+    document.getElementById('stat-laws').textContent = '0';
+    document.getElementById('stat-critical').textContent = '0';
+    return;
+  }
+  list.innerHTML = filtered.map(function(d) {
+    var pct = d.autonomy;
+    var fill = pct >= 80 ? '#c0392b' : pct >= 60 ? '#b8580a' : '#2e7d32';
+    var bClass = d.status === 'legal' ? 'b-legal' : d.status === 'partial' ? 'b-partial' : d.status === 'illegal' ? 'b-illegal' : 'b-unclear';
+    var bText = d.status === 'legal' ? 'Art.36 OK' : d.status === 'partial' ? 'Partial' : d.status === 'illegal' ? 'Prohibited' : 'Unclear';
+    var sevColor = d.sev === 'CRITICAL' ? 'var(--red)' : d.sev === 'HIGH' ? 'var(--amber)' : 'var(--text3)';
+    return '<tr>' +
+      '<td class="col-flag"><span class="laws-flag">' + d.flag + '</span></td>' +
+      '<td class="col-name"><span class="laws-name" title="' + d.name + '">' + d.name + '</span></td>' +
+      '<td class="col-auton"><div class="auton-wrap"><div class="auton-track"><div class="auton-fill" style="width:' + pct + '%;background:' + fill + ';"></div></div><span class="auton-pct">' + pct + '%</span></div></td>' +
+      '<td class="col-status"><span class="badge ' + bClass + '">' + bText + '</span></td>' +
+      '<td class="col-theater"><span class="theater">' + d.theater + '</span></td>' +
+      '<td class="col-sev" style="font-size:8px;font-weight:500;color:' + sevColor + ';">' + d.sev + '</td>' +
+      '</tr>';
+  }).join('');
+  document.getElementById('stat-laws').textContent = filtered.length;
+  var crit = filtered.filter(function(d){ return d.sev === 'CRITICAL'; }).length;
+  document.getElementById('stat-critical').textContent = crit;
+}
+
+function renderSurv() {
+  var grid = document.getElementById('surv-grid');
+  var filtered = SURV.filter(function(d) {
+    var r = filters.region === 'ALL' || d.region === filters.region;
+    var s = filters.sev === 'ALL' || d.sev === filters.sev;
+    return r && s;
+  });
+  if (!filtered.length) {
+    grid.innerHTML = '<div style="font-size:10px;color:var(--text3);padding:12px 0;text-align:center;grid-column:1/-1;">No data matches current filters.</div>';
+    return;
+  }
+  grid.innerHTML = filtered.map(function(d) {
+    return '<div class="heat-cell ' + d.cls + '">' +
+      '<div class="h-label">' + d.label + '</div>' +
+      '<div class="h-sub">' + d.sub + '</div>' +
+      '<span class="h-score">' + d.score + '</span>' +
+      '<div class="h-region">' + d.region + '</div>' +
+      '</div>';
+  }).join('');
+}
+
+function renderRepo() {
+  var list = document.getElementById('repo-list');
+  var q = (document.getElementById('repo-q') || {value:''}).value.toLowerCase();
+  var filtered = REPO.filter(function(d) {
+    var m = matchItem(d);
+    var s = !q || d.title.toLowerCase().indexOf(q) > -1 || d.source.toLowerCase().indexOf(q) > -1 || d.fw.toLowerCase().indexOf(q) > -1;
+    return m && s;
+  });
+  document.getElementById('stat-repo').textContent = filtered.length;
+  if (!filtered.length) {
+    list.innerHTML = '<div class="no-results">No documents match current filters.</div>';
+    return;
+  }
+  list.innerHTML = filtered.map(function(d) {
+    return '<div class="repo-item">' +
+      '<div class="repo-title">' + d.title + '</div>' +
+      '<div class="repo-meta">' +
+        '<span class="repo-badge ' + d.srcClass + '">' + d.source + '</span>' +
+        '<span class="repo-badge">' + d.year + '</span>' +
+        '<span class="repo-badge">' + d.fw + '</span>' +
+        '<span class="repo-badge">' + d.region + '</span>' +
+      '</div></div>';
+  }).join('');
+}
+
+var radarChartInstance = null;
+var radarDatasets = [
+  { label:'US DoD', data:[88,72,45,62,40], color:'#c0392b' },
+  { label:'China MSS', data:[85,95,12,18,8], color:'#7f77dd' },
+  { label:'Private AI (aggr.)', data:[92,60,38,50,30], color:'#b8580a' },
+  { label:'UN GGE', data:[20,15,85,80,92], color:'#2e7d32' },
+  { label:'EU AI Office', data:[35,40,75,88,82], color:'#1565a0' },
+];
+
+function getRadarColors() {
+  return isDark ? { grid:'rgba(255,255,255,0.1)', labels:'#606058', ticks:'#606058', backdrop:'transparent' }
+                : { grid:'rgba(0,0,0,0.08)', labels:'#8a8a84', ticks:'#8a8a84', backdrop:'transparent' };
+}
+
+function updateRadarColors() {
+  var c = getRadarColors();
+  radarChartInstance.options.scales.r.grid.color = c.grid;
+  radarChartInstance.options.scales.r.angleLines.color = c.grid;
+  radarChartInstance.options.scales.r.pointLabels.color = c.labels;
+  radarChartInstance.options.scales.r.ticks.color = c.ticks;
+  radarChartInstance.options.scales.r.ticks.backdropColor = c.backdrop;
+  radarChartInstance.update();
+}
+
+function renderRadar() {
+  var c = getRadarColors();
+  var ctx = document.getElementById('radarChart');
+  radarChartInstance = new Chart(ctx, {
+    type: 'radar',
+    data: {
+      labels: ['Tech Sophistication', 'Deployment Scale', 'Accountability', 'Legal Compliance', 'Oversight Transparency'],
+      datasets: radarDatasets.map(function(d) {
+        return {
+          label: d.label,
+          data: d.data,
+          borderColor: d.color,
+          backgroundColor: d.color + '14',
+          pointBackgroundColor: d.color,
+          borderWidth: 1.5,
+          pointRadius: 3,
+          pointHoverRadius: 5,
+        };
+      })
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { display: false }, tooltip: { bodyFont: { family: 'IBM Plex Mono', size: 10 }, titleFont: { family: 'IBM Plex Mono', size: 10 } } },
+      scales: { r: {
+        min: 0, max: 100,
+        ticks: { stepSize: 25, font: { size: 8, family: 'IBM Plex Mono' }, color: c.ticks, backdropColor: c.backdrop },
+        grid: { color: c.grid },
+        angleLines: { color: c.grid },
+        pointLabels: { font: { size: 8, family: 'IBM Plex Mono' }, color: c.labels }
+      }}
+    }
+  });
+  var legend = document.getElementById('radar-legend');
+  legend.innerHTML = radarDatasets.map(function(d) {
+    return '<span class="rl-item"><span class="rl-sq" style="background:' + d.color + '"></span>' + d.label + '</span>';
+  }).join('');
+}
+
+var feedIdx = 0;
+function initFeed() {
+  var body = document.getElementById('feed-body');
+  body.innerHTML = FEED.slice(0, 8).map(function(f) {
+    return buildFeedItem(f, false);
+  }).join('');
+  feedIdx = 8;
+}
+
+function buildFeedItem(f, isNew) {
+  var now = new Date();
+  var t = String(now.getUTCHours()).padStart(2,'0') + ':' + String(now.getUTCMinutes()).padStart(2,'0') + ' UTC';
+  return '<div class="feed-item' + (isNew ? ' new-item' : '') + '">' +
+    '<div class="feed-item-header">' +
+      '<span class="feed-dot ' + f.type + '"></span>' +
+      '<span class="feed-time">' + t + '</span>' +
+      '<span class="feed-type ' + f.type + '">' + f.type + '</span>' +
+    '</div>' +
+    '<div class="feed-text">' + f.text + '</div>' +
+    '</div>';
+}
+
+function addFeedItem() {
+  var body = document.getElementById('feed-body');
+  var f = FEED[feedIdx % FEED.length];
+  feedIdx++;
+  var html = buildFeedItem(f, true);
+  body.insertAdjacentHTML('afterbegin', html);
+  if (body.children.length > 20) body.removeChild(body.lastChild);
+  var count = document.getElementById('feed-count');
+  count.textContent = 'LIVE';
+  document.getElementById('last-update').textContent = 'Last updated: ' + new Date().toUTCString().slice(0, 25);
+}
+
+function updateClock() {
+  var el = document.getElementById('clock');
+  if (el) {
+    var n = new Date();
+    el.textContent = String(n.getUTCHours()).padStart(2,'0') + ':' +
+                     String(n.getUTCMinutes()).padStart(2,'0') + ':' +
+                     String(n.getUTCSeconds()).padStart(2,'0') + ' UTC';
+  }
+}
+
+function renderAll() { renderLaws(); renderSurv(); renderRepo(); }
+
+renderAll();
+renderRadar();
+initFeed();
+updateClock();
+setInterval(updateClock, 1000);
+setInterval(addFeedItem, 9000);
+document.getElementById('last-update').textContent = 'Last updated: ' + new Date().toUTCString().slice(0, 25);
+</script>
+</body>
+</html>
