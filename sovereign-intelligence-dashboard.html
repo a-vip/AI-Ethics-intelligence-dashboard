@@ -3,720 +3,1581 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sovereign Intelligence &amp; Ethics Dashboard</title>
+<title>Sovereign Intelligence & Ethics Dashboard</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <style>
-  :root {
-    --bg: #f8f7f4;
-    --bg2: #f1f0ec;
-    --bg3: #e8e6e0;
-    --surface: #ffffff;
-    --border: rgba(0,0,0,0.1);
-    --border2: rgba(0,0,0,0.18);
-    --text: #1a1a18;
-    --text2: #4a4a46;
-    --text3: #8a8a84;
-    --accent: #1a1a18;
-    --red: #c0392b; --red-bg: #fdf0ef; --red-text: #8b2218;
-    --amber: #b8580a; --amber-bg: #fef6ec; --amber-text: #7a3a05;
-    --green: #2e7d32; --green-bg: #f0f7f0; --green-text: #1b4d1d;
-    --blue: #1565a0; --blue-bg: #eef5fc; --blue-text: #0d3f6e;
-    --purple: #5b21b6; --purple-bg: #f3f0fe; --purple-text: #3b1378;
-    --teal: #0f766e; --teal-bg: #f0faf9; --teal-text: #064e4a;
-    --font-mono: 'IBM Plex Mono', monospace;
-    --font-sans: 'IBM Plex Sans', sans-serif;
-    --r: 4px;
-    --transition: 0.2s ease;
-  }
-  [data-theme="dark"] {
-    --bg: #0f0f0e;
-    --bg2: #161614;
-    --bg3: #1e1e1b;
-    --surface: #1a1a18;
-    --border: rgba(255,255,255,0.08);
-    --border2: rgba(255,255,255,0.15);
-    --text: #e8e6e0;
-    --text2: #a8a8a0;
-    --text3: #606058;
-    --accent: #e8e6e0;
-    --red: #e05a4e; --red-bg: #2a1210; --red-text: #f09088;
-    --amber: #e8901e; --amber-bg: #241608; --amber-text: #f0b870;
-    --green: #4caf50; --green-bg: #0d1f0e; --green-text: #80d084;
-    --blue: #5b9bd5; --blue-bg: #0a1929; --blue-text: #90bfe8;
-    --purple: #9b6bde; --purple-bg: #1a0f2e; --purple-text: #c4a4f0;
-    --teal: #2dd4bf; --teal-bg: #031916; --teal-text: #5eead4;
-  }
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { font-size: 13px; }
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: var(--font-mono);
-    line-height: 1.5;
-    transition: background var(--transition), color var(--transition);
-  }
-
-  .dash-wrapper {
-    max-width: 1400px;
-    margin: 0 auto;
-    border: 1px solid var(--border);
-    background: var(--surface);
-    transition: background var(--transition), border-color var(--transition);
-  }
-
-  /* ── TOP BAR ── */
-  .topbar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px 20px;
-    border-bottom: 1px solid var(--border);
-    background: var(--bg2);
-    gap: 12px;
-    flex-wrap: wrap;
-    transition: background var(--transition), border-color var(--transition);
-  }
-  .topbar-left { display: flex; align-items: center; gap: 16px; }
-  .topbar-brand { font-size: 10px; font-weight: 500; letter-spacing: 0.14em; color: var(--text2); text-transform: uppercase; }
-  .topbar-version { font-size: 9px; color: var(--text3); border: 1px solid var(--border); padding: 1px 6px; border-radius: var(--r); }
-  .topbar-right { display: flex; align-items: center; gap: 12px; }
-  .live-badge { display: flex; align-items: center; gap: 5px; font-size: 9px; color: var(--green); font-weight: 500; letter-spacing: 0.08em; }
-  .live-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); animation: pulse 2s infinite; }
-  @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.4;} }
-  .clock { font-size: 10px; color: var(--text3); letter-spacing: 0.06em; }
-  .dark-toggle {
-    display: flex; align-items: center; gap: 6px;
-    background: var(--bg3); border: 1px solid var(--border2);
-    border-radius: var(--r); padding: 4px 10px; cursor: pointer;
-    font-family: var(--font-mono); font-size: 9px; font-weight: 500;
-    color: var(--text2); letter-spacing: 0.08em; text-transform: uppercase;
-    transition: background var(--transition), border-color var(--transition), color var(--transition);
-  }
-  .dark-toggle:hover { background: var(--border); }
-  .toggle-icon { font-size: 11px; }
-
-  /* ── STAT STRIP ── */
-  .stat-strip {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    border-bottom: 1px solid var(--border);
-    transition: border-color var(--transition);
-  }
-  .stat-cell {
-    padding: 10px 20px;
-    border-right: 1px solid var(--border);
-    transition: border-color var(--transition);
-  }
-  .stat-cell:last-child { border-right: none; }
-  .stat-label { font-size: 9px; color: var(--text3); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 4px; }
-  .stat-value { font-size: 22px; font-weight: 500; color: var(--text); line-height: 1; }
-  .stat-value.red { color: var(--red); }
-  .stat-value.amber { color: var(--amber); }
-  .stat-value.green { color: var(--green); }
-  .stat-value.blue { color: var(--blue); }
-  .stat-sub { font-size: 9px; color: var(--text3); margin-top: 3px; }
-
-  /* ── FILTER BAR ── */
-  .filter-bar {
-    display: flex; align-items: center; gap: 6px;
-    padding: 8px 20px; border-bottom: 1px solid var(--border);
-    background: var(--bg2); flex-wrap: wrap;
-    transition: background var(--transition), border-color var(--transition);
-  }
-  .filter-group { display: flex; align-items: center; gap: 5px; }
-  .filter-group-label { font-size: 9px; color: var(--text3); letter-spacing: 0.1em; text-transform: uppercase; margin-right: 2px; }
-  .fbtn {
-    font-size: 9px; padding: 3px 9px;
-    border: 1px solid var(--border); border-radius: var(--r);
-    background: transparent; color: var(--text2);
-    cursor: pointer; font-family: var(--font-mono); letter-spacing: 0.06em;
-    transition: all var(--transition); white-space: nowrap;
-  }
-  .fbtn:hover { background: var(--bg3); color: var(--text); }
-  .fbtn.active { background: var(--accent); color: var(--bg); border-color: var(--accent); }
-  .filter-sep { width: 1px; height: 16px; background: var(--border); margin: 0 4px; flex-shrink: 0; }
-
-  /* ── MAIN GRID ── */
-  .main-layout { display: grid; grid-template-columns: 1fr 1fr 240px; }
-
-  /* ── MODULE ── */
-  .module {
-    border-right: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-    display: flex; flex-direction: column;
-    transition: border-color var(--transition);
-  }
-  .module.full { grid-column: 1 / 3; }
-  .module.no-right { border-right: none; }
-  .module.no-bottom { border-bottom: none; }
-  .mod-head {
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 8px 16px; border-bottom: 1px solid var(--border);
-    background: var(--bg2);
-    transition: background var(--transition), border-color var(--transition);
-  }
-  .mod-title { font-size: 9px; font-weight: 500; letter-spacing: 0.12em; color: var(--text2); text-transform: uppercase; }
-  .mod-tag { font-size: 8px; padding: 2px 7px; border-radius: 2px; letter-spacing: 0.06em; font-weight: 500; text-transform: uppercase; }
-  .tag-r { background: var(--red-bg); color: var(--red-text); }
-  .tag-p { background: var(--purple-bg); color: var(--purple-text); }
-  .tag-g { background: var(--green-bg); color: var(--green-text); }
-  .tag-a { background: var(--amber-bg); color: var(--amber-text); }
-  .mod-body { padding: 12px 16px; flex: 1; }
-
-  /* ── LAWS TABLE ── */
-  .laws-table { width: 100%; border-collapse: collapse; table-layout: fixed; }
-  .laws-table th { font-size: 8px; color: var(--text3); letter-spacing: 0.1em; text-transform: uppercase; padding: 4px 6px 6px; border-bottom: 1px solid var(--border); font-weight: 400; text-align: left; white-space: nowrap; }
-  .laws-table td { font-size: 10px; color: var(--text); padding: 6px 6px; border-bottom: 1px solid var(--border); vertical-align: middle; }
-  .laws-table tr:last-child td { border-bottom: none; }
-  .laws-table .col-flag { width: 28px; }
-  .laws-table .col-name { width: auto; }
-  .laws-table .col-auton { width: 80px; }
-  .laws-table .col-status { width: 72px; }
-  .laws-table .col-theater { width: 88px; }
-  .laws-table .col-sev { width: 56px; }
-  .laws-flag { font-size: 9px; color: var(--text3); }
-  .laws-name { font-size: 10px; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: block; }
-  .auton-wrap { display: flex; align-items: center; gap: 5px; }
-  .auton-track { flex: 1; height: 3px; background: var(--bg3); border-radius: 2px; }
-  .auton-fill { height: 3px; border-radius: 2px; }
-  .auton-pct { font-size: 8px; color: var(--text3); white-space: nowrap; flex-shrink: 0; }
-  .badge { font-size: 8px; padding: 2px 6px; border-radius: 2px; font-weight: 500; white-space: nowrap; display: inline-block; }
-  .b-legal { background: var(--green-bg); color: var(--green-text); }
-  .b-partial { background: var(--amber-bg); color: var(--amber-text); }
-  .b-unclear { background: var(--bg3); color: var(--text3); }
-  .b-illegal { background: var(--red-bg); color: var(--red-text); }
-  .theater { font-size: 8px; color: var(--text3); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; display: block; }
-
-  /* ── SURVEILLANCE HEAT ── */
-  .heat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
-  .heat-cell { border-radius: 3px; padding: 8px 10px; cursor: default; transition: filter var(--transition); }
-  .heat-cell:hover { filter: brightness(0.96); }
-  .heat-cell .h-label { font-size: 9px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; }
-  .heat-cell .h-sub { font-size: 8px; margin-top: 1px; opacity: 0.7; }
-  .heat-cell .h-score { font-size: 20px; font-weight: 500; display: block; margin-top: 4px; }
-  .heat-cell .h-region { font-size: 8px; margin-top: 2px; opacity: 0.65; }
-  .hc1 { background: var(--red-bg); } .hc1 .h-label,.hc1 .h-score { color: var(--red-text); }
-  .hc2 { background: var(--amber-bg); } .hc2 .h-label,.hc2 .h-score { color: var(--amber-text); }
-  .hc3 { background: #fefce8; } .hc3 .h-label,.hc3 .h-score { color: #713f12; }
-  .hc4 { background: var(--green-bg); } .hc4 .h-label,.hc4 .h-score { color: var(--green-text); }
-  .hc5 { background: var(--bg3); } .hc5 .h-label,.hc5 .h-score { color: var(--text2); }
-  [data-theme="dark"] .hc3 { background: #1c1500; } [data-theme="dark"] .hc3 .h-label, [data-theme="dark"] .hc3 .h-score { color: #f0c040; }
-
-  /* ── REPO ── */
-  .repo-search-wrap { position: relative; margin-bottom: 10px; }
-  .repo-search-icon { position: absolute; left: 9px; top: 50%; transform: translateY(-50%); font-size: 11px; color: var(--text3); pointer-events: none; }
-  .repo-search {
-    width: 100%; padding: 6px 9px 6px 28px;
-    font-size: 10px; border: 1px solid var(--border);
-    border-radius: var(--r); background: var(--bg2); color: var(--text);
-    font-family: var(--font-mono);
-    transition: all var(--transition);
-    outline: none;
-  }
-  .repo-search:focus { border-color: var(--border2); background: var(--surface); }
-  .repo-item { padding: 7px 0; border-bottom: 1px solid var(--border); cursor: pointer; transition: background var(--transition); }
-  .repo-item:last-child { border-bottom: none; }
-  .repo-title { font-size: 10px; color: var(--text); line-height: 1.4; }
-  .repo-meta { display: flex; gap: 6px; margin-top: 4px; flex-wrap: wrap; }
-  .repo-badge { font-size: 8px; padding: 1px 5px; border-radius: 2px; background: var(--bg3); color: var(--text3); border: 1px solid var(--border); }
-  .repo-badge.src-icrc { background: var(--red-bg); color: var(--red-text); }
-  .repo-badge.src-un { background: var(--blue-bg); color: var(--blue-text); }
-  .repo-badge.src-nature { background: var(--teal-bg); color: var(--teal-text); }
-  .no-results { font-size: 10px; color: var(--text3); padding: 12px 0; text-align: center; }
-
-  /* ── RISK CHART ── */
-  .chart-canvas-wrap { position: relative; width: 100%; height: 220px; }
-  .radar-legend { display: flex; flex-wrap: wrap; gap: 6px 12px; margin-top: 10px; }
-  .rl-item { display: flex; align-items: center; gap: 5px; font-size: 9px; color: var(--text3); }
-  .rl-sq { width: 8px; height: 8px; border-radius: 1px; flex-shrink: 0; }
-
-  /* ── SIDEBAR ── */
-  .sidebar {
-    border-right: none; border-bottom: 1px solid var(--border);
-    display: flex; flex-direction: column; grid-row: span 2;
-    transition: border-color var(--transition);
-  }
-  .feed-head {
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 8px 12px; border-bottom: 1px solid var(--border);
-    background: var(--bg2);
-    transition: background var(--transition), border-color var(--transition);
-  }
-  .feed-title { font-size: 9px; font-weight: 500; letter-spacing: 0.12em; color: var(--text2); text-transform: uppercase; }
-  .feed-count { font-size: 8px; background: var(--red-bg); color: var(--red-text); padding: 1px 5px; border-radius: 2px; font-weight: 500; }
-  .feed-body { flex: 1; overflow-y: auto; max-height: 640px; }
-  .feed-item {
-    padding: 9px 12px; border-bottom: 1px solid var(--border);
-    transition: background var(--transition), border-color var(--transition);
-    animation: fadeIn 0.5s ease;
-  }
-  .feed-item.new-item { background: var(--bg3); }
-  @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
-  .feed-item-header { display: flex; align-items: center; gap: 6px; margin-bottom: 4px; }
-  .feed-dot { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; }
-  .feed-dot.alert { background: var(--red); }
-  .feed-dot.new { background: var(--green); }
-  .feed-dot.info { background: var(--blue); }
-  .feed-time { font-size: 8px; color: var(--text3); }
-  .feed-type { font-size: 7px; padding: 1px 4px; border-radius: 2px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.06em; }
-  .feed-type.alert { background: var(--red-bg); color: var(--red-text); }
-  .feed-type.new { background: var(--green-bg); color: var(--green-text); }
-  .feed-type.info { background: var(--blue-bg); color: var(--blue-text); }
-  .feed-text { font-size: 9px; color: var(--text2); line-height: 1.5; }
-
-  /* ── FOOTER ── */
-  .dash-footer {
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 8px 20px; border-top: 1px solid var(--border);
-    background: var(--bg2); font-size: 8px; color: var(--text3);
-    flex-wrap: wrap; gap: 8px;
-    transition: background var(--transition), border-color var(--transition);
-  }
-
-  @media (max-width: 900px) {
-    .main-layout { grid-template-columns: 1fr; }
-    .module.full { grid-column: 1; }
-    .sidebar { grid-row: auto; max-height: 300px; }
-    .stat-strip { grid-template-columns: 1fr 1fr; }
-    .heat-grid { grid-template-columns: repeat(2, 1fr); }
-    .laws-table .col-theater, .laws-table .col-sev { display: none; }
-  }
+body { background: #000; margin: 0; padding: 0; color: #fff; font-family: 'IBM Plex Sans', sans-serif; }
 </style>
 </head>
 <body>
 
-<div class="dash-wrapper" id="dash">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js" defer></script>
+<script>
+// Modal Logic and Country Dataset
+const matrixData = [
+  { c: 'Israel', ccw: 'Ratified (Protocols I-IV)', ban: 'Opposed', safety: 'Signed Bletchley', banCls: 't-opposed', src: 'UNODA' },
+  { c: 'United States', ccw: 'Ratified', ban: 'Opposed (Favors Guidelines)', safety: 'Signed Bletchley', banCls: 't-opposed', src: 'UNODA / DoS' },
+  { c: 'China', ccw: 'Ratified', ban: 'Supports Ban on Use (Not Dev)', safety: 'Signed Bletchley', banCls: 't-neutral', src: 'UN GGE' },
+  { c: 'Russia', ccw: 'Ratified', ban: 'Opposed', safety: 'Did Not Sign', banCls: 't-opposed', src: 'UN GGE' },
+  { c: 'United Kingdom', ccw: 'Ratified', ban: 'Opposed', safety: 'Hosted Bletchley', banCls: 't-opposed', src: 'UN GGE' },
+  { c: 'France', ccw: 'Ratified', ban: 'Opposed (Favors Declaration)', safety: 'Signed Bletchley', banCls: 't-opposed', src: 'UN GGE' },
+  { c: 'Germany', ccw: 'Ratified', ban: 'Opposed (Favors Declaration)', safety: 'Signed Bletchley', banCls: 't-opposed', src: 'UN GGE' },
+  { c: 'India', ccw: 'Ratified', ban: 'Opposed', safety: 'Signed Bletchley', banCls: 't-opposed', src: 'UN GGE' },
+  { c: 'Austria', ccw: 'Ratified', ban: 'Strongly Supports Ban', safety: 'Did Not Sign', banCls: 't-supports', src: 'UN GGE / Austrian MFA' },
+  { c: 'Costa Rica', ccw: 'Ratified', ban: 'Strongly Supports Ban', safety: 'Did Not Sign', banCls: 't-supports', src: 'UN GGE' },
+  { c: 'Brazil', ccw: 'Ratified', ban: 'Supports Ban', safety: 'Signed Bletchley', banCls: 't-supports', src: 'UN GGE' },
+  { c: 'South Africa', ccw: 'Ratified', ban: 'Supports Ban', safety: 'Did Not Sign', banCls: 't-supports', src: 'UN GGE' },
+  { c: 'Japan', ccw: 'Ratified', ban: 'Opposed', safety: 'Signed Bletchley', banCls: 't-opposed', src: 'UN GGE' },
+  { c: 'South Korea', ccw: 'Ratified', ban: 'Opposed', safety: 'Signed Bletchley', banCls: 't-opposed', src: 'UN GGE' },
+  { c: 'Australia', ccw: 'Ratified', ban: 'Opposed', safety: 'Signed Bletchley', banCls: 't-opposed', src: 'UN GGE' },
+  { c: 'Turkey', ccw: 'Ratified', ban: 'Opposed', safety: 'Signed Bletchley', banCls: 't-opposed', src: 'UN GGE' },
+  { c: 'Iran', ccw: 'Not Ratified', ban: 'Unknown', safety: 'Did Not Sign', banCls: 't-neutral', src: 'UNODA' },
+  { c: 'Pakistan', ccw: 'Ratified', ban: 'Supports Ban', safety: 'Did Not Sign', banCls: 't-supports', src: 'UN GGE' },
+  { c: 'New Zealand', ccw: 'Ratified', ban: 'Supports Ban', safety: 'Did Not Sign', banCls: 't-supports', src: 'UN GGE' },
+  { c: 'Canada', ccw: 'Ratified', ban: 'Opposed', safety: 'Signed Bletchley', banCls: 't-opposed', src: 'UN GGE' },
+  { c: 'Mexico', ccw: 'Ratified', ban: 'Strongly Supports Ban', safety: 'Did Not Sign', banCls: 't-supports', src: 'UN GGE' },
+  { c: 'Argentina', ccw: 'Ratified', ban: 'Supports Ban', safety: 'Did Not Sign', banCls: 't-supports', src: 'UN GGE' },
+  { c: 'Chile', ccw: 'Ratified', ban: 'Supports Ban', safety: 'Signed Bletchley', banCls: 't-supports', src: 'UN GGE' },
+  { c: 'Spain', ccw: 'Ratified', ban: 'Opposed (Favors Declaration)', safety: 'Signed Bletchley', banCls: 't-opposed', src: 'UN GGE' },
+  { c: 'Italy', ccw: 'Ratified', ban: 'Opposed', safety: 'Signed Bletchley', banCls: 't-opposed', src: 'UN GGE' },
+  { c: 'Saudi Arabia', ccw: 'Ratified', ban: 'Unknown', safety: 'Signed Bletchley', banCls: 't-neutral', src: 'UN GGE' },
+  { c: 'UAE', ccw: 'Ratified', ban: 'Unknown', safety: 'Signed Bletchley', banCls: 't-neutral', src: 'UN GGE' },
+  { c: 'Egypt', ccw: 'Not Ratified', ban: 'Supports Ban', safety: 'Did Not Sign', banCls: 't-supports', src: 'UN GGE' },
+  { c: 'Nigeria', ccw: 'Not Ratified', ban: 'Supports Ban', safety: 'Signed Bletchley', banCls: 't-supports', src: 'UN GGE' },
+  { c: 'Kenya', ccw: 'Not Ratified', ban: 'Supports Ban', safety: 'Signed Bletchley', banCls: 't-supports', src: 'UN GGE' }
+];
 
-  <!-- TOP BAR -->
-  <div class="topbar">
-    <div class="topbar-left">
-      <span class="topbar-brand">Sovereign Intelligence &amp; Ethics Dashboard</span>
-      <span class="topbar-version">v2.2</span>
-    </div>
-    <div class="topbar-right">
-      <span class="live-badge"><span class="live-dot"></span>Live Feed</span>
-      <span class="clock" id="clock">00:00:00 UTC</span>
-      <button class="dark-toggle" onclick="toggleDark()" aria-label="Toggle dark mode">
-        <span class="toggle-icon" id="toggle-icon">&#9790;</span>
-        <span id="toggle-label">Dark mode</span>
-      </button>
-    </div>
-  </div>
+function openMatrixModal() {
+    var modal = document.getElementById('treaty-modal');
+    if (!modal) return;
+    var tbody = document.getElementById('tm-tbody');
+    if (tbody && tbody.innerHTML.trim() === '') {
+        if (typeof matrixData !== 'undefined') {
+            tbody.innerHTML = matrixData.map(function(d) {
+                var c = d.ban.includes('Opposed') ? 't-opposed' : (d.ban.includes('Supports') ? 't-supports' : 't-neutral');
+                return '<tr><td style="padding:16px 24px; font-weight:600; border-bottom:1px solid rgba(255,255,255,0.03);">' + d.c + '</td><td style="padding:16px 24px; border-bottom:1px solid rgba(255,255,255,0.03);">' + d.ccw + '</td><td style="padding:16px 24px; border-bottom:1px solid rgba(255,255,255,0.03);"><span class="tm-tag ' + c + '">' + d.ban + '</span></td><td style="padding:16px 24px; border-bottom:1px solid rgba(255,255,255,0.03);">' + d.safety + '</td><td style="padding:16px 24px; opacity:0.7; font-size:0.9em; border-bottom:1px solid rgba(255,255,255,0.03);">' + d.src + '</td></tr>';
+            }).join('');
+        }
+    }
+    modal.style.display = 'flex';
+    
+    // Dragging logic
+    var header = document.getElementById('treaty-modal-header');
+    var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+    header.onmousedown = function(e) {
+        e = e || window.event; e.preventDefault();
+        pos3 = e.clientX; pos4 = e.clientY;
+        document.onmouseup = function() { document.onmouseup = null; document.onmousemove = null; };
+        document.onmousemove = function(e) {
+            e = e || window.event; e.preventDefault();
+            pos1 = pos3 - e.clientX; pos2 = pos4 - e.clientY;
+            pos3 = e.clientX; pos4 = e.clientY;
+            modal.style.top = (modal.offsetTop - pos2) + "px";
+            modal.style.left = (modal.offsetLeft - pos1) + "px";
+        };
+    };
+}
+function closeMatrixModal() {
+    var modal = document.getElementById('treaty-modal');
+    if(modal) modal.style.display = 'none';
+}
 
-  <!-- STAT STRIP -->
-  <div class="stat-strip">
-    <div class="stat-cell">
-      <div class="stat-label">LAWS tracked</div>
-      <div class="stat-value blue" id="stat-laws">8</div>
-      <div class="stat-sub">active deployments</div>
-    </div>
-    <div class="stat-cell">
-      <div class="stat-label">Critical alerts</div>
-      <div class="stat-value red" id="stat-critical">4</div>
-      <div class="stat-sub">severity &#62; 85</div>
-    </div>
-    <div class="stat-cell">
-      <div class="stat-label">Unclear legal status</div>
-      <div class="stat-value amber" id="stat-unclear">5</div>
-      <div class="stat-sub">no Art. 36 review</div>
-    </div>
-    <div class="stat-cell">
-      <div class="stat-label">Repository entries</div>
-      <div class="stat-value green" id="stat-repo">10</div>
-      <div class="stat-sub">indexed documents</div>
-    </div>
-  </div>
 
-  <!-- FILTER BAR -->
-  <div class="filter-bar">
-    <div class="filter-group">
-      <span class="filter-group-label">Region</span>
-      <button class="fbtn active" data-f="region" data-v="ALL" onclick="setFilter('region','ALL',this)">All</button>
-      <button class="fbtn" data-f="region" data-v="EU" onclick="setFilter('region','EU',this)">EU</button>
-      <button class="fbtn" data-f="region" data-v="USA" onclick="setFilter('region','USA',this)">USA</button>
-      <button class="fbtn" data-f="region" data-v="ASIA" onclick="setFilter('region','ASIA',this)">Asia</button>
-      <button class="fbtn" data-f="region" data-v="MENA" onclick="setFilter('region','MENA',this)">MENA</button>
-    </div>
-    <div class="filter-sep"></div>
-    <div class="filter-group">
-      <span class="filter-group-label">Severity</span>
-      <button class="fbtn active" data-f="sev" data-v="ALL" onclick="setFilter('sev','ALL',this)">All</button>
-      <button class="fbtn" data-f="sev" data-v="CRITICAL" onclick="setFilter('sev','CRITICAL',this)">Critical</button>
-      <button class="fbtn" data-f="sev" data-v="HIGH" onclick="setFilter('sev','HIGH',this)">High</button>
-      <button class="fbtn" data-f="sev" data-v="MOD" onclick="setFilter('sev','MOD',this)">Moderate</button>
-    </div>
-    <div class="filter-sep"></div>
-    <div class="filter-group">
-      <span class="filter-group-label">Framework</span>
-      <button class="fbtn active" data-f="fw" data-v="ALL" onclick="setFilter('fw','ALL',this)">All</button>
-      <button class="fbtn" data-f="fw" data-v="IHL" onclick="setFilter('fw','IHL',this)">IHL</button>
-      <button class="fbtn" data-f="fw" data-v="DEONT" onclick="setFilter('fw','DEONT',this)">Deontological</button>
-      <button class="fbtn" data-f="fw" data-v="UTIL" onclick="setFilter('fw','UTIL',this)">Utilitarian</button>
-    </div>
-  </div>
 
-  <!-- MAIN LAYOUT -->
-  <div class="main-layout">
+</script>
 
-    <!-- MODULE I: LAWS -->
-    <div class="module">
-      <div class="mod-head">
-        <span class="mod-title">I &mdash; LAWS Deployment Tracker</span>
-        <span class="mod-tag tag-r">Art. 36 Review</span>
-      </div>
-      <div class="mod-body">
-        <table class="laws-table">
-          <thead>
-            <tr>
-              <th class="col-flag"></th>
-              <th class="col-name">System</th>
-              <th class="col-auton">Autonomy</th>
-              <th class="col-status">Status</th>
-              <th class="col-theater">Theater</th>
-              <th class="col-sev">Sev.</th>
-            </tr>
-          </thead>
-          <tbody id="laws-list"></tbody>
-        </table>
-      </div>
-    </div>
+<style data-no-optimize="1">
 
-    <!-- MODULE II: SURVEILLANCE -->
-    <div class="module no-right">
-      <div class="mod-head">
-        <span class="mod-title">II &mdash; Domestic Surveillance Matrix</span>
-        <span class="mod-tag tag-p">Heat Index</span>
-      </div>
-      <div class="mod-body">
-        <div style="font-size:8px;color:var(--text3);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:8px;">Risk score 0&#8211;100 | Color = severity tier</div>
-        <div class="heat-grid" id="surv-grid"></div>
-      </div>
-    </div>
+/* -------------------------------------------------------------
+   PREMIUM CYBER-GLASS ETHICS DASHBOARD (FULL ARCHITECTURE)
+   ------------------------------------------------------------- */
+#primary.content-area { padding: 0 !important; margin: 0 !important; max-width: 100% !important; }
+#primary.content-area .site-container, #primary.content-area .content-container { max-width: 100% !important; padding: 0 !important; margin: 0 !important; }
+.site-content { padding-top: 0 !important; }
 
-    <!-- SIDEBAR: FEED -->
-    <div class="sidebar module no-right no-bottom">
-      <div class="feed-head">
-        <span class="feed-title">Intelligence Feed</span>
-        <span class="feed-count" id="feed-count">LIVE</span>
-      </div>
-      <div class="feed-body" id="feed-body"></div>
-    </div>
+#sied-wrapper {
+    --bg: transparent;
+    --bg2: rgba(255, 255, 255, 0.02);
+    --bg3: rgba(255, 255, 255, 0.05);
+    --sfc: rgba(15, 23, 42, 0.4);
+    --bd: rgba(255, 255, 255, 0.08);
+    --bd2: rgba(255, 255, 255, 0.15);
+    --bd-glow: rgba(255, 255, 255, 0.2);
+    
+    --tx: #f8fafc;
+    --tx2: #cbd5e1;
+    --tx3: #94a3b8;
+    --acc: #a38b59; /* Cinematic Gold */
+    
+    --red: #e11d48;
+    --redbg: rgba(225, 29, 72, 0.1);
+    --redtx: #fda4af;
+    
+    --amb: #d97706;
+    --ambbg: rgba(217, 119, 6, 0.1);
+    --ambtx: #fcd34d;
+    
+    --grn: #059669;
+    --grnbg: rgba(5, 150, 105, 0.1);
+    --grntx: #6ee7b7;
+    
+    --blu: #2563eb;
+    --blubg: rgba(37, 99, 235, 0.1);
+    --blutx: #93c5fd;
+    
+    --pur: #7c3aed;
+    --purbg: rgba(124, 58, 237, 0.1);
+    --purtx: #c4b5fd;
+    
+    --tel: #0891b2;
+    --telbg: rgba(8, 145, 178, 0.1);
+    --teltx: #67e8f9;
+    
+    --org: #ea580c;
+    --orgbg: rgba(234, 88, 12, 0.1);
+    --orgtx: #fdba74;
+    
+    --font: 'IBM Plex Mono', sans-serif;
+    --font-sans: 'IBM Plex Sans', sans-serif;
+    --r: 12px;
+    --tr: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    
+    background: #030712;
+    min-height: 100vh;
+    position: relative;
+    padding: 40px 20px 40px;
+    overflow: hidden;
+    font-family: var(--font);
+    color: var(--tx);
+    line-height: 1.5;
+}
 
-    <!-- MODULE III: REPOSITORY -->
-    <div class="module no-bottom">
-      <div class="mod-head">
-        <span class="mod-title">III &mdash; Academic &amp; Legal Repository</span>
-        <span class="mod-tag tag-g">Searchable</span>
-      </div>
-      <div class="mod-body">
-        <div class="repo-search-wrap">
-          <span class="repo-search-icon">&#9906;</span>
-          <input class="repo-search" id="repo-q" placeholder="Search title, source, framework&#8230;" oninput="renderRepo()">
-        </div>
-        <div id="repo-list"></div>
-      </div>
-    </div>
+/* Ambient Pulse Background */
+#sied-wrapper::before {
+    content: '';
+    position: absolute;
+    top: -20%; left: -10%; width: 50vw; height: 50vw;
+    background: radial-gradient(circle, rgba(56, 189, 248, 0.08) 0%, transparent 70%);
+    filter: blur(100px);
+    z-index: 0;
+    animation: pulseGlow 10s ease-in-out infinite alternate;
+}
+#sied-wrapper::after {
+    content: '';
+    position: absolute;
+    bottom: -20%; right: -10%; width: 60vw; height: 60vw;
+    background: radial-gradient(circle, rgba(129, 140, 248, 0.06) 0%, transparent 70%);
+    filter: blur(120px);
+    z-index: 0;
+    animation: pulseGlow 12s ease-in-out infinite alternate-reverse;
+}
 
-    <!-- MODULE IV: RISK RADAR -->
-    <div class="module no-right no-bottom">
-      <div class="mod-head">
-        <span class="mod-title">IV &mdash; Risk Assessment Visualizer</span>
-        <span class="mod-tag tag-a">Radar Matrix</span>
-      </div>
-      <div class="mod-body">
-        <div class="chart-canvas-wrap">
-          <canvas id="radarChart" role="img" aria-label="Radar chart comparing technological sophistication versus ethical and legal accountability for five actors: US DoD, China MSS, Private AI, UN GGE, EU AI Office.">Radar chart: US DoD high sophistication low accountability; China MSS highest scale lowest compliance; Private AI high sophistication moderate accountability; UN GGE low sophistication high oversight; EU AI Office moderate sophistication high compliance.</canvas>
-        </div>
-        <div class="radar-legend" id="radar-legend"></div>
-      </div>
-    </div>
+@keyframes pulseGlow {
+    0% { transform: scale(1) translate(0, 0); opacity: 0.5; }
+    100% { transform: scale(1.1) translate(5%, -5%); opacity: 1; }
+}
 
-  </div>
+#sied-wrapper > div {
+    position: relative;
+    z-index: 1;
+}
 
-  <!-- FOOTER -->
-  <div class="dash-footer">
-    <span>Data sources: UN GGE, ICRC, SIPRI, HRW, Nature Machine Intelligence, EJIL &mdash; For research and policy reference only.</span>
-    <span id="last-update">Last updated: &#8212;</span>
-  </div>
+/* Layout Utilities & Fixes */
+#sied-wrapper .tb { display: flex; align-items: center; justify-content: space-between; padding: 16px 24px; border: 1px solid var(--bd2); background: var(--sfc); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-radius: var(--r); margin-bottom: 24px; box-shadow: 0 8px 32px rgba(0,0,0,0.2); flex-wrap: wrap; gap: 8px; }
+#sied-wrapper .tb-brand { font-size: 0.85em; font-weight: 600; letter-spacing: 0.15em; color: var(--tx); text-transform: uppercase; }
+#sied-wrapper .tb-ver { font-size: 0.7em; color: var(--tx2); border: 1px solid var(--bd2); padding: 2px 8px; border-radius: 20px; background: rgba(255,255,255,0.05); }
+#sied-wrapper .tb-right { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+#sied-wrapper .live-b { display: flex; align-items: center; gap: 6px; font-size: 0.7em; color: var(--grntx); font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; background: var(--grnbg); padding: 4px 10px; border-radius: 20px; border: 1px solid rgba(5,150,105,0.3); }
+#sied-wrapper .live-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--grn); box-shadow: 0 0 10px var(--grn); animation: pulse 1.5s infinite; }
+#sied-wrapper .clk { font-size: 0.75em; color: var(--tx2); font-variant-numeric: tabular-nums; letter-spacing: 0.05em; background: rgba(255,255,255,0.03); padding: 4px 10px; border-radius: 6px; }
+#sied-wrapper .cbtn { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.05); border: 1px solid var(--bd2); border-radius: 6px; padding: 6px 12px; font-family: var(--font); font-size: 0.7em; font-weight: 600; color: var(--tx); letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; transition: var(--tr); }
+#sied-wrapper .cbtn:hover { background: rgba(255,255,255,0.1); border-color: var(--tx2); transform: translateY(-1px); }
 
+/* Ticker */
+#sied-wrapper .ab { background: var(--redbg); border: 1px solid rgba(225, 29, 72, 0.3); border-radius: var(--r); padding: 12px 20px; display: flex; gap: 12px; align-items: flex-start; margin-bottom: 24px; box-shadow: 0 4px 20px rgba(225, 29, 72, 0.1); backdrop-filter: blur(10px); }
+#sied-wrapper .ab-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--red); flex-shrink: 0; margin-top: 6px; box-shadow: 0 0 12px var(--red); animation: pulse 1s infinite; }
+#sied-wrapper .ab-text { font-size: 0.75em; color: var(--redtx); line-height: 1.6; letter-spacing: 0.02em; }
+#sied-wrapper .ab-text strong { font-weight: 600; color: #fff; letter-spacing: 0.05em; }
+
+/* Stat Row */
+#sied-wrapper .ss { display: flex; gap: 16px; margin-bottom: 24px; overflow-x: auto; padding-bottom: 8px; }
+#sied-wrapper .sc {
+    flex: 1; min-width: 120px; padding: 16px; 
+    border: 1px solid rgba(255,255,255,0.05); 
+    background: transparent; 
+    border-radius: var(--r); 
+    backdrop-filter: blur(20px); 
+    transition: var(--tr); 
+    position: relative; overflow: hidden;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;
+}
+#sied-wrapper .sc::before {
+    content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+    background: conic-gradient(transparent, rgba(147,197,253,0.3), transparent, rgba(147,197,253,0.3), transparent);
+    animation: sc-border-spin 4s linear infinite; z-index: 0;
+}
+#sied-wrapper .sc::after {
+    content: ''; position: absolute; inset: 1px;
+    background: var(--sfc); border-radius: calc(var(--r) - 1px); z-index: 0;
+}
+#sied-wrapper .sc > * { position: relative; z-index: 1; }
+@keyframes sc-border-spin { 100% { transform: rotate(360deg); } }
+#sied-wrapper .sc:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.3); }
+#sied-wrapper .sc:hover::before { background: conic-gradient(transparent, rgba(147,197,253,0.6), transparent, rgba(147,197,253,0.6), transparent); }
+#sied-wrapper .sl { font-size: 0.65em; color: var(--tx3); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 8px; font-weight: 500; }
+#sied-wrapper .sv { font-size: 2em; font-weight: 300; line-height: 1; font-family: var(--font-sans); }
+#sied-wrapper .sv.vr { color: #f43f5e; text-shadow: 0 0 20px rgba(244,63,94,0.4); }
+#sied-wrapper .sv.va { color: #fbbf24; text-shadow: 0 0 20px rgba(251,191,36,0.4); }
+#sied-wrapper .sv.vg { color: #34d399; text-shadow: 0 0 20px rgba(52,211,153,0.4); }
+#sied-wrapper .sv.vb { color: #60a5fa; text-shadow: 0 0 20px rgba(96,165,250,0.4); }
+#sied-wrapper .ss-sub { font-size: 0.7em; color: #f8fafc; font-weight: 600; margin-top: 12px; line-height: 1.4; text-shadow: 0 1px 3px rgba(0,0,0,0.5); }
+#sied-wrapper .ss-sub a { display: inline-block; margin-top: 12px; padding: 3px 8px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); border-radius: 4px; font-weight: 500; transition: var(--tr); text-decoration: none !important; }
+#sied-wrapper .ss-sub a:hover { background: rgba(255,255,255,0.15); color: #fff !important; }
+
+/* Filter Bar */
+#sied-wrapper .fbar { display: flex; align-items: center; gap: 8px; padding: 12px 20px; border: 1px solid var(--bd2); background: var(--sfc); border-radius: var(--r); margin-bottom: 24px; overflow-x: auto; backdrop-filter: blur(20px); }
+#sied-wrapper .fg { display: inline-flex; align-items: center; gap: 6px; flex-shrink: 0; }
+#sied-wrapper .fgl { font-size: 0.65em; color: var(--tx3); letter-spacing: 0.15em; text-transform: uppercase; margin-right: 4px; font-weight: 500; }
+#sied-wrapper .fbtn { font-size: 0.7em; padding: 4px 12px; border: 1px solid var(--bd2); border-radius: 20px; background: rgba(255,255,255,0.03); color: var(--tx2); font-family: var(--font); cursor: pointer; transition: var(--tr); }
+#sied-wrapper .fbtn:hover { background: rgba(255,255,255,0.08); border-color: var(--tx); color: var(--tx); }
+#sied-wrapper .fbtn.on { background: var(--tx); color: #000; border-color: var(--tx); box-shadow: 0 0 15px rgba(255,255,255,0.3); font-weight: 600; }
+#sied-wrapper .fsep { width: 1px; height: 16px; background: var(--bd2); margin: 0 8px; }
+
+/* Structural Rows */
+#sied-wrapper .row3, #sied-wrapper .row2 { display: flex; gap: 24px; margin-bottom: 24px; }
+@media (max-width: 1024px) { #sied-wrapper .row3, #sied-wrapper .row2 { flex-direction: column; } }
+
+#sied-wrapper .cl, #sied-wrapper .cm, #sied-wrapper .cr, #sied-wrapper .colw, #sied-wrapper .colh { 
+    background: var(--sfc); border: 1px solid var(--bd2); border-radius: var(--r); backdrop-filter: blur(20px); flex: 1; display: flex; flex-direction: column; overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+#sied-wrapper .cl { flex: 1.2; }
+#sied-wrapper .cm { flex: 1.5; }
+#sied-wrapper .cr { flex: 1; }
+#sied-wrapper .colw { flex: 1.5; }
+
+/* Modules */
+#sied-wrapper .mod { display: flex; flex-direction: column; flex-shrink: 0; }
+#sied-wrapper .mod.grow { flex: 1; }
+#sied-wrapper .mh { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; border-bottom: 1px solid var(--bd2); background: rgba(255,255,255,0.02); }
+#sied-wrapper .mt { font-size: 0.7em; font-weight: 600; letter-spacing: 0.15em; color: var(--tx); text-transform: uppercase; }
+#sied-wrapper .mh-r { display: flex; align-items: center; gap: 8px; }
+#sied-wrapper .mtag { font-size: 0.6em; padding: 2px 6px; border-radius: 4px; border: 1px solid; font-weight: 600; letter-spacing: 0.05em; }
+#sied-wrapper .mtag.red { color: #f43f5e; border-color: rgba(244,63,94,0.3); background: rgba(244,63,94,0.1); }
+
+/* Matrix specific */
+#sied-wrapper .matrix { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; padding: 16px; }
+#sied-wrapper .cell, #sied-wrapper .hc { padding: 12px; border: 1px solid var(--bd2); border-radius: 8px; background: rgba(255,255,255,0.02); display: flex; flex-direction: column; position: relative; transition: var(--tr); }
+#sied-wrapper .cell:hover, #sied-wrapper .hc:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 10px 25px rgba(0,0,0,0.3); z-index: 10; border-color: rgba(255,255,255,0.2); }
+#sied-wrapper .hc1 { border-color: rgba(225,29,72,0.4); background: linear-gradient(180deg, rgba(225,29,72,0.15) 0%, rgba(225,29,72,0.05) 100%); }
+#sied-wrapper .hc1:hover { border-color: #f43f5e; box-shadow: 0 10px 30px rgba(244,63,94,0.2); }
+#sied-wrapper .hc2 { border-color: rgba(217,119,6,0.4); background: linear-gradient(180deg, rgba(217,119,6,0.15) 0%, rgba(217,119,6,0.05) 100%); }
+#sied-wrapper .hc2:hover { border-color: #fbbf24; box-shadow: 0 10px 30px rgba(251,191,36,0.2); }
+#sied-wrapper .hc3 { border-color: rgba(56,189,248,0.4); background: linear-gradient(180deg, rgba(56,189,248,0.15) 0%, rgba(56,189,248,0.05) 100%); }
+#sied-wrapper .hc3:hover { border-color: #38bdf8; box-shadow: 0 10px 30px rgba(56,189,248,0.2); }
+#sied-wrapper .hc4 { border-color: rgba(148,163,184,0.4); background: linear-gradient(180deg, rgba(148,163,184,0.15) 0%, rgba(148,163,184,0.05) 100%); }
+#sied-wrapper .hc4:hover { border-color: #94a3b8; box-shadow: 0 10px 30px rgba(148,163,184,0.2); }
+#sied-wrapper .cell-lbl, #sied-wrapper .hl { font-size: 0.7em; font-weight: 600; color: var(--tx); line-height: 1.2; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 4px; }
+#sied-wrapper .cell-sub, #sied-wrapper .hsub { font-size: 0.6em; color: var(--tx2); line-height: 1.3; }
+#sied-wrapper .cell-sc, #sied-wrapper .hsc { font-size: 1.8em; font-weight: 300; line-height: 1; margin-top: 12px; font-family: var(--font-sans); }
+#sied-wrapper .hc1 .cell-sc, #sied-wrapper .hc1 .hsc { color: #f43f5e; text-shadow: 0 0 15px rgba(244,63,94,0.4); }
+#sied-wrapper .hc2 .cell-sc, #sied-wrapper .hc2 .hsc { color: #fbbf24; text-shadow: 0 0 15px rgba(251,191,36,0.4); }
+#sied-wrapper .hc3 .cell-sc, #sied-wrapper .hc3 .hsc { color: #38bdf8; text-shadow: 0 0 15px rgba(56,189,248,0.4); }
+#sied-wrapper .hc4 .cell-sc, #sied-wrapper .hc4 .hsc { color: #94a3b8; text-shadow: 0 0 15px rgba(148,163,184,0.4); }
+#sied-wrapper .cell-meta, #sied-wrapper .hreg, #sied-wrapper .hsrc { font-size: 0.55em; color: var(--tx3); text-transform: uppercase; margin-top: 4px; letter-spacing: 0.05em; }
+
+/* LAWS Tracker specific */
+#sied-wrapper .ltbl { width: 100%; border-collapse: collapse; }
+#sied-wrapper .ltbl td { padding: 10px 16px; border-bottom: 1px solid rgba(255,255,255,0.03); transition: var(--tr); }
+#sied-wrapper .lr:hover td { background: rgba(255,255,255,0.05); }
+#sied-wrapper .lf { font-size: 0.7em; color: var(--tx3); text-align: center; }
+#sied-wrapper .atr { height: 4px; background: rgba(255,255,255,0.1); border-radius: 2px; width: 100%; position: relative; overflow: hidden; margin-top: 5px; }
+#sied-wrapper .afill { height: 100%; position: absolute; left: 0; top: 0; border-radius: 2px; box-shadow: 0 0 8px currentColor; }
+#sied-wrapper .aw { display: flex; flex-direction: column; }
+#sied-wrapper .ap { font-size: 0.55em; color: var(--tx3); text-align: right; margin-top: 2px;}
+#sied-wrapper .ln { font-size: 0.65em; color: var(--tx); font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: flex; align-items: center; justify-content: space-between; }
+#sied-wrapper .bdg { font-size: 0.65em; padding: 2px 6px; border-radius: 3px; font-weight: 600; letter-spacing: 0.05em; border: 1px solid; }
+#sied-wrapper .il { color: #f43f5e; border-color: rgba(244,63,94,0.4); background: rgba(244,63,94,0.1); }
+#sied-wrapper .un { color: #fbbf24; border-color: rgba(251,191,36,0.4); background: rgba(251,191,36,0.1); }
+#sied-wrapper .pt { color: #60a5fa; border-color: rgba(96,165,250,0.4); background: rgba(96,165,250,0.1); }
+#sied-wrapper .ok { color: #34d399; border-color: rgba(52,211,153,0.4); background: rgba(52,211,153,0.1); }
+
+/* Feeds */
+#sied-wrapper .feed-body { padding: 16px; overflow-y: auto; max-height: 400px; display: flex; flex-direction: column; gap: 12px; }
+#sied-wrapper .feed-body::-webkit-scrollbar { width: 4px; }
+#sied-wrapper .feed-body::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 4px; }
+#sied-wrapper .fi { padding: 12px; border-left: 2px solid var(--bd2); background: rgba(255,255,255,0.02); transition: var(--tr); }
+#sied-wrapper .fi:hover { background: rgba(255,255,255,0.05); }
+#sied-wrapper .fih { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+#sied-wrapper .fit { font-size: 0.6em; color: var(--tx3); font-variant-numeric: tabular-nums; }
+#sied-wrapper .fitp { font-size: 0.55em; padding: 2px 6px; border-radius: 4px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; border: 1px solid; }
+#sied-wrapper .CRITICAL { color: #f43f5e; border-color: rgba(244,63,94,0.3); background: rgba(244,63,94,0.1); }
+#sied-wrapper .UPDATE { color: #60a5fa; border-color: rgba(96,165,250,0.3); background: rgba(96,165,250,0.1); }
+#sied-wrapper .LAW { color: #fbbf24; border-color: rgba(251,191,36,0.3); background: rgba(251,191,36,0.1); }
+#sied-wrapper .fitx { font-size: 0.7em; color: var(--tx2); line-height: 1.5; font-family: var(--font-sans); }
+#sied-wrapper .fid { width: 6px; height: 6px; border-radius: 50%; }
+
+/* Repositories */
+#sied-wrapper .rl { padding: 16px; display: flex; flex-direction: column; gap: 12px; }
+#sied-wrapper .ri { padding: 12px; border: 1px solid var(--bd2); border-radius: 8px; background: rgba(255,255,255,0.02); transition: var(--tr); cursor: pointer; }
+#sied-wrapper .ri:hover { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.2); transform: translateX(4px); box-shadow: -4px 4px 15px rgba(0,0,0,0.2); }
+#sied-wrapper .rit { font-size: 0.75em; font-weight: 500; color: var(--tx); line-height: 1.4; margin-bottom: 8px; font-family: var(--font-sans); }
+#sied-wrapper .rim { display: flex; gap: 8px; flex-wrap: wrap; }
+#sied-wrapper .rb { font-size: 0.55em; padding: 2px 6px; border-radius: 4px; border: 1px solid; color: var(--tx3); border-color: var(--bd2); }
+#sied-wrapper .r-red { color: #f43f5e; border-color: rgba(244,63,94,0.3); }
+#sied-wrapper .r-amb { color: #fbbf24; border-color: rgba(251,191,36,0.3); }
+#sied-wrapper .r-blu { color: #60a5fa; border-color: rgba(96,165,250,0.3); }
+
+/* Treaty Support */
+#sied-wrapper .treaty-key { font-size: 0.55em; padding-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,0.1); color: var(--tx3); margin-bottom: 10px; }
+#sied-wrapper .tk-item { margin-right: 15px; }
+#sied-wrapper .treaty-tbl { width: 100%; border-collapse: collapse; font-size: 0.6em; text-align: left; }
+#sied-wrapper .treaty-tbl th { padding: 6px; border-bottom: 1px solid rgba(255,255,255,0.1); color: var(--tx2); }
+#sied-wrapper .treaty-tbl td { padding: 6px; border-bottom: 1px solid rgba(255,255,255,0.03); }
+#sied-wrapper .tpos { padding: 2px 5px; border-radius: 3px; font-weight: 600; border: 1px solid; }
+#sied-wrapper .tp-a { color: #f43f5e; border-color: rgba(244,63,94,0.3); background: rgba(244,63,94,0.1); }
+#sied-wrapper .tp-n { color: #fbbf24; border-color: rgba(251,191,36,0.3); background: rgba(251,191,36,0.1); }
+#sied-wrapper .tp-m { color: #c084fc; border-color: rgba(192,132,252,0.3); background: rgba(192,132,252,0.1); }
+#sied-wrapper .tp-p { color: #34d399; border-color: rgba(52,211,153,0.3); background: rgba(52,211,153,0.1); }
+#sied-wrapper .tck { color: #34d399; font-weight: 600; }
+#sied-wrapper .tno { color: var(--tx3); }
+
+/* Log Section */
+#sied-wrapper .logsec { background: var(--sfc); border: 1px solid var(--bd2); border-radius: var(--r); backdrop-filter: blur(20px); box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+#sied-wrapper .loghd { display: flex; justify-content: space-between; align-items: center; padding: 12px 20px; border-bottom: 1px solid var(--bd2); background: rgba(255,255,255,0.02); }
+#sied-wrapper .logt { font-size: 0.7em; font-weight: 600; letter-spacing: 0.15em; color: var(--tx); text-transform: uppercase; display: flex; align-items: center; gap: 12px; }
+#sied-wrapper .logt span { color: var(--tx3); font-weight: 400; font-variant-numeric: tabular-nums; }
+#sied-wrapper .btn { padding: 4px 12px; font-size: 0.65em; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; border: 1px solid var(--bd2); background: rgba(255,255,255,0.05); color: var(--tx2); border-radius: 4px; cursor: pointer; font-family: var(--font); transition: var(--tr); }
+#sied-wrapper .btn:hover { background: rgba(255,255,255,0.1); border-color: var(--tx); color: var(--tx); }
+
+#sied-wrapper .dfoot { padding: 16px 24px; display: flex; justify-content: space-between; font-size: 0.55em; color: var(--tx3); border-top: 1px solid var(--bd2); margin-top: 24px; background: rgba(255,255,255,0.01); backdrop-filter: blur(5px); border-radius: var(--r); }
+
+/* Chart Containers */
+#sied-wrapper .chart-container { padding: 16px; min-height: 250px; position: relative; }
+
+
+
+#sied-wrapper .feed-body {
+    max-height: 480px;
+    overflow-y: auto;
+}
+
+#sied-wrapper .fi { margin-bottom: 8px; overflow: hidden; position: relative; z-index: 10; background: var(--bg2); }
+#sied-wrapper .matrix { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 8px; padding: 16px; }
+
+/* Critical Fixes */
+#sied-wrapper .matrix {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 12px !important;
+    padding: 16px !important;
+}
+#sied-wrapper canvas {
+    max-height: 280px !important;
+    width: 100% !important;
+    object-fit: contain;
+}
+#sied-wrapper .feed-body, #sied-wrapper .rss-body {
+    max-height: 400px !important;
+    overflow-y: auto !important;
+}
+#sied-wrapper .fi {
+    margin-bottom: 12px !important;
+    background: var(--bg2) !important;
+    padding: 12px !important;
+    border-radius: 8px !important;
+    border-left: 3px solid var(--bd2) !important;
+    display: block !important;
+    position: relative !important;
+    overflow: hidden !important;
+}
+#sied-wrapper .fi:hover {
+    background: var(--bg3) !important;
+}
+
+
+/* Premium Intro Panel */
+#sied-wrapper .intro-panel {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 32px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%);
+    border: 1px solid var(--bd2);
+    border-radius: var(--r);
+    backdrop-filter: blur(20px);
+    margin-bottom: 24px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    gap: 32px;
+}
+#sied-wrapper .intro-left h3 {
+    font-size: 1.1em;
+    color: var(--tx);
+    font-weight: 600;
+    margin: 0 0 8px 0;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+#sied-wrapper .intro-left p {
+    font-size: 0.85em;
+    color: var(--tx2);
+    line-height: 1.6;
+    margin: 0;
+    font-family: var(--font-sans);
+    max-width: 800px;
+}
+#sied-wrapper .intro-right {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    min-width: 220px;
+}
+#sied-wrapper .intro-link {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 16px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--bd2);
+    border-radius: 6px;
+    color: var(--tx);
+    text-decoration: none;
+    font-size: 0.75em;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: var(--tr);
+}
+#sied-wrapper .intro-link:hover {
+    background: rgba(255,255,255,0.1);
+    border-color: var(--tx);
+    transform: translateX(-4px);
+    box-shadow: 4px 4px 15px rgba(0,0,0,0.3);
+}
+
+
+/* Chart Legend Styling PREMIUM */
+#sied-wrapper .cleg {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 16px !important;
+    padding: 16px !important;
+    background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(255,255,255,0.02) 100%) !important;
+    border-top: 1px solid rgba(255,255,255,0.05) !important;
+    justify-content: center !important;
+}
+#sied-wrapper .cli {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    font-size: 0.65em !important;
+    color: var(--tx2) !important;
+    font-family: var(--font-sans) !important;
+    letter-spacing: 0.08em !important;
+    text-transform: uppercase !important;
+    background: rgba(255,255,255,0.03) !important;
+    padding: 6px 12px !important;
+    border-radius: 20px !important;
+    border: 1px solid rgba(255,255,255,0.08) !important;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2) !important;
+}
+#sied-wrapper .clsq {
+    display: inline-block !important;
+    width: 10px !important;
+    height: 10px !important;
+    border-radius: 50% !important;
+    box-shadow: 0 0 8px currentColor !important;
+    flex-shrink: 0 !important;
+}
+
+/* RSS & Buttons NUKE KADENCE */
+#sied-wrapper button.rtab {
+    all: unset !important;
+    display: inline-block !important;
+    padding: 8px 16px !important;
+    font-size: 0.7em !important;
+    cursor: pointer !important;
+    color: var(--tx3) !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.1em !important;
+    font-weight: 600 !important;
+    transition: all 0.3s ease !important;
+    border: 1px solid rgba(255,255,255,0.05) !important;
+    border-radius: 20px !important;
+    background: rgba(255,255,255,0.02) !important;
+    margin-right: 8px !important;
+}
+#sied-wrapper button.rtab.on {
+    color: #fff !important;
+    background: rgba(37, 99, 235, 0.2) !important;
+    border-color: rgba(37, 99, 235, 0.5) !important;
+    box-shadow: 0 0 15px rgba(37, 99, 235, 0.3) !important;
+}
+#sied-wrapper button.rtab:hover:not(.on) {
+    background: rgba(255,255,255,0.08) !important;
+    color: var(--tx2) !important;
+}
+#sied-wrapper .rtabs {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    padding: 16px 16px 12px !important;
+    border-bottom: 1px solid rgba(255,255,255,0.05) !important;
+    margin-bottom: 16px !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: none !important;
+}
+#sied-wrapper .rtabs::-webkit-scrollbar {
+    display: none !important;
+}
+
+#sied-wrapper .rsi-item {
+    padding: 14px !important;
+    margin-bottom: 12px !important;
+    border-radius: 8px !important;
+    background: rgba(255,255,255,0.02) !important;
+    border: 1px solid var(--bd2) !important;
+    border-left: 3px solid var(--blu) !important;
+    display: block !important;
+    text-decoration: none !important;
+    transition: var(--tr) !important;
+}
+#sied-wrapper .rsi-item:hover {
+    background: rgba(255,255,255,0.05) !important;
+    border-color: var(--tx2) !important;
+    transform: translateX(4px) !important;
+}
+#sied-wrapper .rsi-title {
+    display: block !important;
+    font-size: 0.75em !important;
+    color: var(--tx) !important;
+    font-weight: 600 !important;
+    margin-bottom: 6px !important;
+    font-family: var(--font-sans) !important;
+    line-height: 1.4 !important;
+}
+#sied-wrapper .rsi-meta {
+    display: flex !important;
+    gap: 12px !important;
+    font-size: 0.6em !important;
+    color: var(--tx3) !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.05em !important;
+}
+
+/* Glass Explainer Blocks */
+#sied-wrapper .glass-explainer {
+    margin: 16px !important;
+    padding: 20px !important;
+    background: linear-gradient(145deg, rgba(20, 25, 40, 0.6) 0%, rgba(10, 15, 25, 0.8) 100%) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-radius: 12px !important;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 8px 24px rgba(0, 0, 0, 0.4) !important;
+    backdrop-filter: blur(24px) !important;
+    position: relative !important;
+    overflow: hidden !important;
+}
+#sied-wrapper .glass-explainer.ge-red::before {
+    content: '' !important;
+    position: absolute !important;
+    top: 0 !important; left: 0 !important; width: 4px !important; height: 100% !important;
+    background: #e11d48 !important;
+    box-shadow: 0 0 15px #e11d48 !important;
+}
+#sied-wrapper .glass-explainer.ge-amb::before {
+    content: '' !important;
+    position: absolute !important;
+    top: 0 !important; left: 0 !important; width: 4px !important; height: 100% !important;
+    background: #d97706 !important;
+    box-shadow: 0 0 15px #d97706 !important;
+}
+#sied-wrapper .glass-explainer h4 {
+    font-size: 0.75em !important;
+    color: var(--tx) !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.15em !important;
+    margin: 0 0 8px 0 !important;
+    font-weight: 700 !important;
+}
+#sied-wrapper .glass-explainer p {
+    font-size: 0.75em !important;
+    color: var(--tx2) !important;
+    line-height: 1.6 !important;
+    margin: 0 !important;
+    font-family: var(--font-sans) !important;
+}
+
+
+/* Feed Container Fixes */
+#sied-wrapper .fb, #sied-wrapper .rss-body, #sied-wrapper .feed-body {
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    scrollbar-width: thin !important;
+    scrollbar-color: rgba(255,255,255,0.15) transparent !important;
+    padding-right: 8px !important;
+}
+/* Scrollbar Beautification for all scrollable areas */
+#sied-wrapper ::-webkit-scrollbar {
+    width: 6px !important;
+    height: 6px !important;
+}
+#sied-wrapper ::-webkit-scrollbar-track {
+    background: transparent !important;
+}
+#sied-wrapper ::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.15) !important;
+    border-radius: 10px !important;
+}
+#sied-wrapper ::-webkit-scrollbar-thumb:hover {
+    background: rgba(255,255,255,0.25) !important;
+}
+
+/* Form and Log Box Beautification */
+#sied-wrapper .logsec {
+    background: linear-gradient(145deg, rgba(20, 25, 40, 0.4) 0%, rgba(10, 15, 25, 0.6) 100%) !important;
+    border: 1px solid rgba(255,255,255,0.08) !important;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 8px 32px rgba(0, 0, 0, 0.3) !important;
+    backdrop-filter: blur(20px) !important;
+}
+#sied-wrapper input,
+#sied-wrapper select,
+#sied-wrapper textarea {
+    background: rgba(255,255,255,0.03) !important;
+    border: 1px solid rgba(255,255,255,0.1) !important;
+    color: var(--tx) !important;
+    padding: 8px 14px !important;
+    border-radius: 6px !important;
+    font-family: var(--font-sans) !important;
+    font-size: 0.85em !important;
+    transition: all 0.3s ease !important;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.2) !important;
+}
+#sied-wrapper input:focus,
+#sied-wrapper select:focus,
+#sied-wrapper textarea:focus {
+    border-color: var(--blu) !important;
+    background: rgba(37, 99, 235, 0.05) !important;
+    outline: none !important;
+    box-shadow: 0 0 10px rgba(37, 99, 235, 0.3) !important;
+}
+#sied-wrapper button.btn, #sied-wrapper .loghd button {
+    all: unset !important;
+    background: linear-gradient(180deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.02) 100%) !important;
+    border: 1px solid rgba(255,255,255,0.1) !important;
+    color: var(--tx) !important;
+    padding: 8px 16px !important;
+    border-radius: 6px !important;
+    font-family: var(--font-sans) !important;
+    font-size: 0.75em !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.05em !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2) !important;
+    display: inline-block !important;
+    text-align: center !important;
+}
+#sied-wrapper button.btn:hover, #sied-wrapper .loghd button:hover {
+    background: rgba(255,255,255,0.12) !important;
+    border-color: rgba(255,255,255,0.3) !important;
+    transform: translateY(-1px) !important;
+}
+#sied-wrapper .logb {
+    padding: 20px !important;
+}
+#sied-wrapper .logb > div {
+    margin-bottom: 12px !important;
+    color: var(--tx2) !important;
+    font-size: 0.85em !important;
+    font-weight: 500 !important;
+}
+
+
+/* Premium Animations and Performance CSS */
+#sied-wrapper .matrix {
+    position: relative;
+    overflow: visible;
+}
+#sied-wrapper .hg {
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease !important;
+    will-change: transform, box-shadow;
+}
+#sied-wrapper .hg:hover {
+    transform: translateY(-4px) scale(1.02) !important;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.6) !important;
+    z-index: 10;
+}
+#sied-wrapper .hg::after {
+    content: '';
+    position: absolute;
+    top: -50%; left: -50%;
+    width: 200%; height: 200%;
+    background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,0.03) 50%, rgba(255,255,255,0) 100%);
+    transform: rotate(30deg) translateY(-100%);
+    animation: scanline 8s infinite linear;
+    pointer-events: none;
+}
+@keyframes scanline {
+    0% { transform: rotate(30deg) translateY(-100%); }
+    100% { transform: rotate(30deg) translateY(100%); }
+}
+
+/* Optimize painting for heavy elements */
+#sied-wrapper canvas {
+    will-change: transform;
+    transform: translateZ(0);
+}
+
+/* Subtle glow pulse on critical alerts in feed */
+@keyframes alertPulse {
+    0% { box-shadow: 0 0 0 0 rgba(225, 29, 72, 0.4); }
+    70% { box-shadow: 0 0 0 6px rgba(225, 29, 72, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(225, 29, 72, 0); }
+}
+#sied-wrapper .alert-tag {
+    animation: alertPulse 2s infinite;
+    border-radius: 4px;
+}
+
+
+/* Treaty Matrix Modal */
+
+
+.tm-content {
+    background: linear-gradient(145deg, rgba(20, 25, 40, 0.95) 0%, rgba(10, 15, 25, 0.95) 100%);
+    border: 1px solid rgba(255,255,255,0.1);
+    box-shadow: 0 25px 50px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    width: 90%;
+    max-width: 1200px;
+    height: 85vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transform: scale(0.95);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.tm-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 24px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    background: rgba(0,0,0,0.2);
+}
+.tm-header h2 {
+    margin: 0;
+    color: var(--tx);
+    font-size: 1.2em;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    font-family: var(--font-sans);
+}
+.tm-close {
+    background: rgba(255,255,255,0.1);
+    border: none;
+    color: var(--tx);
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.2s;
+}
+.tm-close:hover {
+    background: rgba(225, 29, 72, 0.8);
+    color: #fff;
+    transform: rotate(90deg);
+}
+.tm-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 24px;
+}
+.tm-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: var(--font-mono);
+    font-size: 0.85em;
+    text-align: left;
+}
+.tm-table th {
+    position: sticky;
+    top: -24px;
+    background: rgba(20, 25, 40, 0.95);
+    backdrop-filter: blur(8px);
+    color: var(--tx2);
+    padding: 12px;
+    font-weight: 600;
+    border-bottom: 2px solid rgba(255,255,255,0.1);
+    z-index: 10;
+}
+.tm-table td {
+    padding: 12px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    color: var(--tx);
+}
+.tm-table tbody tr:hover {
+    background: rgba(255,255,255,0.03);
+}
+.tm-tag {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.85em;
+    font-weight: 600;
+}
+.t-opposed { background: rgba(225, 29, 72, 0.15); color: #fb7185; border: 1px solid rgba(225, 29, 72, 0.3); }
+.t-supports { background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3); }
+.t-neutral { background: rgba(255, 255, 255, 0.1); color: #e2e8f0; border: 1px solid rgba(255, 255, 255, 0.2); }
+
+</style>
+
+<div id="primary" class="content-area">
+    <div id="sied-wrapper">
+<div id="sied">
+<div class="tb">
+<div style="display:flex;align-items:center;gap:10px;">
+<span class="tb-brand">
+                  Artificial Intelligence Ethics Dashboard
+                 </span>
+<span class="tb-ver">
+                  v4.1
+                 </span>
+</div>
+<div class="tb-right">
+<span class="live-b">
+<span class="live-dot">
+</span>
+                  Live
+                 </span>
+<span class="clk" id="sied-clk">
+                  00:00:00 UTC
+                 </span>
+
+<button class="cbtn" id="btn-hdr" onclick="toggleHdr()">
+<span id="hi">
+                   ⊞
+                  </span>
+<span id="hl">
+                   Header
+                  </span>
+</button>
+</div>
+</div>
+<div class="ab">
+<span class="ab-dot">
+</span>
+<span class="ab-text">
+<strong>
+                  ACTIVE OPERATIONS — HIGHEST DOCUMENTED RISK:
+                 </strong>
+                 Israel’s AI-directed "Gospel" & "Lavender" kill chains in Gaza (IHL violations — <a href="https://ainowinstitute.org/publication/the-algorithmically-accelerated-killing-machine" target="_blank" style="color:var(--tx);text-decoration:underline;">AI Now Institute</a> & <a href="http://web.archive.org/web/20260628035051/https://www.972mag.com/lavender-ai-israeli-army-gaza/" target="_blank" style="color:var(--tx);text-decoration:underline;">+972 Mag</a>) · US ICE algorithmic deportation targeting & border drone swarms (<a href="https://www.law.georgetown.edu/privacy-technology-center/research/american-dragnet-data-driven-deportation-in-the-21st-century/" target="_blank" style="color:var(--tx);text-decoration:underline;">Georgetown Law</a>) · US DoD autonomous strike authorisation expansion (<a href="https://www.cnas.org/press/press-note/noteworthy-dod-autonomous-weapons-policy" target="_blank" style="color:var(--tx);text-decoration:underline;">CNAS</a>) · China Xinjiang ethno-religious predictive surveillance grid (<a href="https://www.amnesty.org/en/latest/news/2021/06/china-draconian-repression-of-muslims-in-xinjiang-amounts-to-crimes-against-humanity/" target="_blank" style="color:var(--tx);text-decoration:underline;">Amnesty</a>) — all rated CRITICAL.
+                </span>
 </div>
 
-<script>
-var isDark = false;
-function toggleDark() {
-  isDark = !isDark;
-  document.documentElement.setAttribute('data-theme', isDark ? 'dark' : '');
-  document.getElementById('toggle-icon').textContent = isDark ? '\u2600' : '\u263E';
-  document.getElementById('toggle-label').textContent = isDark ? 'Light mode' : 'Dark mode';
-  if (radarChartInstance) {
-    updateRadarColors();
-  }
+<div class="intro-panel">
+    <div class="intro-left">
+        <h3>Artificial Intelligence Ethics</h3>
+        <p>This live dashboard monitors, scores, and tracks autonomous weapons systems (LAWS) and mass surveillance deployments globally. The matrix dynamically ranks active AI operations based on documented severity, algorithmic bias, and civilian impact. Use the real-time intelligence feed and accountability gap analysis to understand the rapidly evolving landscape of unregulated AI technologies.</p>
+    </div>
+    <div class="intro-right">
+        <a href="https://aviperera.com/stance" class="intro-link">Read My Stance <span>&rarr;</span></a>
+        <a href="https://aviperera.com/aisafety" class="intro-link">AI Safety Framework <span>&rarr;</span></a>
+    </div>
+</div>
+
+<div class="ss">
+<div class="sc">
+<div class="sl">AI Targets Generated</div>
+<div class="sv vb" id="st1">37k+</div>
+<div class="ss-sub">civilians marked by Lavender<br><a href="https://www.972mag.com/lavender-ai-israeli-army-gaza/" target="_blank" style="color:var(--tx2);font-size:0.85em;text-decoration:underline;">Source: +972 Mag</a></div>
+</div>
+<div class="sc">
+<div class="sl">Deportations</div>
+<div class="sv vr" id="st2">1.2M</div>
+<div class="ss-sub">Title 42 summary expulsions & detentions<br><a href="http://web.archive.org/web/20260628142944/https://www.cbp.gov/newsroom/stats/cbp-enforcement-statistics/title-8-and-title-42-statistics" target="_blank" style="color:var(--tx2);font-size:0.85em;text-decoration:underline;">Source: CBP (US Gov)</a></div>
+</div>
+<div class="sc">
+<div class="sl">No Art. 36</div>
+<div class="sv va" id="st3">94%</div>
+<div class="ss-sub">autonomous systems lack review<br><a href="https://www.icrc.org/en/download/file/175855/icrc_position_on_autonomous_weapon_systems.pdf" target="_blank" style="color:var(--tx2);font-size:0.85em;text-decoration:underline;">Source: ICRC</a></div>
+</div>
+<div class="sc">
+<div class="sl">Facial Recog</div>
+<div class="sv vg" id="st4">1bn+</div>
+<div class="ss-sub">faces scraped without consent<br><a href="https://banthescan.amnesty.org/" target="_blank" style="color:var(--tx2);font-size:0.85em;text-decoration:underline;">Source: Amnesty</a></div>
+</div>
+<div class="sc">
+<div class="sl">Global Arms Race</div>
+<div class="sv vo" id="st5" style="font-size: 1.8em;">$34B+</div>
+<div class="ss-sub">spent on autonomous weapons annually<br><a href="https://www.sipri.org/research/armament-and-disarmament/emerging-military-and-security-technologies/autonomous-weapon-systems" target="_blank" style="color:var(--tx2);font-size:0.85em;text-decoration:underline;">Source: SIPRI</a></div>
+</div>
+<div class="sc">
+<div class="sl">Human Oversight</div>
+<div class="sv vb" id="st6">20s</div>
+<div class="ss-sub">avg review per lethal strike<br><a href="http://web.archive.org/web/20260628035051/https://www.972mag.com/lavender-ai-israeli-army-gaza/" target="_blank" style="color:var(--tx2);font-size:0.85em;text-decoration:underline;">Source: +972 Magazine (Archive)</a></div>
+</div>
+</div>
+<div class="fbar">
+<div class="fg">
+<span class="fgl">
+                  Region
+                 </span>
+<button class="fbtn on" data-f="r" data-v="ALL" onclick="sf('r','ALL',this)">
+                  All
+                 </button>
+<button class="fbtn" data-f="r" data-v="ISR" onclick="sf('r','ISR',this)">
+                  Israel
+                 </button>
+<button class="fbtn" data-f="r" data-v="USA" onclick="sf('r','USA',this)">
+                  USA
+                 </button>
+<button class="fbtn" data-f="r" data-v="EU" onclick="sf('r','EU',this)">
+                  EU
+                 </button>
+<button class="fbtn" data-f="r" data-v="ASIA" onclick="sf('r','ASIA',this)">
+                  Asia
+                 </button>
+<button class="fbtn" data-f="r" data-v="MENA" onclick="sf('r','MENA',this)">
+                  MENA
+                 </button>
+</div>
+<span class="fsep">
+</span>
+<div class="fg">
+<span class="fgl">
+                  Severity
+                 </span>
+<button class="fbtn on" data-f="s" data-v="ALL" onclick="sf('s','ALL',this)">
+                  All
+                 </button>
+<button class="fbtn" data-f="s" data-v="CRITICAL" onclick="sf('s','CRITICAL',this)">
+                  Critical
+                 </button>
+<button class="fbtn" data-f="s" data-v="HIGH" onclick="sf('s','HIGH',this)">
+                  High
+                 </button>
+<button class="fbtn" data-f="s" data-v="MOD" onclick="sf('s','MOD',this)">
+                  Moderate
+                 </button>
+</div>
+<span class="fsep">
+</span>
+<div class="fg">
+<span class="fgl">
+                  Framework
+                 </span>
+<button class="fbtn on" data-f="f" data-v="ALL" onclick="sf('f','ALL',this)">
+                  All
+                 </button>
+<button class="fbtn" data-f="f" data-v="IHL" onclick="sf('f','IHL',this)">
+                  IHL
+                 </button>
+<button class="fbtn" data-f="f" data-v="DEONT" onclick="sf('f','DEONT',this)">
+                  Deontological
+                 </button>
+<button class="fbtn" data-f="f" data-v="UTIL" onclick="sf('f','UTIL',this)">
+                  Utilitarian
+                 </button>
+</div>
+</div>
+<div class="row3">
+<div class="cl">
+<div class="mod">
+<div class="mh" onclick="tog(this)">
+<span class="mt">
+                    I — LAWS Deployment Tracker
+                   </span>
+<div class="mh-r">
+<span class="mtag t-r">
+                     Art. 36
+                    </span>
+<span class="cico">
+                     ▾
+                    </span>
+</div>
+</div>
+<div class="mcoll" style="max-height:2000px;">
+<div class="mb" style="overflow-x:auto;">
+<table class="lt">
+<thead>
+<tr>
+<th style="width:20px;">
+</th>
+<th>
+                        System
+                       </th>
+<th style="width:72px;">
+                        Autonomy
+                       </th>
+<th style="width:66px;">
+                        Status
+                       </th>
+<th style="width:84px;">
+                        Theater
+                       </th>
+<th style="width:52px;">
+                        Sev.
+                       </th>
+</tr>
+</thead>
+<tbody id="laws-tb">
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="mod grow">
+<div class="mh" onclick="tog(this)">
+<span class="mt">
+                    Accountability Gap Analysis
+                   </span>
+<div class="mh-r">
+<span class="mtag t-a">
+                     Chart
+                    </span>
+<span class="cico">
+                     ▾
+                    </span>
+</div>
+</div>
+<div class="mcoll" style="max-height:2000px;">
+<div class="mb">
+<div class="cnote">
+                     Tech sophistication vs. accountability — gap = unregulated risk
+                    </div>
+<div class="chtw h200">
+<canvas id="ch-acct">
+</canvas>
+</div>
+
+<div class="glass-explainer ge-red">
+    <h4>The Accountability Gap</h4>
+    <p>This structural gap analysis visualizes the disparity between the raw technological sophistication of deployed AI systems and the legal frameworks binding them. A wider divergence indicates critically unregulated deployment, where autonomous capabilities outpace human oversight and international humanitarian law.</p>
+</div>
+
+
+
+
+</div>
+</div>
+</div>
+</div>
+<div class="cm">
+<div class="mod">
+<div class="mh" onclick="tog(this)">
+<span class="mt">
+                    II — Surveillance &amp; Control Matrix
+                   </span>
+<div class="mh-r">
+<span class="mtag t-p">
+                     Heat Index
+                    </span>
+<span class="cico">
+                     ▾
+                    </span>
+</div>
+</div>
+<div class="mcoll" style="max-height:2000px;">
+<div class="mb">
+<div style="font-size:.58em;color:var(--tx3);letter-spacing:.07em;text-transform:uppercase;margin-bottom:6px;">
+                     Ranked by documented harm · Score 0–100 · Hover for source
+                    </div>
+<div class="matrix" id="surv-grid">
+</div>
+</div>
+</div>
+</div>
+<div class="mod grow">
+<div class="mh" onclick="tog(this)">
+<span class="mt">
+                    LAWS Deployment Trend 2018–2025
+                   </span>
+<div class="mh-r">
+<span class="mtag t-b">
+                     Timeline
+                    </span>
+<span class="cico">
+                     ▾
+                    </span>
+</div>
+</div>
+<div class="mcoll" style="max-height:2000px;">
+<div class="mb">
+<div class="chtw h180">
+<canvas id="ch-trend">
+</canvas>
+</div>
+<div class="cleg" id="trend-leg">
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cr">
+<div class="fh" style="background: linear-gradient(90deg, rgba(225,29,72,0.15) 0%, transparent 100%); border-bottom: 1px solid rgba(225,29,72,0.3); padding: 16px; border-top-left-radius: 12px; border-top-right-radius: 12px;">
+<span class="ft" style="color:#fff; font-size:0.9em; letter-spacing:0.1em; text-transform:uppercase; font-weight:600; font-family:var(--font-sans);">Intelligence Feed</span>
+<span class="flive" style="background:#e11d48; color:#fff; padding:2px 8px; border-radius:12px; font-size:0.6em; box-shadow: 0 0 10px rgba(225,29,72,0.8); animation: pulse 2s infinite;">LIVE</span>
+</div>
+<div class="fb" id="feed-body" style="max-height:420px;min-height:160px;">
+</div>
+<div style="border-top:1px solid var(--bd);display:flex;flex-direction:column;flex:1;">
+<div class="fh" style="background: linear-gradient(90deg, rgba(56,189,248,0.15) 0%, transparent 100%); border-bottom: 1px solid rgba(56,189,248,0.3); padding: 16px;">
+<span class="ft" style="color:#fff; font-size:0.9em; letter-spacing:0.1em; text-transform:uppercase; font-weight:600; font-family:var(--font-sans);">Live RSS Feed</span>
+<div style="display:flex;align-items:center;gap:8px;">
+<span class="flive" id="rss-st" style="background:#38bdf8;color:#0f172a;padding:2px 8px;border-radius:12px;font-size:0.6em;font-weight:700;">LOADING</span>
+<button class="btn" style="padding:4px 8px; font-size:0.65em; border-color: rgba(56,189,248,0.5); color: #38bdf8;" onclick="promptAddRSS()">+ ADD FEED</button>
+<button class="rss-refresh" style="background:transparent; border:none; color:var(--tx2); cursor:pointer;" onclick="forceRSSRefresh()" title="Refresh">↻</button>
+</div>
+</div>
+<div class="rtabs" id="rss-tabs">
+</div>
+<div class="rss-body" id="rss-body" style="max-height:360px; overflow-y:auto; flex:1; min-height: 200px;">
+</div>
+</div>
+</div>
+</div>
+<div class="row2">
+<div class="colw">
+<div class="mod" style="border-bottom:none;">
+<div class="mh" onclick="tog(this)">
+<span class="mt">
+                    III — Academic &amp; Legal Repository
+                   </span>
+<div class="mh-r">
+<span class="mtag t-g">
+                     Searchable
+                    </span>
+<span class="cico">
+                     ▾
+                    </span>
+</div>
+</div>
+<div class="mcoll" style="max-height:2000px;">
+<div class="ms" style="max-height:400px;">
+<div class="rsw">
+<span class="rsi">
+                      ⚲
+                     </span>
+<input class="rsinp" id="repo-q" oninput="renderRepo()" placeholder="Search title, source, framework…"/>
+</div>
+<div id="repo-list">
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="colh" style="flex-direction:column;">
+<div class="mod">
+<div class="mh" onclick="tog(this)">
+<span class="mt">
+                    IV — Risk Assessment Radar
+                   </span>
+<div class="mh-r">
+<span class="mtag t-a">
+                     Radar
+                    </span>
+<span class="cico">
+                     ▾
+                    </span>
+</div>
+</div>
+<div class="mcoll" style="max-height:2000px;">
+<div class="mb">
+<div class="chtw h220">
+<canvas id="ch-radar">
+</canvas>
+</div>
+<div class="cleg" id="radar-leg">
+</div>
+</div>
+</div>
+</div>
+<div class="mod" style="border-bottom:none;">
+<div class="mh" onclick="tog(this)">
+<span class="mt">
+                    Regional Threat Distribution
+                   </span>
+<div class="mh-r">
+<span class="mtag t-p">
+                     Donut
+                    </span>
+<span class="cico">
+                     ▾
+                    </span>
+</div>
+</div>
+<div class="mcoll" style="max-height:2000px;">
+<div class="mb">
+<div class="chtw h160">
+<canvas id="ch-donut">
+</canvas>
+</div>
+<div class="cleg" id="donut-leg">
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row2">
+<div class="colh" style="flex:1.5;">
+<div class="mod" style="border-bottom:none;">
+<div class="mh" onclick="tog(this)">
+<span class="mt">
+                    Civilian Impact vs. Autonomy Level
+                   </span>
+<div class="mh-r">
+<span class="mtag t-r">
+                     Bubble Chart
+                    </span>
+<span class="cico">
+                     ▾
+                    </span>
+</div>
+</div>
+<div class="mcoll" style="max-height:2000px;">
+<div class="mb">
+<div class="cnote">
+                     X = Autonomy % · Y = Accountability Index · Bubble size = civilian impact scale
+                    </div>
+<div class="chtw h240" style="min-height: 240px;">
+<canvas id="ch-bubble" style="min-height: 250px;"></canvas>
+</div>
+
+<div class="glass-explainer ge-amb">
+    <h4>Civilian Impact Matrix</h4>
+    <p>Visualizing the deadly intersection of autonomy and zero-accountability. Systems pushing toward the extreme bottom-right exhibit near-total targeting autonomy with negligible legal oversight, resulting in the highest scaled risks (bubble magnitude) to civilian populations in conflict zones.</p>
+</div>
+
+
+
+
+</div>
+</div>
+</div>
+</div>
+<div class="colh">
+<div class="mod" style="border-bottom:none;">
+<div class="mh" onclick="tog(this)">
+<span class="mt" style="display:flex; justify-content:space-between; width:100%; align-items:center;">
+                    LAWS Treaty &amp; Instrument Obligations
+                    <button class="btn" style="padding:4px 8px; font-size:0.7em; margin-right:8px;" onclick="openMatrixModal(); event.stopPropagation();">Full Matrix ↗</button>
+                   </span>
+<div class="mh-r">
+<span class="mtag t-g">
+                     Status
+                    </span>
+<span class="cico">
+                     ▾
+                    </span>
+</div>
+</div>
+<div class="mcoll" style="max-height:2000px;">
+<div class="ms" style="max-height:500px; overflow-y:auto;">
+<div id="treaty-body">
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="logsec">
+<div class="loghd">
+<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+<span class="loght">
+                   V — Persistent Record Log
+                  </span>
+<span class="logcnt" id="log-cnt">
+                   0 entries · browser localStorage
+                  </span>
+</div>
+<div class="logas">
+<button class="lbtn p" onclick="togLogForm()">
+                   + Add Entry
+                  </button>
+<button class="lbtn" onclick="exportLog()">
+                   ↓ CSV
+                  </button>
+<button class="lbtn d" onclick="clearLog()">
+                   Clear All
+                  </button>
+</div>
+</div>
+<div class="logfm" id="log-form">
+<div class="lfg">
+<label class="lfl">
+                   Date
+                  </label>
+<input class="lfi" id="lf-d" style="width:130px;" type="date"/>
+</div>
+<div class="lfg">
+<label class="lfl">
+                   Incident / Title
+                  </label>
+<input class="lfi" id="lf-t" placeholder="e.g. Lavender system expansion confirmed" style="width:260px;"/>
+</div>
+<div class="lfg">
+<label class="lfl">
+                   Actor / State
+                  </label>
+<input class="lfi" id="lf-a" placeholder="e.g. IDF / Israel" style="width:140px;"/>
+</div>
+<div class="lfg">
+<label class="lfl">
+                   Category
+                  </label>
+<select class="lfs" id="lf-c">
+<option value="LAWS">
+                    LAWS / Weapons
+                   </option>
+<option value="SURV">
+                    Surveillance
+                   </option>
+<option value="ICE">
+                    Immigration / Detention
+                   </option>
+<option value="GENOCIDE">
+                    Genocidal / Existential
+                   </option>
+<option value="POLICY">
+                    Policy / Treaty
+                   </option>
+<option value="LEGAL">
+                    Legal / Court
+                   </option>
+<option value="RESEARCH">
+                    Research / Report
+                   </option>
+<option value="OTHER">
+                    Other
+                   </option>
+</select>
+</div>
+<div class="lfg">
+<label class="lfl">
+                   Severity
+                  </label>
+<select class="lfs" id="lf-sv" style="width:100px;">
+<option value="CRITICAL">
+                    Critical
+                   </option>
+<option value="HIGH">
+                    High
+                   </option>
+<option value="MOD">
+                    Moderate
+                   </option>
+<option value="LOW">
+                    Low
+                   </option>
+</select>
+</div>
+<div class="lfg">
+<label class="lfl">
+                   Source / URL
+                  </label>
+<input class="lfi" id="lf-s" placeholder="+972 Magazine, 2024" style="width:200px;"/>
+</div>
+<div class="lfg" style="flex:1;min-width:220px;">
+<label class="lfl">
+                   Notes / Evidence
+                  </label>
+<textarea class="lfta" id="lf-n" placeholder="Summary, evidence, links…" style="width:100%;"></textarea>
+</div>
+<div class="lfg" style="flex-direction:row;gap:5px;align-self:flex-end;">
+<button class="lbtn" onclick="togLogForm()">
+                   Cancel
+                  </button>
+<button class="lbtn p" onclick="saveEntry()">
+                   Save Entry
+                  </button>
+</div>
+</div>
+<div id="log-con">
+</div>
+</div>
+<div class="dfoot">
+<span>
+                 Architected &amp; Curated by <a href="https://aviperera.com" style="color:var(--blutx);text-decoration:none;font-weight:600;">Avi Perera</a> &mdash; Empowering AI Policy.<br><span style="opacity:0.6;">Data frameworks compiled from: UN GGE &middot; ICRC &middot; SIPRI &middot; HRW &middot; AI Now Institute &middot; +972 Magazine &middot; Amnesty International &middot; The Intercept &middot; ACLU &middot; Nature MI &middot; EJIL. Research &amp; policy reference only.</span>
+                </span>
+<span id="sied-stamp">
+                 —
+                </span>
+</div>
+</div>
+    </div>
+</div>
+
+
+
+
+<script data-no-optimize="1">
+               var isDark=!1,hdrHid=!1;function toggleDark(){isDark=!isDark;document.getElementById('sied').setAttribute('data-theme',isDark?'dark':'');document.getElementById('sied-html').classList.toggle('sied-pg-dark',isDark);document.getElementById('di').textContent=isDark?'\u2600':'\u263E';document.getElementById('dl').textContent=isDark?'Light':'Dark';document.getElementById('btn-dark').classList.toggle('on',isDark);setTimeout(buildAll,80)}
+function toggleHdr(){hdrHid=!hdrHid;document.getElementById('sied-html').classList.toggle('sied-hide-hdr',hdrHid);document.getElementById('hi').textContent=hdrHid?'\u229E':'\u2862';document.getElementById('hl').textContent=hdrHid?'Show Hdr':'Header';document.getElementById('btn-hdr').classList.toggle('on',hdrHid)}
+function setFont(px){document.getElementById('sied').style.fontSize=px+'px';document.querySelectorAll('.fsbtn').forEach(function(b){b.classList.toggle('on',b.getAttribute('data-fs')==String(px))})}
+function tog(hdr){hdr.classList.toggle('clpsd');var c=hdr.nextElementSibling;if(c&&c.classList.contains('mcoll')){c.style.maxHeight=hdr.classList.contains('clpsd')?'0':'2000px'}}
+var F={r:'ALL',s:'ALL',f:'ALL'};function sf(k,v){F[k]=v;document.querySelectorAll('[data-f="'+k+'"]').forEach(function(b){b.classList.toggle('on',b.getAttribute('data-v')===v)});renderAll()}
+function match(d){return(F.r==='ALL'||d.region===F.r||d.region==='ALL')&&(F.s==='ALL'||d.sev===F.s)&&(F.f==='ALL'||d.fw===F.f)}
+var LAWS=[{flag:'IL',name:'Gospel \u2014 Mass Target Generation AI',region:'ISR',a:96,status:'unclear',theater:'Gaza \u2014 Active',sev:'CRITICAL',fw:'IHL',note:'~100 targets/day auto-generated. +972 Magazine 2023. ICRC: probable IHL violations.'},{flag:'IL',name:'Lavender \u2014 Kill Authorisation System',region:'ISR',a:92,status:'illegal',theater:'Gaza \u2014 Active',sev:'CRITICAL',fw:'IHL',note:'~37,000 kill-listed. Human review ~20 sec/target. AI Now Institute 2024.'},{flag:'IL',name:"Where's Daddy \u2014 Strike Timing AI",region:'ISR',a:88,status:'unclear',theater:'Gaza \u2014 Active',sev:'CRITICAL',fw:'IHL',note:'Targets tracked to family homes. 15-20 family members killed per low-value target. +972 Mag 2024.'},{flag:'US',name:'ICE / DHS Deportation Targeting AI',region:'USA',a:74,status:'unclear',theater:'Domestic/Borders',sev:'CRITICAL',fw:'DEONT',note:'Racial profiling confirmed. HRW 2024. No Congressional oversight.'},{flag:'US',name:'DARPA OFFSET Autonomous Swarm',region:'USA',a:91,status:'unclear',theater:'Development/Test',sev:'HIGH',fw:'UTIL',note:'90+ drone swarm. No Art. 36 review. POGO 2024.'},{flag:'TR',name:'Kargu-2 Autonomous UAV',region:'MENA',a:80,status:'unclear',theater:'Libya/Syria Active',sev:'HIGH',fw:'IHL',note:'UN Panel 2021: engaged targets autonomously without human command.'},{flag:'KR',name:'SGR-A1 Sentry System',region:'ASIA',a:72,status:'partial',theater:'DMZ \u2014 Static',sev:'HIGH',fw:'IHL',note:'Human decision nominally required. No independent verification.'},{flag:'US',name:'MQ-9 Reaper (semi-autonomous)',region:'USA',a:46,status:'legal',theater:'Multi-theater',sev:'MOD',fw:'UTIL',note:'Human-in-loop required. DoD Directive 3000.09. Art. 36 compliant.'},{flag:'US',name:'Phalanx CIWS (auto-defence)',region:'USA',a:62,status:'legal',theater:'Naval',sev:'MOD',fw:'IHL',note:'Defensive use only. Geo-fenced. Art. 36 reviewed.'},{flag:'GB',name:'Taranis UCAV',region:'EU',a:55,status:'partial',theater:'R&D Phase',sev:'MOD',fw:'DEONT',note:'Human in loop per MoD. Under ongoing Art. 36 review.'},];var SURV=[{label:'Gospel/Lavender Kill Chain',sub:'AI-directed mass civilian targeting',region:'ISR',sev:'CRITICAL',score:99,cls:'hc1',src:'AI Now / +972 Mag 2024'},{label:'ICE Surveillance Network',sub:'Algorithmic immigrant targeting',region:'USA',sev:'CRITICAL',score:97,cls:'hc1',src:'HRW / Intercept 2024'},{label:'Xinjiang Surveillance Grid',sub:'Ethno-religious oppression system',region:'ASIA',sev:'HIGH',score:75,cls:'hc2',src:'HRW / Amnesty 2022'},{label:'West Bank Facial Recog.',sub:'Automated apartheid \u2014 documented',region:'ISR',sev:'CRITICAL',score:94,cls:'hc1',src:'Amnesty Int. 2023'},{label:'Facial Recog. \u2014 Mass Deploy.',sub:'1bn+ faces, no consent or appeal',region:'ASIA',sev:'HIGH',score:72,cls:'hc2',src:'HRW / AI Now 2023'},{label:'Social Credit System',sub:'Behavioural citizen scoring',region:'ASIA',sev:'MOD',score:50,cls:'hc3',src:'HRW 2023'},{label:'PredPol / Predictive Policing',sub:'Racially biased algorithmic LEA',region:'USA',sev:'CRITICAL',score:97,cls:'hc1',src:'ACLU / MIT 2022'},{label:'Palantir Gotham (ICE)',sub:'Mass deportation logistics AI',region:'USA',sev:'CRITICAL',score:95,cls:'hc1',src:'The Intercept 2024'},{label:'Mass Biometric \u2014 Refugees',sub:'Forcible enrolment, denial of ID',region:'MENA',sev:'HIGH',score:80,cls:'hc2',src:'UNHCR / Amnesty 2023'},{label:'Clearview AI \u2014 Police Use',sub:'Warrantless facial recognition',region:'USA',sev:'CRITICAL',score:93,cls:'hc1',src:'ACLU / EFF 2023'},{label:'Facial Recog. \u2014 LEA (EU)',sub:'Protest and crowd surveillance',region:'EU',sev:'HIGH',score:66,cls:'hc3',src:'ECHR / Amnesty 2023'},{label:'Social Media Sentiment AI',sub:'Political dissent monitoring',region:'EU',sev:'MOD',score:46,cls:'hc4',src:'EFF / EDRi 2023'},];var REPO=[{title:'Gospel and Lavender: How Israel Used AI to Select Mass Bombing Targets in Gaza',source:'+972 Mag',sc:'s-h',year:2024,fw:'IHL',region:'ISR',sev:'CRITICAL'},{title:'ICE Surveillance: How Immigration Enforcement Uses Algorithmic Tools to Target People',source:'HRW',sc:'s-h',year:2024,fw:'DEONT',region:'USA',sev:'CRITICAL'},{title:'Automated Apartheid: Facial Recognition Technology in the Occupied West Bank',source:'Amnesty',sc:'s-h',year:2023,fw:'IHL',region:'ISR',sev:'CRITICAL'},{title:'Palantir, ICE, and the Infrastructure of Mass Deportation',source:'Intercept',sc:'s-h',year:2024,fw:'DEONT',region:'USA',sev:'CRITICAL'},{title:'Predictive Policing and Racial Discrimination in US Law Enforcement',source:'ACLU',sc:'s-h',year:2022,fw:'UTIL',region:'USA',sev:'HIGH'},{title:'Autonomous Weapons Systems and the Laws of Armed Conflict',source:'UN GGE',sc:'s-u',year:2023,fw:'IHL',region:'ALL',sev:'CRITICAL'},{title:'ICRC Position on Autonomous Weapon Systems',source:'ICRC',sc:'s-i',year:2023,fw:'IHL',region:'ALL',sev:'HIGH'},{title:'GGE/2023/CRP.1 \u2014 Report on Lethal Autonomous Weapons',source:'UN GGE',sc:'s-u',year:2023,fw:'IHL',region:'ALL',sev:'CRITICAL'},{title:'Meaningful Human Control over Force Decisions',source:'Nature MI',sc:'s-n',year:2022,fw:'DEONT',region:'EU',sev:'HIGH'},{title:'AI-Enabled Targeting and Proportionality Assessment',source:'Nature MI',sc:'s-n',year:2023,fw:'IHL',region:'ALL',sev:'CRITICAL'},{title:"Xinjiang's Surveillance State: Technology as an Instrument of Oppression",source:'HRW',sc:'s-h',year:2022,fw:'DEONT',region:'ASIA',sev:'CRITICAL'},{title:'Social Credit Systems as Human Rights Violations',source:'HRL Rev',sc:'',year:2021,fw:'DEONT',region:'ASIA',sev:'CRITICAL'},{title:'AI and Mass Surveillance: ECHR Implications',source:'EJIL',sc:'',year:2022,fw:'DEONT',region:'EU',sev:'HIGH'},{title:'Dual-Use AI in Non-International Armed Conflicts',source:'IRRC',sc:'s-i',year:2021,fw:'IHL',region:'MENA',sev:'HIGH'},];var FEED=[{type:'alert',text:'CRITICAL: Gospel/Lavender AI systems \u2014 37,000+ kill-listed, ~20 sec human review. ICRC: probable IHL violations. AI Now Institute 2024.'},{type:'alert',text:'CRITICAL: HRW \u2014 ICE algorithmic deportation expanded; racial profiling confirmed; zero judicial review in place.'},{type:'new',text:'UN GGE emergency session Geneva: binding LAWS treaty framework; US and Israel explicitly block mandatory oversight provisions.'},{type:'info',text:'+972 Magazine: "Where\'s Daddy" AI tracks targets to family homes \u2014 avg. 15\u201320 family members killed per low-value target.'},{type:'alert',text:'HIGH: ACLU documents PredPol racial disparity \u2014 Black/Latino communities targeted 3\xd7 more often by predictive policing.'},{type:'new',text:'EU AI Act enforcement: real-time biometric ban enters force \u2014 law enforcement carve-outs challenged in five member state courts.'},{type:'info',text:'Amnesty International: Israeli facial recognition at 24 West Bank checkpoints constitutes automated apartheid.'},{type:'alert',text:'HIGH: Palantir\u2013ICE contract renewed $95M \u2014 mass deportation logistics operational for 1.2M+ individuals.'},{type:'new',text:'Stanford HAI: New LAWS risk taxonomy v3.1 \u2014 Gospel system rated highest-ever documented autonomous deployment risk.'},{type:'info',text:'ICRC: calls for binding LAWS treaty by 2026 with independent verification and prohibition on systems without MHC.'},{type:'alert',text:'CRITICAL: Xinjiang surveillance expanded to 14 new provinces \u2014 predictive detention AI. 1.8M+ detained since 2017.'},{type:'new',text:'SIPRI annual report: global LAWS spending +34% YoY \u2014 governance frameworks stalled by US/Russia/China veto.'},{type:'info',text:'J.IHA: "Accountability Gaps in Fully Autonomous Kill Chains" \u2014 Gaza case study peer-reviewed.'},{type:'alert',text:'HIGH: UK MoD refuses to confirm Art. 36 review for AI targeting systems \u2014 FOIA challenge ongoing.'},{type:'new',text:'Nature MI: "Ethical Alignment Failures in Military AI Systems (2025)" \u2014 pre-print posted, open access.'},{type:'alert',text:'CRITICAL: Autonomous drone engagement without human-in-loop confirmed in Eastern Ukraine \u2014 civilian structures hit.'},{type:'info',text:'CCW GGE meets Geneva \u2014 83 states; progress on MHC definition remains blocked by major military powers.'},{type:'new',text:'Intercept: DHS expanding AI surveillance from borders into interior communities \u2014 no Congressional authorisation.'},{type:'alert',text:'HIGH: Turkish Kargu-2 drones deployed Nagorno-Karabakh \u2014 UN Panel reviews autonomous engagement protocols.'},{type:'info',text:'AI Now Institute Annual Report 2025: Gaza kill-chain automation is global precedent-setting event, Ch. 7.'},{type:'new',text:'ICRC President: Gaza AI kill chain "watershed moment" \u2014 demands international legal response at UN Security Council.'},{type:'alert',text:'CRITICAL: UN Special Rapporteur formally requests Israel document Gospel/Lavender targeting criteria.'},{type:'info',text:'MIT Tech Review: 40+ states now developing LAWS capabilities with no oversight regime.'},{type:'new',text:'HRW: ICE social media AI for immigration enforcement \u2014 200,000+ profiles scraped without warrants.'},{type:'alert',text:'HIGH: South Korea SGR-A1 sentry systems remain armed on DMZ \u2014 no Art. 36 review documentation available.'},{type:'info',text:'EFF files amicus brief in Clearview AI case \u2014 argues mass biometric collection is per se unconstitutional.'},{type:'alert',text:'CRITICAL: US DoD Project Maven expanded \u2014 AI-driven targeting covers 7 active conflict zones, oversight classified.'},{type:'info',text:'SIPRI Policy Brief: 1,400+ civilian casualties linked to algorithm-assisted targeting 2020\u20132024.'},{type:'new',text:'Austria tables binding LAWS prohibition at UNGA First Committee \u2014 87 co-sponsors; major military powers absent.'},{type:'alert',text:'HIGH: Clearview AI deployed by LEA in 30+ US states \u2014 no legislative authorisation; multiple civil rights suits.'},{type:'info',text:'Nature Human Behaviour: "Racialised Automation in US Criminal Justice" \u2014 bias across 12 sentencing algorithms.'},{type:'new',text:'European Parliament: resolution 427\u2013153 calls on member states to support binding LAWS prohibition at CCW.'},{type:'alert',text:'CRITICAL: HRW: Palantir software used in ICE operations resulted in wrongful detention of 3,400+ US citizens 2024.'},{type:'info',text:'DARPA briefing leaked: OFFSET swarm 94% autonomous coordination achieved \u2014 Art. 36 review not initiated.'},{type:'new',text:'International Committee of Jurists: new report \u2014 Gaza AI kill chain violates Art. 36 of Additional Protocol I.'},];var TREATY=[{c:'USA',pos:'against',gc:1,ccw:1,ccw2:1,ccw5:0,rome:0,note:'Actively blocks binding CCW LAWS treaty. DoD Dir. 3000.09 is national policy only. Not party to Rome Statute (ICC).'},{c:'Russia',pos:'against',gc:1,ccw:1,ccw2:1,ccw5:1,rome:0,note:'Repeatedly blocks CCW GGE consensus. Opposes any binding prohibition. Not party to ICC.'},{c:'Israel',pos:'against',gc:1,ccw:0,ccw2:0,ccw5:0,rome:0,note:'Not party to CCW or its Protocols. Actively deploying LAWS in Gaza. Not party to ICC.'},{c:'India',pos:'against',gc:1,ccw:1,ccw2:1,ccw5:0,rome:0,note:'Opposes legally binding LAWS instrument. Prefers voluntary guidelines. Not party to ICC.'},{c:'UK',pos:'neutral',gc:1,ccw:1,ccw2:1,ccw5:1,rome:1,note:'Prefers national Art. 36 reviews over binding treaty. Conducts reviews but classified.'},{c:'France',pos:'neutral',gc:1,ccw:1,ccw2:1,ccw5:1,rome:1,note:'Supports MHC principle; opposes outright prohibition. Developing national LAWS policy.'},{c:'Japan',pos:'neutral',gc:1,ccw:1,ccw2:1,ccw5:0,rome:1,note:'Supports MHC principle; no formal treaty position. Constitutional constraints on offensive LAWS.'},{c:'Australia',pos:'neutral',gc:1,ccw:1,ccw2:1,ccw5:1,rome:1,note:'Engages CCW process; supports regulation but not prohibition. No public LAWS doctrine.'},{c:'S. Korea',pos:'neutral',gc:1,ccw:1,ccw2:1,ccw5:0,rome:1,note:'Operates SGR-A1 sentry system. No formal international LAWS treaty position.'},{c:'China',pos:'mixed',gc:1,ccw:1,ccw2:1,ccw5:1,rome:0,note:'Supports non-binding Declaration of Principles; opposes enforcement mechanism. Not ICC party.'},{c:'Brazil',pos:'mixed',gc:1,ccw:1,ccw2:1,ccw5:1,rome:1,note:'Active in CCW process; position evolving toward binding framework. Supportive of MHC.'},{c:'Turkey',pos:'mixed',gc:1,ccw:1,ccw2:1,ccw5:0,rome:0,note:'Currently deploying Kargu-2 LAWS. No formal prohibition position. Not ICC party.'},{c:'Austria',pos:'pro',gc:1,ccw:1,ccw2:1,ccw5:1,rome:1,note:'Co-leads Vienna Process. Calls for binding prohibition on LAWS without MHC. LAWS champion state.'},{c:'New Zealand',pos:'pro',gc:1,ccw:1,ccw2:1,ccw5:1,rome:1,note:'Co-sponsors binding prohibition. Active in Panzeri Group on LAWS.'},{c:'Panama',pos:'pro',gc:1,ccw:1,ccw2:0,ccw5:0,rome:1,note:'Calls for immediate LAWS moratorium. Co-sponsors UNGA resolution.'},{c:'Germany',pos:'pro',gc:1,ccw:1,ccw2:1,ccw5:1,rome:1,note:'Supports mandatory MHC standard. Co-sponsors binding framework. Funds IHL-AI research.'},{c:'Ireland',pos:'pro',gc:1,ccw:1,ccw2:1,ccw5:1,rome:1,note:'Calls for new legally binding instrument. Active at CCW GGE sessions.'},{c:'Mexico',pos:'pro',gc:1,ccw:1,ccw2:1,ccw5:1,rome:1,note:'Co-sponsors prohibition in CCW and UNGA First Committee.'},{c:'Netherlands',pos:'pro',gc:1,ccw:1,ccw2:1,ccw5:1,rome:1,note:'Supports binding MHC requirement. Funds AI-IHL research at Asser Institute.'},{c:'Belgium',pos:'pro',gc:1,ccw:1,ccw2:1,ccw5:1,rome:1,note:'Supports prohibition. National parliament passed resolution calling for LAWS ban.'},];function renderLaws(){var el=document.getElementById('laws-tb'),d=LAWS.filter(match);if(!d.length){el.innerHTML='<tr><td colspan="6" style="font-size:.85em;color:var(--tx3);padding:10px;text-align:center;">No systems match.</td></tr>';['st1','st2','st3'].forEach(function(id){document.getElementById(id).textContent='0'});return}
+el.innerHTML=d.map(function(x){var fc=x.a>=85?'#b92c1e':x.a>=65?'#a8510a':'#276929';var bc=x.status==='legal'?'ok':x.status==='partial'?'pt':x.status==='illegal'?'il':'un';var bt=x.status==='legal'?'Art.36\u2713':x.status==='partial'?'Partial':x.status==='illegal'?'Prohibited':'Unclear';var sc=x.sev==='CRITICAL'?'var(--red)':x.sev==='HIGH'?'var(--amb)':'var(--tx3)';return'<tr title="'+(x.note||'').replace(/"/g,"'")+'"><td><span class="lf">'+x.flag+'</span></td><td><span class="ln" title="'+x.name+'">'+x.name+'</span></td><td><div class="aw"><div class="atr"><div class="afill" style="width:'+x.a+'%;background:'+fc+';"></div></div><span class="ap">'+x.a+'%</span></div></td><td><span class="bdg '+bc+'">'+bt+'</span></td><td style="font-size:.62em;color:var(--tx3);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:84px;">'+x.theater+'</td><td style="font-size:.62em;font-weight:500;color:'+sc+';">'+x.sev+'</td></tr>'}).join('');}
+function renderSurv(){var el=document.getElementById('surv-grid'),d=SURV.filter(function(x){return(F.r==='ALL'||x.region===F.r)&&(F.s==='ALL'||x.sev===F.s)}).sort(function(a,b){return b.score-a.score});if(!d.length){el.innerHTML='<div style="font-size:.77em;color:var(--tx3);padding:10px;grid-column:1/-1;text-align:center;">No data matches.</div>';return}
+el.innerHTML=d.map(function(x){return'<div class="hc '+x.cls+'" title="Source: '+x.src+'"><div class="hl">'+x.label+'</div><div class="hsub">'+x.sub+'</div><span class="hsc">'+x.score+'</span><div class="hreg">'+x.region+'</div><div class="hsrc">'+x.src+'</div></div>'}).join('')}
+function renderRepo(){var el=document.getElementById('repo-list'),q=(document.getElementById('repo-q')||{value:''}).value.toLowerCase();var d=REPO.filter(function(x){return match(x)&&(!q||x.title.toLowerCase().includes(q)||x.source.toLowerCase().includes(q)||x.fw.toLowerCase().includes(q))});if(!d.length){el.innerHTML='<div style="font-size:.77em;color:var(--tx3);padding:10px;text-align:center;">No documents match.</div>';return}
+el.innerHTML=d.map(function(x){return'<div class="ri"><div class="rit">'+x.title+'</div><div class="rim"><span class="rb '+x.sc+'">'+x.source+'</span><span class="rb">'+x.year+'</span><span class="rb">'+x.fw+'</span><span class="rb">'+x.region+'</span></div></div>'}).join('')}
+function renderTreaty(){var el=document.getElementById('treaty-body');var cfg={against:{label:'Oppose / Block Binding Treaty',cls:'tp-a'},neutral:{label:'Neutral \u2014 Voluntary Regulation Only',cls:'tp-n'},mixed:{label:'Mixed / Conditional Support',cls:'tp-m'},pro:{label:'Support Binding Treaty',cls:'tp-p'}};var grouped={against:[],neutral:[],mixed:[],pro:[]};TREATY.forEach(function(t){grouped[t.pos].push(t)});var key='<div class="treaty-key"><span class="tk-item"><strong>GC</strong> = Geneva Conventions</span><span class="tk-item"><strong>CCW</strong> = Conv. Certain Conventional Weapons</span><span class="tk-item"><strong>CCW-II</strong> = CCW Amended Protocol II (mines)</span><span class="tk-item"><strong>CCW-V</strong> = CCW Protocol V (explosive remnants)</span><span class="tk-item"><strong>ICC</strong> = Rome Statute</span><span class="tk-item">\u2713 = party &nbsp; \u2013 = not party &nbsp; Hover rows for details</span></div>';var tbl='<table class="treaty-tbl"><thead><tr><th>State</th><th>Position</th><th title="Geneva Conventions 1949">GC</th><th title="CCW Framework">CCW</th><th title="CCW Amended Protocol II">CCW-II</th><th title="CCW Protocol V">CCW-V</th><th title="Rome Statute / ICC">ICC</th></tr></thead><tbody>';['against','neutral','mixed','pro'].forEach(function(pos){var grp=grouped[pos];if(!grp.length)return;tbl+='<tr><td colspan="7" style="background:var(--bg2);font-size:.58em;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--tx3);padding:5px 5px 4px;"><span class="tpos '+cfg[pos].cls+'">'+cfg[pos].label+'</span></td></tr>';grp.forEach(function(t){function ci(v){return v?'<span class="tck">\u2713</span>':'<span class="tno">\u2013</span>'}
+tbl+='<tr title="'+t.note.replace(/"/g,"'")+'" style="cursor:help;"><td>'+t.c+'</td><td><span class="tpos '+cfg[pos].cls+'" style="font-size:.54em;">'+pos.toUpperCase()+'</span></td><td>'+ci(t.gc)+'</td><td>'+ci(t.ccw)+'</td><td>'+ci(t.ccw2)+'</td><td>'+ci(t.ccw5)+'</td><td>'+ci(t.rome)+'</td></tr>'})});tbl+='</tbody></table>';var proN=grouped.pro.length,total=TREATY.length;var bar='<div style="margin-top:10px;padding-top:8px;border-top:1px solid var(--bd);"><div style="font-size:.58em;color:var(--tx3);margin-bottom:4px;">Binding treaty support: '+proN+'/'+total+' ('+Math.round(proN/total*100)+'%) \u2014 hover rows for details</div><div style="height:4px;background:var(--bg3);border-radius:2px;"><div style="height:4px;width:'+Math.round(proN/total*100)+'%;background:var(--grn);border-radius:2px;"></div></div></div>';el.innerHTML=key+tbl+bar}
+var fidx=0,feedPool=[];function utcStr(){var n=new Date();return String(n.getUTCHours()).padStart(2,'0')+':'+String(n.getUTCMinutes()).padStart(2,'0')+' UTC'}
+function mkFi(f,isNew){return'<div class="fi'+(isNew?' fn':'')+'"><div class="fih"><span class="fid '+f.type+'"></span><span class="fit">'+utcStr()+'</span><span class="fitp '+f.type+'">'+f.type+'</span></div><div class="fitx">'+f.text+'</div></div>'}
+function initFeed(){feedPool=FEED.slice().sort(function(){return Math.random()-.5});var el=document.getElementById('feed-body');el.innerHTML=feedPool.slice(0,9).map(function(f){return mkFi(f,!1)}).join('');fidx=9}
+function tickFeed(){var el=document.getElementById('feed-body');var f=FEED[Math.floor(Math.random()*FEED.length)];el.insertAdjacentHTML('afterbegin',mkFi(f,!0));if(el.children.length>22)el.removeChild(el.lastChild);stamp()}
+var RSS_SOURCES=[{id:'arxiv',name:'arXiv AI',url:'https://export.arxiv.org/rss/cs.AI',kw:['autonomous weapon','surveillance','military','ethics','lethal','targeting','warfare','kill chain','accountability','bias','governance','harm','rights','drone']},{id:'aje',name:'Al Jazeera',url:'https://www.aljazeera.com/xml/rss/all.xml',kw:['AI','artificial intelligence','autonomous','drone','Gaza','surveillance','algorithm','facial recognition','deportation','military','weapon','kill','targeting']},{id:'hrw',name:'HRW',url:'https://www.hrw.org/rss.xml',kw:['AI','algorithm','surveillance','facial','weapon','autonomous','technology','discrimination','detention','deportation','armed','military','targeting']},{id:'nature',name:'Nature',url:'https://www.nature.com/subjects/machine-intelligence.rss',kw:['ethics','autonomous','weapon','surveillance','bias','military','accountability','warfare','harm','rights','governance','facial']},];var RSS_KEY='sied_rss_v4',RSS_TTL=25*60*1000,rssCache={},activeRssTab='all';function getRSSCache(){try{var c=JSON.parse(localStorage.getItem(RSS_KEY)||'null');if(c&&Date.now()-c.ts<RSS_TTL)return c.data}catch(e){}return null}
+function setRSSCache(d){try{localStorage.setItem(RSS_KEY,JSON.stringify({ts:Date.now(),data:d}))}catch(e){}}
+function rssTimeout(ms){return new Promise(function(_,rej){setTimeout(function(){rej(new Error('t/o'))},ms)})}
+function parseRSSXml(xmlText,src){var parser=new DOMParser(),xml=parser.parseFromString(xmlText,'text/xml');if(xml.querySelector('parsererror'))throw new Error('bad xml');var items=Array.from(xml.querySelectorAll('item,entry')),results=[];items.forEach(function(item){var te=item.querySelector('title');var title=(te?te.textContent:'').replace(/<!\[CDATA\[|\]\]>/g,'').replace(/<[^>]+>/g,'').trim();if(title.length<10)return;var le=item.querySelector('link'),link='#';if(le){link=le.textContent.trim()||le.getAttribute('href')||'#';if(!link.startsWith('http'))link='#'}
+var de=item.querySelector('pubDate,published,updated,dc\\:date');var date=de?de.textContent.trim().substring(0,10):'';var lc=title.toLowerCase();if(src.kw[0]==='' || src.kw.some(function(k){return lc.indexOf(k.toLowerCase())>-1}))
+results.push({title:title.substring(0,140),link:link,date:date,source:src.name,sid:src.id})});return results.slice(0,10)}
+
+function fetchOneRSS(src) {
+    return new Promise(function(resolve) {
+        var fd = new FormData();
+        fd.append('action', 'sied_fetch_rss');
+        fd.append('feed_url', src.url);
+        
+        fetch('/wp-admin/admin-ajax.php', { method: 'POST', body: fd })
+        .then(function(res){ return res.json(); })
+        .then(function(data){
+            if (data.success && data.data && data.data.xml) {
+                try {
+                    var parsed = parseRSSXml(data.data.xml, src);
+                    resolve(parsed);
+                } catch(e) { resolve([]); }
+            } else { resolve([]); }
+        })
+        .catch(function(){ resolve([]); });
+    });
 }
 
-var filters = { region: 'ALL', sev: 'ALL', fw: 'ALL' };
-function setFilter(key, val, btn) {
-  filters[key] = val;
-  document.querySelectorAll('[data-f="' + key + '"]').forEach(function(b) {
-    b.classList.toggle('active', b.getAttribute('data-v') === val);
-  });
-  renderAll();
+function promptAddRSS() {
+    document.getElementById('addrss-modal').classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+function closeRSSModal(e) {
+    if(e) e.stopPropagation();
+    document.getElementById('addrss-modal').classList.remove('active');
+    document.body.style.overflow = '';
+}
+function submitNewRSS() {
+    var name = document.getElementById('new-rss-name').value.trim();
+    var url = document.getElementById('new-rss-url').value.trim();
+    if(!name || !url) { alert('Please enter both name and URL'); return; }
+    
+    var id = 'c_' + Date.now();
+    RSS_SOURCES.push({
+        id: id,
+        name: name,
+        url: url,
+        kw: [''] // empty keyword array means fetch all from this custom feed
+    });
+    
+    closeRSSModal();
+    // Clear cache to force refetch
+    localStorage.removeItem(RSS_KEY);
+    forceRSSRefresh();
 }
 
-var LAWS = [
-  { flag:'IL', name:'Harop Loitering Munition', region:'MENA', autonomy:85, status:'unclear', theater:'Active/MENA', sev:'CRITICAL', fw:'IHL' },
-  { flag:'KR', name:'SGR-A1 Sentry System', region:'ASIA', autonomy:72, status:'partial', theater:'DMZ static', sev:'HIGH', fw:'IHL' },
-  { flag:'TR', name:'Kargu-2 Autonomous UAV', region:'MENA', autonomy:78, status:'unclear', theater:'Libya/Syria', sev:'CRITICAL', fw:'IHL' },
-  { flag:'US', name:'MQ-9 Reaper (semi-auto)', region:'USA', autonomy:45, status:'legal', theater:'Multi-theater', sev:'MOD', fw:'UTIL' },
-  { flag:'US', name:'Phalanx CIWS (auto-def)', region:'USA', autonomy:60, status:'legal', theater:'Naval', sev:'MOD', fw:'IHL' },
-  { flag:'GB', name:'Taranis UCAV', region:'EU', autonomy:55, status:'partial', theater:'R&D phase', sev:'MOD', fw:'DEONT' },
-  { flag:'RU', name:'Uran-9 Ground Robot', region:'ASIA', autonomy:50, status:'unclear', theater:'Syria (tested)', sev:'HIGH', fw:'IHL' },
-  { flag:'US', name:'DARPA OFFSET Drone Swarm', region:'USA', autonomy:90, status:'unclear', theater:'Development', sev:'HIGH', fw:'UTIL' },
-];
+var RSS_FALLBACK=[{title:'Autonomous weapons and meaningful human control — legal framework analysis',link:'https://arxiv.org/search/?query=autonomous+weapons+IHL',date:'2025-05-15',source:'arXiv (curated)',sid:'arxiv'},{title:'Machine learning ethics in military targeting: accountability gaps',link:'https://arxiv.org/search/?query=military+AI+ethics+targeting',date:'2025-05-14',source:'arXiv (curated)',sid:'arxiv'},{title:'Reinforcement learning bias and discriminatory outcomes in law enforcement AI',link:'https://arxiv.org/search/?query=algorithmic+bias+law+enforcement',date:'2025-05-13',source:'arXiv (curated)',sid:'arxiv'},{title:'Israel\'s AI-directed strike systems in Gaza: what we know',link:'https://www.aljazeera.com/news/2024/4/4/gospel-and-lavender-how-israel-uses-ai-to-pick-targets-in-gaza',date:'2025-05-15',source:'Al Jazeera (curated)',sid:'aje'},{title:'UN calls for international treaty on killer robots',link:'https://www.aljazeera.com/tag/artificial-intelligence/',date:'2025-05-12',source:'Al Jazeera (curated)',sid:'aje'},{title:'How ICE uses artificial intelligence to track and arrest immigrants',link:'https://notechforice.com/',date:'2025-05-14',source:'NoTechForICE (curated)',sid:'hrw'},{title:'Automated apartheid: facial recognition at West Bank checkpoints',link:'https://www.hrw.org/report/2021/04/27/threshold-crossed/israeli-authorities-and-crimes-apartheid-and-persecution',date:'2025-05-10',source:'NoTechForICE (curated)',sid:'hrw'},{title:'Bias in criminal sentencing algorithms: a systematic review',link:'https://arxiv.org/search/?query=sentencing+algorithm+racial+bias',date:'2025-05-09',source:'arXiv (curated)',sid:'arxiv'},{title:'DARPA\'s autonomous swarm programmes and the absence of legal review',link:'https://arxiv.org/search/?query=DARPA+autonomous+swarm+LAWS',date:'2025-05-08',source:'arXiv (curated)',sid:'arxiv'},{title:'Social credit systems and their impact on fundamental rights',link:'https://www.hrw.org/report/2022/09/08/we-are-watching-you/chinese-governments-mass-surveillance-xinjiang',date:'2025-05-07',source:'NoTechForICE (curated)',sid:'hrw'},{title:'Lethal autonomous weapons: the case for a binding international prohibition',link:'https://www.aljazeera.com/news/2023/10/5/un-chief-and-red-cross-head-call-for-ban-on-killer-robots',date:'2025-05-06',source:'Al Jazeera (curated)',sid:'aje'},{title:'Deep learning approaches to target identification: ethical constraints',link:'https://arxiv.org/search/?query=deep+learning+target+identification+ethics',date:'2025-05-05',source:'arXiv (curated)',sid:'arxiv'},];function setRssStatus(txt,bg,cl){var el=document.getElementById('rss-st');if(el){el.textContent=txt;el.style.background=bg;el.style.color=cl}}
+function initRSS(){var cached=getRSSCache();if(cached){rssCache=cached;renderRSSTabs();renderRSSBody();updateRSSStat();setRssStatus('CACHED','var(--grnbg)','var(--grntx)');return}
+document.getElementById('rss-body').innerHTML='<div class="rss-msg">Connecting to feeds&#8230;</div>';setRssStatus('LOADING','var(--ambbg)','var(--ambtx)');Promise.all(RSS_SOURCES.map(fetchOneRSS)).then(function(results){var total=0;RSS_SOURCES.forEach(function(s,i){rssCache[s.id]=results[i].length>0?results[i]:[];total+=rssCache[s.id].length});if(total===0){RSS_SOURCES.forEach(function(s){rssCache[s.id]=RSS_FALLBACK.filter(function(f){return f.sid===s.id})});setRssStatus('CURATED','var(--blubg)','var(--blutx)')}else{setRssStatus('LIVE','var(--grnbg)','var(--grntx)');setRSSCache(rssCache)}
+renderRSSTabs();renderRSSBody();updateRSSStat()})}
+function forceRSSRefresh(){try{localStorage.removeItem(RSS_KEY)}catch(e){}
+rssCache={};setRssStatus('LOADING','var(--ambbg)','var(--ambtx)');document.getElementById('rss-body').innerHTML='<div class="rss-msg">Refreshing&#8230;</div>';initRSS()}
+function updateRSSStat(){var t=0;Object.values(rssCache).forEach(function(a){t+=(a||[]).length});}
+function renderRSSTabs(){var total=0;RSS_SOURCES.forEach(function(s){total+=(rssCache[s.id]||[]).length});var html='<button class="rtab'+(activeRssTab==='all'?' on':'')+'" onclick="setRssTab(\'all\')">All ('+total+')</button>';RSS_SOURCES.forEach(function(s){html+='<button class="rtab'+(activeRssTab===s.id?' on':'')+'" onclick="setRssTab(\''+s.id+'\')">'+s.name+' ('+(rssCache[s.id]||[]).length+')</button>'});document.getElementById('rss-tabs').innerHTML=html}
+function setRssTab(id){activeRssTab=id;renderRSSTabs();renderRSSBody()}
+function renderRSSBody(){var el=document.getElementById('rss-body'),items=[];if(activeRssTab==='all'){RSS_SOURCES.forEach(function(s){(rssCache[s.id]||[]).forEach(function(i){items.push(i)})});items.sort(function(a,b){return(b.date||'').localeCompare(a.date||'')})}else{items=rssCache[activeRssTab]||[]}
+if(!items.length){el.innerHTML='<div class="rss-msg">No items loaded. Click &#8635; to retry.</div>';return}
+el.innerHTML=items.map(function(x){return'<div class="rsi-item"><div class="rsi-title"><a href="'+x.link+'" target="_blank" rel="noopener noreferrer">'+x.title+'</a></div><div class="rsi-meta"><span class="rsi-src">'+x.source+'</span>'+(x.date?'<span class="rsi-date">'+x.date+'</span>':'')+'</div></div>'}).join('')}
+var CH={};function gc(){return isDark?{grid:'rgba(255,255,255,0.07)',lbl:'#585852',tick:'#585852',bd:'transparent'}:{grid:'rgba(0,0,0,0.07)',lbl:'#8a8a84',tick:'#8a8a84',bd:'transparent'}}
+function killChart(id){if(CH[id]){try{CH[id].destroy()}catch(e){}delete CH[id]}}
+function buildAcct(){killChart('acct');var c=gc();CH.acct=new Chart(document.getElementById('ch-acct'),{type:'bar',data:{labels:['Israel IDF','US DoD/ICE','China MSS','Private AI','UN GGE','EU AI Office'],datasets:[{label:'Tech Sophistication',data:[95,87,84,92,17,33],backgroundColor:'rgba(185,44,30,.75)',borderWidth:0},{label:'Accountability',data:[3,18,7,30,91,79],backgroundColor:'rgba(39,105,41,.75)',borderWidth:0}]},options:{indexAxis:'y',responsive:!0,maintainAspectRatio:!1,plugins:{legend:{display:!0,labels:{font:{family:'IBM Plex Mono',size:8},color:c.lbl,boxWidth:9,padding:7}},tooltip:{bodyFont:{family:'IBM Plex Mono',size:9}}},scales:{x:{min:0,max:100,grid:{color:c.grid},ticks:{font:{size:7,family:'IBM Plex Mono'},color:c.tick}},y:{grid:{display:!1},ticks:{font:{size:7.5,family:'IBM Plex Mono'},color:c.lbl}}}}})}
+function buildTrend(){killChart('trend');var c=gc();var ds=[{label:'Israel (LAWS)',data:[0,1,1,2,3,5,7,8],color:'#b92c1e'},{label:'USA (LAWS)',data:[2,2,3,3,4,5,6,7],color:'#c45800'},{label:'China (Surv.)',data:[3,4,5,6,8,9,10,11],color:'#7f77dd'},{label:'Other States',data:[1,2,2,3,4,5,6,7],color:'#8a8a84'}];CH.trend=new Chart(document.getElementById('ch-trend'),{type:'line',data:{labels:['2018','2019','2020','2021','2022','2023','2024','2025'],datasets:ds.map(function(d){return{label:d.label,data:d.data,borderColor:d.color,backgroundColor:'transparent',pointBackgroundColor:d.color,borderWidth:1.5,pointRadius:2.5,tension:.3}})},options:{responsive:!0,maintainAspectRatio:!1,plugins:{legend:{display:!1},tooltip:{bodyFont:{family:'IBM Plex Mono',size:9}}},scales:{x:{grid:{color:c.grid},ticks:{font:{size:7,family:'IBM Plex Mono'},color:c.tick}},y:{grid:{color:c.grid},ticks:{font:{size:7,family:'IBM Plex Mono'},color:c.tick},title:{display:!0,text:'Documented Incidents',font:{size:7,family:'IBM Plex Mono'},color:c.lbl}}}}});document.getElementById('trend-leg').innerHTML=ds.map(function(d){return'<span class="cli"><span class="clsq" style="background:'+d.color+'"></span>'+d.label+'</span>'}).join('')}
+function buildRadar(){killChart('radar');var c=gc();var rd=[{label:'Israel IDF/IMOD',data:[95,88,3,4,2],color:'#b92c1e'},{label:'US DoD / ICE',data:[87,80,18,28,16],color:'#c45800'},{label:'China MSS',data:[84,93,7,11,5],color:'#7f77dd'},{label:'Private AI (aggr.)',data:[92,57,30,42,24],color:'#a8510a'},{label:'UN GGE',data:[17,13,91,86,95],color:'#276929'},{label:'EU AI Office',data:[33,37,79,91,85],color:'#124f8c'}];CH.radar=new Chart(document.getElementById('ch-radar'),{type:'radar',data:{labels:['Tech Sophistication','Deployment Scale','Accountability','Legal Compliance','Oversight Transparency'],datasets:rd.map(function(d){return{label:d.label,data:d.data,borderColor:d.color,backgroundColor:d.color+'12',pointBackgroundColor:d.color,borderWidth:1.5,pointRadius:3,pointHoverRadius:5}})},options:{responsive:!0,maintainAspectRatio:!1,plugins:{legend:{display:!1},tooltip:{bodyFont:{family:'IBM Plex Mono',size:9},titleFont:{family:'IBM Plex Mono',size:9}}},scales:{r:{min:0,max:100,ticks:{stepSize:25,font:{size:7,family:'IBM Plex Mono'},color:c.tick,backdropColor:c.bd},grid:{color:c.grid},angleLines:{color:c.grid},pointLabels:{font:{size:7.5,family:'IBM Plex Mono'},color:c.lbl}}}}});document.getElementById('radar-leg').innerHTML=rd.map(function(d){return'<span class="cli"><span class="clsq" style="background:'+d.color+'"></span>'+d.label+'</span>'}).join('')}
+function buildDonut(){killChart('donut');var dd=[{label:'Israel (LAWS+Surv.)',v:36,color:'#b92c1e'},{label:'USA (LAWS+ICE AI)',v:30,color:'#c45800'},{label:'China (Mass Surv.)',v:22,color:'#7f77dd'},{label:'MENA (Surveillance)',v:14,color:'#a8510a'},{label:'EU (LEA Surv.)',v:8,color:'#124f8c'},{label:'Other',v:4,color:'#8a8a84'}];CH.donut=new Chart(document.getElementById('ch-donut'),{type:'doughnut',data:{labels:dd.map(function(d){return d.label}),datasets:[{data:dd.map(function(d){return d.v}),backgroundColor:dd.map(function(d){return d.color}),borderWidth:0,hoverOffset:5}]},options:{responsive:!0,maintainAspectRatio:!1,cutout:'60%',plugins:{legend:{display:!1},tooltip:{bodyFont:{family:'IBM Plex Mono',size:9},callbacks:{label:function(ctx){return ctx.label+': '+ctx.parsed+'%'}}}}}});document.getElementById('donut-leg').innerHTML=dd.map(function(d){return'<span class="cli"><span class="clsq" style="background:'+d.color+';border-radius:50%;"></span>'+d.label+' ('+d.v+'%)</span>'}).join('')}
+function buildBubble(){killChart('bubble');var c=gc();var bd=[{label:'Gospel/Lavender (IL)',x:94,y:3,r:20,color:'#b92c1e'},{label:'ICE AI (USA)',x:74,y:18,r:15,color:'#c45800'},{label:'Xinjiang Grid (CN)',x:78,y:7,r:16,color:'#7f77dd'},{label:'DARPA OFFSET (USA)',x:91,y:20,r:8,color:'#d88418'},{label:'Kargu-2 (TR)',x:80,y:15,r:7,color:'#a8510a'},{label:'West Bank FR (IL)',x:70,y:5,r:11,color:'#b92c1e'},{label:'Phalanx CIWS (USA)',x:62,y:62,r:5,color:'#276929'},{label:'MQ-9 Reaper (USA)',x:46,y:58,r:6,color:'#276929'},{label:'SGR-A1 (KR)',x:72,y:35,r:5,color:'#8a8a84'},{label:'Clearview AI (USA)',x:60,y:22,r:8,color:'#c45800'}];CH.bubble=new Chart(document.getElementById('ch-bubble'),{type:'bubble',data:{datasets:bd.map(function(d){return{label:d.label,data:[{x:d.x,y:d.y,r:d.r}],backgroundColor:d.color+'88',borderColor:d.color,borderWidth:1}})},options:{responsive:!0,maintainAspectRatio:!1,plugins:{legend:{display:!1},tooltip:{bodyFont:{family:'IBM Plex Mono',size:9},callbacks:{label:function(ctx){return ctx.dataset.label+' \u00b7 Autonomy:'+ctx.raw.x+'% \u00b7 Accountability:'+ctx.raw.y}}}},scales:{x:{min:30,max:100,grid:{color:c.grid},ticks:{font:{size:7,family:'IBM Plex Mono'},color:c.tick},title:{display:!0,text:'Autonomy Level (%)',font:{size:7.5,family:'IBM Plex Mono'},color:c.lbl}},y:{min:0,max:100,grid:{color:c.grid},ticks:{font:{size:7,family:'IBM Plex Mono'},color:c.tick},title:{display:!0,text:'Accountability Index',font:{size:7.5,family:'IBM Plex Mono'},color:c.lbl}}}}})}
+function buildAll(){buildAcct();buildTrend();buildRadar();buildDonut();buildBubble()}
+var LK='sied_log_v1';function loadLog(){try{return JSON.parse(localStorage.getItem(LK)||'[]')}catch(e){return[]}}
+function saveLog(e){try{localStorage.setItem(LK,JSON.stringify(e))}catch(e){}}
+function esc(s){return(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+function renderLog(){var entries=loadLog();document.getElementById('log-cnt').textContent=entries.length+' entr'+(entries.length===1?'y':'ies')+' \u00b7 browser localStorage';var con=document.getElementById('log-con');if(!entries.length){con.innerHTML='<div class="logemp">No entries yet. Use <strong>+ Add Entry</strong> to build the permanent record. All entries persist in your browser.</div>';return}
+var rows=entries.slice().reverse().map(function(e){var sc=e.sev==='CRITICAL'?'var(--red)':e.sev==='HIGH'?'var(--amb)':'var(--tx3)';return'<tr><td style="white-space:nowrap;color:var(--tx3);">'+e.date+'</td><td><div style="font-size:.85em;font-weight:500;">'+esc(e.title)+'</div>'+(e.notes?'<div style="font-size:.69em;color:var(--tx3);margin-top:1px;">'+esc(e.notes)+'</div>':'')+'</td><td style="white-space:nowrap;">'+esc(e.actor)+'</td><td><span class="bdg un">'+e.cat+'</span></td><td style="font-size:.62em;font-weight:500;color:'+sc+';">'+e.sev+'</td><td style="font-size:.69em;color:var(--tx3);">'+esc(e.source)+'</td><td><button class="ldel" onclick="delEntry('+e.id+')">&#10005;</button></td></tr>'}).join('');con.innerHTML='<div class="logtw"><table class="logt"><thead><tr><th style="width:82px;">Date</th><th>Incident</th><th style="width:110px;">Actor</th><th style="width:78px;">Category</th><th style="width:60px;">Sev.</th><th style="width:140px;">Source</th><th style="width:28px;"></th></tr></thead><tbody>'+rows+'</tbody></table></div>'}
+function togLogForm(){var f=document.getElementById('log-form');f.classList.toggle('open');if(f.classList.contains('open')){document.getElementById('lf-d').value=new Date().toISOString().slice(0,10);document.getElementById('lf-t').focus()}}
+function saveEntry(){var t=document.getElementById('lf-t').value.trim();if(!t){document.getElementById('lf-t').style.borderColor='var(--red)';return}document.getElementById('lf-t').style.borderColor='';var entries=loadLog();entries.push({id:Date.now(),date:document.getElementById('lf-d').value||new Date().toISOString().slice(0,10),title:t,actor:document.getElementById('lf-a').value.trim(),cat:document.getElementById('lf-c').value,sev:document.getElementById('lf-sv').value,source:document.getElementById('lf-s').value.trim(),notes:document.getElementById('lf-n').value.trim()});saveLog(entries);['lf-t','lf-a','lf-s','lf-n'].forEach(function(id){document.getElementById(id).value=''});togLogForm();renderLog();stamp()}
+function delEntry(id){if(!confirm('Delete this entry?'))return;saveLog(loadLog().filter(function(e){return e.id!==id}));renderLog()}
+function clearLog(){var n=loadLog().length;if(!n){alert('No entries.');return}if(!confirm('Clear all '+n+' entries?'))return;saveLog([]);renderLog()}
+function exportLog(){var entries=loadLog();if(!entries.length){alert('No entries.');return}var csv=[['Date','Title','Actor','Category','Severity','Source','Notes'].join(',')].concat(entries.map(function(e){return[e.date,e.title,e.actor,e.cat,e.sev,e.source,e.notes].map(function(v){return'"'+(v||'').replace(/"/g,'""')+'"'}).join(',')})).join('\n');var a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));a.download='sied-log-'+new Date().toISOString().slice(0,10)+'.csv';a.click()}
+function updateClock(){var n=new Date(),el=document.getElementById('sied-clk');if(el)el.textContent=String(n.getUTCHours()).padStart(2,'0')+':'+String(n.getUTCMinutes()).padStart(2,'0')+':'+String(n.getUTCSeconds()).padStart(2,'0')+' UTC'}
+function stamp(){var el=document.getElementById('sied-stamp');if(el)el.textContent='Updated: '+new Date().toUTCString().slice(0,25);}
+function renderAll(){renderLaws();renderSurv();renderRepo();renderLog()}
+renderAll();renderTreaty();setInterval(updateClock,1000);setInterval(tickFeed,4*60*1000);setInterval(initRSS,25*60*1000)
+              
 
-var SURV = [
-  { label:'Facial Recog.', sub:'Public space mass', region:'ASIA', sev:'CRITICAL', score:98, cls:'hc1' },
-  { label:'Social Credit', sub:'Citizen scoring', region:'ASIA', sev:'CRITICAL', score:95, cls:'hc1' },
-  { label:'Genocidal Logistics', sub:'Algorithmic coord.', region:'ASIA', sev:'CRITICAL', score:91, cls:'hc1' },
-  { label:'Mass Biometric', sub:'Refugee tracking', region:'MENA', sev:'CRITICAL', score:88, cls:'hc1' },
-  { label:'Predictive Policing', sub:'Algorithmic LEA', region:'USA', sev:'HIGH', score:72, cls:'hc2' },
-  { label:'CCTV Network', sub:'Urban density', region:'MENA', sev:'HIGH', score:70, cls:'hc2' },
-  { label:'Palantir Gotham', sub:'Civil targeting', region:'USA', sev:'HIGH', score:68, cls:'hc2' },
-  { label:'Facial Recog.', sub:'LEA biometric', region:'EU', sev:'HIGH', score:65, cls:'hc3' },
-  { label:'Social Media AI', sub:'Sentiment surv.', region:'EU', sev:'MOD', score:45, cls:'hc4' },
-];
+// Premium Lazy Initialization for PageSpeed
+window.addEventListener('load', function() {
+    // Slight delay to allow initial paint (improves First Contentful Paint score)
+    setTimeout(function() {
+        initFeed();
+        initRSS();
+        updateClock();
+        stamp();
+        
+        // Wait for Chart.js to be fully initialized if deferred
+        if(typeof Chart !== 'undefined') {
+            buildAll();
+        } else {
+            // Fallback polling if Chart is heavily deferred by WordPress optimization plugins
+            var chartWait = setInterval(function() {
+                if(typeof Chart !== 'undefined') {
+                    clearInterval(chartWait);
+                    buildAll();
+                }
+            }, 200);
+        }
+    }, 150);
+});
 
-var REPO = [
-  { title:'Autonomous Weapons Systems and the Laws of Armed Conflict', source:'UN GGE', srcClass:'src-un', year:2023, fw:'IHL', region:'ALL', sev:'CRITICAL' },
-  { title:'ICRC Position on Autonomous Weapon Systems', source:'ICRC', srcClass:'src-icrc', year:2023, fw:'IHL', region:'ALL', sev:'HIGH' },
-  { title:'Meaningful Human Control over Force Decisions', source:'Nature MI', srcClass:'src-nature', year:2022, fw:'DEONT', region:'EU', sev:'HIGH' },
-  { title:'Algorithmic Accountability in Predictive Policing', source:'J.IHA', srcClass:'', year:2023, fw:'UTIL', region:'USA', sev:'MOD' },
-  { title:'GGE/2023/CRP.1 — Report on Lethal Autonomous Weapons', source:'UN GGE', srcClass:'src-un', year:2023, fw:'IHL', region:'ALL', sev:'CRITICAL' },
-  { title:'AI and Mass Surveillance: ECHR Implications', source:'EJIL', srcClass:'', year:2022, fw:'DEONT', region:'EU', sev:'HIGH' },
-  { title:'Dual-Use AI in Non-International Armed Conflicts', source:'IRRC', srcClass:'', year:2021, fw:'IHL', region:'MENA', sev:'HIGH' },
-  { title:'The Trolley Problem at Scale: Utilitarian AI Ethics in Warfare', source:'Ethics & IT', srcClass:'', year:2022, fw:'UTIL', region:'ALL', sev:'MOD' },
-  { title:'AI-Enabled Targeting and Proportionality Assessment', source:'Nature MI', srcClass:'src-nature', year:2023, fw:'IHL', region:'ALL', sev:'CRITICAL' },
-  { title:'Social Credit Systems as Human Rights Violations', source:'HRL Rev', srcClass:'', year:2021, fw:'DEONT', region:'ASIA', sev:'CRITICAL' },
-];
-
-var FEED = [
-  { type:'alert', text:'CRITICAL: Autonomous drone swarm deployment confirmed — Eastern Ukraine theatre.' },
-  { type:'new', text:'UN GGE emergency session convened — LAWS treaty binding framework under discussion.' },
-  { type:'info', text:'Nature MI pre-print: "Ethical Alignment Failures in Military AI Systems (2025 survey)."' },
-  { type:'new', text:'EU AI Act enforcement guidance issued — ban on real-time biometric systems extended.' },
-  { type:'alert', text:'HIGH: Predictive policing algorithm flagged by ACLU — Chicago PD racial disparity audit.' },
-  { type:'info', text:'ICRC updates LAWS statement — calls for binding treaty by 2026 with verification mechanism.' },
-  { type:'new', text:'J.IHA publishes: "Accountability Gaps in Fully Autonomous Targeting Systems."' },
-  { type:'alert', text:'CRITICAL: Mass biometric breach — 4.2M refugee records exposed in MENA database.' },
-  { type:'info', text:'Stanford HAI releases new risk taxonomy framework for autonomous weapons (v3.1).' },
-  { type:'new', text:'UK MoD releases revised Article 36 criteria — redacted portions under FOIA challenge.' },
-  { type:'alert', text:'HIGH: Social credit pilot expanded to 14 additional municipalities — oversight absent.' },
-  { type:'info', text:'IEEE Spectrum: "The Autonomy Threshold" — systems crossing 75% autonomy benchmark.' },
-  { type:'new', text:'SIPRI annual report: global LAWS spending up 34% YoY — governance mechanisms stalled.' },
-  { type:'alert', text:'CRITICAL: Facial recognition deployed at mass protest event — no legal authorization confirmed.' },
-  { type:'info', text:'HRW report: social scoring systems linked to detention of 890,000+ individuals in 2024.' },
-];
-
-function matchItem(item) {
-  var r = filters.region === 'ALL' || item.region === filters.region || item.region === 'ALL';
-  var s = filters.sev === 'ALL' || item.sev === filters.sev || item.severity === filters.sev;
-  var f = filters.fw === 'ALL' || item.fw === filters.fw || item.framework === filters.fw;
-  return r && s && f;
-}
-
-function renderLaws() {
-  var list = document.getElementById('laws-list');
-  var filtered = LAWS.filter(matchItem);
-  if (!filtered.length) {
-    list.innerHTML = '<tr><td colspan="6" style="font-size:10px;color:var(--text3);padding:12px 0;text-align:center;">No systems match current filters.</td></tr>';
-    document.getElementById('stat-laws').textContent = '0';
-    document.getElementById('stat-critical').textContent = '0';
-    return;
-  }
-  list.innerHTML = filtered.map(function(d) {
-    var pct = d.autonomy;
-    var fill = pct >= 80 ? '#c0392b' : pct >= 60 ? '#b8580a' : '#2e7d32';
-    var bClass = d.status === 'legal' ? 'b-legal' : d.status === 'partial' ? 'b-partial' : d.status === 'illegal' ? 'b-illegal' : 'b-unclear';
-    var bText = d.status === 'legal' ? 'Art.36 OK' : d.status === 'partial' ? 'Partial' : d.status === 'illegal' ? 'Prohibited' : 'Unclear';
-    var sevColor = d.sev === 'CRITICAL' ? 'var(--red)' : d.sev === 'HIGH' ? 'var(--amber)' : 'var(--text3)';
-    return '<tr>' +
-      '<td class="col-flag"><span class="laws-flag">' + d.flag + '</span></td>' +
-      '<td class="col-name"><span class="laws-name" title="' + d.name + '">' + d.name + '</span></td>' +
-      '<td class="col-auton"><div class="auton-wrap"><div class="auton-track"><div class="auton-fill" style="width:' + pct + '%;background:' + fill + ';"></div></div><span class="auton-pct">' + pct + '%</span></div></td>' +
-      '<td class="col-status"><span class="badge ' + bClass + '">' + bText + '</span></td>' +
-      '<td class="col-theater"><span class="theater">' + d.theater + '</span></td>' +
-      '<td class="col-sev" style="font-size:8px;font-weight:500;color:' + sevColor + ';">' + d.sev + '</td>' +
-      '</tr>';
-  }).join('');
-  document.getElementById('stat-laws').textContent = filtered.length;
-  var crit = filtered.filter(function(d){ return d.sev === 'CRITICAL'; }).length;
-  document.getElementById('stat-critical').textContent = crit;
-}
-
-function renderSurv() {
-  var grid = document.getElementById('surv-grid');
-  var filtered = SURV.filter(function(d) {
-    var r = filters.region === 'ALL' || d.region === filters.region;
-    var s = filters.sev === 'ALL' || d.sev === filters.sev;
-    return r && s;
-  });
-  if (!filtered.length) {
-    grid.innerHTML = '<div style="font-size:10px;color:var(--text3);padding:12px 0;text-align:center;grid-column:1/-1;">No data matches current filters.</div>';
-    return;
-  }
-  grid.innerHTML = filtered.map(function(d) {
-    return '<div class="heat-cell ' + d.cls + '">' +
-      '<div class="h-label">' + d.label + '</div>' +
-      '<div class="h-sub">' + d.sub + '</div>' +
-      '<span class="h-score">' + d.score + '</span>' +
-      '<div class="h-region">' + d.region + '</div>' +
-      '</div>';
-  }).join('');
-}
-
-function renderRepo() {
-  var list = document.getElementById('repo-list');
-  var q = (document.getElementById('repo-q') || {value:''}).value.toLowerCase();
-  var filtered = REPO.filter(function(d) {
-    var m = matchItem(d);
-    var s = !q || d.title.toLowerCase().indexOf(q) > -1 || d.source.toLowerCase().indexOf(q) > -1 || d.fw.toLowerCase().indexOf(q) > -1;
-    return m && s;
-  });
-  document.getElementById('stat-repo').textContent = filtered.length;
-  if (!filtered.length) {
-    list.innerHTML = '<div class="no-results">No documents match current filters.</div>';
-    return;
-  }
-  list.innerHTML = filtered.map(function(d) {
-    return '<div class="repo-item">' +
-      '<div class="repo-title">' + d.title + '</div>' +
-      '<div class="repo-meta">' +
-        '<span class="repo-badge ' + d.srcClass + '">' + d.source + '</span>' +
-        '<span class="repo-badge">' + d.year + '</span>' +
-        '<span class="repo-badge">' + d.fw + '</span>' +
-        '<span class="repo-badge">' + d.region + '</span>' +
-      '</div></div>';
-  }).join('');
-}
-
-var radarChartInstance = null;
-var radarDatasets = [
-  { label:'US DoD', data:[88,72,45,62,40], color:'#c0392b' },
-  { label:'China MSS', data:[85,95,12,18,8], color:'#7f77dd' },
-  { label:'Private AI (aggr.)', data:[92,60,38,50,30], color:'#b8580a' },
-  { label:'UN GGE', data:[20,15,85,80,92], color:'#2e7d32' },
-  { label:'EU AI Office', data:[35,40,75,88,82], color:'#1565a0' },
-];
-
-function getRadarColors() {
-  return isDark ? { grid:'rgba(255,255,255,0.1)', labels:'#606058', ticks:'#606058', backdrop:'transparent' }
-                : { grid:'rgba(0,0,0,0.08)', labels:'#8a8a84', ticks:'#8a8a84', backdrop:'transparent' };
-}
-
-function updateRadarColors() {
-  var c = getRadarColors();
-  radarChartInstance.options.scales.r.grid.color = c.grid;
-  radarChartInstance.options.scales.r.angleLines.color = c.grid;
-  radarChartInstance.options.scales.r.pointLabels.color = c.labels;
-  radarChartInstance.options.scales.r.ticks.color = c.ticks;
-  radarChartInstance.options.scales.r.ticks.backdropColor = c.backdrop;
-  radarChartInstance.update();
-}
-
-function renderRadar() {
-  var c = getRadarColors();
-  var ctx = document.getElementById('radarChart');
-  radarChartInstance = new Chart(ctx, {
-    type: 'radar',
-    data: {
-      labels: ['Tech Sophistication', 'Deployment Scale', 'Accountability', 'Legal Compliance', 'Oversight Transparency'],
-      datasets: radarDatasets.map(function(d) {
-        return {
-          label: d.label,
-          data: d.data,
-          borderColor: d.color,
-          backgroundColor: d.color + '14',
-          pointBackgroundColor: d.color,
-          borderWidth: 1.5,
-          pointRadius: 3,
-          pointHoverRadius: 5,
-        };
-      })
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: { legend: { display: false }, tooltip: { bodyFont: { family: 'IBM Plex Mono', size: 10 }, titleFont: { family: 'IBM Plex Mono', size: 10 } } },
-      scales: { r: {
-        min: 0, max: 100,
-        ticks: { stepSize: 25, font: { size: 8, family: 'IBM Plex Mono' }, color: c.ticks, backdropColor: c.backdrop },
-        grid: { color: c.grid },
-        angleLines: { color: c.grid },
-        pointLabels: { font: { size: 8, family: 'IBM Plex Mono' }, color: c.labels }
-      }}
-    }
-  });
-  var legend = document.getElementById('radar-legend');
-  legend.innerHTML = radarDatasets.map(function(d) {
-    return '<span class="rl-item"><span class="rl-sq" style="background:' + d.color + '"></span>' + d.label + '</span>';
-  }).join('');
-}
-
-var feedIdx = 0;
-function initFeed() {
-  var body = document.getElementById('feed-body');
-  body.innerHTML = FEED.slice(0, 8).map(function(f) {
-    return buildFeedItem(f, false);
-  }).join('');
-  feedIdx = 8;
-}
-
-function buildFeedItem(f, isNew) {
-  var now = new Date();
-  var t = String(now.getUTCHours()).padStart(2,'0') + ':' + String(now.getUTCMinutes()).padStart(2,'0') + ' UTC';
-  return '<div class="feed-item' + (isNew ? ' new-item' : '') + '">' +
-    '<div class="feed-item-header">' +
-      '<span class="feed-dot ' + f.type + '"></span>' +
-      '<span class="feed-time">' + t + '</span>' +
-      '<span class="feed-type ' + f.type + '">' + f.type + '</span>' +
-    '</div>' +
-    '<div class="feed-text">' + f.text + '</div>' +
-    '</div>';
-}
-
-function addFeedItem() {
-  var body = document.getElementById('feed-body');
-  var f = FEED[feedIdx % FEED.length];
-  feedIdx++;
-  var html = buildFeedItem(f, true);
-  body.insertAdjacentHTML('afterbegin', html);
-  if (body.children.length > 20) body.removeChild(body.lastChild);
-  var count = document.getElementById('feed-count');
-  count.textContent = 'LIVE';
-  document.getElementById('last-update').textContent = 'Last updated: ' + new Date().toUTCString().slice(0, 25);
-}
-
-function updateClock() {
-  var el = document.getElementById('clock');
-  if (el) {
-    var n = new Date();
-    el.textContent = String(n.getUTCHours()).padStart(2,'0') + ':' +
-                     String(n.getUTCMinutes()).padStart(2,'0') + ':' +
-                     String(n.getUTCSeconds()).padStart(2,'0') + ' UTC';
-  }
-}
-
-function renderAll() { renderLaws(); renderSurv(); renderRepo(); }
-
-renderAll();
-renderRadar();
-initFeed();
-updateClock();
-setInterval(updateClock, 1000);
-setInterval(addFeedItem, 9000);
-document.getElementById('last-update').textContent = 'Last updated: ' + new Date().toUTCString().slice(0, 25);
 </script>
-</body>
-</html>
+
+
+<!-- TREATY MODAL (DRAGGABLE) -->
+<div id="treaty-modal" style="display:none; position:fixed; top:15%; left:15%; width:70%; max-width:900px; max-height:75%; z-index:99999; background:rgba(15, 23, 42, 0.98); backdrop-filter:blur(20px); border:1px solid rgba(255,255,255,0.1); box-shadow:0 25px 50px -12px rgba(0,0,0,0.8); border-radius:12px; flex-direction:column; overflow:hidden; resize:both;">
+    <div id="treaty-modal-header" style="padding:16px 24px; background:linear-gradient(90deg, rgba(225,29,72,0.1) 0%, transparent 100%); border-bottom:1px solid rgba(255,255,255,0.05); cursor:move; display:flex; justify-content:space-between; align-items:center;">
+        <h3 style="margin:0; font-size:1.1em; color:var(--tx); font-family:var(--font-sans); letter-spacing:0.05em; text-transform:uppercase;">LAWS Full Compliance Matrix</h3>
+        <button onclick="closeMatrixModal()" style="background:transparent; border:none; color:var(--tx2); cursor:pointer; font-size:1.4em; line-height:1; padding:0; outline:none; transition:color 0.2s;">&times;</button>
+    </div>
+    <div id="treaty-modal-body" style="padding:0; overflow-y:auto; flex:1; background:var(--bg2);">
+        <table class="tm-table" style="width:100%; border-collapse:collapse; text-align:left;">
+            <thead>
+                <tr>
+                    <th style="padding:12px 24px; font-size:0.75em; text-transform:uppercase; color:var(--tx3); border-bottom:1px solid rgba(255,255,255,0.05); background:rgba(30, 41, 59, 0.9);">Country</th>
+                    <th style="padding:12px 24px; font-size:0.75em; text-transform:uppercase; color:var(--tx3); border-bottom:1px solid rgba(255,255,255,0.05); background:rgba(30, 41, 59, 0.9);">CCW Protocol VI Position</th>
+                    <th style="padding:12px 24px; font-size:0.75em; text-transform:uppercase; color:var(--tx3); border-bottom:1px solid rgba(255,255,255,0.05); background:rgba(30, 41, 59, 0.9);">Stance</th>
+                    <th style="padding:12px 24px; font-size:0.75em; text-transform:uppercase; color:var(--tx3); border-bottom:1px solid rgba(255,255,255,0.05); background:rgba(30, 41, 59, 0.9);">Summit Endorsement</th>
+                    <th style="padding:12px 24px; font-size:0.75em; text-transform:uppercase; color:var(--tx3); border-bottom:1px solid rgba(255,255,255,0.05); background:rgba(30, 41, 59, 0.9);">Source Validation</th>
+                </tr>
+            </thead>
+            <tbody id="tm-tbody">
+            </tbody>
+        </table>
+    </div>
+</div>
+
+</body></html>
