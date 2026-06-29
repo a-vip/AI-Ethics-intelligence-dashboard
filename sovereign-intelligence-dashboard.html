@@ -205,27 +205,29 @@ function closeMatrixModal() {
 #sied-wrapper .ss { display: flex; gap: 16px; margin-bottom: 24px; overflow-x: auto; padding-bottom: 8px; }
 #sied-wrapper .sc {
     flex: 1; min-width: 120px; padding: 16px; 
-    border: 1px solid rgba(255,255,255,0.05); 
+    border: 1px solid rgba(255,255,255,0.08); 
     background: transparent; 
     border-radius: var(--r); 
-    backdrop-filter: blur(20px); 
     transition: var(--tr); 
     position: relative; overflow: hidden;
     display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
 }
 #sied-wrapper .sc::before {
     content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
-    background: conic-gradient(transparent, rgba(147,197,253,0.3), transparent, rgba(147,197,253,0.3), transparent);
-    animation: sc-border-spin 4s linear infinite; z-index: 0;
+    background: conic-gradient(transparent, rgba(147,197,253,0.8), transparent 20%);
+    animation: sc-border-spin 2s linear infinite; z-index: 0;
+    opacity: 0; transition: opacity 0.3s ease;
 }
 #sied-wrapper .sc::after {
     content: ''; position: absolute; inset: 1px;
-    background: var(--sfc); border-radius: calc(var(--r) - 1px); z-index: 0;
+    background: rgba(20, 22, 30, 0.85); border-radius: calc(var(--r) - 1px); z-index: 0;
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
 }
 #sied-wrapper .sc > * { position: relative; z-index: 1; }
 @keyframes sc-border-spin { 100% { transform: rotate(360deg); } }
-#sied-wrapper .sc:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.3); }
-#sied-wrapper .sc:hover::before { background: conic-gradient(transparent, rgba(147,197,253,0.6), transparent, rgba(147,197,253,0.6), transparent); }
+#sied-wrapper .sc:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,0,0,0.4); border-color: transparent; }
+#sied-wrapper .sc:hover::before { opacity: 1; }
 #sied-wrapper .sl { font-size: 0.65em; color: var(--tx3); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 8px; font-weight: 500; }
 #sied-wrapper .sv { font-size: 2em; font-weight: 300; line-height: 1; font-family: var(--font-sans); }
 #sied-wrapper .sv.vr { color: #f43f5e; text-shadow: 0 0 20px rgba(244,63,94,0.4); }
