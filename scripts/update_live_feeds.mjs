@@ -141,66 +141,100 @@ function parseXmlItems(xml, source, limit = 6) {
   return items;
 }
 
+function isRelevant(sourceKey, title, desc) {
+  if (['arxiv', 'mit', 'nature', 'avi'].includes(sourceKey)) return true;
+  const txt = `${title} ${desc}`;
+  return /\bAI\b/.test(txt) || /\b(artificial intelligence|lethal autonomous|autonomous weapon|killer robot|drone swarm|loitering munition|algorithmic|biometric|facial recognition|mass surveillance|cyberattack|frontier model|LLM|GPT-|Claude |Gemini |human control|article 36|CCW|deepfake|abliteration|guardrail|spyware|pegasus|palantir|autonomous targeting|machine learning|robotic weapon)\b/i.test(txt);
+}
+
 const CURATED_BASELINE = [
   {
-    title: 'Seventh Review Conference of the Convention on Certain Conventional Weapons (CCW) Convenes in Geneva (Nov 16–20, 2026)',
+    title: 'UN CCW 7th Review Conference Opens in Geneva (Nov 16–20, 2026) — 128 Parties Debate Two-Tier LAWS Mandate',
     url: 'https://disarmament.unoda.org/the-convention-on-certain-conventional-weapons/',
     date: '2026-11-16',
-    ts: Math.floor(new Date('2026-11-16T08:00:00Z').getTime() / 1000),
+    ts: Math.floor(new Date('2026-11-16T09:00:00Z').getTime() / 1000),
     source: 'UNODA / CCW Geneva',
     key: 'un',
     category: 'UN / Treaty Bodies',
-    summary: '128 High Contracting Parties review 2026 GGE Rolling Text on Lethal Autonomous Weapons Systems (LAWS) and two-tier prohibition/regulation mandate ahead of treaty negotiations.'
+    sev: 'CRITICAL',
+    summary: '128 High Contracting Parties review 2026 GGE Rolling Text on Tier-1 LAWS prohibitions and Tier-2 Meaningful Human Control obligations.'
   },
   {
-    title: 'ICRC Position & May 2026 Appeal: Urgent Need for Binding International Rules on Autonomous Weapon Systems',
+    title: 'Google Releases Gemini 4 Hydrogen (Nov 12) & Carbon (Nov 10) with Runtime CoT Safety Monitors Under CA SB 53',
+    url: 'https://deepmind.google/technologies/gemini/',
+    date: '2026-11-12',
+    ts: Math.floor(new Date('2026-11-12T12:00:00Z').getTime() / 1000),
+    source: 'Google DeepMind / FSF 2.0',
+    key: 'mit',
+    category: 'Frontier Safety',
+    sev: 'HIGH',
+    summary: 'Hydrogen trims agentic shortcut risk by 81% vs 3.8 Flash under CA TFAIA & EU AI Act Art. 51–55 Systemic Risk transparency.'
+  },
+  {
+    title: 'Anthropic Launches Claude Fable 5.2 & Restricted Mythos 5.2; OpenAI Deploys GPT-6 Cyber Under Daybreak Red',
+    url: 'https://aviperera.com/ai-policy-tracker/',
+    date: '2026-11-09',
+    ts: Math.floor(new Date('2026-11-09T12:00:00Z').getTime() / 1000),
+    source: 'Frontier Safety Registry',
+    key: 'avi',
+    category: 'Frontier Cyber Risk',
+    sev: 'CRITICAL',
+    summary: 'First frontier generation autonomously chaining zero-day exploits; general weights withheld and restricted to vetted cyber defenders.'
+  },
+  {
+    title: 'Abliteration.ai: Orthogonal Representation Surgery Strips Open-Weight Guardrails (DeepSeek-V4 / Llama 4) in Minutes',
+    url: 'https://aviperera.com/abliteration-ai-removing-guardrails-international-security/',
+    date: '2026-10-08',
+    ts: Math.floor(new Date('2026-10-08T12:00:00Z').getTime() / 1000),
+    source: 'Avi Perera OSINT & Research',
+    key: 'avi',
+    category: 'Guardrail Abliteration',
+    sev: 'CRITICAL',
+    summary: 'Demonstrates fragility of open-weight refusal fine-tuning and gaps inside EU AI Act Art. 53 open-source exemptions.'
+  },
+  {
+    title: 'EU AI Act Regulation (EU) 2024/1689 Reaches Full General Applicability — High-Risk Biometrics & Art. 55 Live',
+    url: 'https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202401689',
+    date: '2026-08-02',
+    ts: Math.floor(new Date('2026-08-02T09:00:00Z').getTime() / 1000),
+    source: 'European Union AI Office',
+    key: 'icrc',
+    category: 'Binding Hard Law',
+    sev: 'HIGH',
+    summary: 'Enforces mandatory conformity assessments, Annex III fundamental-rights audits, and post-market incident reporting across EU27.'
+  },
+  {
+    title: 'ICRC Position & May 2026 Appeal: Urgent Need for Legally Binding Treaty Rules on Autonomous Weapon Systems',
     url: 'https://www.icrc.org/en/law-and-policy/autonomous-weapon-systems',
     date: '2026-05-12',
     ts: Math.floor(new Date('2026-05-12T10:00:00Z').getTime() / 1000),
     source: 'ICRC IHL Division',
     key: 'icrc',
     category: 'UN / Treaty Bodies',
-    summary: 'Reaffirms prohibition of unpredictable AWS and anti-personnel autonomous targeting under Customary IHL and Geneva Conventions Additional Protocol I Art. 36.'
+    sev: 'CRITICAL',
+    summary: 'Reaffirms prohibition of unpredictable AWS and anti-personnel autonomous targeting under Customary IHL and Geneva AP I Art. 36.'
   },
   {
-    title: 'UNGA Resolution A/RES/80/57: Lethal Autonomous Weapons Systems Adopted 164–6–7',
-    url: 'https://docs.un.org/en/A/RES/80/57',
-    date: '2025-12-01',
-    ts: Math.floor(new Date('2025-12-01T14:00:00Z').getTime() / 1000),
-    source: 'UN General Assembly',
-    key: 'un',
-    category: 'UN / Treaty Bodies',
-    summary: '164 Member States vote in favour of advancing urgent international legal instruments on LAWS; 6 states (Belarus, Burundi, DPRK, Israel, Russia, United States) vote against.'
-  },
-  {
-    title: 'EU AI Act Full General Applicability (Aug 2, 2026): High-Risk Annex III Biometric & Law Enforcement Obligations Live',
-    url: 'https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202401689',
-    date: '2026-08-02',
-    ts: Math.floor(new Date('2026-08-02T09:00:00Z').getTime() / 1000),
-    source: 'European Union AI Office',
-    key: 'eu',
-    category: 'Regulation & Hard Law',
-    summary: 'Regulation (EU) 2024/1689 mandatory conformity assessments, post-market bias monitoring, and serious incident reporting enter general enforcement across EU27.'
-  },
-  {
-    title: 'ICJ Provisional Measures (South Africa v. Israel) & Algorithmic Targeting Evidentiary Record',
-    url: 'https://www.icj-cij.org/case/192',
-    date: '2026-04-18',
-    ts: Math.floor(new Date('2026-04-18T11:00:00Z').getTime() / 1000),
-    source: 'International Court of Justice',
-    key: 'lawfare',
-    category: 'International Justice',
-    summary: 'Documents state obligations to prevent genocidal acts and preserve evidence relating to automated target-generation pipelines (Lavender, Habsora, Where\'s Daddy?).'
-  },
-  {
-    title: 'Paris Criminal Court Ruling in Lafarge Corporate Complicity Case Sets Supply-Chain Standard for Dual-Use Tech',
+    title: 'Paris Criminal Court Ruling in Lafarge Corporate Complicity Case Sets Precedent for Dual-Use Cloud & AI Vendors',
     url: 'https://www.ecchr.eu/en/case/lafarge-in-syria/',
     date: '2026-04-07',
     ts: Math.floor(new Date('2026-04-07T12:00:00Z').getTime() / 1000),
     source: 'ECCHR / Legal Precedent',
     key: 'hrw',
     category: 'Corporate Liability',
-    summary: 'Rejects neutral commercial service defense where corporate infrastructure knowingly facilitates crimes against humanity under international criminal law.'
+    sev: 'CRITICAL',
+    summary: 'Rejects neutral commercial vendor defense where infrastructure knowingly facilitates IHL violations and crimes against humanity.'
+  },
+  {
+    title: 'UNGA Resolution A/RES/80/57 on Lethal Autonomous Weapons Systems Adopted 164–6–7',
+    url: 'https://docs.un.org/en/A/RES/80/57',
+    date: '2025-12-01',
+    ts: Math.floor(new Date('2025-12-01T14:00:00Z').getTime() / 1000),
+    source: 'UN General Assembly',
+    key: 'un',
+    category: 'UN / Treaty Bodies',
+    sev: 'HIGH',
+    summary: '164 Member States vote for urgent international LAWS treaty work; Belarus, Burundi, DPRK, Israel, Russia, and United States vote against.'
   }
 ];
 
@@ -219,10 +253,11 @@ async function run() {
       clearTimeout(timer);
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const xml = await res.text();
-      const parsed = parseXmlItems(xml, src, 6);
+      const rawParsed = parseXmlItems(xml, src, 12);
+      const parsed = rawParsed.filter(it => isRelevant(src.key, it.title, it.summary)).slice(0, 6);
       collected.push(...parsed);
-      sourceStats.push({ key: src.key, name: src.name, category: src.category, count: parsed.length, status: parsed.length ? 'live' : 'empty' });
-      console.log(`[OK] ${src.key}: ${parsed.length} items`);
+      sourceStats.push({ key: src.key, name: src.name, category: src.category, count: parsed.length, status: parsed.length ? 'live' : 'filtered' });
+      console.log(`[OK] ${src.key}: ${parsed.length}/${rawParsed.length} relevant items`);
     } catch (err) {
       clearTimeout(timer);
       sourceStats.push({ key: src.key, name: src.name, category: src.category, count: 0, status: 'degraded', error: err.message });

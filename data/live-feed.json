@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-11-16T10:16:32.730Z",
-  "count": 60,
+  "generatedAt": "2026-11-16T11:03:17.201Z",
+  "count": 35,
   "sources": [
     {
       "key": "arxiv",
@@ -13,28 +13,28 @@
       "key": "un",
       "name": "UN News (Peace & Security)",
       "category": "UN / Treaty Bodies",
-      "count": 6,
-      "status": "live"
+      "count": 0,
+      "status": "filtered"
     },
     {
       "key": "icrc",
       "name": "ICRC Humanitarian Law & Policy",
       "category": "IHL & Treaty Bodies",
-      "count": 6,
+      "count": 2,
       "status": "live"
     },
     {
       "key": "lieber",
       "name": "Lieber Institute (West Point)",
       "category": "Military & IHL Scholarship",
-      "count": 6,
-      "status": "live"
+      "count": 0,
+      "status": "filtered"
     },
     {
       "key": "justsec",
       "name": "Just Security",
       "category": "National Security & Law",
-      "count": 6,
+      "count": 1,
       "status": "live"
     },
     {
@@ -48,8 +48,8 @@
       "key": "hrw",
       "name": "Human Rights Watch",
       "category": "Human Rights & IHL",
-      "count": 6,
-      "status": "live"
+      "count": 0,
+      "status": "filtered"
     },
     {
       "key": "mit",
@@ -68,34 +68,15 @@
   ],
   "items": [
     {
-      "title": "Seventh Review Conference of the Convention on Certain Conventional Weapons (CCW) Convenes in Geneva (Nov 16–20, 2026)",
+      "title": "UN CCW 7th Review Conference Opens in Geneva (Nov 16–20, 2026) — 128 Parties Debate Two-Tier LAWS Mandate",
       "url": "https://disarmament.unoda.org/the-convention-on-certain-conventional-weapons/",
       "date": "2026-11-16",
-      "ts": 1794816000,
+      "ts": 1794819600,
       "source": "UNODA / CCW Geneva",
       "key": "un",
       "category": "UN / Treaty Bodies",
-      "summary": "128 High Contracting Parties review 2026 GGE Rolling Text on Lethal Autonomous Weapons Systems (LAWS) and two-tier prohibition/regulation mandate ahead of treaty negotiations."
-    },
-    {
-      "title": "UAE: 5 Shia Residents Arrested Arbitrarily",
-      "url": "https://www.hrw.org/news/2026/11/16/uae-5-shia-residents-arrested-arbitrarily",
-      "date": "2026-11-16",
-      "ts": 1794805200,
-      "source": "Human Rights Watch",
-      "key": "hrw",
-      "category": "Human Rights & IHL",
-      "summary": "Click to expand Image Abu Dhabi Court House Complex, Dar Al-Omran, Abu Dhabi, UAE, February 2017.&nbsp; © 2017 Artur Widak/NurPhoto via Getty Images (Beirut) – Emirati authorities have arbitrarily detained at l..."
-    },
-    {
-      "title": "Nadia Murad: ‘Day by day, I took my story back’",
-      "url": "https://news.un.org/feed/view/en/story/2026/11/1168801",
-      "date": "2026-11-15",
-      "ts": 1794744000,
-      "source": "UN News (Peace & Security)",
-      "key": "un",
-      "category": "UN / Treaty Bodies",
-      "summary": "Nobel Peace Prize laureate Nadia Murad has spent years telling the world about the atrocities committed against her and the Yazidi community by militants from the terrorist group, ISIL.&nbsp;"
+      "sev": "CRITICAL",
+      "summary": "128 High Contracting Parties review 2026 GGE Rolling Text on Tier-1 LAWS prohibitions and Tier-2 Meaningful Human Control obligations."
     },
     {
       "title": "Just the Docs: Nonprofits Sue Five Frontier AI Companies to Freeze Development, Citing Cyberattack and Catastrophic Risks",
@@ -108,126 +89,6 @@
       "summary": "Four nonprofits sue Anthropic, Google, Meta, OpenAI, and SpaceXSI seeking to freeze frontier AI development over cyberattack and catastrophic risks. The post Just the Docs: Nonprofits Sue Five Frontier AI Compa..."
     },
     {
-      "title": "Israel Bans Travel for Prominent Palestinian Rights Defender",
-      "url": "https://www.hrw.org/news/2026/11/13/israel-bans-travel-for-prominent-palestinian-rights-defender",
-      "date": "2026-11-13",
-      "ts": 1794601813,
-      "source": "Human Rights Watch",
-      "key": "hrw",
-      "category": "Human Rights & IHL",
-      "summary": "Click to expand Image Shawan Jabarin, head of the al-Haq human rights group, at the organization's offices in the West Bank city of Ramallah, October 23, 2021. © 2021 Majdi Mohammed/AP Photo (Beirut) –&nbsp;Isr..."
-    },
-    {
-      "title": "Just the Docs: Treasury and State Department Designate Three Guatemalan Drug Trafficking Groups as Terrorists",
-      "url": "https://www.justsecurity.org/164471/treasury-state-guatemala-cartels-terrorist-designations/?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=treasury-state-guatemala-cartels-terrorist-designations",
-      "date": "2026-11-13",
-      "ts": 1794601567,
-      "source": "Just Security",
-      "key": "justsec",
-      "category": "National Security & Law",
-      "summary": "Treasury sanctions Guatemala’s Los Mendoza and Los Huistas as terrorists while State designates Los Lorenzanas as a Foreign Terrorist Organization. The post Just the Docs: Treasury and State Department Designat..."
-    },
-    {
-      "title": "Guantanamo Dispatches: Six Jurors Chosen, 14 More Needed For First Death Penalty Tribunal At Guantanamo Bay",
-      "url": "https://www.justsecurity.org/164450/six-jurors-chosen-death-penalty-tribunal-guantanamo/?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=six-jurors-chosen-death-penalty-tribunal-guantanamo",
-      "date": "2026-11-13",
-      "ts": 1794598949,
-      "source": "Just Security",
-      "key": "justsec",
-      "category": "National Security & Law",
-      "summary": "Six U.S. military officers have been chosen to serve on the jury for the death penalty trial of the USS Cole suspect at Guantanamo. The post Guantanamo Dispatches: Six Jurors Chosen, 14 More Needed For First De..."
-    },
-    {
-      "title": "London Calling: The Customary Law of Naval Blockade and Contemporary Practice",
-      "url": "https://lieber.westpoint.edu/london-calling-customary-law-naval-blockade-contemporary-practice/",
-      "date": "2026-11-13",
-      "ts": 1794594464,
-      "source": "Lieber Institute (West Point)",
-      "key": "lieber",
-      "category": "Military & IHL Scholarship",
-      "summary": "The post London Calling: The Customary Law of Naval Blockade and Contemporary Practice appeared first on Lieber Institute West Point ."
-    },
-    {
-      "title": "Hungary Pledges to Ratify European Treaty to Protect Women from Violence",
-      "url": "https://www.hrw.org/news/2026/11/13/hungary-pledges-to-ratify-european-treaty-to-protect-women-from-violence",
-      "date": "2026-11-13",
-      "ts": 1794589315,
-      "source": "Human Rights Watch",
-      "key": "hrw",
-      "category": "Human Rights & IHL",
-      "summary": "Click to expand Image People march during a protest on violence against women in Budapest in November 2018. © 2018 Attila Kisbenedek/AFP via Getty Images On November 12, Hungary's Prime Minister Péter Magyar&nb..."
-    },
-    {
-      "title": "Preparing for 2029: A Reconversion Strategy",
-      "url": "https://www.justsecurity.org/163851/preparing-2029-reconversion-strategy/?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=preparing-2029-reconversion-strategy",
-      "date": "2026-11-13",
-      "ts": 1794578671,
-      "source": "Just Security",
-      "key": "justsec",
-      "category": "National Security & Law",
-      "summary": "The next U.S. administration should adopt a planning model of centralized strategic coordination and decentralized substantive execution. The post Preparing for 2029: A Reconversion Strategy appeared first on J..."
-    },
-    {
-      "title": "Breaking the Cycle of Corruption: Congress Needs to Show Historic Leadership on Accountability",
-      "url": "https://www.justsecurity.org/163908/breaking-cycle-corruption-congress-accountability/?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=breaking-cycle-corruption-congress-accountability",
-      "date": "2026-11-13",
-      "ts": 1794577766,
-      "source": "Just Security",
-      "key": "justsec",
-      "category": "National Security & Law",
-      "summary": "To put the country on a path toward democratic renewal, Congress must prioritize genuine accountability for executive branch abuses. The post Breaking the Cycle of Corruption: Congress Needs to Show Historic Le..."
-    },
-    {
-      "title": "Early Edition: November 13, 2026",
-      "url": "https://www.justsecurity.org/164357/early-edition-november-13-2026/?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=early-edition-november-13-2026",
-      "date": "2026-11-13",
-      "ts": 1794576490,
-      "source": "Just Security",
-      "key": "justsec",
-      "category": "National Security & Law",
-      "summary": "Sign up to receive the Early Edition in your inbox here. A curated weekday guide to major news and developments over the last 24 hours. Here’s today’s news: IRAN WAR President Trump on social media yesterday sa..."
-    },
-    {
-      "title": "Security Council LIVE: Fragile Gulf calm tested as threats to Hormuz shipping mount",
-      "url": "https://news.un.org/feed/view/en/story/2026/11/1168804",
-      "date": "2026-11-13",
-      "ts": 1794571200,
-      "source": "UN News (Peace & Security)",
-      "key": "un",
-      "category": "UN / Treaty Bodies",
-      "summary": "Nearly nine months after Israeli and US strikes on Iran set off a regional war, the Gulf remains on a knife edge. Iran has all but closed the Strait of Hormuz, which carried a fifth of the world’s oil before th..."
-    },
-    {
-      "title": "DR Congo Ebola outbreak: Unrest fuelled by armed groups holds back response",
-      "url": "https://news.un.org/feed/view/en/story/2026/11/1168797",
-      "date": "2026-11-13",
-      "ts": 1794571200,
-      "source": "UN News (Peace & Security)",
-      "key": "un",
-      "category": "UN / Treaty Bodies",
-      "summary": "The Ebola outbreak in the Democratic Republic of the Congo (DRC) continues to spread amid repeated and ongoing deadly attacks on civilians and frontline health workers by armed groups that are obstructing effor..."
-    },
-    {
-      "title": "France: Sweeping Bill Threatens Peaceful Protest, Rights",
-      "url": "https://www.hrw.org/news/2026/11/13/france-sweeping-bill-threatens-peaceful-protest-rights",
-      "date": "2026-11-13",
-      "ts": 1794546000,
-      "source": "Human Rights Watch",
-      "key": "hrw",
-      "category": "Human Rights & IHL",
-      "summary": "Click to expand Image Protesters gather in Place de la Nation square during a demonstration called by high-school students, joined by unions and teachers, who have been demanding better learning conditions, in ..."
-    },
-    {
-      "title": "Indonesia: Alleged Excessive Force Against Protesters",
-      "url": "https://www.hrw.org/news/2026/11/12/indonesia-alleged-excessive-force-against-protesters",
-      "date": "2026-11-13",
-      "ts": 1794528000,
-      "source": "Human Rights Watch",
-      "key": "hrw",
-      "category": "Human Rights & IHL",
-      "summary": "Click to expand Image Police respond to a youth protest in Yogyakarta, Indonesia, November 11, 2026. © 2026 Cover Images via AP Images (London) –&nbsp;Indonesian authorities should impartially investigate alleg..."
-    },
-    {
       "title": "Nvidia privately confirmed it could track chips to fight smuggling, even as industry publicly questioned feasibility",
       "url": "https://www.technologyreview.com/2026/11/12/1148483/nvidia-chip-tracking/",
       "date": "2026-11-12",
@@ -238,54 +99,15 @@
       "summary": "Representatives from Nvidia told Illinois representative Bill Foster that it would be technically possible to implement the anti-smuggling measures called for in the Chip Security Act, Foster told MIT Technolog..."
     },
     {
-      "title": "Attack on Trans Sex Workers in Argentina Demands Justice",
-      "url": "https://www.hrw.org/news/2026/11/12/attack-on-trans-sex-workers-in-argentina-demands-justice",
-      "date": "2026-11-12",
-      "ts": 1794505753,
-      "source": "Human Rights Watch",
-      "key": "hrw",
-      "category": "Human Rights & IHL",
-      "summary": "Click to expand Image A protest against violence targeting trans people in Buenos Aires, Argentina, on June 28, 2026. © 2026 Carolina Jaramillo/NurPhoto via Getty Images A brutal attack on trans women sex worke..."
-    },
-    {
-      "title": "Six killed in Israeli airstrike on Gaza’s Nasser Hospital",
-      "url": "https://news.un.org/feed/view/en/story/2026/11/1168796",
+      "title": "Google Releases Gemini 4 Hydrogen (Nov 12) & Carbon (Nov 10) with Runtime CoT Safety Monitors Under CA SB 53",
+      "url": "https://deepmind.google/technologies/gemini/",
       "date": "2026-11-12",
       "ts": 1794484800,
-      "source": "UN News (Peace & Security)",
-      "key": "un",
-      "category": "UN / Treaty Bodies",
-      "summary": "An Israeli airstrike on Gaza’s Nasser Hospital on Wednesday night killed six people, injured 27 others and caused extensive damage.&nbsp;"
-    },
-    {
-      "title": "Haiti: More than 1,000 killed between July and September, UN report reveals",
-      "url": "https://news.un.org/feed/view/en/story/2026/11/1168789",
-      "date": "2026-11-12",
-      "ts": 1794484800,
-      "source": "UN News (Peace & Security)",
-      "key": "un",
-      "category": "UN / Treaty Bodies",
-      "summary": "More than 1,000 people were killed in Haiti during the third quarter of this year, as armed gangs continue to terrorize the population in the capital Port-au-Prince and beyond, the UN team in the island nation,..."
-    },
-    {
-      "title": "A collective step forward: the outcome document on achieving meaningful protection for hospitals in armed conflict",
-      "url": "https://blogs.icrc.org/law-and-policy/2026/11/12/a-collective-step-forward-the-outcome-document-on-achieving-meaningful-protection-for-hospitals-in-armed-conflict/",
-      "date": "2026-11-12",
-      "ts": 1794471412,
-      "source": "ICRC Humanitarian Law & Policy",
-      "key": "icrc",
-      "category": "IHL & Treaty Bodies",
-      "summary": "Hospitals and other medical facilities enjoy specific protection under international humanitarian law (IHL), yet the reality in contemporary armed conflicts is starkly different. Attacks against health-care fac..."
-    },
-    {
-      "title": "Lebanon: Devastation awaits returnees as UN peacekeepers prepare exit",
-      "url": "https://news.un.org/feed/view/en/story/2026/11/1168784",
-      "date": "2026-11-11",
-      "ts": 1794398400,
-      "source": "UN News (Peace & Security)",
-      "key": "un",
-      "category": "UN / Treaty Bodies",
-      "summary": "The situation in southern Lebanon remains volatile and extremely difficult for communities trying to rebuild their lives, UN peacekeepers based there report, despite a significant decrease in hostilities follow..."
+      "source": "Google DeepMind / FSF 2.0",
+      "key": "mit",
+      "category": "Frontier Safety",
+      "sev": "HIGH",
+      "summary": "Hydrogen trims agentic shortcut risk by 81% vs 3.8 Flash under CA TFAIA & EU AI Act Art. 51–55 Systemic Risk transparency."
     },
     {
       "title": "Tensegrity continuum robots enable task-adaptive morphologies for cooperative behaviours",
@@ -298,26 +120,6 @@
       "summary": ""
     },
     {
-      "title": "Mind the Gap: The Distance Between WHO Data and International Legal Standards",
-      "url": "https://lieber.westpoint.edu/mind-gap-distance-between-who-data-international-legal-standards/",
-      "date": "2026-11-10",
-      "ts": 1794336346,
-      "source": "Lieber Institute (West Point)",
-      "key": "lieber",
-      "category": "Military & IHL Scholarship",
-      "summary": "The post Mind the Gap: The Distance Between WHO Data and International Legal Standards appeared first on Lieber Institute West Point ."
-    },
-    {
-      "title": "Eyes in the sky, weapons in hand: FPV drones and the challenges for IHL and the protection of civilians",
-      "url": "https://blogs.icrc.org/law-and-policy/2026/11/10/eyes-in-the-sky-weapons-in-hand-fpv-drones-and-the-challenges-for-ihl-and-the-protection-of-civilians/",
-      "date": "2026-11-10",
-      "ts": 1794300978,
-      "source": "ICRC Humanitarian Law & Policy",
-      "key": "icrc",
-      "category": "IHL & Treaty Bodies",
-      "summary": "Drones have become a defining feature of contemporary armed conflicts. Their use has surged dramatically in recent years, originally with the proliferation of inexpensive, commercially available systems, and in..."
-    },
-    {
       "title": "The backlash about data centers might really just be about electricity",
       "url": "https://www.technologyreview.com/2026/11/09/1148194/the-backlash-about-data-centers-might-really-just-be-about-electricity/",
       "date": "2026-11-09",
@@ -326,16 +128,6 @@
       "key": "mit",
       "category": "Frontier Tech & Policy",
       "summary": "This story originally appeared in The Algorithm, our weekly newsletter on AI. To get stories like this in your inbox first, sign up here. As voters went to the polls across the US last week, I was in Ashburn, V..."
-    },
-    {
-      "title": "How the UN Bought Time for the World to Understand Autonomous Weapons",
-      "url": "https://lieber.westpoint.edu/how-un-bought-time-world-understand-autonomous-weapons/",
-      "date": "2026-11-09",
-      "ts": 1794245820,
-      "source": "Lieber Institute (West Point)",
-      "key": "lieber",
-      "category": "Military & IHL Scholarship",
-      "summary": "The post How the UN Bought Time for the World to Understand Autonomous Weapons appeared first on Lieber Institute West Point ."
     },
     {
       "title": "Nancy Pelosi’s replacement is ready to regulate AI",
@@ -368,6 +160,17 @@
       "summary": "As companies look to accelerate innovation with artificial intelligence, cloud computing, and advanced modeling, the primary challenge is connecting new technologies to reliable data, scientific expertise, and ..."
     },
     {
+      "title": "Anthropic Launches Claude Fable 5.2 & Restricted Mythos 5.2; OpenAI Deploys GPT-6 Cyber Under Daybreak Red",
+      "url": "https://aviperera.com/ai-policy-tracker/",
+      "date": "2026-11-09",
+      "ts": 1794225600,
+      "source": "Frontier Safety Registry",
+      "key": "avi",
+      "category": "Frontier Cyber Risk",
+      "sev": "CRITICAL",
+      "summary": "First frontier generation autonomously chaining zero-day exploits; general weights withheld and restricted to vetted cyber defenders."
+    },
+    {
       "title": "Multimodal cell foundation models require synergistic integration beyond alignment",
       "url": "https://www.nature.com/articles/s42256-026-01328-3",
       "date": "2026-11-09",
@@ -376,16 +179,6 @@
       "key": "nature",
       "category": "Peer-Reviewed Science",
       "summary": ""
-    },
-    {
-      "title": "GC IV Commentary Series – Article 47 of the Fourth Geneva Convention of 1949: A Possible Blind Spot",
-      "url": "https://lieber.westpoint.edu/article-47-fourth-geneva-convention-1949-possible-blind-spot/",
-      "date": "2026-11-06",
-      "ts": 1793985601,
-      "source": "Lieber Institute (West Point)",
-      "key": "lieber",
-      "category": "Military & IHL Scholarship",
-      "summary": "The post GC IV Commentary Series – Article 47 of the Fourth Geneva Convention of 1949: A Possible Blind Spot appeared first on Lieber Institute West Point ."
     },
     {
       "title": "I watched a humanoid robot clean my apartment. It felt like a taste of the future.",
@@ -426,26 +219,6 @@
       "key": "mit",
       "category": "Frontier Tech & Policy",
       "summary": "Texas is the fastest-growing data center market in the US and ground zero for Big Tech's largest AI buildouts. But the blue wave that swept the Lone Star State may jeopardize that position. Democrat James Talar..."
-    },
-    {
-      "title": "GC IV Commentary Series – Common Article 2(2) and (3)",
-      "url": "https://lieber.westpoint.edu/common-article-22-3/",
-      "date": "2026-11-04",
-      "ts": 1793817164,
-      "source": "Lieber Institute (West Point)",
-      "key": "lieber",
-      "category": "Military & IHL Scholarship",
-      "summary": "The post GC IV Commentary Series – Common Article 2(2) and (3) appeared first on Lieber Institute West Point ."
-    },
-    {
-      "title": "The Law on Brain Technologies in Warfare Series – HUMINT, Detainees, and “Brain Fingerprinting”",
-      "url": "https://lieber.westpoint.edu/humint-detainees-brain-fingerprinting/",
-      "date": "2026-11-03",
-      "ts": 1793729698,
-      "source": "Lieber Institute (West Point)",
-      "key": "lieber",
-      "category": "Military & IHL Scholarship",
-      "summary": "The post The Law on Brain Technologies in Warfare Series – HUMINT, Detainees, and “Brain Fingerprinting” appeared first on Lieber Institute West Point ."
     },
     {
       "title": "Defining Autonomous Weapon Systems: A schematic framework for refined purpose-driven definitions",
@@ -546,6 +319,111 @@
       "key": "arxiv",
       "category": "Academic / Preprints",
       "summary": "Governments govern AI-generated online harms from commercial platforms (EU DSA, AI Act, UK Online Safety Act), yet the most severe class remains ungoverned: autonomous cyber weapons (ACWs) deployed by nation-st..."
+    },
+    {
+      "title": "V-BAT (MQ-35)",
+      "url": "https://aviperera.com/v-bat-mq-35/",
+      "date": "2026-10-20",
+      "ts": 1792460400,
+      "source": "Avi Perera OSINT & Research",
+      "key": "avi",
+      "category": "Sovereign Dossiers",
+      "summary": "Forensic analysis of Shield AI's V-BAT (MQ-35): Hivemind autonomy, ViDAR sensor, targeting role, export, privacy law and international implications."
+    },
+    {
+      "title": "Norinco Fuxi and NUDT Combat Humanoids",
+      "url": "https://aviperera.com/norinco-fuxi-and-nudt-combat-humanoids/",
+      "date": "2026-10-19",
+      "ts": 1792389341,
+      "source": "Avi Perera OSINT & Research",
+      "key": "avi",
+      "category": "Sovereign Dossiers",
+      "summary": "A forensic analysis of Norinco’s Fuxi teleoperated humanoid and the PLA’s NUDT combat humanoid research: specifications, urban assault concepts, IHL, sanctions and CCW talks."
+    },
+    {
+      "title": "AI will not set its own limits in warfare. States must.",
+      "url": "https://blogs.icrc.org/law-and-policy/2026/10/15/ai-will-not-set-its-own-limits-in-warfare-states-must/",
+      "date": "2026-10-15",
+      "ts": 1792044969,
+      "source": "ICRC Humanitarian Law & Policy",
+      "key": "icrc",
+      "category": "IHL & Treaty Bodies",
+      "summary": "Artificial intelligence (AI) is being developed at extraordinary speed, prompting warnings from within the technology industry itself that advances may be outpacing our ability to understand and control its ris..."
+    },
+    {
+      "title": "Abliteration.ai: Orthogonal Representation Surgery Strips Open-Weight Guardrails (DeepSeek-V4 / Llama 4) in Minutes",
+      "url": "https://aviperera.com/abliteration-ai-removing-guardrails-international-security/",
+      "date": "2026-10-08",
+      "ts": 1791460800,
+      "source": "Avi Perera OSINT & Research",
+      "key": "avi",
+      "category": "Guardrail Abliteration",
+      "sev": "CRITICAL",
+      "summary": "Demonstrates fragility of open-weight refusal fine-tuning and gaps inside EU AI Act Art. 53 open-source exemptions."
+    },
+    {
+      "title": "The Ethics of Artificial Intelligence in Military Operations",
+      "url": "https://arxiv.org/abs/2609.26507v1",
+      "date": "2026-09-22",
+      "ts": 1790087909,
+      "source": "arXiv (LAWS & AI Safety)",
+      "key": "arxiv",
+      "category": "Academic / Preprints",
+      "summary": "Deep learning systems now mediate military decisions to use force, yet their internal logic resists inspection, their evaluation practices are gameable, and their deployment fractures accountability across disp..."
+    },
+    {
+      "title": "Anticipatory Human Oversight of Agentic AI: A Philosophical Account",
+      "url": "https://arxiv.org/abs/2609.24242v1",
+      "date": "2026-09-21",
+      "ts": 1789978031,
+      "source": "arXiv (LAWS & AI Safety)",
+      "key": "arxiv",
+      "category": "Academic / Preprints",
+      "summary": "Human oversight is widely held to mitigate the risks of AI systems. Even for systems that produce discrete outputs at identifiable decision points, the realisation of human oversight as a reactive measure is em..."
+    },
+    {
+      "title": "EU AI Act Regulation (EU) 2024/1689 Reaches Full General Applicability — High-Risk Biometrics & Art. 55 Live",
+      "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202401689",
+      "date": "2026-08-02",
+      "ts": 1785661200,
+      "source": "European Union AI Office",
+      "key": "icrc",
+      "category": "Binding Hard Law",
+      "sev": "HIGH",
+      "summary": "Enforces mandatory conformity assessments, Annex III fundamental-rights audits, and post-market incident reporting across EU27."
+    },
+    {
+      "title": "ICRC Position & May 2026 Appeal: Urgent Need for Legally Binding Treaty Rules on Autonomous Weapon Systems",
+      "url": "https://www.icrc.org/en/law-and-policy/autonomous-weapon-systems",
+      "date": "2026-05-12",
+      "ts": 1778580000,
+      "source": "ICRC IHL Division",
+      "key": "icrc",
+      "category": "UN / Treaty Bodies",
+      "sev": "CRITICAL",
+      "summary": "Reaffirms prohibition of unpredictable AWS and anti-personnel autonomous targeting under Customary IHL and Geneva AP I Art. 36."
+    },
+    {
+      "title": "Paris Criminal Court Ruling in Lafarge Corporate Complicity Case Sets Precedent for Dual-Use Cloud & AI Vendors",
+      "url": "https://www.ecchr.eu/en/case/lafarge-in-syria/",
+      "date": "2026-04-07",
+      "ts": 1775563200,
+      "source": "ECCHR / Legal Precedent",
+      "key": "hrw",
+      "category": "Corporate Liability",
+      "sev": "CRITICAL",
+      "summary": "Rejects neutral commercial vendor defense where infrastructure knowingly facilitates IHL violations and crimes against humanity."
+    },
+    {
+      "title": "UNGA Resolution A/RES/80/57 on Lethal Autonomous Weapons Systems Adopted 164–6–7",
+      "url": "https://docs.un.org/en/A/RES/80/57",
+      "date": "2025-12-01",
+      "ts": 1764597600,
+      "source": "UN General Assembly",
+      "key": "un",
+      "category": "UN / Treaty Bodies",
+      "sev": "HIGH",
+      "summary": "164 Member States vote for urgent international LAWS treaty work; Belarus, Burundi, DPRK, Israel, Russia, and United States vote against."
     }
   ]
 }

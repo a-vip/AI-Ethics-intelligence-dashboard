@@ -40,7 +40,7 @@
   var LAWS_STATE = { cat: 'ALL', q: '', sortKey: 'a', sortDir: 'desc' };
   var TRAJ_MODE = 'theaters';
   var BUBBLE_DOMAIN = 'ALL';
-  var TREATY_STATE = { q: '', region: 'ALL', stance: 'ALL', gap: 'ALL', sortKey: 'complianceScore', sortDir: 'desc', page: 1, pageSize: 25, showAll: false };
+  var TREATY_STATE = { q: '', region: 'ALL', stance: 'ALL', gap: 'ALL', sortKey: 'stancePriority', sortDir: 'asc', page: 1, pageSize: 25, showAll: false };
   var REPO_STATE = { cat: 'ALL', q: '', sortKey: 'year', sortDir: 'desc' };
   var RSS_CAT = 'all';
 
@@ -355,6 +355,7 @@
       Object.keys(CH).forEach(function (k) {
         if (CH[k] && typeof CH[k].resize === 'function') CH[k].resize();
       });
+      ensureChartsWhenChartJsLoads(0);
     }, 60);
   };
 
@@ -364,6 +365,7 @@
       b.classList.toggle('on', b.getAttribute('data-v') === val);
     });
     renderLower();
+    buildObservatoryCharts();
   };
 
   window.tog = function (hdr) {
@@ -534,6 +536,33 @@
   }
 
   // ── 195-State International LAWS Treaty & Governance Matrix ──
+  var FEATURED_OPPOSE_ORDER = {
+    'United States of America': 1,
+    'Israel': 2,
+    'Russian Federation': 3,
+    'China': 4,
+    'India': 5,
+    'Iran (Islamic Republic of)': 6,
+    "Democratic People's Republic of Korea": 7,
+    'Belarus': 8,
+    'Saudi Arabia': 9,
+    'Türkiye': 10,
+    'United Arab Emirates': 11,
+    'Syrian Arab Republic': 12,
+    'Burundi': 13
+  };
+
+  function stanceRank(stance) {
+    if (stance === 'Opposes Binding Treaty' || (stance && stance.indexOf('Use-Ban') >= 0)) return 1;
+    if (stance === 'Two-Tier IHL / MHC Regulation') return 2;
+    if (stance === 'Binding Treaty Supporter') return 3;
+    return 4; // Unknown / No Recorded Position
+  }
+
+  function isPolDeclEndorsed(val) {
+    return /^Endorsed/i.test(String(val || '').trim());
+  }
+
   function getFilteredTreaty() {
     var q = (TREATY_STATE.q || '').toLowerCase();
     var rows = TREATY_MATRIX.filter(function (t) {
@@ -543,12 +572,26 @@
       if (TREATY_STATE.gap === 'NO_CCW' && t.ccw === 'Party') return false;
       if (TREATY_STATE.gap === 'NO_ICC' && t.icc === 'Party') return false;
       if (TREATY_STATE.gap === 'AGAINST_80' && t.unga80 !== 'Against') return false;
-      if (TREATY_STATE.gap === 'POL_DECL' && (t.polDecl || '').indexOf('Endorsed') < 0) return false;
+      if (TREATY_STATE.gap === 'POL_DECL' && !isPolDeclEndorsed(t.polDecl)) return false;
       if (q && [t.country, t.unRegion, t.stance, t.ap1, t.ccw, t.icc, t.note].join(' ').toLowerCase().indexOf(q) < 0) return false;
       return true;
     });
     rows.sort(function (a, b) {
       var k = TREATY_STATE.sortKey;
+      if (k === 'stancePriority') {
+        var ra = stanceRank(a.stance), rb = stanceRank(b.stance);
+        if (ra !== rb) return TREATY_STATE.sortDir === 'asc' ? ra - rb : rb - ra;
+        var pa = FEATURED_OPPOSE_ORDER[a.country] || 999;
+        var pb = FEATURED_OPPOSE_ORDER[b.country] || 999;
+        if (pa !== pb) return pa - pb;
+        return String(a.country).localeCompare(String(b.country));
+      }
+      if (k === 'unknownFirst') {
+        var ua = a.stance.indexOf('Unknown') >= 0 ? 0 : 1;
+        var ub = b.stance.indexOf('Unknown') >= 0 ? 0 : 1;
+        if (ua !== ub) return ua - ub;
+        return String(a.country).localeCompare(String(b.country));
+      }
       var va = a[k] != null ? a[k] : '';
       var vb = b[k] != null ? b[k] : '';
       if (typeof va === 'number' && typeof vb === 'number') return TREATY_STATE.sortDir === 'asc' ? va - vb : vb - va;
@@ -560,6 +603,13 @@
     });
     return rows;
   }
+
+  window.setTreatyPreset = function (key, dir) {
+    TREATY_STATE.sortKey = key;
+    TREATY_STATE.sortDir = dir || 'asc';
+    TREATY_STATE.page = 1;
+    renderTreaty();
+  };
 
   window.setTreatyFilter = function (field, val) {
     TREATY_STATE[field] = val;
@@ -576,8 +626,6 @@
 
   function renderTreaty() {
     var body = document.getElementById('treaty-body');
-    var kpiStates = document.getElementById('kpi-states');
-    if (kpiStates && TREATY_MATRIX.length) kpiStates.textContent = TREATY_MATRIX.length;
     if (!body || !TREATY_MATRIX.length) return;
 
     var rows = getFilteredTreaty();
@@ -597,13 +645,19 @@
     var html =
       '<div class="treaty-summary-bar">' +
       '<div class="ts-card"><span class="ts-k">Total UN Coverage</span><span class="ts-v" style="color:#38bdf8;">' + TREATY_MATRIX.length + ' States</span><span style="font-size:0.68rem;color:#94a3b8;">193 Members + 2 Observers</span></div>' +
-      '<div class="ts-card"><span class="ts-k">Binding Ban Supporters</span><span class="ts-v" style="color:#34d399;">' + supCnt + '</span><span style="font-size:0.68rem;color:#94a3b8;">Pro-Treaty Coalition</span></div>' +
+      '<div class="ts-card"><span class="ts-k">Oppose / Use-Ban First</span><span class="ts-v" style="color:#f43f5e;">' + oppCnt + '</span><span style="font-size:0.68rem;color:#94a3b8;">Resist Binding Ban</span></div>' +
       '<div class="ts-card"><span class="ts-k">Two-Tier IHL / MHC</span><span class="ts-v" style="color:#fbbf24;">' + twoCnt + '</span><span style="font-size:0.68rem;color:#94a3b8;">Context Human Control</span></div>' +
-      '<div class="ts-card"><span class="ts-k">Oppose / Use-Ban Only</span><span class="ts-v" style="color:#f43f5e;">' + oppCnt + '</span><span style="font-size:0.68rem;color:#94a3b8;">Resist Binding Ban</span></div>' +
+      '<div class="ts-card"><span class="ts-k">Binding Ban Supporters</span><span class="ts-v" style="color:#34d399;">' + supCnt + '</span><span style="font-size:0.68rem;color:#94a3b8;">Pro-Treaty Coalition</span></div>' +
       '<div class="ts-card"><span class="ts-k">Unknown / Unrecorded</span><span class="ts-v" style="color:#cbd5e1;">' + unkCnt + '</span><span style="font-size:0.68rem;color:#94a3b8;">No Formal CCW Submission</span></div>' +
       '<div class="ts-card"><span class="ts-k">Binding Treaties Active</span><span class="ts-v" style="color:#7dd3fc;">' + ap1Cnt + ' / ' + ccwCnt + '</span><span style="font-size:0.68rem;color:#94a3b8;">AP I Art. 36 / UN CCW Parties</span></div>' +
       '</div>' +
-      '<div class="chtw" style="height:56px;margin-bottom:14px;"><canvas id="ch-treaty-bar"></canvas></div>' +
+      '<div class="chtw" style="height:64px;margin-bottom:14px;"><canvas id="ch-treaty-bar"></canvas></div>' +
+      '<div class="sub-pills">' +
+      '<button class="sp-btn' + (TREATY_STATE.sortKey === 'stancePriority' ? ' on' : '') + '" onclick="setTreatyPreset(\'stancePriority\',\'asc\')">⚠ Oppose Ban First (Default)</button>' +
+      '<button class="sp-btn' + (TREATY_STATE.sortKey === 'country' ? ' on' : '') + '" onclick="setTreatyPreset(\'country\',\'asc\')">A–Z Alphabetical</button>' +
+      '<button class="sp-btn' + (TREATY_STATE.sortKey === 'complianceScore' ? ' on' : '') + '" onclick="setTreatyPreset(\'complianceScore\',\'desc\')">Compliance Score ↓</button>' +
+      '<button class="sp-btn' + (TREATY_STATE.sortKey === 'unknownFirst' ? ' on' : '') + '" onclick="setTreatyPreset(\'unknownFirst\',\'asc\')">Unknown Positions First</button>' +
+      '</div>' +
       '<div class="ts-filters">' +
       '<input value="' + esc(TREATY_STATE.q) + '" oninput="setTreatyFilter(\'q\', this.value)" placeholder="Search any of 195 UN states, treaties, votes..." style="min-width:220px;flex:1;" />' +
       '<select onchange="setTreatyFilter(\'region\', this.value)" class="at-select">' +
@@ -655,7 +709,7 @@
           '<td>' + treatyBadge(t.ccw) + (t.ccw === 'Party' ? ' <span style="font-size:0.65rem;color:#94a3b8;">(P2:' + t.ccwP2 + ')</span>' : '') + '</td>' +
           '<td>' + treatyBadge(t.icc) + '</td>' +
           '<td>' + treatyBadge(t.unga80) + '</td>' +
-          '<td style="font-size:0.72rem;color:#cbd5e1;">' + (t.polDecl.indexOf('Endorsed') >= 0 ? '<span class="bdg pt">Endorsed</span>' : '<span style="color:#64748b;">No / Unknown</span>') + '</td>' +
+          '<td style="font-size:0.72rem;color:#cbd5e1;">' + (isPolDeclEndorsed(t.polDecl) ? '<span class="bdg pt">Endorsed</span>' : '<span style="color:#64748b;">No / Unknown</span>') + '</td>' +
           '<td style="font-family:var(--font);font-weight:700;color:' + sCol + ';">' + t.complianceScore + '</td>' +
           '</tr>';
       }).join('') +
@@ -799,26 +853,39 @@
   };
 
   // ── Live Ethics & Security Stream + Multi-Source Live RSS Connector ──
+  var CURATED_STREAM_DEFAULTS = [
+    { sev: 'CRITICAL', title: 'UN CCW 7th Review Conference Opens in Geneva (Nov 16–20, 2026) — 128 Parties Debate Two-Tier LAWS Mandate', url: 'https://disarmament.unoda.org/the-convention-on-certain-conventional-weapons/', date: '2026-11-16', source: 'UNODA / CCW Geneva', key: 'un', category: 'UN / Treaty Bodies', summary: '128 High Contracting Parties review 2026 GGE Rolling Text on Tier-1 LAWS prohibitions and Tier-2 Meaningful Human Control.' },
+    { sev: 'HIGH', title: 'Google Releases Gemini 4 Hydrogen (Nov 12) & Carbon (Nov 10) with Runtime CoT Monitors Under CA SB 53', url: 'https://deepmind.google/technologies/gemini/', date: '2026-11-12', source: 'Google DeepMind / FSF 2.0', key: 'mit', category: 'Frontier Safety', summary: 'Hydrogen cuts agentic shortcut risk by 81% vs 3.8 Flash under CA TFAIA & EU AI Act Art. 51–55 systemic risk disclosure.' },
+    { sev: 'CRITICAL', title: 'Anthropic Launches Claude Fable 5.2 & Restricted Mythos 5.2; OpenAI Deploys GPT-6 Cyber (Daybreak Red)', url: 'https://aviperera.com/ai-policy-tracker/', date: '2026-11-09', source: 'Frontier Safety Registry', key: 'avi', category: 'Frontier Cyber Risk', summary: 'First frontier generation autonomously chaining zero-day exploits; unrestricted weights withheld to cyber verification programs.' },
+    { sev: 'CRITICAL', title: 'Abliteration.ai: Orthogonal Representation Surgery Strips Open-Weight Guardrails (DeepSeek-V4 / Llama 4) in Minutes', url: 'https://aviperera.com/abliteration-ai-removing-guardrails-international-security/', date: '2026-10-08', source: 'Avi Perera OSINT & Research', key: 'avi', category: 'Guardrail Abliteration', summary: 'Exposes structural vulnerability inside EU AI Act Art. 53 open-source weight exemptions.' },
+    { sev: 'CRITICAL', title: 'Paris Criminal Court Convicts Lafarge of Corporate Complicity — Sets Standard for Dual-Use Cloud & AI Vendors', url: 'https://www.ecchr.eu/en/case/lafarge-in-syria/', date: '2026-04-07', source: 'ECCHR / French Supreme Court', key: 'hrw', category: 'Corporate Liability', summary: 'Rejects commercial neutrality defense where corporate infrastructure facilitates IHL violations and crimes against humanity.' }
+  ];
+
   function renderLiveStreams() {
     var customRss = [];
     try { customRss = JSON.parse(localStorage.getItem('sied_user_rss_v7') || localStorage.getItem('sied_rss_custom') || '[]'); } catch (e) {}
-    var allItems = customRss.concat(LIVE_FEED);
+    var streamSource = LIVE_FEED.length ? LIVE_FEED : CURATED_STREAM_DEFAULTS;
+    var allItems = customRss.concat(streamSource);
 
-    // Populate Top Breaking Intelligence Stream
+    // Populate Breaking AI Ethics & Security Stream (#feed-body)
     var feedBody = document.getElementById('feed-body');
     if (feedBody) {
-      if (!allItems.length) {
-        feedBody.innerHTML = '<div style="color:#94a3b8;font-size:0.8rem;">Loading authoritative live feeds...</div>';
-      } else {
-        feedBody.innerHTML = allItems.slice(0, 14).map(function (it) {
-          return '<div class="fi">' +
-            '<div style="display:flex;justify-content:space-between;gap:8px;font-family:var(--font);font-size:0.66rem;color:#fda4af;margin-bottom:3px;">' +
-            '<span>' + esc(it.source) + ' · ' + esc(it.category || '') + '</span><span>' + esc(it.date) + '</span></div>' +
-            '<a href="' + safeUrl(it.url || it.link) + '" target="_blank" rel="noopener" style="font-size:0.81rem;font-weight:700;color:#f8fafc;text-decoration:none;display:block;">' + esc(it.title) + ' ↗</a>' +
-            (it.summary ? '<div style="font-size:0.74rem;color:#cbd5e1;margin-top:3px;">' + esc(it.summary.slice(0, 140)) + '</div>' : '') +
-            '</div>';
-        }).join('');
-      }
+      var focused = allItems.filter(function (it) {
+        var txt = (it.title || '') + ' ' + (it.summary || '');
+        if (it.sev === 'CRITICAL' || it.sev === 'HIGH') return true;
+        return /\bAI\b/.test(txt) || /\b(artificial intelligence|lethal autonomous|autonomous weapon|killer robot|drone swarm|loitering munition|algorithmic|biometric|facial recognition|mass surveillance|cyberattack|frontier model|LLM|GPT-|Claude |Gemini |human control|article 36|CCW|deepfake|abliteration|guardrail|spyware|pegasus|palantir|autonomous targeting)\b/i.test(txt);
+      });
+      var displayFeed = focused.length ? focused : CURATED_STREAM_DEFAULTS;
+      feedBody.innerHTML = displayFeed.slice(0, 14).map(function (it) {
+        var bCol = it.sev === 'CRITICAL' ? '#f43f5e' : (it.sev === 'HIGH' ? '#f59e0b' : '#38bdf8');
+        var bTag = it.sev || 'LIVE';
+        return '<div class="fi" style="border-left-color:' + bCol + ';">' +
+          '<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;font-family:var(--font);font-size:0.66rem;color:#cbd5e1;margin-bottom:4px;">' +
+          '<span><strong style="color:' + bCol + ';">[' + esc(bTag) + ']</strong> ' + esc(it.source) + (it.category ? ' · ' + esc(it.category) : '') + '</span><span>' + esc(it.date) + '</span></div>' +
+          '<a href="' + safeUrl(it.url || it.link) + '" target="_blank" rel="noopener" style="font-size:0.81rem;font-weight:700;color:#f8fafc;text-decoration:none;display:block;">' + esc(it.title) + ' ↗</a>' +
+          (it.summary ? '<div style="font-size:0.74rem;color:#cbd5e1;margin-top:3px;line-height:1.4;">' + esc(it.summary.slice(0, 150)) + '</div>' : '') +
+          '</div>';
+      }).join('');
     }
 
     // Populate Multi-Source Filterable RSS Tabs
@@ -1121,22 +1188,26 @@
         if (!xA || !yA) return;
         var xMid = xA.getPixelForValue(75), yMid = yA.getPixelForValue(70);
         ctx.save();
-        // Top-right Accountability Vacuum
-        ctx.fillStyle = 'rgba(244, 63, 94, 0.08)';
+        ctx.fillStyle = 'rgba(244, 63, 94, 0.09)';
         ctx.fillRect(xMid, yA.top, xA.right - xMid, yMid - yA.top);
-        // Top-left Oversight Strain
         ctx.fillStyle = 'rgba(245, 158, 11, 0.06)';
         ctx.fillRect(xA.left, yA.top, xMid - xA.left, yMid - yA.top);
-        // Bottom Bounded
         ctx.fillStyle = 'rgba(16, 185, 129, 0.05)';
         ctx.fillRect(xA.left, yMid, xA.right - xA.left, yA.bottom - yMid);
-        // Quadrant Borders
-        ctx.strokeStyle = 'rgba(255,255,255,0.16)';
+        ctx.strokeStyle = 'rgba(255,255,255,0.18)';
         ctx.setLineDash([4, 4]);
         ctx.beginPath();
         ctx.moveTo(xMid, yA.top); ctx.lineTo(xMid, yA.bottom);
         ctx.moveTo(xA.left, yMid); ctx.lineTo(xA.right, yMid);
         ctx.stroke();
+        ctx.setLineDash([]);
+        ctx.font = '700 9px "IBM Plex Mono", monospace';
+        ctx.fillStyle = 'rgba(253, 164, 175, 0.55)';
+        ctx.fillText('ACCOUNTABILITY VACUUM', xMid + 8, yA.top + 14);
+        ctx.fillStyle = 'rgba(252, 211, 77, 0.45)';
+        ctx.fillText('OVERSIGHT STRAIN', xA.left + 8, yA.top + 14);
+        ctx.fillStyle = 'rgba(110, 231, 183, 0.45)';
+        ctx.fillText('BOUNDED / HITL', xA.left + 8, yA.bottom - 8);
         ctx.restore();
       }
     };
@@ -1270,16 +1341,6 @@
     }
   }
 
-  function ensureChartsWhenChartJsLoads(attempts) {
-    if (typeof Chart !== 'undefined') {
-      buildFrontierCharts();
-      buildObservatoryCharts();
-      renderTreaty(); // builds treatyBar inside treaty module
-    } else if ((attempts || 0) < 40) {
-      setTimeout(function () { ensureChartsWhenChartJsLoads((attempts || 0) + 1); }, 80);
-    }
-  }
-
   function downloadText(filename, content, mime) {
     var blob = new Blob([content], { type: mime });
     var a = document.createElement('a');
@@ -1299,11 +1360,8 @@
     renderLog();
   }
 
-  // =========================================================================
-  // 4. ASYNC MODULAR CONNECTOR LOADER
-  // =========================================================================
   function fetchJson(file) {
-    return fetch(CFG.dataBase + file + '?v=7.0.0', { cache: 'no-cache' })
+    return fetch(CFG.dataBase + file + '?v=7.0.1', { cache: 'no-cache' })
       .then(function (r) { if (!r.ok) throw new Error(file + ' HTTP ' + r.status); return r.json(); });
   }
 
@@ -1338,37 +1396,88 @@
       });
   }
 
-  function boot() {
-    Promise.all([
-      fetchJson('frontier-models.json'),
-      fetchJson('laws-systems.json'),
-      fetchJson('agentic-systems.json'),
-      fetchJson('surveillance-systems.json'),
-      fetchJson('bubble-matrix.json'),
-      fetchJson('trajectory-data.json'),
-      fetchJson('treaty-matrix.json'),
-      fetchJson('research-repo.json')
-    ]).then(function (res) {
-      FRONTIER_MODELS = res[0] || [];
-      LAWS = res[1] || [];
-      AGENTIC_SYSTEMS = res[2] || [];
-      SURV = res[3] || [];
-      BUBBLE_MATRIX = res[4] || [];
-      TRAJECTORY = res[5] || null;
-      TREATY_MATRIX = res[6] || [];
-      REPO = res[7] || [];
-
-      renderAirtable();
-      renderLower();
-      ensureChartsWhenChartJsLoads(0);
-    }).catch(function (err) {
-      var st = document.getElementById('at-live-count');
-      if (st) st.textContent = 'Data Connection Notice: Serve via HTTPS / Local Server';
-      console.error('SIED v7.0 data load error:', err);
-    });
-
-    fetchFeeds(false);
+  var chartInjectAttempted = false;
+  function ensureChartsWhenChartJsLoads(attempts) {
+    if (typeof Chart !== 'undefined') {
+      buildFrontierCharts();
+      buildObservatoryCharts();
+      renderTreaty();
+      return;
+    }
+    if (!chartInjectAttempted && (attempts || 0) >= 5 && CFG.assetBase) {
+      chartInjectAttempted = true;
+      var s = document.createElement('script');
+      s.src = CFG.assetBase + 'chart.umd.min.js?v=4.4.1';
+      s.onload = function () { ensureChartsWhenChartJsLoads(0); };
+      document.head.appendChild(s);
+    }
+    if ((attempts || 0) < 120) {
+      setTimeout(function () { ensureChartsWhenChartJsLoads((attempts || 0) + 1); }, 100);
+    }
   }
 
-  document.addEventListener('DOMContentLoaded', boot);
+  function applyAllDatasets(d) {
+    if (!d) return;
+    if (d.frontierModels && d.frontierModels.length) FRONTIER_MODELS = d.frontierModels;
+    if (d.laws && d.laws.length) LAWS = d.laws;
+    if (d.agentic && d.agentic.length) AGENTIC_SYSTEMS = d.agentic;
+    if (d.surv && d.surv.length) SURV = d.surv;
+    if (d.bubble && d.bubble.length) BUBBLE_MATRIX = d.bubble;
+    if (d.trajectory) TRAJECTORY = d.trajectory;
+    if (d.treaty && d.treaty.length) TREATY_MATRIX = d.treaty;
+    if (d.repo && d.repo.length) REPO = d.repo;
+    if (d.liveFeed && d.liveFeed.length && !LIVE_FEED.length) LIVE_FEED = d.liveFeed;
+
+    renderAirtable();
+    renderLower();
+    ensureChartsWhenChartJsLoads(0);
+  }
+
+  function boot() {
+    // Hydrate immediately from optional bundled seed if present (supports offline file:// opening)
+    if (window.SIED_SEED_DATA) {
+      applyAllDatasets(window.SIED_SEED_DATA);
+    } else {
+      renderLiveStreams();
+      renderAlertsQueue();
+    }
+
+    // Fetch live modular JSON endpoints cleanly over HTTP/HTTPS
+    if (location.protocol !== 'file:') {
+      Promise.all([
+        fetchJson('frontier-models.json'),
+        fetchJson('laws-systems.json'),
+        fetchJson('agentic-systems.json'),
+        fetchJson('surveillance-systems.json'),
+        fetchJson('bubble-matrix.json'),
+        fetchJson('trajectory-data.json'),
+        fetchJson('treaty-matrix.json'),
+        fetchJson('research-repo.json')
+      ]).then(function (res) {
+        applyAllDatasets({
+          frontierModels: res[0],
+          laws: res[1],
+          agentic: res[2],
+          surv: res[3],
+          bubble: res[4],
+          trajectory: res[5],
+          treaty: res[6],
+          repo: res[7]
+        });
+      }).catch(function (err) {
+        console.warn('SIED v7.0 HTTP JSON fetch fallback:', err && err.message);
+      });
+
+      fetchFeeds(false);
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', boot);
+  } else {
+    boot();
+  }
+  window.addEventListener('load', function () {
+    setTimeout(function () { ensureChartsWhenChartJsLoads(0); }, 120);
+  });
 })();
