@@ -1,4 +1,4 @@
-# AI Ethics Intelligence Dashboard (v5.0 Flagship Ecosystem) ⚖️🤖
+# AI Ethics Intelligence Dashboard v6.0 ⚖️🤖
 
 **Live Observatory:** [https://aviperera.com/ai-ethics-dashboard/](https://aviperera.com/ai-ethics-dashboard/)  
 **Companion Tools:** [Global AI Policy Tracker](https://aviperera.com/ai-policy-tracker/) · [AI Policy Timeline (1899–2030)](https://aviperera.com/ai-policy-timeline/) · [AI Weapons Systems Database](https://aviperera.com/systems-database/)
@@ -7,31 +7,23 @@
 
 ---
 
-## 🏛️ Guiding Design Principles
+## 🗂️ Airtable-Style Frontier AI Models Registry (Nov 2026)
 
-| Principle | Architectural Rationale |
-| :--- | :--- |
-| **1. Transparency-by-Design** | Every frontier model and autonomous system entry includes a direct citation to the original **Model Card / System Dossier**, the exact **date of release**, and a structured summary of **peer-reviewed bias and safety studies** (e.g., gendered occupational stereotypes, covert dialect prejudice, and guardrail abliteration susceptibility). |
-| **2. Temporal Contextualisation** | By linking model releases and weapon deployments directly to the **[Global AI Policy Tracker](https://aviperera.com/ai-policy-tracker/)** and **[AI Policy Timeline](https://aviperera.com/ai-policy-timeline/)**, researchers can verify whether a jurisdiction had enacted binding safeguards (such as the EU AI Act Chapter V GPAI rules, China CAC Agent regulations, or Article 36 IHL weapons reviews) at the exact time of deployment. |
-| **3. Actionable Alerts** | When a model or autonomous system is flagged for high-risk bias (e.g., occupational gender stereotypes, racial disparity in predictive policing) or unreviewed autonomous lethality, the dashboard generates **Actionable Alert Bulletins** for subscribed policy analysts and civil-society NGOs. |
+Elevated directly into its own standalone workspace above the risk observatory grid, the **Frontier AI Models, Bias & Regulatory Registry** tracks **36 frontier models** through **November 16, 2026**, featuring:
 
----
+- **Google DeepMind:** `Gemini 4 Hydrogen` (Nov 12, 2026), `Gemini 4 Carbon` (Nov 10, 2026), `Gemini 4 Argon` (Oct 13, 2026), `Gemini 3.8 Flash` (Sep 2, 2026), `Gemini 3.5 Pro & DiffusionGemma`, `Gemini 3 Pro`, `Gemini 2.5 Pro`
+- **Anthropic:** `Claude Fable 5.2` & `Claude Mythos 5.2` (Nov 9, 2026), `Claude Haiku 5.5` (Oct 12, 2026), `Claude Sonnet 5.5` (Sep 28, 2026), `Claude Opus 5.5` (Sep 22, 2026), `Claude Opus 5 & Sonnet 5`, `Claude Opus 4–4.8`, `Claude 3.7 Sonnet`
+- **OpenAI:** `GPT-6 Cyber` (Nov 5, 2026 — Critical Cyber Preparedness), `GPT-6.1 Terra` (Oct 26, 2026), `GPT-6.1 Sol` (Sep 29, 2026), `GPT-6 Astra / Sol / Luna / Instant` (Sep–Oct 2026), `GPT-5.3 Codex`, `GPT-5`, `o3 & o4-mini`
+- **DeepSeek, Meta, xAI, Mistral, Qwen, Kimi, Zhipu, ByteDance, Cohere & Amazon:** `DeepSeek-V4 / V4.1-Flash / R1`, `Meta Muse Spark & Llama 4`, `xAI Grok 4.7 & Grok 4`, `Mistral Large 4 ("le Chonk")`, `Qwen 3.8`, `Moonshot Kimi K3.1 Pro (2.8T MoE)`, `Zhipu GLM-5.3 (744B MoE)`, `ByteDance Seed 2.1 / Seedance 2.5`, `Cohere Command A+`, `Amazon Nova 2 Omni`
 
-## ⚡ Key Modules & Ecosystem Tabs
-
-1. **🧠 Frontier AI Models, Bias Annotations & Temporal Regulatory Registry**:
-   - Tracks major frontier releases (`DeepSeek-R1`, `OpenAI o3 / o3-mini`, `Claude 3.7 Sonnet`, `Gemini 2.0 Pro / DiffusionGemma`, `Llama 3.1 405B / 3.3 70B`, `GPT-4o`, `Grok-3`, `Qwen 2.5-Max`, `Mistral Large 2`) with empirical bias disparity vs. guardrail robustness charts and a browser-persisted `+ Log Model Release` workflow.
-2. **🤖 Agentic AI, Computer-Use & Multi-Agent Autonomy Risk Monitor**:
-   - Evaluates `L1–L5` autonomous agent systems (`Palantir AIP`, `Shield AI Hivemind`, `OpenAI Operator`, `Claude Computer Use & MCP`, `Character.AI Companion Agents`, `Abliterated Open-Weight Agent Swarms`, `Anduril Lattice`, `Google Project Mariner`) across tool-use surface, failure modes, and 2025–2026 agent regulations.
-3. **🎯 Military AI & LAWS Deployment Tracker (32+ Systems)**:
-   - Direct integration with Avi Perera's [Autonomous Weapons Systems Database](https://aviperera.com/systems-database/), tracking loitering munitions, combat humanoids (`Norinco Fuxi`, `Foundation Phantom MK-1/MK-2`, `IHMC Alex`, `FEDOR Skybot F-850`), autonomous wingmen (`V-BAT MQ-35A`, `MQ-28 Ghost Bat`, `S-70 Okhotnik-B`), and AI targeting systems (`Gospel`, `Lavender`, `Palantir Project Maven`).
-4. **👁️ Mass Surveillance, Biometrics & Predictive Control Heat Matrix**:
-   - Scores 16 global biometric, facial recognition, and predictive policing deployments (0–100 severity index) alongside the **Accountability Gap Analysis**, **Civilian Impact vs. Autonomy Bubble Matrix**, **5-Axis IHL Radar**, and **30-State International LAWS Treaty Matrix**.
-5. **🔔 Actionable Alerts Dispatch Engine & Persistent Research Log**:
-   - Provides one-click NGO alert briefs, analyst subscription configuration, and a persistent browser `localStorage` research & model release log with `.CSV` export.
+Each Airtable row features sortable columns, `Group By` (`Organization`, `Severity`, `Regulatory Era`), view pills (`All`, `Late 2026 Frontier`, `Critical Risk / Cyber`, `Open-Weights`, `Under 2026 Hard Law`), row density controls, live `∑` aggregate footer metrics, a click-to-expand **Record Inspector Drawer**, CSV/JSON export, and 3 dedicated Frontier Model charts.
 
 ---
 
-## 📄 License & Citation
+## 📁 Extensible JSON Data Architecture (`/data/`)
 
-Architected and curated by **[Avi Perera](https://aviperera.com)**. Built for open-source transparency in International AI Policy, Frontier AI Safety, and Autonomous Weapons Governance.
+All core registries are exported to structured JSON schemas so new releases and systems can be added continuously without editing UI markup:
+
+- `data/frontier-models.json` — Frontier model releases, bias studies, Preparedness/RSP tiers, and regulatory cross-references
+- `data/laws-systems.json` — 32 autonomous weapon systems mapped to Article 36 IHL compliance and canonical dossiers
+- `data/agentic-systems.json` — Agentic AI, computer-use, and autonomous military C2 risk profiles

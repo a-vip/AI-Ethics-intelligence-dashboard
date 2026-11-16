@@ -1,0 +1,98 @@
+[
+  {
+    "name": "Palantir AIP (Defense & Kill-Chain Orchestrator)",
+    "dev": "Palantir Technologies (USA)",
+    "region": "USA",
+    "sev": "CRITICAL",
+    "fw": "IHL",
+    "tier": "L4 Tactical C2 Agent",
+    "tools": "ISR Feeds, Target Nomination, Strike C2",
+    "failureMode": "Automation bias compresses commander deliberation below Meaningful Human Control.",
+    "regStatus": "Exempted from EU AI Act (Art. 2); DoD Dir. 3000.09 policy only",
+    "url": "https://aviperera.com/when-algorithms-go-to-war/"
+  },
+  {
+    "name": "Shield AI Hivemind Edge Swarm Agent",
+    "dev": "Shield AI (USA)",
+    "region": "USA",
+    "sev": "CRITICAL",
+    "fw": "IHL",
+    "tier": "L4 Edge Kinetic Autonomy",
+    "tools": "EW-Denied SLAM, Flight Control, Target Lock",
+    "failureMode": "Executes terminal engagement when comms link is jammed, severing human abort.",
+    "regStatus": "No binding CCW LAWS treaty; lacks public Art. 36 disclosure",
+    "url": "https://aviperera.com/v-bat-mq-35/"
+  },
+  {
+    "name": "Claude Fable 5.2 / Mythos 5.2 Multi-Hour Agents",
+    "dev": "Anthropic (USA)",
+    "region": "USA",
+    "sev": "HIGH",
+    "fw": "DEONT",
+    "tier": "L4 Long-Horizon Coding & Cyber Agent",
+    "tools": "Shell, Multi-Repo PRs, MCP Servers, Sec Audit",
+    "failureMode": "Mythos 5.2 demonstrates autonomous zero-day vulnerability chaining; mitigated by verification gating.",
+    "regStatus": "CA SB 53 + EU AI Act Art. 55 + UK AISI Project Glasswing",
+    "url": "https://aviperera.com/waic-2026-agentic-ai-safety-forum-analysis/"
+  },
+  {
+    "name": "OpenAI GPT-6 Cyber & Operator Web Agents",
+    "dev": "OpenAI (USA)",
+    "region": "USA",
+    "sev": "CRITICAL",
+    "fw": "IHL",
+    "tier": "L4 Pentest & Browser Agent",
+    "tools": "DOM Automation, Exploit Harness, Credentialed Sessions",
+    "failureMode": "Rated Critical Cyber under Preparedness Framework; indirect prompt injection & CoT metagaming.",
+    "regStatus": "CA SB 53 + Daybreak Red Access Gate + EU AI Act Art. 55",
+    "url": "https://aviperera.com/ai-policy-tracker/"
+  },
+  {
+    "name": "Google Gemini 4 Carbon & Hydrogen Agent Stack",
+    "dev": "Google DeepMind (USA)",
+    "region": "USA",
+    "sev": "HIGH",
+    "fw": "UTIL",
+    "tier": "L4 Scientific & Patching Agent",
+    "tools": "Codebase Debugging, SEC-bench Pro, Live Search/OS",
+    "failureMode": "Reduced overreach by 81% via CoT runtime monitors; Fairwind gated for cyber defense.",
+    "regStatus": "CA SB 53 + EU AI Act Art. 51–55 + South Korea AI Basic Act",
+    "url": "https://aviperera.com/ai-policy-tracker/"
+  },
+  {
+    "name": "Abliterated Uncensored Open-Weight Agent Swarms",
+    "dev": "Decentralized / Dual-Use Actors",
+    "region": "ALL",
+    "sev": "CRITICAL",
+    "fw": "IHL",
+    "tier": "L4 Unconstrained Swarm Agent",
+    "tools": "Automated Exploit Chaining, Drone C2 Scripts, Spear-Phishing",
+    "failureMode": "Orthogonal weight projection strips safety refusals from Llama 4 / DeepSeek-V4 while preserving agentic planning.",
+    "regStatus": "Evades API controls; exposes regulatory gap in open-weight supply chains",
+    "url": "https://aviperera.com/abliteration-ai-removing-guardrails-international-security/"
+  },
+  {
+    "name": "Character.AI Affective Companion Agents",
+    "dev": "Character Technologies (USA)",
+    "region": "USA",
+    "sev": "CRITICAL",
+    "fw": "DEONT",
+    "tier": "L3 Persistent Affective Agent",
+    "tools": "Long-Term Memory, Voice Synthesis, Teen Persona Roleplay",
+    "failureMode": "Psychological dependency, minor harm liability & foreseeable bankruptcy.",
+    "regStatus": "Target of State AG suits, FTC probes & EU AI Act Art. 5 manipulative bans",
+    "url": "https://aviperera.com/character-ai-bankruptcy/"
+  },
+  {
+    "name": "Anduril Lattice Autonomous Mission Command",
+    "dev": "Anduril Industries (USA)",
+    "region": "USA",
+    "sev": "HIGH",
+    "fw": "IHL",
+    "tier": "L4 Multi-Domain Defense Agent",
+    "tools": "Border Sentry Towers, Roadrunner, Altius Swarms",
+    "failureMode": "Sensor-fusion false positives escalating autonomously at borders.",
+    "regStatus": "Deployed by US CBP & DoD; exempt from civilian algorithmic audit laws",
+    "url": "https://aviperera.com/anduril-roadrunner/"
+  }
+]
