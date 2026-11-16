@@ -94,5 +94,41 @@
     "failureMode": "Sensor-fusion false positives escalating autonomously at borders.",
     "regStatus": "Deployed by US CBP & DoD; exempt from civilian algorithmic audit laws",
     "url": "https://aviperera.com/anduril-roadrunner/"
+  },
+  {
+    "name": "Claude Code & Computer Use (Anthropic v5.5 Harness)",
+    "dev": "Anthropic (USA)",
+    "region": "USA",
+    "sev": "HIGH",
+    "fw": "RSP / EU AI Act Art. 55",
+    "tier": "L3 Autonomous OS / CLI Agent",
+    "tools": "Shell Execution, GUI Control, Multi-Repo PR, Web Browse",
+    "failureMode": "Indirect prompt injection in untrusted repositories can hijack tool invocations unless sandboxed via permission hooks.",
+    "regStatus": "CA SB 53 + EU AI Act Systemic Risk Code; ASL-3/4 frontier red-teaming disclosures",
+    "url": "https://www.anthropic.com/news/3-5-models-and-computer-use"
+  },
+  {
+    "name": "OpenAI Operator / Codex & Deep Research Agents",
+    "dev": "OpenAI (USA)",
+    "region": "USA",
+    "sev": "HIGH",
+    "fw": "Preparedness / EU Art. 55",
+    "tier": "L3 Web & Sandboxed Code Agent",
+    "tools": "Browser DOM Automation, Python Sandbox, API Chains",
+    "failureMode": "Multi-step web browsing risks credential phishing and autonomous financial/account side-effects without confirmation gates.",
+    "regStatus": "Mandatory systemic-risk incident reporting (EU Art. 55 & CA TFAIA) + NIST CAISI evals",
+    "url": "https://openai.com/index/introducing-operator/"
+  },
+  {
+    "name": "Google Project Mariner / Gemini 4 Agentic SDK",
+    "dev": "Google DeepMind (USA / UK)",
+    "region": "USA",
+    "sev": "MOD",
+    "fw": "FSF 2.0 / EU AI Act",
+    "tier": "L3 Multi-Tab Execution Agent",
+    "tools": "Chrome Action Space, Workspace APIs, Code Interpreter",
+    "failureMode": "Cross-tab context bleed or latent web page instruction injection mitigated via xhigh CoT monitor.",
+    "regStatus": "Frontier Safety Framework 2.0 + South Korea AI Basic Act + EU General-Purpose Rules",
+    "url": "https://deepmind.google/technologies/project-mariner/"
   }
 ]

@@ -1,0 +1,188 @@
+{
+  "years": [
+    "2015",
+    "2016",
+    "2017",
+    "2018",
+    "2019",
+    "2020",
+    "2021",
+    "2022",
+    "2023",
+    "2024",
+    "2025",
+    "2026 (Nov)"
+  ],
+  "theaters": {
+    "gazaLevant": [
+      4,
+      6,
+      9,
+      14,
+      18,
+      25,
+      34,
+      42,
+      95,
+      138,
+      152,
+      165
+    ],
+    "ukraineEastEur": [
+      2,
+      3,
+      5,
+      7,
+      10,
+      14,
+      22,
+      68,
+      124,
+      215,
+      340,
+      420
+    ],
+    "usBorderSurveillance": [
+      18,
+      22,
+      31,
+      45,
+      58,
+      72,
+      84,
+      96,
+      118,
+      142,
+      174,
+      198
+    ],
+    "indoPacificSwarm": [
+      5,
+      7,
+      11,
+      16,
+      23,
+      30,
+      41,
+      56,
+      78,
+      104,
+      136,
+      168
+    ]
+  },
+  "cyberSafety": {
+    "frontierCyberExploits": [
+      1,
+      2,
+      4,
+      7,
+      11,
+      18,
+      28,
+      42,
+      74,
+      118,
+      185,
+      246
+    ],
+    "biometricLitigation": [
+      3,
+      4,
+      6,
+      9,
+      15,
+      24,
+      31,
+      39,
+      52,
+      68,
+      84,
+      97
+    ],
+    "hardLawEnforcementActions": [
+      0,
+      1,
+      2,
+      5,
+      8,
+      14,
+      19,
+      26,
+      38,
+      61,
+      95,
+      142
+    ]
+  },
+  "diplomacySpend": {
+    "globalAwsSpendUsdBn": [
+      5.2,
+      6.1,
+      7.4,
+      9.1,
+      11.2,
+      13.8,
+      16.5,
+      21.4,
+      29.8,
+      38.6,
+      48.2,
+      56.9
+    ],
+    "ungaProTreatyVotes": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      152,
+      166,
+      164,
+      164
+    ],
+    "ccwStatesParties": [
+      121,
+      123,
+      125,
+      125,
+      125,
+      125,
+      125,
+      126,
+      126,
+      128,
+      128,
+      128
+    ]
+  },
+  "milestones": [
+    {
+      "year": "2017",
+      "label": "Project Maven Launches (US DoD) & 11 CCW GGE Principles Drafting Begins"
+    },
+    {
+      "year": "2020",
+      "label": "Libya UN Panel S/2021/229 (Kargu-2); UK Bridges AFR & NL SyRI Court Bans"
+    },
+    {
+      "year": "2023",
+      "label": "UNGA 78/241 (152Y); US Political Declaration Launched; IDF Gospel/Lavender Deployment"
+    },
+    {
+      "year": "2024",
+      "label": "EU AI Act Enacted; UNGA 79/62 (166Y); Palantir TITAN & Saker Scout Fielded"
+    },
+    {
+      "year": "2025",
+      "label": "UNGA 80/57 (164Y, US switches to Against); Helsing HX-2 & Jiu Tian Swarm Scale"
+    },
+    {
+      "year": "2026 (Nov)",
+      "label": "EU AI Act Art. 51–55 Full Applicability (Aug); Lafarge Convictions (Apr); CCW 7th Review Conf (Nov 16)"
+    }
+  ]
+}

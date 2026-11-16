@@ -1,0 +1,282 @@
+[
+  {
+    "name": "IDF Gospel (Habsora)",
+    "domain": "LAWS",
+    "autonomy": 96,
+    "impact": 97,
+    "scaleLabel": "100+ automated targets/day; Gaza bombardment",
+    "sev": "CRITICAL",
+    "year": 2023,
+    "theater": "Gaza"
+  },
+  {
+    "name": "IDF Lavender AI",
+    "domain": "LAWS",
+    "autonomy": 94,
+    "impact": 99,
+    "scaleLabel": "37,000 civilians/suspected operatives flagged",
+    "sev": "CRITICAL",
+    "year": 2023,
+    "theater": "Gaza"
+  },
+  {
+    "name": "IDF Where's Daddy?",
+    "domain": "LAWS",
+    "autonomy": 95,
+    "impact": 98,
+    "scaleLabel": "Residential family home strikes (late 2023–25)",
+    "sev": "CRITICAL",
+    "year": 2023,
+    "theater": "Gaza"
+  },
+  {
+    "name": "IAI Harop / Harpy",
+    "domain": "LAWS",
+    "autonomy": 88,
+    "impact": 85,
+    "scaleLabel": "Nagorno-Karabakh, Levant, Red Sea SEAD",
+    "sev": "HIGH",
+    "year": 2020,
+    "theater": "Caucasus / MENA"
+  },
+  {
+    "name": "ZALA Lancet-3 Loitering",
+    "domain": "LAWS",
+    "autonomy": 85,
+    "impact": 86,
+    "scaleLabel": "2,500+ documented Ukrainian front strikes",
+    "sev": "CRITICAL",
+    "year": 2023,
+    "theater": "Ukraine"
+  },
+  {
+    "name": "STM Kargu-2 Swarm",
+    "domain": "LAWS",
+    "autonomy": 88,
+    "impact": 80,
+    "scaleLabel": "Libya UN Panel (S/2021/229) first AWS hunt",
+    "sev": "CRITICAL",
+    "year": 2020,
+    "theater": "Libya"
+  },
+  {
+    "name": "Saker Scout Optical AI",
+    "domain": "LAWS",
+    "autonomy": 90,
+    "impact": 78,
+    "scaleLabel": "EW-denied autonomous strike (Delta C2)",
+    "sev": "CRITICAL",
+    "year": 2024,
+    "theater": "Ukraine"
+  },
+  {
+    "name": "Helsing HX-2 Karma",
+    "domain": "LAWS",
+    "autonomy": 86,
+    "impact": 76,
+    "scaleLabel": "4,000+ units European frontline swarm",
+    "sev": "HIGH",
+    "year": 2025,
+    "theater": "Ukraine / Europe"
+  },
+  {
+    "name": "Shahed-136 / Meraj Swarms",
+    "domain": "LAWS",
+    "autonomy": 84,
+    "impact": 93,
+    "scaleLabel": "Repeated civilian infrastructure saturation",
+    "sev": "CRITICAL",
+    "year": 2024,
+    "theater": "Ukraine / MENA"
+  },
+  {
+    "name": "AVIC Jiu Tian Mothership",
+    "domain": "LAWS",
+    "autonomy": 89,
+    "impact": 82,
+    "scaleLabel": "100+ swarm munition bay carrier",
+    "sev": "HIGH",
+    "year": 2025,
+    "theater": "Indo-Pacific"
+  },
+  {
+    "name": "Sukhoi S-70 Okhotnik-B",
+    "domain": "LAWS",
+    "autonomy": 85,
+    "impact": 81,
+    "scaleLabel": "Heavy stealth UCAV + S-71M munition",
+    "sev": "HIGH",
+    "year": 2024,
+    "theater": "Ukraine"
+  },
+  {
+    "name": "Samsung SGR-A1 DMZ",
+    "domain": "LAWS",
+    "autonomy": 72,
+    "impact": 54,
+    "scaleLabel": "DMZ human-confirmed firing lock",
+    "sev": "MOD",
+    "year": 2006,
+    "theater": "Korean DMZ"
+  },
+  {
+    "name": "Elbit Skystriker / Replicator",
+    "domain": "LAWS",
+    "autonomy": 82,
+    "impact": 75,
+    "scaleLabel": "Attritable networked loitering munitions",
+    "sev": "HIGH",
+    "year": 2025,
+    "theater": "Indo-Pacific / MENA"
+  },
+  {
+    "name": "UK DragonFire / Vampire",
+    "domain": "LAWS",
+    "autonomy": 62,
+    "impact": 28,
+    "scaleLabel": "Defensive counter-UAS maritime engagement",
+    "sev": "LOW",
+    "year": 2026,
+    "theater": "UK Maritime"
+  },
+  {
+    "name": "SCAF Remote Carrier (HITL)",
+    "domain": "LAWS",
+    "autonomy": 68,
+    "impact": 44,
+    "scaleLabel": "Strict French/EU human command doctrine",
+    "sev": "MOD",
+    "year": 2026,
+    "theater": "Europe"
+  },
+  {
+    "name": "NSO Pegasus Zero-Click",
+    "domain": "Surveillance & Border AI",
+    "autonomy": 82,
+    "impact": 96,
+    "scaleLabel": "50,000+ targets across 45+ states",
+    "sev": "CRITICAL",
+    "year": 2021,
+    "theater": "Global"
+  },
+  {
+    "name": "IDF Red Wolf / Blue Wolf",
+    "domain": "Surveillance & Border AI",
+    "autonomy": 86,
+    "impact": 95,
+    "scaleLabel": "3.2M+ occupied West Bank checkpoint ID",
+    "sev": "CRITICAL",
+    "year": 2023,
+    "theater": "West Bank"
+  },
+  {
+    "name": "China IJOP Mass Biometrics",
+    "domain": "Surveillance & Border AI",
+    "autonomy": 89,
+    "impact": 98,
+    "scaleLabel": "12M+ population predictive flagging",
+    "sev": "CRITICAL",
+    "year": 2019,
+    "theater": "Xinjiang"
+  },
+  {
+    "name": "Clearview AI 50B Face Graph",
+    "domain": "Surveillance & Border AI",
+    "autonomy": 78,
+    "impact": 91,
+    "scaleLabel": "50B+ civilian images scraped worldwide",
+    "sev": "CRITICAL",
+    "year": 2022,
+    "theater": "US / EU"
+  },
+  {
+    "name": "Palantir ICE / Border Fusion",
+    "domain": "Surveillance & Border AI",
+    "autonomy": 76,
+    "impact": 92,
+    "scaleLabel": "11M+ immigration enforcement profiles",
+    "sev": "CRITICAL",
+    "year": 2024,
+    "theater": "US Borders"
+  },
+  {
+    "name": "Anduril Lattice Border Towers",
+    "domain": "Surveillance & Border AI",
+    "autonomy": 84,
+    "impact": 84,
+    "scaleLabel": "300+ autonomous border sentry towers",
+    "sev": "HIGH",
+    "year": 2024,
+    "theater": "US–Mexico / Channel"
+  },
+  {
+    "name": "Dutch SyRI [Court Injunction]",
+    "domain": "Surveillance & Border AI",
+    "autonomy": 64,
+    "impact": 68,
+    "scaleLabel": "Banned 2020 by Hague Court under ECHR Art. 8",
+    "sev": "MOD",
+    "year": 2020,
+    "theater": "Netherlands"
+  },
+  {
+    "name": "UK Bridges AFR [Court Ban]",
+    "domain": "Surveillance & Border AI",
+    "autonomy": 60,
+    "impact": 62,
+    "scaleLabel": "Struck down by UK Court of Appeal",
+    "sev": "MOD",
+    "year": 2020,
+    "theater": "Wales / UK"
+  },
+  {
+    "name": "Palantir AIP / TITAN Loop",
+    "domain": "Cyber & Agentic AI",
+    "autonomy": 84,
+    "impact": 90,
+    "scaleLabel": "Compressed military target kill-chain",
+    "sev": "CRITICAL",
+    "year": 2025,
+    "theater": "US / Allied C2"
+  },
+  {
+    "name": "Shield AI Hivemind Pilot",
+    "domain": "Cyber & Agentic AI",
+    "autonomy": 88,
+    "impact": 79,
+    "scaleLabel": "Comms-denied multi-aircraft autonomous C2",
+    "sev": "HIGH",
+    "year": 2025,
+    "theater": "Global"
+  },
+  {
+    "name": "Auto-Spearphish / Zero-Day Agents",
+    "domain": "Cyber & Agentic AI",
+    "autonomy": 87,
+    "impact": 89,
+    "scaleLabel": "2025–26 autonomous CVE exploit waves",
+    "sev": "CRITICAL",
+    "year": 2026,
+    "theater": "Cyberspace"
+  },
+  {
+    "name": "Claude Code / Operator Agents",
+    "domain": "Cyber & Agentic AI",
+    "autonomy": 65,
+    "impact": 48,
+    "scaleLabel": "Sandboxed tool-use w/ HITL checkpoints",
+    "sev": "MOD",
+    "year": 2026,
+    "theater": "Global Enterprise"
+  },
+  {
+    "name": "AI Election Deepfake Botnets",
+    "domain": "Cyber & Agentic AI",
+    "autonomy": 80,
+    "impact": 85,
+    "scaleLabel": "50+ national elections targeted (2024–26)",
+    "sev": "HIGH",
+    "year": 2025,
+    "theater": "Global InfoSec"
+  }
+]
