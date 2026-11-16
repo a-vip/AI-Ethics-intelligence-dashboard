@@ -1,0 +1,3238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Ethics Intelligence Dashboard v5.0 — Autonomous Weapons, Frontier Models &amp; Agentic AI | Avi Perera</title>
+<meta name="description" content="Flagship AI Ethics Intelligence Dashboard tracking Autonomous Weapons Systems (LAWS), Frontier AI Model Releases & Bias Patterns, Agentic AI Risks, Mass Surveillance, and International Law obligations." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+body { background: #030712; margin: 0; padding: 0; color: #f8fafc; font-family: 'IBM Plex Sans', sans-serif; }
+</style>
+</head>
+<body>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js" defer></script>
+
+<style data-no-optimize="1">
+/* -------------------------------------------------------------------------
+   AI ETHICS INTELLIGENCE DASHBOARD v5.0 — FLAGSHIP SOFTWARE ECOSYSTEM
+   "Optimism disciplined by systematic risk assessment" — Avi Perera
+   ------------------------------------------------------------------------- */
+#primary.content-area { padding: 0 !important; margin: 0 !important; max-width: 100% !important; }
+#primary.content-area .site-container, #primary.content-area .content-container { max-width: 100% !important; padding: 0 !important; margin: 0 !important; }
+.site-content { padding-top: 0 !important; }
+
+#sied-wrapper {
+    --bg: #030712;
+    --bg2: rgba(15, 23, 42, 0.65);
+    --bg3: rgba(30, 41, 59, 0.72);
+    --sfc: rgba(15, 23, 42, 0.76);
+    --sfc-hover: rgba(30, 41, 59, 0.88);
+    --bd: rgba(255, 255, 255, 0.09);
+    --bd2: rgba(255, 255, 255, 0.16);
+    --bd-glow: rgba(56, 189, 248, 0.38);
+
+    --tx: #f8fafc;
+    --tx2: #cbd5e1;
+    --tx3: #94a3b8;
+    --acc: #38bdf8;
+
+    --red: #f43f5e;
+    --redbg: rgba(244, 63, 94, 0.12);
+    --redtx: #fda4af;
+
+    --amb: #f59e0b;
+    --ambbg: rgba(245, 158, 11, 0.12);
+    --ambtx: #fcd34d;
+
+    --grn: #10b981;
+    --grnbg: rgba(16, 185, 129, 0.12);
+    --grntx: #6ee7b7;
+
+    --blu: #3b82f6;
+    --blubg: rgba(59, 130, 246, 0.14);
+    --blutx: #93c5fd;
+
+    --pur: #8b5cf6;
+    --purbg: rgba(139, 92, 246, 0.14);
+    --purtx: #c4b5fd;
+
+    --tel: #06b6d4;
+    --telbg: rgba(6, 182, 212, 0.14);
+    --teltx: #67e8f9;
+
+    --font: 'IBM Plex Mono', 'JetBrains Mono', monospace;
+    --font-sans: 'IBM Plex Sans', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --r: 14px;
+    --tr: 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+
+    background: #030712;
+    min-height: 100vh;
+    position: relative;
+    padding: 28px 24px 60px;
+    overflow-x: hidden;
+    font-family: var(--font-sans);
+    color: var(--tx);
+    line-height: 1.55;
+    box-sizing: border-box;
+}
+
+#sied-wrapper *, #sied-wrapper *::before, #sied-wrapper *::after {
+    box-sizing: border-box;
+}
+
+#sied {
+    max-width: 1540px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+/* Ambient Pulse Background */
+#sied-wrapper::before {
+    content: '';
+    position: absolute;
+    top: -15%; left: -10%; width: 50vw; height: 50vw;
+    background: radial-gradient(circle, rgba(56, 189, 248, 0.08) 0%, transparent 70%);
+    filter: blur(100px);
+    z-index: 0;
+    pointer-events: none;
+}
+#sied-wrapper::after {
+    content: '';
+    position: absolute;
+    bottom: -15%; right: -10%; width: 55vw; height: 55vw;
+    background: radial-gradient(circle, rgba(139, 92, 246, 0.07) 0%, transparent 70%);
+    filter: blur(120px);
+    z-index: 0;
+    pointer-events: none;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.45; transform: scale(0.92); }
+}
+
+/* ── Top Command Bar ── */
+#sied-wrapper .tb {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 22px;
+    border: 1px solid var(--bd2);
+    background: var(--sfc);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: var(--r);
+    margin-bottom: 18px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.35);
+    flex-wrap: wrap;
+    gap: 12px;
+}
+#sied-wrapper .tb-brand {
+    font-family: var(--font);
+    font-size: 0.92rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: var(--tx);
+    text-transform: uppercase;
+}
+#sied-wrapper .tb-ver {
+    font-family: var(--font);
+    font-size: 0.72rem;
+    color: #38bdf8;
+    border: 1px solid rgba(56, 189, 248, 0.35);
+    padding: 2px 10px;
+    border-radius: 999px;
+    background: rgba(56, 189, 248, 0.1);
+    font-weight: 600;
+}
+#sied-wrapper .tb-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+#sied-wrapper .live-b {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font);
+    font-size: 0.72rem;
+    color: var(--grntx);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    background: var(--grnbg);
+    padding: 5px 12px;
+    border-radius: 999px;
+    border: 1px solid rgba(16, 185, 129, 0.35);
+}
+#sied-wrapper .live-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--grn);
+    box-shadow: 0 0 10px var(--grn);
+    animation: pulse 1.6s infinite;
+}
+#sied-wrapper .clk {
+    font-family: var(--font);
+    font-size: 0.76rem;
+    color: var(--tx2);
+    font-variant-numeric: tabular-nums;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--bd);
+    padding: 5px 11px;
+    border-radius: 8px;
+}
+#sied-wrapper .cbtn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--bd2);
+    border-radius: 8px;
+    padding: 6px 13px;
+    font-family: var(--font);
+    font-size: 0.73rem;
+    font-weight: 600;
+    color: var(--tx);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    cursor: pointer;
+    text-decoration: none;
+    transition: var(--tr);
+}
+#sied-wrapper .cbtn:hover {
+    background: rgba(56, 189, 248, 0.14);
+    border-color: #38bdf8;
+    color: #fff;
+    transform: translateY(-1px);
+}
+#sied-wrapper .cbtn-alert {
+    background: rgba(244, 63, 94, 0.12);
+    border-color: rgba(244, 63, 94, 0.4);
+    color: #fda4af;
+}
+#sied-wrapper .cbtn-alert:hover {
+    background: rgba(244, 63, 94, 0.24);
+    border-color: #f43f5e;
+    color: #fff;
+}
+
+/* ── Active Operations Critical Alert Banner ── */
+#sied-wrapper .ab {
+    background: linear-gradient(90deg, rgba(244, 63, 94, 0.14) 0%, rgba(15, 23, 42, 0.85) 100%);
+    border: 1px solid rgba(244, 63, 94, 0.35);
+    border-left: 4px solid var(--red);
+    border-radius: var(--r);
+    padding: 14px 20px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 20px rgba(244, 63, 94, 0.1);
+}
+#sied-wrapper .ab-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--red);
+    flex-shrink: 0;
+    margin-top: 6px;
+    box-shadow: 0 0 12px var(--red);
+    animation: pulse 1.2s infinite;
+}
+#sied-wrapper .ab-text {
+    font-size: 0.84rem;
+    color: #fecdd3;
+    line-height: 1.6;
+}
+#sied-wrapper .ab-text strong {
+    font-family: var(--font);
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 0.04em;
+}
+#sied-wrapper .ab-text a {
+    color: #fff;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    font-weight: 500;
+}
+
+/* ── Hero & Philosophical Epigraph Panel ── */
+#sied-wrapper .intro-panel {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    padding: 26px 30px;
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.65) 0%, rgba(15, 23, 42, 0.82) 100%);
+    border: 1px solid var(--bd2);
+    border-radius: var(--r);
+    backdrop-filter: blur(20px);
+    margin-bottom: 20px;
+    box-shadow: 0 12px 32px rgba(0,0,0,0.3);
+    gap: 28px;
+}
+#sied-wrapper .intro-left {
+    flex: 1;
+}
+#sied-wrapper .intro-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font);
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: #38bdf8;
+    background: rgba(56, 189, 248, 0.1);
+    border: 1px solid rgba(56, 189, 248, 0.28);
+    padding: 4px 12px;
+    border-radius: 999px;
+    margin-bottom: 10px;
+}
+#sied-wrapper .intro-left h1 {
+    font-size: clamp(1.45rem, 2.5vw, 2.05rem);
+    color: var(--tx);
+    font-weight: 800;
+    margin: 0 0 10px 0;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+}
+#sied-wrapper .intro-left p {
+    font-size: 0.94rem;
+    color: var(--tx2);
+    line-height: 1.68;
+    margin: 0 0 12px 0;
+    max-width: 920px;
+}
+#sied-wrapper .intro-quote {
+    font-size: 0.85rem;
+    color: #7dd3fc;
+    background: rgba(56, 189, 248, 0.07);
+    border-left: 3px solid #38bdf8;
+    padding: 9px 14px;
+    border-radius: 0 8px 8px 0;
+    font-style: italic;
+}
+#sied-wrapper .intro-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+    min-width: 250px;
+}
+#sied-wrapper .intro-link {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 11px 16px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--bd2);
+    border-radius: 10px;
+    color: var(--tx);
+    text-decoration: none;
+    font-family: var(--font);
+    font-size: 0.76rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    transition: var(--tr);
+}
+#sied-wrapper .intro-link:hover {
+    background: rgba(56, 189, 248, 0.14);
+    border-color: #38bdf8;
+    color: #fff;
+    transform: translateX(-3px);
+}
+
+/* ── 3 Core Design Principles Strip (From User's Spec) ── */
+#sied-wrapper .principles-strip {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 20px;
+}
+#sied-wrapper .principle-card {
+    background: rgba(15, 23, 42, 0.72);
+    border: 1px solid var(--bd2);
+    border-radius: var(--r);
+    padding: 16px 20px;
+    position: relative;
+    overflow: hidden;
+    transition: var(--tr);
+}
+#sied-wrapper .principle-card:hover {
+    border-color: rgba(56, 189, 248, 0.45);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+}
+#sied-wrapper .principle-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 6px;
+}
+#sied-wrapper .principle-title {
+    font-family: var(--font);
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #38bdf8;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+#sied-wrapper .principle-badge {
+    font-family: var(--font);
+    font-size: 0.66rem;
+    padding: 2px 8px;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.06);
+    color: var(--tx2);
+    border: 1px solid var(--bd);
+}
+#sied-wrapper .principle-desc {
+    font-size: 0.83rem;
+    color: var(--tx2);
+    line-height: 1.55;
+    margin: 0;
+}
+
+/* ── 6 Animated KPI Stat Cards ── */
+#sied-wrapper .ss {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 14px;
+    margin-bottom: 22px;
+}
+#sied-wrapper .sc {
+    padding: 18px 14px;
+    border: 1px solid rgba(255,255,255,0.1);
+    background: transparent;
+    border-radius: var(--r);
+    transition: var(--tr);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    box-shadow: 0 6px 22px rgba(0,0,0,0.25);
+}
+#sied-wrapper .sc::before {
+    content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+    background: conic-gradient(transparent, rgba(56, 189, 248, 0.85), transparent 25%);
+    animation: sc-border-spin 2.4s linear infinite; z-index: 0;
+    opacity: 0; transition: opacity 0.3s ease;
+}
+#sied-wrapper .sc::after {
+    content: ''; position: absolute; inset: 1px;
+    background: rgba(15, 23, 42, 0.9); border-radius: calc(var(--r) - 1px); z-index: 0;
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+}
+#sied-wrapper .sc > * { position: relative; z-index: 1; }
+@keyframes sc-border-spin { 100% { transform: rotate(360deg); } }
+#sied-wrapper .sc:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(0,0,0,0.45); border-color: transparent; }
+#sied-wrapper .sc:hover::before { opacity: 1; }
+#sied-wrapper .sl {
+    font-family: var(--font);
+    font-size: 0.68rem;
+    color: var(--tx3);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    font-weight: 600;
+}
+#sied-wrapper .sv {
+    font-size: 2.05rem;
+    font-weight: 700;
+    line-height: 1.05;
+    font-family: var(--font-sans);
+}
+#sied-wrapper .sv.vr { color: #f43f5e; text-shadow: 0 0 18px rgba(244,63,94,0.35); }
+#sied-wrapper .sv.va { color: #fbbf24; text-shadow: 0 0 18px rgba(251,191,36,0.35); }
+#sied-wrapper .sv.vg { color: #34d399; text-shadow: 0 0 18px rgba(52,211,153,0.35); }
+#sied-wrapper .sv.vb { color: #38bdf8; text-shadow: 0 0 18px rgba(56,189,248,0.35); }
+#sied-wrapper .sv.vo { color: #c084fc; text-shadow: 0 0 18px rgba(192,132,252,0.35); }
+#sied-wrapper .ss-sub {
+    font-size: 0.76rem;
+    color: var(--tx2);
+    font-weight: 500;
+    margin-top: 8px;
+    line-height: 1.35;
+}
+#sied-wrapper .ss-sub a {
+    display: inline-block;
+    margin-top: 8px;
+    padding: 3px 9px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.14);
+    border-radius: 6px;
+    font-size: 0.7rem;
+    color: var(--tx2) !important;
+    text-decoration: none !important;
+    transition: var(--tr);
+}
+#sied-wrapper .ss-sub a:hover {
+    background: rgba(56, 189, 248, 0.16);
+    border-color: #38bdf8;
+    color: #fff !important;
+}
+
+/* ── Sticky Ecosystem Navigation Tabs + Filter Bar ── */
+#sied-wrapper .nav-tabs-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 14px;
+    background: rgba(15, 23, 42, 0.88);
+    border: 1px solid var(--bd2);
+    border-radius: var(--r);
+    margin-bottom: 14px;
+    overflow-x: auto;
+    backdrop-filter: blur(20px);
+    position: sticky;
+    top: 10px;
+    z-index: 90;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+}
+#sied-wrapper .dtab {
+    all: unset;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 9px 15px;
+    border-radius: 10px;
+    font-family: var(--font);
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--tx2);
+    background: rgba(255,255,255,0.03);
+    border: 1px solid transparent;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: var(--tr);
+}
+#sied-wrapper .dtab:hover {
+    background: rgba(255,255,255,0.08);
+    color: #fff;
+}
+#sied-wrapper .dtab.active {
+    background: linear-gradient(135deg, rgba(56, 189, 248, 0.22), rgba(139, 92, 246, 0.22));
+    border-color: #38bdf8;
+    color: #fff;
+    box-shadow: 0 0 18px rgba(56, 189, 248, 0.25);
+}
+#sied-wrapper .dtab-cnt {
+    font-size: 0.66rem;
+    padding: 1px 7px;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.1);
+    color: #7dd3fc;
+}
+
+/* Filter Bar */
+#sied-wrapper .fbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 12px 18px;
+    border: 1px solid var(--bd2);
+    background: var(--sfc);
+    border-radius: var(--r);
+    margin-bottom: 22px;
+    overflow-x: auto;
+    backdrop-filter: blur(20px);
+    flex-wrap: wrap;
+}
+#sied-wrapper .fg {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+#sied-wrapper .fgl {
+    font-family: var(--font);
+    font-size: 0.7rem;
+    color: var(--tx3);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-right: 4px;
+    font-weight: 600;
+}
+#sied-wrapper .fbtn {
+    font-family: var(--font);
+    font-size: 0.73rem;
+    padding: 5px 12px;
+    border: 1px solid var(--bd2);
+    border-radius: 999px;
+    background: rgba(255,255,255,0.03);
+    color: var(--tx2);
+    cursor: pointer;
+    transition: var(--tr);
+}
+#sied-wrapper .fbtn:hover {
+    background: rgba(255,255,255,0.09);
+    border-color: var(--tx);
+    color: #fff;
+}
+#sied-wrapper .fbtn.on {
+    background: #38bdf8;
+    color: #030712;
+    border-color: #38bdf8;
+    box-shadow: 0 0 14px rgba(56, 189, 248, 0.35);
+    font-weight: 700;
+}
+#sied-wrapper .fsep {
+    width: 1px;
+    height: 18px;
+    background: var(--bd2);
+    margin: 0 4px;
+}
+
+/* ── Clean Grid Layout Rows ── */
+#sied-wrapper .dash-grid-2 {
+    display: grid;
+    grid-template-columns: 1.35fr 1fr;
+    gap: 22px;
+    margin-bottom: 22px;
+}
+#sied-wrapper .dash-grid-equal {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+    margin-bottom: 22px;
+}
+#sied-wrapper .dash-full {
+    margin-bottom: 22px;
+}
+
+/* Modules / Cards */
+#sied-wrapper .mod-card {
+    background: var(--sfc);
+    border: 1px solid var(--bd2);
+    border-radius: var(--r);
+    backdrop-filter: blur(20px);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.28);
+}
+#sied-wrapper .mh {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    border-bottom: 1px solid var(--bd2);
+    background: rgba(255,255,255,0.025);
+    cursor: pointer;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+#sied-wrapper .mt {
+    font-family: var(--font);
+    font-size: 0.84rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--tx);
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+#sied-wrapper .mh-r {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+#sied-wrapper .mtag {
+    font-family: var(--font);
+    font-size: 0.68rem;
+    padding: 3px 9px;
+    border-radius: 6px;
+    border: 1px solid var(--bd2);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    background: rgba(255,255,255,0.05);
+    color: var(--tx2);
+}
+#sied-wrapper .mtag.t-r { color: #fda4af; border-color: rgba(244,63,94,0.35); background: rgba(244,63,94,0.12); }
+#sied-wrapper .mtag.t-a { color: #fcd34d; border-color: rgba(245,158,11,0.35); background: rgba(245,158,11,0.12); }
+#sied-wrapper .mtag.t-g { color: #6ee7b7; border-color: rgba(16,185,129,0.35); background: rgba(16,185,129,0.12); }
+#sied-wrapper .mtag.t-b { color: #7dd3fc; border-color: rgba(56,189,248,0.35); background: rgba(56,189,248,0.12); }
+#sied-wrapper .mtag.t-p { color: #d8b4fe; border-color: rgba(168,85,247,0.35); background: rgba(168,85,247,0.12); }
+
+#sied-wrapper .mb {
+    padding: 18px 20px;
+}
+
+/* ── Tables (LAWS, Frontier Models, Agentic AI, Treaties) ── */
+#sied-wrapper .clean-tbl-wrap {
+    width: 100%;
+    overflow-x: auto;
+}
+#sied-wrapper .lt {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+#sied-wrapper .lt th {
+    padding: 11px 14px;
+    font-family: var(--font);
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--tx3);
+    background: rgba(15, 23, 42, 0.85);
+    border-bottom: 1px solid var(--bd2);
+    white-space: nowrap;
+}
+#sied-wrapper .lt td {
+    padding: 12px 14px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    font-size: 0.84rem;
+    color: var(--tx);
+    vertical-align: middle;
+}
+#sied-wrapper .lt tbody tr {
+    transition: background 0.2s;
+}
+#sied-wrapper .lt tbody tr:hover {
+    background: rgba(56, 189, 248, 0.06);
+}
+#sied-wrapper .sys-title-link {
+    color: #f8fafc;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: color 0.2s;
+}
+#sied-wrapper .sys-title-link:hover {
+    color: #38bdf8;
+    text-decoration: underline;
+}
+#sied-wrapper .sys-sub-meta {
+    font-size: 0.75rem;
+    color: var(--tx3);
+    margin-top: 2px;
+}
+
+/* Autonomy Bar */
+#sied-wrapper .atr {
+    height: 6px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 999px;
+    width: 90px;
+    position: relative;
+    overflow: hidden;
+}
+#sied-wrapper .afill {
+    height: 100%;
+    border-radius: 999px;
+}
+#sied-wrapper .ap {
+    font-family: var(--font);
+    font-size: 0.73rem;
+    color: var(--tx2);
+    font-weight: 600;
+}
+
+/* Badges */
+#sied-wrapper .bdg {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-family: var(--font);
+    font-size: 0.7rem;
+    padding: 3px 9px;
+    border-radius: 6px;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    border: 1px solid;
+    white-space: nowrap;
+}
+#sied-wrapper .il { color: #fda4af; border-color: rgba(244,63,94,0.4); background: rgba(244,63,94,0.12); }
+#sied-wrapper .un { color: #fcd34d; border-color: rgba(245,158,11,0.4); background: rgba(245,158,11,0.12); }
+#sied-wrapper .pt { color: #93c5fd; border-color: rgba(59,130,246,0.4); background: rgba(59,130,246,0.12); }
+#sied-wrapper .ok { color: #6ee7b7; border-color: rgba(16,185,129,0.4); background: rgba(16,185,129,0.12); }
+#sied-wrapper .pr { color: #d8b4fe; border-color: rgba(168,85,247,0.4); background: rgba(168,85,247,0.12); }
+
+/* Bias & Risk Pills */
+#sied-wrapper .bias-pill {
+    display: inline-block;
+    font-size: 0.72rem;
+    padding: 3px 8px;
+    border-radius: 6px;
+    background: rgba(244, 63, 94, 0.1);
+    border: 1px solid rgba(244, 63, 94, 0.28);
+    color: #fda4af;
+    margin: 2px 4px 2px 0;
+    font-weight: 500;
+}
+#sied-wrapper .reg-cross-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.74rem;
+    padding: 4px 10px;
+    border-radius: 6px;
+    background: rgba(56, 189, 248, 0.1);
+    border: 1px solid rgba(56, 189, 248, 0.3);
+    color: #7dd3fc;
+    text-decoration: none;
+    font-weight: 600;
+    transition: var(--tr);
+}
+#sied-wrapper .reg-cross-link:hover {
+    background: rgba(56, 189, 248, 0.22);
+    color: #fff;
+}
+
+/* ── Surveillance & Control Heat Matrix ── */
+#sied-wrapper .matrix {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fill, minmax(215px, 1fr)) !important;
+    gap: 12px !important;
+    padding: 4px 0 !important;
+}
+#sied-wrapper .hc {
+    padding: 15px;
+    border: 1px solid var(--bd2);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    transition: var(--tr);
+}
+#sied-wrapper .hc:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.35);
+}
+#sied-wrapper .hc1 { border-color: rgba(244,63,94,0.42); background: linear-gradient(180deg, rgba(244,63,94,0.16) 0%, rgba(15,23,42,0.75) 100%); }
+#sied-wrapper .hc2 { border-color: rgba(245,158,11,0.42); background: linear-gradient(180deg, rgba(245,158,11,0.16) 0%, rgba(15,23,42,0.75) 100%); }
+#sied-wrapper .hc3 { border-color: rgba(56,189,248,0.42); background: linear-gradient(180deg, rgba(56,189,248,0.16) 0%, rgba(15,23,42,0.75) 100%); }
+#sied-wrapper .hc4 { border-color: rgba(148,163,184,0.35); background: linear-gradient(180deg, rgba(148,163,184,0.14) 0%, rgba(15,23,42,0.75) 100%); }
+#sied-wrapper .hl {
+    font-size: 0.84rem;
+    font-weight: 700;
+    color: var(--tx);
+    line-height: 1.3;
+    margin-bottom: 4px;
+}
+#sied-wrapper .hsub {
+    font-size: 0.76rem;
+    color: var(--tx2);
+    line-height: 1.4;
+}
+#sied-wrapper .hsc {
+    font-size: 1.9rem;
+    font-weight: 700;
+    line-height: 1;
+    margin-top: 12px;
+    font-family: var(--font);
+}
+#sied-wrapper .hc1 .hsc { color: #f43f5e; }
+#sied-wrapper .hc2 .hsc { color: #fbbf24; }
+#sied-wrapper .hc3 .hsc { color: #38bdf8; }
+#sied-wrapper .hc4 .hsc { color: #94a3b8; }
+#sied-wrapper .hreg, #sied-wrapper .hsrc {
+    font-family: var(--font);
+    font-size: 0.68rem;
+    color: var(--tx3);
+    text-transform: uppercase;
+    margin-top: 4px;
+}
+
+/* ── Agentic AI Cards Grid ── */
+#sied-wrapper .agentic-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 14px;
+}
+#sied-wrapper .agent-card {
+    background: rgba(15, 23, 42, 0.72);
+    border: 1px solid var(--bd2);
+    border-radius: 12px;
+    padding: 16px 18px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 10px;
+    transition: var(--tr);
+}
+#sied-wrapper .agent-card:hover {
+    border-color: #38bdf8;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.35);
+}
+
+/* ── Intelligence Feed & Live RSS ── */
+#sied-wrapper .fb, #sied-wrapper .rss-body {
+    max-height: 390px !important;
+    overflow-y: auto !important;
+    padding: 14px 16px !important;
+}
+#sied-wrapper .fi {
+    margin-bottom: 10px !important;
+    background: rgba(15, 23, 42, 0.65) !important;
+    padding: 12px 14px !important;
+    border-radius: 8px !important;
+    border: 1px solid var(--bd) !important;
+    border-left: 3px solid var(--bd2) !important;
+}
+#sied-wrapper .fih {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 6px;
+}
+#sied-wrapper .fit {
+    font-family: var(--font);
+    font-size: 0.7rem;
+    color: var(--tx3);
+}
+#sied-wrapper .fitp {
+    font-family: var(--font);
+    font-size: 0.66rem;
+    padding: 2px 7px;
+    border-radius: 4px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+#sied-wrapper .fitp.alert { color: #fda4af; background: rgba(244,63,94,0.16); border: 1px solid rgba(244,63,94,0.35); }
+#sied-wrapper .fitp.new { color: #7dd3fc; background: rgba(56,189,248,0.16); border: 1px solid rgba(56,189,248,0.35); }
+#sied-wrapper .fitp.info { color: #fcd34d; background: rgba(245,158,11,0.16); border: 1px solid rgba(245,158,11,0.35); }
+#sied-wrapper .fitx {
+    font-size: 0.83rem;
+    color: var(--tx2);
+    line-height: 1.5;
+}
+
+/* RSS Tabs & Items */
+#sied-wrapper .rtabs {
+    display: flex !important;
+    gap: 6px !important;
+    overflow-x: auto !important;
+    padding: 12px 16px !important;
+    border-bottom: 1px solid var(--bd) !important;
+}
+#sied-wrapper button.rtab {
+    all: unset !important;
+    padding: 6px 13px !important;
+    font-family: var(--font) !important;
+    font-size: 0.72rem !important;
+    cursor: pointer !important;
+    color: var(--tx3) !important;
+    font-weight: 600 !important;
+    border: 1px solid var(--bd) !important;
+    border-radius: 999px !important;
+    background: rgba(255,255,255,0.03) !important;
+    white-space: nowrap !important;
+}
+#sied-wrapper button.rtab.on {
+    color: #fff !important;
+    background: rgba(56, 189, 248, 0.2) !important;
+    border-color: #38bdf8 !important;
+}
+#sied-wrapper .rsi-item {
+    padding: 12px 14px !important;
+    margin-bottom: 10px !important;
+    border-radius: 8px !important;
+    background: rgba(15, 23, 42, 0.65) !important;
+    border: 1px solid var(--bd) !important;
+    border-left: 3px solid #38bdf8 !important;
+    display: block !important;
+}
+#sied-wrapper .rsi-title a {
+    font-size: 0.85rem !important;
+    color: var(--tx) !important;
+    font-weight: 600 !important;
+    text-decoration: none !important;
+    line-height: 1.45 !important;
+}
+#sied-wrapper .rsi-title a:hover {
+    color: #38bdf8 !important;
+    text-decoration: underline !important;
+}
+#sied-wrapper .rsi-meta {
+    display: flex !important;
+    gap: 12px !important;
+    font-family: var(--font) !important;
+    font-size: 0.68rem !important;
+    color: var(--tx3) !important;
+    margin-top: 5px !important;
+}
+
+/* ── Academic & Legal Repository ── */
+#sied-wrapper .rsw {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    background: rgba(15, 23, 42, 0.8);
+    border: 1px solid var(--bd2);
+    border-radius: 10px;
+    margin-bottom: 14px;
+}
+#sied-wrapper .rsinp {
+    width: 100%;
+    background: transparent !important;
+    border: none !important;
+    color: var(--tx) !important;
+    font-size: 0.86rem !important;
+    outline: none !important;
+    box-shadow: none !important;
+    padding: 2px 0 !important;
+}
+#sied-wrapper .ri {
+    padding: 13px 16px;
+    border: 1px solid var(--bd);
+    border-radius: 10px;
+    background: rgba(15, 23, 42, 0.55);
+    margin-bottom: 10px;
+    transition: var(--tr);
+}
+#sied-wrapper .ri:hover {
+    background: rgba(30, 41, 59, 0.75);
+    border-color: rgba(56, 189, 248, 0.35);
+    transform: translateX(3px);
+}
+#sied-wrapper .rit {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--tx);
+    line-height: 1.45;
+    margin-bottom: 8px;
+}
+#sied-wrapper .rit a {
+    color: inherit;
+    text-decoration: none;
+}
+#sied-wrapper .rit a:hover {
+    color: #38bdf8;
+    text-decoration: underline;
+}
+#sied-wrapper .rim {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+#sied-wrapper .rb {
+    font-family: var(--font);
+    font-size: 0.68rem;
+    padding: 2px 8px;
+    border-radius: 5px;
+    border: 1px solid var(--bd2);
+    color: var(--tx2);
+    background: rgba(255,255,255,0.03);
+}
+
+/* ── Glass Explainer Blocks ── */
+#sied-wrapper .glass-explainer {
+    margin-top: 14px !important;
+    padding: 16px 18px !important;
+    background: linear-gradient(145deg, rgba(20, 28, 46, 0.75) 0%, rgba(11, 15, 25, 0.9) 100%) !important;
+    border: 1px solid var(--bd2) !important;
+    border-radius: 10px !important;
+    position: relative !important;
+}
+#sied-wrapper .glass-explainer.ge-red { border-left: 4px solid #f43f5e !important; }
+#sied-wrapper .glass-explainer.ge-amb { border-left: 4px solid #f59e0b !important; }
+#sied-wrapper .glass-explainer.ge-blu { border-left: 4px solid #38bdf8 !important; }
+#sied-wrapper .glass-explainer h4 {
+    font-family: var(--font) !important;
+    font-size: 0.78rem !important;
+    color: var(--tx) !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.08em !important;
+    margin: 0 0 6px 0 !important;
+}
+#sied-wrapper .glass-explainer p {
+    font-size: 0.83rem !important;
+    color: var(--tx2) !important;
+    line-height: 1.55 !important;
+    margin: 0 !important;
+}
+
+/* ── Chart Containers & Legends ── */
+#sied-wrapper .chtw {
+    position: relative;
+    width: 100%;
+    min-height: 240px;
+}
+#sied-wrapper canvas {
+    max-height: 290px !important;
+    width: 100% !important;
+}
+#sied-wrapper .cleg {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 10px !important;
+    padding: 12px 8px 4px !important;
+    justify-content: center !important;
+}
+#sied-wrapper .cli {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 7px !important;
+    font-family: var(--font) !important;
+    font-size: 0.72rem !important;
+    color: var(--tx2) !important;
+    background: rgba(255,255,255,0.04) !important;
+    padding: 4px 11px !important;
+    border-radius: 999px !important;
+    border: 1px solid var(--bd) !important;
+}
+#sied-wrapper .clsq {
+    display: inline-block !important;
+    width: 9px !important;
+    height: 9px !important;
+    border-radius: 50% !important;
+}
+
+/* ── Treaty Table ── */
+#sied-wrapper .treaty-key {
+    font-size: 0.75rem;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--bd);
+    color: var(--tx2);
+    margin-bottom: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+#sied-wrapper .treaty-tbl {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.8rem;
+    text-align: left;
+}
+#sied-wrapper .treaty-tbl th {
+    padding: 9px 10px;
+    border-bottom: 1px solid var(--bd2);
+    color: var(--tx2);
+    font-family: var(--font);
+    font-size: 0.72rem;
+}
+#sied-wrapper .treaty-tbl td {
+    padding: 8px 10px;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+#sied-wrapper .tpos {
+    font-family: var(--font);
+    font-size: 0.68rem;
+    padding: 2px 7px;
+    border-radius: 4px;
+    font-weight: 600;
+    border: 1px solid;
+}
+#sied-wrapper .tp-a { color: #fda4af; border-color: rgba(244,63,94,0.35); background: rgba(244,63,94,0.12); }
+#sied-wrapper .tp-n { color: #fcd34d; border-color: rgba(245,158,11,0.35); background: rgba(245,158,11,0.12); }
+#sied-wrapper .tp-m { color: #d8b4fe; border-color: rgba(168,85,247,0.35); background: rgba(168,85,247,0.12); }
+#sied-wrapper .tp-p { color: #6ee7b7; border-color: rgba(16,185,129,0.35); background: rgba(16,185,129,0.12); }
+#sied-wrapper .tck { color: #34d399; font-weight: 700; }
+#sied-wrapper .tno { color: var(--tx3); }
+
+/* ── Actionable Alerts Console ── */
+#sied-wrapper .alert-dispatch-card {
+    padding: 14px 16px;
+    border-radius: 10px;
+    border: 1px solid rgba(244, 63, 94, 0.32);
+    background: linear-gradient(90deg, rgba(244, 63, 94, 0.1) 0%, rgba(15, 23, 42, 0.75) 100%);
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 14px;
+}
+
+/* ── Persistent Log Section ── */
+#sied-wrapper .logsec {
+    background: var(--sfc);
+    border: 1px solid var(--bd2);
+    border-radius: var(--r);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    overflow: hidden;
+}
+#sied-wrapper .loghd {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    border-bottom: 1px solid var(--bd2);
+    background: rgba(255,255,255,0.025);
+    flex-wrap: wrap;
+    gap: 10px;
+}
+#sied-wrapper .loght {
+    font-family: var(--font);
+    font-size: 0.84rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--tx);
+    text-transform: uppercase;
+}
+#sied-wrapper .logcnt {
+    font-family: var(--font);
+    font-size: 0.73rem;
+    color: var(--tx3);
+}
+#sied-wrapper .logfm {
+    display: none;
+    padding: 18px 20px;
+    border-bottom: 1px solid var(--bd);
+    background: rgba(15, 23, 42, 0.85);
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: 12px;
+}
+#sied-wrapper .logfm.open {
+    display: grid;
+}
+#sied-wrapper .lfg {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+#sied-wrapper .lfl {
+    font-family: var(--font);
+    font-size: 0.7rem;
+    color: var(--tx3);
+    text-transform: uppercase;
+    font-weight: 600;
+}
+#sied-wrapper input, #sied-wrapper select, #sied-wrapper textarea {
+    background: rgba(255,255,255,0.04) !important;
+    border: 1px solid var(--bd2) !important;
+    color: var(--tx) !important;
+    padding: 8px 12px !important;
+    border-radius: 8px !important;
+    font-family: var(--font-sans) !important;
+    font-size: 0.84rem !important;
+    width: 100%;
+}
+#sied-wrapper select option {
+    background: #0f172a;
+    color: #f8fafc;
+}
+#sied-wrapper .lbtn {
+    padding: 7px 14px;
+    font-family: var(--font);
+    font-size: 0.73rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    border: 1px solid var(--bd2);
+    background: rgba(255,255,255,0.06);
+    color: var(--tx);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: var(--tr);
+}
+#sied-wrapper .lbtn.p {
+    background: rgba(56, 189, 248, 0.18);
+    border-color: #38bdf8;
+    color: #38bdf8;
+}
+#sied-wrapper .lbtn:hover {
+    background: rgba(56, 189, 248, 0.28);
+    color: #fff;
+}
+
+#sied-wrapper .dfoot {
+    padding: 18px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    font-size: 0.78rem;
+    color: var(--tx3);
+    border: 1px solid var(--bd);
+    margin-top: 26px;
+    background: rgba(15, 23, 42, 0.65);
+    border-radius: var(--r);
+}
+
+/* ── Responsive Breakpoints ── */
+@media (max-width: 1200px) {
+    #sied-wrapper .ss { grid-template-columns: repeat(3, 1fr); }
+    #sied-wrapper .dash-grid-2, #sied-wrapper .dash-grid-equal { grid-template-columns: 1fr; }
+    #sied-wrapper .principles-strip { grid-template-columns: 1fr; }
+}
+@media (max-width: 768px) {
+    #sied-wrapper { padding: 16px 12px 44px; }
+    #sied-wrapper .ss { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    #sied-wrapper .intro-panel { flex-direction: column; padding: 18px; gap: 16px; }
+    #sied-wrapper .intro-right { width: 100%; min-width: 0; }
+    #sied-wrapper .matrix { grid-template-columns: repeat(2, 1fr) !important; }
+    #sied-wrapper .sv { font-size: 1.65rem; }
+}
+@media (max-width: 480px) {
+    #sied-wrapper .matrix { grid-template-columns: 1fr !important; }
+}
+</style>
+
+<div id="primary" class="content-area">
+<div id="sied-wrapper">
+<div id="sied">
+
+    <!-- Top Command Bar -->
+    <div class="tb">
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+            <span class="tb-brand">AI Ethics Intelligence Dashboard</span>
+            <span class="tb-ver">v5.0 Flagship Ecosystem</span>
+        </div>
+        <div class="tb-right">
+            <span class="live-b"><span class="live-dot"></span>Live Monitoring</span>
+            <span class="clk" id="sied-clk">00:00:00 UTC</span>
+            <a class="cbtn" href="https://aviperera.com/ai-policy-tracker/" target="_top">🌍 Policy Tracker ↗</a>
+            <a class="cbtn" href="https://aviperera.com/ai-policy-timeline/" target="_top">⏳ Policy Timeline ↗</a>
+            <a class="cbtn" href="https://aviperera.com/systems-database/" target="_top">🎯 Systems DB ↗</a>
+            <button class="cbtn cbtn-alert" onclick="switchDashTab('alerts')">🔔 NGO Alerts (<span id="hdr-alert-cnt">8</span>)</button>
+        </div>
+    </div>
+
+    <!-- Critical Active Operations Ticker -->
+    <div class="ab">
+        <span class="ab-dot"></span>
+        <span class="ab-text">
+            <strong>ACTIVE OPERATIONS &amp; HIGH-RISK FLAGS:</strong>
+            Israel’s AI-directed "Gospel", "Lavender" &amp; "Where's Daddy" kill chains in Gaza (IHL violations — <a href="https://ainowinstitute.org/publication/the-algorithmically-accelerated-killing-machine" target="_blank" rel="noopener">AI Now</a> &amp; <a href="https://aviperera.com/lavender/" target="_blank" rel="noopener">Lavender Dossier</a>) ·
+            US DHS/ICE Palantir Gotham algorithmic deportation targeting (<a href="https://aviperera.com/palantir-gotham/" target="_blank" rel="noopener">Gotham Dossier</a>) ·
+            Autonomous Loitering Swarms &amp; Combat Humanoids without Art. 36 review (<a href="https://aviperera.com/v-bat-mq-35/" target="_blank" rel="noopener">V-BAT MQ-35</a>, <a href="https://aviperera.com/kalashnikov-zala-lancet-3/" target="_blank" rel="noopener">ZALA Lancet-3</a>, <a href="https://aviperera.com/norinco-fuxi-and-nudt-combat-humanoids/" target="_blank" rel="noopener">Norinco Fuxi</a>) ·
+            Frontier Model Guardrail Abliteration &amp; Occupational Bias Alerts (<a href="https://aviperera.com/abliteration-ai-removing-guardrails-international-security/" target="_blank" rel="noopener">Abliteration Security Report</a>).
+        </span>
+    </div>
+
+    <!-- Hero & Philosophical Manifesto Panel -->
+    <div class="intro-panel">
+        <div class="intro-left">
+            <div class="intro-eyebrow">⚖️ Sovereign Intelligence, Frontier AI Governance &amp; Autonomous Systems Observatory</div>
+            <h1>Artificial Intelligence Ethics Intelligence Dashboard</h1>
+            <p>
+                This living observatory monitors, scores, and cross-references <strong>Autonomous Weapons Systems (LAWS)</strong>, <strong>Mass Surveillance &amp; Predictive Policing</strong>, <strong>Frontier AI Model Releases &amp; Bias Patterns</strong>, and <strong>Agentic AI Deployments</strong> globally. Every system is evaluated against International Humanitarian Law (Article 36 reviews), peer-reviewed algorithmic bias audits, and binding national/international statutes.
+            </p>
+            <div class="intro-quote">
+                "Technological optimism must be disciplined by systematic risk assessment — demonstrating that the same engineering skill set that builds frontier LLMs and autonomous systems can build the scaffolding needed to monitor them responsibly." — <strong>Avi Perera</strong>
+            </div>
+        </div>
+        <div class="intro-right">
+            <a href="https://aviperera.com/stance/" class="intro-link">Read My AI Stance <span>&rarr;</span></a>
+            <a href="https://aviperera.com/aisafety/" class="intro-link">AI Safety Framework <span>&rarr;</span></a>
+            <a href="https://aviperera.com/ai-policy-tracker/" class="intro-link">Global AI Policy Tracker <span>&rarr;</span></a>
+            <button class="intro-link" style="cursor:pointer;width:100%;text-align:left;" onclick="exportFullEcosystemCSV()">↓ Export Master Dataset (.CSV) <span>&darr;</span></button>
+        </div>
+    </div>
+
+    <!-- 3 Guiding Design Principles Strip -->
+    <div class="principles-strip">
+        <div class="principle-card">
+            <div class="principle-top">
+                <span class="principle-title">1. Transparency-by-Design</span>
+                <span class="principle-badge">Model Cards &amp; Peer Review</span>
+            </div>
+            <p class="principle-desc">
+                Every frontier model and autonomous system entry includes a direct citation to the original <strong>Model Card / System Dossier</strong>, exact <strong>date of release</strong>, and a structured summary of <strong>peer-reviewed bias &amp; safety studies</strong>.
+            </p>
+        </div>
+        <div class="principle-card">
+            <div class="principle-top">
+                <span class="principle-title">2. Temporal Contextualisation</span>
+                <span class="principle-badge">Policy Tracker Linked</span>
+            </div>
+            <p class="principle-desc">
+                By linking model and weapon releases directly to the <a href="https://aviperera.com/ai-policy-tracker/" style="color:#38bdf8;text-decoration:underline;">Global AI Policy Tracker</a> and <a href="https://aviperera.com/ai-policy-timeline/" style="color:#38bdf8;text-decoration:underline;">Timeline</a>, users see whether a jurisdiction had enacted binding safeguards at the exact time of deployment.
+            </p>
+        </div>
+        <div class="principle-card">
+            <div class="principle-top">
+                <span class="principle-title">3. Actionable Alerts</span>
+                <span class="principle-badge">NGO &amp; Analyst Dispatch</span>
+            </div>
+            <p class="principle-desc">
+                When a model or weapon system is flagged for high-risk bias (e.g., gendered occupational stereotypes, racial disparity) or unreviewed lethality, the dashboard generates <strong>Actionable Alert Bulletins</strong> for subscribed policy analysts and civil-society NGOs.
+            </p>
+        </div>
+    </div>
+
+    <!-- 6 Global KPI Stat Cards -->
+    <div class="ss">
+        <div class="sc">
+            <div class="sl">AI Targets Generated</div>
+            <div class="sv vb" id="st1">37k+</div>
+            <div class="ss-sub">civilians marked by Lavender AI<br><a href="https://aviperera.com/lavender/" target="_blank" rel="noopener">Dossier: Lavender AI</a></div>
+        </div>
+        <div class="sc">
+            <div class="sl">Algorithmic Detentions</div>
+            <div class="sv vr" id="st2">1.2M</div>
+            <div class="ss-sub">ICE/CBP automated enforcement<br><a href="https://aviperera.com/palantir-gotham/" target="_blank" rel="noopener">Dossier: Palantir Gotham</a></div>
+        </div>
+        <div class="sc">
+            <div class="sl">No Art. 36 IHL Review</div>
+            <div class="sv va" id="st3">94%</div>
+            <div class="ss-sub">autonomous weapon systems unreviewed<br><a href="https://www.icrc.org/en/document/icrc-position-autonomous-weapon-systems" target="_blank" rel="noopener">Source: ICRC Position</a></div>
+        </div>
+        <div class="sc">
+            <div class="sl">Biometric Scraping</div>
+            <div class="sv vg" id="st4">30bn+</div>
+            <div class="ss-sub">faces scraped without consent<br><a href="https://aviperera.com/clearview-ai/" target="_blank" rel="noopener">Dossier: Clearview AI</a></div>
+        </div>
+        <div class="sc">
+            <div class="sl">Tracked AI Systems</div>
+            <div class="sv vo" id="st5">75+</div>
+            <div class="ss-sub">LAWS, Frontier LLMs &amp; Agentic AI<br><a href="https://aviperera.com/systems-database/" target="_blank" rel="noopener">Source: Systems DB</a></div>
+        </div>
+        <div class="sc">
+            <div class="sl">Human Oversight</div>
+            <div class="sv vr" id="st6">20s</div>
+            <div class="ss-sub">avg human review per lethal strike<br><a href="https://aviperera.com/ai-warfare-20-second-kill-chain/" target="_blank" rel="noopener">Report: 20s Kill Chain</a></div>
+        </div>
+    </div>
+
+    <!-- Sticky Ecosystem View Switcher (7 Tabs) -->
+    <div class="nav-tabs-bar" role="tablist" aria-label="Dashboard Ecosystem Views">
+        <button class="dtab active" data-tab="all" onclick="switchDashTab('all')">⚡ All Modules (Full Ecosystem)</button>
+        <button class="dtab" data-tab="frontier" onclick="switchDashTab('frontier')">🧠 Frontier AI Models &amp; Bias <span class="dtab-cnt" id="cnt-frontier">16</span></button>
+        <button class="dtab" data-tab="agentic" onclick="switchDashTab('agentic')">🤖 Agentic AI &amp; Autonomy <span class="dtab-cnt" id="cnt-agentic">12</span></button>
+        <button class="dtab" data-tab="laws" onclick="switchDashTab('laws')">🎯 Military AI &amp; LAWS DB <span class="dtab-cnt" id="cnt-laws">32</span></button>
+        <button class="dtab" data-tab="surv" onclick="switchDashTab('surv')">👁️ Surveillance &amp; IHL Matrix <span class="dtab-cnt" id="cnt-surv">16</span></button>
+        <button class="dtab" data-tab="intel" onclick="switchDashTab('intel')">📡 Live Intel, RSS &amp; Legal Repo</button>
+        <button class="dtab" data-tab="alerts" onclick="switchDashTab('alerts')">🔔 Actionable Alerts &amp; Research Log</button>
+    </div>
+
+    <!-- Global Multi-Dimension Filter Bar -->
+    <div class="fbar">
+        <div class="fg">
+            <span class="fgl">Region</span>
+            <button class="fbtn on" data-f="r" data-v="ALL" onclick="sf('r','ALL',this)">All</button>
+            <button class="fbtn" data-f="r" data-v="USA" onclick="sf('r','USA',this)">USA</button>
+            <button class="fbtn" data-f="r" data-v="ISR" onclick="sf('r','ISR',this)">Israel</button>
+            <button class="fbtn" data-f="r" data-v="ASIA" onclick="sf('r','ASIA',this)">China / Asia</button>
+            <button class="fbtn" data-f="r" data-v="EU" onclick="sf('r','EU',this)">Europe / UK</button>
+            <button class="fbtn" data-f="r" data-v="RUS" onclick="sf('r','RUS',this)">Russia</button>
+            <button class="fbtn" data-f="r" data-v="MENA" onclick="sf('r','MENA',this)">MENA / Turkey</button>
+        </div>
+        <span class="fsep"></span>
+        <div class="fg">
+            <span class="fgl">Risk Severity</span>
+            <button class="fbtn on" data-f="s" data-v="ALL" onclick="sf('s','ALL',this)">All</button>
+            <button class="fbtn" data-f="s" data-v="CRITICAL" onclick="sf('s','CRITICAL',this)">Critical</button>
+            <button class="fbtn" data-f="s" data-v="HIGH" onclick="sf('s','HIGH',this)">High</button>
+            <button class="fbtn" data-f="s" data-v="MOD" onclick="sf('s','MOD',this)">Moderate</button>
+        </div>
+        <span class="fsep"></span>
+        <div class="fg">
+            <span class="fgl">Evaluation Framework</span>
+            <button class="fbtn on" data-f="f" data-v="ALL" onclick="sf('f','ALL',this)">All</button>
+            <button class="fbtn" data-f="f" data-v="IHL" onclick="sf('f','IHL',this)">IHL (Art. 36)</button>
+            <button class="fbtn" data-f="f" data-v="DEONT" onclick="sf('f','DEONT',this)">Deontological / Rights</button>
+            <button class="fbtn" data-f="f" data-v="UTIL" onclick="sf('f','UTIL',this)">Utilitarian / Safety</button>
+        </div>
+    </div>
+
+    <!-- =====================================================================
+         SECTION A: FRONTIER AI MODELS, BIAS REGISTRY & TEMPORAL CONTEXT
+         (Visible in 'all' and 'frontier' tabs)
+         ===================================================================== -->
+    <div class="dash-sec" data-sec="frontier">
+        <div class="mod-card dash-full">
+            <div class="mh" onclick="tog(this)">
+                <span class="mt">
+                    🧠 I — Frontier AI Models, Bias Annotations &amp; Temporal Regulatory Cross-Reference
+                </span>
+                <div class="mh-r">
+                    <button class="lbtn p" style="padding:4px 10px;font-size:0.68rem;" onclick="event.stopPropagation(); openLogForModel();">+ Log Model Release</button>
+                    <span class="mtag t-b">Transparency-by-Design</span>
+                    <span class="mtag t-p">Temporal Context</span>
+                    <span class="cico">▾</span>
+                </div>
+            </div>
+            <div class="mcoll" style="max-height:4000px;">
+                <div class="mb">
+                    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:14px;">
+                        <div style="font-size:0.84rem;color:var(--tx2);">
+                            Every frontier model entry logs its <strong>original Model Card / System Card</strong>, <strong>release date</strong>, <strong>peer-reviewed bias patterns</strong>, and <strong>regulatory status at deployment</strong> linked to the <a href="https://aviperera.com/ai-policy-tracker/" style="color:#38bdf8;">Global AI Policy Tracker</a>.
+                        </div>
+                        <input type="text" id="frontier-q" oninput="renderFrontierModels()" placeholder="Search model, developer, bias pattern, or regulation..." style="max-width:340px;" />
+                    </div>
+                    <div class="clean-tbl-wrap">
+                        <table class="lt">
+                            <thead>
+                                <tr>
+                                    <th>Release Date</th>
+                                    <th>Model &amp; Architecture</th>
+                                    <th>Lab / Jurisdiction</th>
+                                    <th>Annotated Bias Patterns &amp; Peer-Reviewed Studies</th>
+                                    <th>Temporal Regulatory Status at Deployment</th>
+                                    <th>Bias / Risk</th>
+                                    <th>Model Card &amp; Alert</th>
+                                </tr>
+                            </thead>
+                            <tbody id="frontier-tb"></tbody>
+                        </table>
+                    </div>
+
+                    <div class="dash-grid-equal" style="margin-top:20px;margin-bottom:0;">
+                        <div style="background:rgba(15,23,42,0.55);border:1px solid var(--bd);border-radius:12px;padding:16px;">
+                            <div style="font-family:var(--font);font-size:0.78rem;font-weight:700;color:var(--tx);text-transform:uppercase;margin-bottom:8px;">
+                                📊 Empirical Bias Disparity vs. Guardrail Robustness Across Frontier Models
+                            </div>
+                            <div class="chtw" style="height:240px;">
+                                <canvas id="ch-frontier-bias"></canvas>
+                            </div>
+                        </div>
+                        <div class="glass-explainer ge-blu" style="margin-top:0 !important;display:flex;flex-direction:column;justify-content:center;">
+                            <h4>Why Systematic Bias &amp; Guardrail Auditing Matters</h4>
+                            <p style="margin-bottom:10px !important;">
+                                Peer-reviewed evaluations (Kotek et al. 2023; Hofmann et al., <em>Nature</em> 2024; UNESCO 2024) demonstrate that frontier LLMs amplify <strong>gendered occupational stereotypes</strong> up to 3–6&times; baseline labour statistics and exhibit covert dialectal prejudice in hiring, clinical triage, and legal sentencing.
+                            </p>
+                            <p>
+                                Furthermore, as documented in <a href="https://aviperera.com/abliteration-ai-removing-guardrails-international-security/" target="_blank" style="color:#38bdf8;text-decoration:underline;">Abliteration.ai and the End of the Guardrail Assumption (Perera, 2026)</a>, orthogonal weight projection can strip refusal guardrails from open-weight models in minutes—requiring binding lifecycle governance rather than voluntary post-training alignment alone.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- =====================================================================
+         SECTION B: AGENTIC AI & AUTONOMOUS TOOL-USE RISK MONITOR
+         (Visible in 'all' and 'agentic' tabs)
+         ===================================================================== -->
+    <div class="dash-sec" data-sec="agentic">
+        <div class="mod-card dash-full">
+            <div class="mh" onclick="tog(this)">
+                <span class="mt">
+                    🤖 II — Agentic AI, Computer-Use &amp; Multi-Agent Autonomy Risk Monitor
+                </span>
+                <div class="mh-r">
+                    <span class="mtag t-r">L1–L5 Autonomy</span>
+                    <span class="mtag t-a">WAIC 2026 &amp; Agent Rules</span>
+                    <span class="cico">▾</span>
+                </div>
+            </div>
+            <div class="mcoll" style="max-height:4000px;">
+                <div class="mb">
+                    <div style="font-size:0.84rem;color:var(--tx2);margin-bottom:14px;">
+                        Tracking the shift from static text models to <strong>autonomous goal-directed agents</strong> capable of multi-step web execution, code deployment, financial transactions, psychological companionship, and tactical C2 orchestration. Cross-referenced with <a href="https://aviperera.com/china-ai-agent-regulations-2026/" target="_blank" style="color:#38bdf8;">China's 2026 AI Agent Regulations</a>, <a href="https://aviperera.com/waic-2026-agentic-ai-safety-forum-analysis/" target="_blank" style="color:#38bdf8;">WAIC 2026 Agentic Safety Forum</a>, and the EU AI Act.
+                    </div>
+                    <div class="agentic-grid" id="agentic-grid"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- =====================================================================
+         SECTION C: MILITARY AI & LAWS DEPLOYMENT TRACKER (32+ SYSTEMS) + ACCOUNTABILITY GAP
+         (Visible in 'all' and 'laws' tabs)
+         ===================================================================== -->
+    <div class="dash-sec" data-sec="laws">
+        <div class="dash-grid-2">
+            <div class="mod-card">
+                <div class="mh" onclick="tog(this)">
+                    <span class="mt">
+                        🎯 III — LAWS &amp; Autonomous Weapons Deployment Tracker (<span id="laws-count-lbl">32</span> Systems)
+                    </span>
+                    <div class="mh-r">
+                        <a href="https://aviperera.com/systems-database/" target="_top" class="lbtn" style="padding:3px 9px;font-size:0.66rem;text-decoration:none;" onclick="event.stopPropagation();">Full Systems DB ↗</a>
+                        <span class="mtag t-r">Art. 36 IHL</span>
+                        <span class="cico">▾</span>
+                    </div>
+                </div>
+                <div class="mcoll" style="max-height:4000px;">
+                    <div class="mb">
+                        <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:12px;">
+                            <input type="text" id="laws-q" oninput="renderLaws()" placeholder="Search weapon system, state actor, manufacturer, theater..." style="max-width:340px;" />
+                            <span style="font-family:var(--font);font-size:0.72rem;color:var(--tx3);">Click any system title to open canonical dossier ↗</span>
+                        </div>
+                        <div class="clean-tbl-wrap" style="max-height:620px;overflow-y:auto;">
+                            <table class="lt">
+                                <thead>
+                                    <tr>
+                                        <th style="width:36px;">State</th>
+                                        <th>System &amp; Platform Type</th>
+                                        <th>Autonomy</th>
+                                        <th>Art. 36 Status</th>
+                                        <th>Operational Theater</th>
+                                        <th>Severity</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="laws-tb"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="display:flex;flex-direction:column;gap:22px;">
+                <div class="mod-card">
+                    <div class="mh" onclick="tog(this)">
+                        <span class="mt">Accountability Gap Analysis</span>
+                        <div class="mh-r">
+                            <span class="mtag t-a">Tech vs. Law</span>
+                            <span class="cico">▾</span>
+                        </div>
+                    </div>
+                    <div class="mcoll" style="max-height:2000px;">
+                        <div class="mb">
+                            <div style="font-size:0.78rem;color:var(--tx3);margin-bottom:8px;">
+                                Technological sophistication vs. binding legal accountability — wider divergence = unregulated risk
+                            </div>
+                            <div class="chtw" style="height:230px;">
+                                <canvas id="ch-acct"></canvas>
+                            </div>
+                            <div class="glass-explainer ge-red">
+                                <h4>The Responsibility &amp; Accountability Gap</h4>
+                                <p>
+                                    Visualizes the structural disparity between deployed AI lethality/autonomy and binding legal oversight. As analysed in <a href="https://aviperera.com/autonomous-weapons-ethics-accountability-gap/" target="_blank" style="color:#fda4af;text-decoration:underline;">The Ghost in the Code (Perera, 2026)</a>, when an autonomous system commits a disproportionate strike, product liability shields the developer while commanders lack mens rea over opaque neural weights.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mod-card">
+                    <div class="mh" onclick="tog(this)">
+                        <span class="mt">LAWS &amp; High-Risk AI Incident Velocity (2018–2026)</span>
+                        <div class="mh-r">
+                            <span class="mtag t-b">Timeline</span>
+                            <span class="cico">▾</span>
+                        </div>
+                    </div>
+                    <div class="mcoll" style="max-height:2000px;">
+                        <div class="mb">
+                            <div class="chtw" style="height:210px;">
+                                <canvas id="ch-trend"></canvas>
+                            </div>
+                            <div class="cleg" id="trend-leg"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- =====================================================================
+         SECTION D: SURVEILLANCE MATRIX, BUBBLE CHART, RADAR & TREATY MATRIX
+         (Visible in 'all' and 'surv' tabs)
+         ===================================================================== -->
+    <div class="dash-sec" data-sec="surv">
+        <div class="mod-card dash-full">
+            <div class="mh" onclick="tog(this)">
+                <span class="mt">👁️ IV — Mass Surveillance, Biometrics &amp; Predictive Control Matrix (16 Systems)</span>
+                <div class="mh-r">
+                    <span class="mtag t-p">Heat Index 0–100</span>
+                    <span class="cico">▾</span>
+                </div>
+            </div>
+            <div class="mcoll" style="max-height:3000px;">
+                <div class="mb">
+                    <div style="font-size:0.8rem;color:var(--tx3);margin-bottom:12px;">
+                        Ranked by documented civilian harm, biometric scale, and absence of judicial warrant or redress · Score 0–100 · Click cards with dossiers to inspect
+                    </div>
+                    <div class="matrix" id="surv-grid"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="dash-grid-equal">
+            <div class="mod-card">
+                <div class="mh" onclick="tog(this)">
+                    <span class="mt">V — Civilian Impact vs. Autonomy Level</span>
+                    <div class="mh-r">
+                        <span class="mtag t-r">Bubble Matrix</span>
+                        <span class="cico">▾</span>
+                    </div>
+                </div>
+                <div class="mcoll" style="max-height:2000px;">
+                    <div class="mb">
+                        <div style="font-size:0.78rem;color:var(--tx3);margin-bottom:8px;">
+                            X = Autonomy % · Y = Accountability Index · Bubble radius = documented civilian impact scale
+                        </div>
+                        <div class="chtw" style="height:250px;">
+                            <canvas id="ch-bubble"></canvas>
+                        </div>
+                        <div class="glass-explainer ge-amb">
+                            <h4>Civilian Impact Matrix</h4>
+                            <p>Systems pushing toward the bottom-right combine high targeting/decision autonomy with near-zero legal accountability, producing the highest scaled harm to civilian populations.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="display:flex;flex-direction:column;gap:22px;">
+                <div class="mod-card">
+                    <div class="mh" onclick="tog(this)">
+                        <span class="mt">VI — Multi-Actor Governance &amp; IHL Radar</span>
+                        <div class="mh-r">
+                            <span class="mtag t-a">5-Axis Radar</span>
+                            <span class="cico">▾</span>
+                        </div>
+                    </div>
+                    <div class="mcoll" style="max-height:2000px;">
+                        <div class="mb">
+                            <div class="chtw" style="height:220px;">
+                                <canvas id="ch-radar"></canvas>
+                            </div>
+                            <div class="cleg" id="radar-leg"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mod-card">
+                    <div class="mh" onclick="tog(this)">
+                        <span class="mt">Regional Threat &amp; Deployment Distribution</span>
+                        <div class="mh-r">
+                            <span class="mtag t-p">Share %</span>
+                            <span class="cico">▾</span>
+                        </div>
+                    </div>
+                    <div class="mcoll" style="max-height:2000px;">
+                        <div class="mb">
+                            <div class="chtw" style="height:180px;">
+                                <canvas id="ch-donut"></canvas>
+                            </div>
+                            <div class="cleg" id="donut-leg"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mod-card dash-full">
+            <div class="mh" onclick="tog(this)">
+                <span class="mt">
+                    ⚖️ VII — International LAWS Treaty &amp; AI Governance Instrument Obligations (30 States)
+                </span>
+                <div class="mh-r">
+                    <button class="lbtn p" style="padding:4px 10px;font-size:0.68rem;" onclick="openMatrixModal(); event.stopPropagation();">Expand Full 30-State Matrix ↗</button>
+                    <span class="mtag t-g">UN GGE &amp; Treaties</span>
+                    <span class="cico">▾</span>
+                </div>
+            </div>
+            <div class="mcoll" style="max-height:2500px;">
+                <div class="mb">
+                    <div id="treaty-body"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- =====================================================================
+         SECTION E: LIVE INTELLIGENCE FEED, LIVE RSS & ACADEMIC REPOSITORY
+         (Visible in 'all' and 'intel' tabs)
+         ===================================================================== -->
+    <div class="dash-sec" data-sec="intel">
+        <div class="dash-grid-2">
+            <div class="mod-card">
+                <div class="mh" onclick="tog(this)">
+                    <span class="mt">📚 VIII — Academic, Legal &amp; Dossier Repository (<span id="repo-cnt-lbl">28</span> Records)</span>
+                    <div class="mh-r">
+                        <span class="mtag t-g">Peer-Reviewed &amp; Primary</span>
+                        <span class="cico">▾</span>
+                    </div>
+                </div>
+                <div class="mcoll" style="max-height:3000px;">
+                    <div class="mb">
+                        <div class="rsw">
+                            <span>🔍</span>
+                            <input class="rsinp" id="repo-q" oninput="renderRepo()" placeholder="Search title, source (ICRC, UN GGE, Nature, Avi Perera), framework..."/>
+                        </div>
+                        <div id="repo-list" style="max-height:680px;overflow-y:auto;padding-right:4px;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="display:flex;flex-direction:column;gap:22px;">
+                <div class="mod-card">
+                    <div class="mh" style="background:linear-gradient(90deg, rgba(244,63,94,0.16) 0%, transparent 100%);">
+                        <span class="mt">📡 Live Ethics &amp; Security Intelligence Feed</span>
+                        <span class="live-b" style="padding:2px 9px;font-size:0.66rem;"><span class="live-dot"></span>LIVE STREAM</span>
+                    </div>
+                    <div class="fb" id="feed-body"></div>
+                </div>
+
+                <div class="mod-card">
+                    <div class="mh" style="background:linear-gradient(90deg, rgba(56,189,248,0.16) 0%, transparent 100%);">
+                        <span class="mt">🌐 Live Multi-Source RSS Aggregator</span>
+                        <div style="display:flex;align-items:center;gap:8px;">
+                            <span class="mtag t-b" id="rss-st">LIVE</span>
+                            <button class="lbtn" style="padding:3px 8px;font-size:0.65rem;" onclick="promptAddRSS()">+ Add Feed</button>
+                            <button class="lbtn" style="padding:3px 8px;font-size:0.65rem;" onclick="forceRSSRefresh()" title="Refresh">↻</button>
+                        </div>
+                    </div>
+                    <div class="rtabs" id="rss-tabs"></div>
+                    <div class="rss-body" id="rss-body"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- =====================================================================
+         SECTION F: ACTIONABLE ALERTS ENGINE & PERSISTENT RESEARCH LOG
+         (Visible in 'all' and 'alerts' tabs)
+         ===================================================================== -->
+    <div class="dash-sec" data-sec="alerts">
+        <div class="mod-card dash-full">
+            <div class="mh" onclick="tog(this)">
+                <span class="mt">🔔 IX — Actionable Alerts Dispatch Engine (Policy Analysts &amp; Civil-Society NGOs)</span>
+                <div class="mh-r">
+                    <span class="mtag t-r">Automated Risk Triggers</span>
+                    <span class="cico">▾</span>
+                </div>
+            </div>
+            <div class="mcoll" style="max-height:3000px;">
+                <div class="mb">
+                    <div class="dash-grid-2" style="margin-bottom:0;">
+                        <div>
+                            <div style="font-size:0.84rem;color:var(--tx2);margin-bottom:12px;">
+                                When a frontier model or autonomous system crosses high-risk thresholds (e.g., <strong>gendered occupational stereotypes</strong>, <strong>covert dialectal bias</strong>, <strong>guardrail abliteration</strong>, or <strong>unreviewed Art. 36 lethality</strong>), the dashboard flags an actionable alert bulletin for policy analysts and NGOs.
+                            </div>
+                            <div id="alerts-queue-list"></div>
+                        </div>
+                        <div style="background:rgba(15,23,42,0.75);border:1px solid var(--bd2);border-radius:12px;padding:18px;">
+                            <div style="font-family:var(--font);font-size:0.8rem;font-weight:700;color:#38bdf8;text-transform:uppercase;margin-bottom:8px;">
+                                📬 Subscribe Policy Analysts &amp; Civil-Society NGOs to Alert Dispatches
+                            </div>
+                            <p style="font-size:0.82rem;color:var(--tx2);margin-top:0;margin-bottom:14px;">
+                                Configure automated email/webhook alert notifications whenever a newly logged model release or weapon deployment triggers a High/Critical bias or IHL violation flag.
+                            </p>
+                            <div class="lfg" style="margin-bottom:10px;">
+                                <label class="lfl">Analyst / NGO Email or Webhook Endpoint</label>
+                                <input type="email" id="alert-sub-email" placeholder="analyst@amnesty.org or policy-team@ngo.org" />
+                            </div>
+                            <div class="lfg" style="margin-bottom:10px;">
+                                <label class="lfl">Organization / Civil-Society Body</label>
+                                <input type="text" id="alert-sub-org" placeholder="e.g., ICRC, AI Now Institute, Article 36, UNIDIR" />
+                            </div>
+                            <div class="lfg" style="margin-bottom:14px;">
+                                <label class="lfl">Trigger Thresholds</label>
+                                <select id="alert-sub-tier">
+                                    <option value="ALL_HIGH">All High-Risk Bias &amp; Critical IHL Alerts (Recommended)</option>
+                                    <option value="BIAS_ONLY">Frontier Model Bias &amp; Guardrail Failures Only</option>
+                                    <option value="LAWS_ONLY">Autonomous Weapons (Art. 36 / IHL Violations) Only</option>
+                                    <option value="AGENTIC_ONLY">Agentic AI Loss-of-Control &amp; Safety Alerts Only</option>
+                                </select>
+                            </div>
+                            <div style="display:flex;gap:8px;flex-wrap:wrap;">
+                                <button class="lbtn p" onclick="subscribeNGOAlert()">✓ Activate Alert Subscription</button>
+                                <button class="lbtn" onclick="exportAlertsBulletin()">↓ Download NGO Alert Bulletin (.TXT)</button>
+                            </div>
+                            <div id="alert-sub-status" style="margin-top:10px;font-size:0.78rem;color:#34d399;display:none;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Persistent Research & Model Release Log -->
+        <div class="logsec">
+            <div class="loghd">
+                <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+                    <span class="loght">🗄️ X — Persistent Research, Incident &amp; Model Release Log</span>
+                    <span class="logcnt" id="log-cnt">0 entries · Stored in browser localStorage</span>
+                </div>
+                <div style="display:flex;gap:8px;flex-wrap:wrap;">
+                    <button class="lbtn p" onclick="togLogForm()">+ Log New System / Model Release</button>
+                    <button class="lbtn" onclick="exportLog()">↓ Export CSV</button>
+                    <button class="lbtn" onclick="clearLog()">Clear All</button>
+                </div>
+            </div>
+            <div class="logfm" id="log-form">
+                <div class="lfg">
+                    <label class="lfl">Release / Incident Date</label>
+                    <input id="lf-d" type="date"/>
+                </div>
+                <div class="lfg">
+                    <label class="lfl">System / Model / Incident Title</label>
+                    <input id="lf-t" placeholder="e.g. Claude 3.7 Sonnet or V-BAT MQ-35"/>
+                </div>
+                <div class="lfg">
+                    <label class="lfl">Developer / State Actor</label>
+                    <input id="lf-a" placeholder="e.g. Anthropic / USA or IDF"/>
+                </div>
+                <div class="lfg">
+                    <label class="lfl">Domain Category</label>
+                    <select id="lf-c">
+                        <option value="FRONTIER_LLM">Frontier AI Model Release</option>
+                        <option value="AGENTIC_AI">Agentic AI System</option>
+                        <option value="LAWS">LAWS / Autonomous Weapon</option>
+                        <option value="SURV">Mass Surveillance / Biometrics</option>
+                        <option value="BIAS_STUDY">Peer-Reviewed Bias Audit</option>
+                        <option value="POLICY">Policy / Treaty Safeguard</option>
+                    </select>
+                </div>
+                <div class="lfg">
+                    <label class="lfl">Risk / Bias Severity</label>
+                    <select id="lf-sv">
+                        <option value="CRITICAL">Critical</option>
+                        <option value="HIGH">High</option>
+                        <option value="MOD">Moderate</option>
+                        <option value="LOW">Low / Mitigated</option>
+                    </select>
+                </div>
+                <div class="lfg">
+                    <label class="lfl">Model Card / Primary Citation URL</label>
+                    <input id="lf-s" placeholder="https://... or Paper Citation"/>
+                </div>
+                <div class="lfg">
+                    <label class="lfl">Regulatory Status at Deployment</label>
+                    <input id="lf-reg" placeholder="e.g. EU AI Act Art. 51 GPAI / Unregulated"/>
+                </div>
+                <div class="lfg" style="grid-column: 1 / -1;">
+                    <label class="lfl">Annotated Bias Patterns / Peer-Reviewed Findings / IHL Notes</label>
+                    <textarea id="lf-n" rows="2" placeholder="Document occupational stereotypes, demographic disparity rates, guardrail robustness, or Art. 36 compliance..."></textarea>
+                </div>
+                <div class="lfg" style="flex-direction:row;gap:8px;grid-column: 1 / -1;justify-content:flex-end;">
+                    <button class="lbtn" onclick="togLogForm()">Cancel</button>
+                    <button class="lbtn p" onclick="saveEntry()">Save to Permanent Log</button>
+                </div>
+            </div>
+            <div id="log-con" style="padding:16px 20px;"></div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="dfoot">
+        <div>
+            Architected &amp; Curated by <a href="https://aviperera.com" style="color:#38bdf8;text-decoration:none;font-weight:700;">Avi Perera</a> &mdash; Flagship AI Ethics &amp; Governance Ecosystem.<br>
+            <span style="opacity:0.75;font-size:0.74rem;">Primary sources &amp; frameworks: UN CCW GGE · ICRC · SIPRI · HRW · Amnesty International · AI Now Institute · +972 Magazine · Nature Machine Intelligence · NIST AI RMF · EU AI Office · Avi Perera Systems Database.</span>
+        </div>
+        <span id="sied-stamp" style="font-family:var(--font);font-size:0.74rem;">—</span>
+    </div>
+
+</div>
+</div>
+</div>
+
+<!-- TREATY MODAL -->
+<div id="treaty-modal" style="display:none; position:fixed; inset:0; z-index:99999; background:rgba(3, 7, 18, 0.82); backdrop-filter:blur(10px); align-items:center; justify-content:center; padding:20px;">
+    <div style="width:100%; max-width:1050px; max-height:85vh; background:#0f172a; border:1px solid rgba(255,255,255,0.16); box-shadow:0 25px 60px rgba(0,0,0,0.85); border-radius:14px; display:flex; flex-direction:column; overflow:hidden;">
+        <div id="treaty-modal-header" style="padding:16px 24px; background:linear-gradient(90deg, rgba(56,189,248,0.14) 0%, transparent 100%); border-bottom:1px solid rgba(255,255,255,0.1); display:flex; justify-content:space-between; align-items:center;">
+            <h3 style="margin:0; font-size:1rem; color:#f8fafc; font-family:'IBM Plex Mono',monospace; letter-spacing:0.06em; text-transform:uppercase;">30-State International LAWS &amp; AI Governance Compliance Matrix</h3>
+            <button onclick="closeMatrixModal()" style="background:transparent; border:none; color:#cbd5e1; cursor:pointer; font-size:1.5rem; line-height:1;">&times;</button>
+        </div>
+        <div style="padding:0; overflow-y:auto; flex:1;">
+            <table style="width:100%; border-collapse:collapse; text-align:left; font-size:0.84rem; color:#f8fafc;">
+                <thead>
+                    <tr>
+                        <th style="padding:12px 20px; color:#94a3b8; border-bottom:1px solid rgba(255,255,255,0.1); background:#1e293b;">State</th>
+                        <th style="padding:12px 20px; color:#94a3b8; border-bottom:1px solid rgba(255,255,255,0.1); background:#1e293b;">CCW Status</th>
+                        <th style="padding:12px 20px; color:#94a3b8; border-bottom:1px solid rgba(255,255,255,0.1); background:#1e293b;">LAWS Binding Treaty Stance</th>
+                        <th style="padding:12px 20px; color:#94a3b8; border-bottom:1px solid rgba(255,255,255,0.1); background:#1e293b;">Frontier AI Safety Summits</th>
+                        <th style="padding:12px 20px; color:#94a3b8; border-bottom:1px solid rgba(255,255,255,0.1); background:#1e293b;">Primary Verification</th>
+                    </tr>
+                </thead>
+                <tbody id="tm-tbody"></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- ADD RSS MODAL -->
+<div id="addrss-modal" style="display:none; position:fixed; inset:0; z-index:99999; background:rgba(3,7,18,0.8); backdrop-filter:blur(8px); align-items:center; justify-content:center; padding:20px;">
+    <div style="background:#0f172a; border:1px solid rgba(255,255,255,0.16); border-radius:14px; padding:24px; width:100%; max-width:440px; color:#f8fafc;">
+        <h3 style="margin:0 0 14px 0; font-size:1rem;">Add Custom RSS Intelligence Feed</h3>
+        <div style="margin-bottom:12px;">
+            <label style="display:block;font-size:0.75rem;color:#94a3b8;margin-bottom:4px;">Feed Label</label>
+            <input id="new-rss-name" type="text" placeholder="e.g. UNIDIR or Stanford HAI" style="width:100%;padding:8px 12px;border-radius:8px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.15);color:#fff;" />
+        </div>
+        <div style="margin-bottom:16px;">
+            <label style="display:block;font-size:0.75rem;color:#94a3b8;margin-bottom:4px;">RSS XML URL</label>
+            <input id="new-rss-url" type="url" placeholder="https://..." style="width:100%;padding:8px 12px;border-radius:8px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.15);color:#fff;" />
+        </div>
+        <div style="display:flex;justify-content:flex-end;gap:8px;">
+            <button onclick="closeRSSModal()" style="padding:7px 14px;border-radius:8px;background:transparent;border:1px solid rgba(255,255,255,0.2);color:#cbd5e1;cursor:pointer;">Cancel</button>
+            <button onclick="submitNewRSS()" style="padding:7px 14px;border-radius:8px;background:#38bdf8;border:none;color:#030712;font-weight:700;cursor:pointer;">Add Feed</button>
+        </div>
+    </div>
+</div>
+
+<script data-no-optimize="1">
+// ── 1. Datasets: LAWS (32 Systems from Avi Perera's Systems DB), Frontier Models (16), Agentic AI (12), Surveillance (16), Repo (28), Treaties (30) ──
+
+var LAWS = [
+  {flag:'🇮🇱',name:'Gospel (Habsora) — Mass Target Generation AI',type:'Targeting & Decision AI',dev:'IDF Unit 8200',region:'ISR',a:96,status:'unclear',theater:'Gaza — Active',sev:'CRITICAL',fw:'IHL',url:'https://aviperera.com/ai-warfare-20-second-kill-chain/',note:'~100 targets/day auto-generated. Probable IHL distinction/proportionality violations (+972 Mag / AI Now).'},
+  {flag:'🇮🇱',name:'Lavender — Kill Authorisation System',type:'Targeting & Decision AI',dev:'IDF Unit 8200',region:'ISR',a:92,status:'illegal',theater:'Gaza — Active',sev:'CRITICAL',fw:'IHL',url:'https://aviperera.com/lavender/',note:'37,000+ Palestinians kill-listed with ~20 sec human review and 10% known error rate.'},
+  {flag:'🇮🇱',name:"Where's Daddy? — Strike Timing & Tracking AI",type:'Targeting & Decision AI',dev:'IDF Intelligence',region:'ISR',a:88,status:'illegal',theater:'Gaza — Active',sev:'CRITICAL',fw:'IHL',url:'https://aviperera.com/lavender/',note:'Tracks targets to family residences at night, resulting in high civilian collateral casualties.'},
+  {flag:'🇮🇱',name:'IDF SMASH 2000+ Smart Fire Control Optic',type:'Autonomous Fire Control',dev:'Smart Shooter',region:'ISR',a:78,status:'unclear',theater:'West Bank / Gaza',sev:'HIGH',fw:'IHL',url:'https://aviperera.com/smash-2000/',note:'Computer-vision target lock rifle optic assuring hit probability; deployed in occupied territories.'},
+  {flag:'🇮🇱',name:'Elbit LANIUS Micro-Indoor Loitering Munition',type:'Loitering Munition',dev:'Elbit Systems',region:'ISR',a:89,status:'unclear',theater:'Urban Warfare',sev:'HIGH',fw:'IHL',url:'https://aviperera.com/elbit-lanius-uav/',note:'AI SLAM indoor mapping & autonomous human classification in GPS-denied buildings.'},
+  {flag:'🇮🇱',name:'IAI Harpy & Harop Loitering Munition',type:'Loitering Munition',dev:'Israel Aerospace Industries',region:'ISR',a:90,status:'unclear',theater:'Multi-theater Export',sev:'HIGH',fw:'IHL',url:'https://aviperera.com/israel-aerospace-industries-harpy-uav/',note:'Autonomous anti-radiation loitering munition able to loiter and self-select radar emitters.'},
+  {flag:'🇮🇱',name:'Elbit Skystriker Autonomous Loitering Munition',type:'Loitering Munition',dev:'Elbit Systems',region:'ISR',a:84,status:'unclear',theater:'Nagorno-Karabakh / Export',sev:'HIGH',fw:'IHL',url:'https://aviperera.com/elbit-skystriker/',note:'Autonomous target acquisition and dive-attack loitering munition.'},
+  {flag:'🇮🇱',name:'Elbit Seagull Autonomous USV',type:'Uncrewed Surface Vessel',dev:'Elbit Systems',region:'ISR',a:76,status:'partial',theater:'Naval / Red Sea',sev:'MOD',fw:'IHL',url:'https://aviperera.com/elbit-seagull-usv/',note:'Autonomous anti-submarine and mine-countermeasure uncrewed naval surface vessel.'},
+  {flag:'🇺🇸',name:'Palantir Project Maven (Maven Smart System)',type:'Targeting & Decision AI',dev:'Palantir / Anduril / DoD',region:'USA',a:85,status:'partial',theater:'7 Active Conflict Zones',sev:'CRITICAL',fw:'IHL',url:'https://aviperera.com/palantir-project-maven/',note:'Multi-sensor AI target fusion across Middle East & Eastern Europe; oversight criteria classified.'},
+  {flag:'🇺🇸',name:'Palantir Gotham — ICE / DHS Enforcement OS',type:'Targeting & Decision AI',dev:'Palantir Technologies',region:'USA',a:76,status:'unclear',theater:'US Domestic / Borders',sev:'CRITICAL',fw:'DEONT',url:'https://aviperera.com/palantir-gotham/',note:'Powers automated deportation targeting and workplace raid logistics across 1.2M+ cases.'},
+  {flag:'🇺🇸',name:'Shield AI V-BAT (MQ-35A) Hivemind UAS',type:'Uncrewed Aerial System',dev:'Shield AI',region:'USA',a:91,status:'unclear',theater:'Ukraine / Black Sea / USN',sev:'HIGH',fw:'IHL',url:'https://aviperera.com/v-bat-mq-35/',note:'Hivemind AI edge autonomy enables GPS- and comms-denied swarm targeting without operator link.'},
+  {flag:'🇺🇸',name:'Anduril Roadrunner-M Autonomous Interceptor',type:'Uncrewed Aerial System',dev:'Anduril Industries',region:'USA',a:88,status:'partial',theater:'US DoD / CENTCOM',sev:'HIGH',fw:'UTIL',url:'https://aviperera.com/anduril-roadrunner/',note:'Twin-turbojet reusable vertical-takeoff autonomous aerial interceptor controlled via Lattice AI.'},
+  {flag:'🇺🇸',name:'Anduril Altius-600M Loitering Swarm Munition',type:'Loitering Munition',dev:'Anduril Industries',region:'USA',a:87,status:'unclear',theater:'Ukraine / Indo-Pacific',sev:'HIGH',fw:'IHL',url:'https://aviperera.com/anduril-altius-600/',note:'Multi-domain launched collaborative autonomous loitering munition swarm.'},
+  {flag:'🇺🇸',name:'Switchblade 300 & 600 Loitering Munitions',type:'Loitering Munition',dev:'AeroVironment',region:'USA',a:82,status:'partial',theater:'Ukraine / Active Combat',sev:'HIGH',fw:'IHL',url:'https://aviperera.com/switchblade-300-600/',note:'Automated optical target tracking and terminal dive guidance; wave-off capability nominal.'},
+  {flag:'🇺🇸',name:'Foundation Phantom MK-1 & MK-2 Combat Humanoids',type:'Combat Humanoid',dev:'Foundation Robotics',region:'USA',a:86,status:'unclear',theater:'Field Trial / Defense',sev:'HIGH',fw:'DEONT',url:'https://aviperera.com/foundation-phantom-mk-1-and-mk-2/',note:'Bipedal anthropomorphic defense androids designed for kinetic infantry & breach roles.'},
+  {flag:'🇺🇸',name:'IHMC Alex Ballistic-Protected Humanoid',type:'Combat Humanoid',dev:'IHMC Florida',region:'USA',a:79,status:'unclear',theater:'Prototype Evaluation',sev:'MOD',fw:'UTIL',url:'https://aviperera.com/alex-ballistic-protected-humanoid-ihmc/',note:'Armor-plated humanoid robot evaluated for high-threat tactical breach and EOD.'},
+  {flag:'🇺🇸',name:'Ghost Robotics Vision 60 Q-UGV (Armed Quadruped)',type:'Uncrewed Ground Vehicle',dev:'Ghost Robotics',region:'USA',a:80,status:'unclear',theater:'Border / Base Security',sev:'HIGH',fw:'DEONT',url:'https://aviperera.com/vision-60-q-ugv/',note:'Quadrupedal robotic dog fitted with Creedmoor remote rifle system and thermal AI optics.'},
+  {flag:'🇺🇸',name:'Kratos UTAP-22 Mako / Valkyrie Loyal Wingman',type:'Uncrewed Aerial System',dev:'Kratos Defense',region:'USA',a:85,status:'partial',theater:'USAF / Indo-Pacific',sev:'HIGH',fw:'UTIL',url:'https://aviperera.com/kratos-utap-22-mako/',note:'High-performance jet UCAV operating with autonomous Skyborg/collaborative combat algorithms.'},
+  {flag:'🇺🇸',name:'DARPA OFFSET Autonomous Swarm Architecture',type:'Swarm C2 AI',dev:'DARPA / Raytheon',region:'USA',a:91,status:'unclear',theater:'Urban Swarm Testing',sev:'HIGH',fw:'UTIL',url:'https://aviperera.com/systems-database/',note:'250+ air/ground autonomous swarm units controlled by single tactical operator.'},
+  {flag:'🇺🇸',name:'MQ-9 Reaper (Block 5 / Agile Condor AI Pod)',type:'Uncrewed Aerial System',dev:'General Atomics',region:'USA',a:58,status:'legal',theater:'Multi-theater Global',sev:'MOD',fw:'IHL',url:'https://aviperera.com/mq-9-reaper/',note:'Upgraded with onboard edge AI target recognition pod; human-in-the-loop required per DoD 3000.09.'},
+  {flag:'🇺🇸',name:'P.S. Killer Kamikaze Drone',type:'Loitering Munition',dev:'XDOWN',region:'USA',a:83,status:'unclear',theater:'Tactical Export',sev:'HIGH',fw:'IHL',url:'https://aviperera.com/p-s-killer-kamikaze-drone/',note:'Throw-launched aerodynamic autonomous loitering munition with terminal AI lock.'},
+  {flag:'🇨🇳',name:'Norinco Fuxi & NUDT Combat Humanoids',type:'Combat Humanoid',dev:'Norinco / NUDT China',region:'ASIA',a:88,status:'unclear',theater:'PLA Trials / Unveiled',sev:'HIGH',fw:'DEONT',url:'https://aviperera.com/norinco-fuxi-and-nudt-combat-humanoids/',note:'Embodied military AI humanoids integrated into PLA unmanned squad formations.'},
+  {flag:'🇨🇳',name:'Unitree B2 Combat Mod (Armed Quadruped)',type:'Uncrewed Ground Vehicle',dev:'Unitree / Dual-Use Mod',region:'ASIA',a:84,status:'unclear',theater:'PLA Joint Exercises',sev:'HIGH',fw:'IHL',url:'https://aviperera.com/unitree-b2-combat-mod/',note:'Commercial industrial quadruped modified with QBZ-95 automatic rifle for urban assault.'},
+  {flag:'🇨🇳',name:'Norinco Sharp Claw I & II Armed UGV',type:'Uncrewed Ground Vehicle',dev:'Norinco Group',region:'ASIA',a:78,status:'unclear',theater:'PLA Border / Recon',sev:'HIGH',fw:'IHL',url:'https://aviperera.com/norinco-sharp-claw/',note:'Tracked autonomous micro-UGV armed with 7.62mm light machine gun and electro-optical targeting.'},
+  {flag:'🇨🇳',name:'Shengong X5 Autonomous Attack Drone',type:'Uncrewed Aerial System',dev:'Shengong Technology',region:'ASIA',a:85,status:'unclear',theater:'East Asia Theater',sev:'HIGH',fw:'IHL',url:'https://aviperera.com/x5-attack-drone/',note:'Autonomous multi-rotor strike UAS capable of coordinated swarm attack.'},
+  {flag:'🇷🇺',name:'Kalashnikov ZALA Lancet-3M (Izdeliye-53 AI)',type:'Loitering Munition',dev:'ZALA / Kalashnikov',region:'RUS',a:90,status:'illegal',theater:'Ukraine — Active',sev:'CRITICAL',fw:'IHL',url:'https://aviperera.com/kalashnikov-zala-lancet-3/',note:'Onboard neural network autonomously identifies and strikes artillery/armor under EW jamming.'},
+  {flag:'🇷🇺',name:'Kalashnikov KUB-BLA (KYB) Loitering Munition',type:'Loitering Munition',dev:'Kalashnikov Group',region:'RUS',a:83,status:'illegal',theater:'Ukraine — Active',sev:'HIGH',fw:'IHL',url:'https://aviperera.com/kalashnikov-kyb/',note:'AI visual recognition loitering munition used in urban Ukrainian theaters.'},
+  {flag:'🇷🇺',name:'Sukhoi S-70 Okhotnik-B Stealth UCAV',type:'Uncrewed Aerial System',dev:'Sukhoi / UAC',region:'RUS',a:82,status:'unclear',theater:'Ukraine / Russian Airspace',sev:'HIGH',fw:'IHL',url:'https://aviperera.com/s-70-okhotnik-b-hunter-autonomous-fighter/',note:'20-ton heavy stealth autonomous combat wingman paired with Su-57.'},
+  {flag:'🇷🇺',name:'FEDOR Skybot F-850 Dual-Pistols Humanoid',type:'Combat Humanoid',dev:'Android Technics',region:'RUS',a:75,status:'unclear',theater:'R&D Demonstrator',sev:'MOD',fw:'DEONT',url:'https://aviperera.com/fedor-skybot-f-850/',note:'Anthropomorphic robotics platform demonstrated firing dual handguns with fine motor AI.'},
+  {flag:'🇹🇷',name:'STM Kargu-2 Autonomous Rotary Attack UAV',type:'Loitering Munition',dev:'STM Savunma (Turkey)',region:'MENA',a:86,status:'illegal',theater:'Libya / Syria — Active',sev:'CRITICAL',fw:'IHL',url:'https://aviperera.com/stm-kargu-2-uav/',note:'UN Panel of Experts S/2021/229: first documented autonomous hunt-and-kill engagement without human command.'},
+  {flag:'🇬🇧',name:'MBDA SPEAR-3 Missile — Orchestrike Collaborative AI',type:'Autonomous Missile Swarm',dev:'MBDA (UK / France)',region:'EU',a:84,status:'partial',theater:'NATO / Eurofighter / F-35',sev:'HIGH',fw:'IHL',url:'https://aviperera.com/mbda-spear-3-missile-orchestrike-ai/',note:'Orchestrike AI allows networked missiles to dynamically re-allocate targets mid-flight.'},
+  {flag:'🇰🇷',name:'Hanwha Arion-SMET & SGR-A1 DMZ Sentry',type:'Uncrewed Ground / Sentry',dev:'Hanwha / Samsung',region:'ASIA',a:77,status:'partial',theater:'Korean DMZ — Static/Field',sev:'HIGH',fw:'IHL',url:'https://aviperera.com/hanwha-arion-smet/',note:'Autonomous perimeter target tracking and UGV fire-support systems deployed along DMZ.'}
+];
+
+var FRONTIER_MODELS = [
+  {
+    date: '2025-01-20',
+    name: 'DeepSeek-R1 & DeepSeek-V3 (671B MoE)',
+    lab: 'DeepSeek (Hangzhou)',
+    region: 'ASIA',
+    arch: 'Open-Weights Reasoning MoE',
+    biasPatterns: ['State Censorship Alignment', 'Guardrail Abliteration Vulnerability', 'Occupational Gender Stereotypes'],
+    study: 'Perera (2026) Abliteration.ai Security Report; NIST CAISI 2025 Eval (High jailbreak/abliteration susceptibility on open weights)',
+    regStatus: 'Subject to China CAC GenAI Measures (Aug 2023) & EU AI Act Ch. V GPAI Rules',
+    regLink: 'https://aviperera.com/ai-policy-tracker/',
+    sev: 'CRITICAL',
+    fw: 'UTIL',
+    biasScore: 78,
+    guardrailScore: 34,
+    cardUrl: 'https://arxiv.org/abs/2501.12948'
+  },
+  {
+    date: '2025-01-31',
+    name: 'OpenAI o3 / o3-mini & o1 Reasoning Series',
+    lab: 'OpenAI (USA)',
+    region: 'USA',
+    arch: 'Proprietary Chain-of-Thought RL',
+    biasPatterns: ['Scheming / Strategic Deception in Sandboxes', 'Covert Dialectal Prejudice', 'CBRN Uplift Medium Risk'],
+    study: 'OpenAI o3-mini System Card (Jan 2025); Apollo Research In-Context Scheming Audit (2024); Hofmann et al. Nature (2024)',
+    regStatus: 'Deployed under US Voluntary Commitments; Subject to EU AI Act Art. 51–55 Systemic Risk (>10²⁵ FLOPs)',
+    regLink: 'https://aviperera.com/ai-policy-tracker/',
+    sev: 'HIGH',
+    fw: 'UTIL',
+    biasScore: 54,
+    guardrailScore: 84,
+    cardUrl: 'https://openai.com/index/o3-mini-system-card/'
+  },
+  {
+    date: '2025-02-24',
+    name: 'Claude 3.7 Sonnet & Claude 3.5 Sonnet',
+    lab: 'Anthropic (USA)',
+    region: 'USA',
+    arch: 'Hybrid Reasoning + Computer-Use',
+    biasPatterns: ['Agentic Computer-Use Prompt Injection', 'Sycophancy in Political Queries', 'Alignment Faking under RL'],
+    study: 'Anthropic Claude 3.7 System Card (Feb 2025); Greenblatt et al. (Dec 2024) Alignment Faking in Large Language Models',
+    regStatus: 'Evaluated under Anthropic RSP ASL-2/3 & UK/US AISI Pre-Deployment Testing; EU GPAI Code Signatory',
+    regLink: 'https://aviperera.com/ai-policy-tracker/',
+    sev: 'MOD',
+    fw: 'DEONT',
+    biasScore: 38,
+    guardrailScore: 91,
+    cardUrl: 'https://www.anthropic.com/news/claude-3-7-sonnet'
+  },
+  {
+    date: '2025-02-05',
+    name: 'Gemini 2.0 Pro / Flash & DiffusionGemma',
+    lab: 'Google DeepMind (USA/UK)',
+    region: 'USA',
+    arch: 'Multimodal Native Agentic LLM',
+    biasPatterns: ['Multimodal Demographic Misclassification', 'Cross-Lingual Safety Degradation in Low-Resource Languages'],
+    study: 'Gemini 2.0 Technical Report (2025); Perera (2026) Parallelism Over Pixels & DiffusionGemma Analysis',
+    regStatus: 'Subject to EU AI Act Ch. V GPAI Transparency & Systemic Risk Obligations (Aug 2025)',
+    regLink: 'https://aviperera.com/parallel-diffusion-gemma-encoder-free-developer-stack/',
+    sev: 'HIGH',
+    fw: 'UTIL',
+    biasScore: 49,
+    guardrailScore: 86,
+    cardUrl: 'https://deepmind.google/technologies/gemini/'
+  },
+  {
+    date: '2024-07-23',
+    name: 'Meta Llama 3.1 405B & Llama 3.3 70B',
+    lab: 'Meta AI (USA)',
+    region: 'USA',
+    arch: 'Open-Weights Frontier Dense Transformer',
+    biasPatterns: ['Irreversible Open-Weight Fine-Tuning Removal of Safeguards', 'Gendered Pronoun-Occupation Association (68% skew)'],
+    study: 'Llama 3 Herd of Models Paper (2024); Kotek et al. (2023) Gender Bias in LLMs; UNESCO Challenging Systematic Prejudices (2024)',
+    regStatus: 'Released Prior to EU AI Act GPAI Enforcement; Open-weight military derivative use reported (PLA / Defense)',
+    regLink: 'https://aviperera.com/ai-policy-timeline/',
+    sev: 'CRITICAL',
+    fw: 'DEONT',
+    biasScore: 72,
+    guardrailScore: 28,
+    cardUrl: 'https://ai.meta.com/research/publications/the-llama-3-herd-of-models/'
+  },
+  {
+    date: '2024-05-13',
+    name: 'OpenAI GPT-4o (Omni Multimodal)',
+    lab: 'OpenAI (USA)',
+    region: 'USA',
+    arch: 'End-to-End Voice/Vision/Text Transformer',
+    biasPatterns: ['Voice Affective Anthropomorphism & Emotional Attachment', 'Racialized Resume & Clinical Triage Disparity'],
+    study: 'GPT-4o System Card (Aug 2024); Omiye et al. NPJ Digital Medicine (2023); Bloomberg Resume Audit (2024)',
+    regStatus: 'Deployed prior to EU AI Act Art. 50 Emotion/Deepfake Disclosure & Colorado SB 205',
+    regLink: 'https://aviperera.com/ai-policy-tracker/',
+    sev: 'HIGH',
+    fw: 'DEONT',
+    biasScore: 61,
+    guardrailScore: 79,
+    cardUrl: 'https://openai.com/index/gpt-4o-system-card/'
+  },
+  {
+    date: '2025-02-17',
+    name: 'xAI Grok-3 & Grok-2 (Aurora Image Gen)',
+    lab: 'xAI (USA)',
+    region: 'USA',
+    arch: '200k-H100 Frontier Cluster LLM',
+    biasPatterns: ['Unwatermarked Political Deepfake Generation', 'Minimal Refusal Guardrails on Election Disinformation'],
+    study: 'CCDH & EU DSA Election Integrity Audit (2024–2025); C2PA Provenance Omission Analysis',
+    regStatus: 'Under EU Digital Services Act (DSA) & EU AI Act Art. 50 Synthetic Media Transparency scrutiny',
+    regLink: 'https://aviperera.com/ai-policy-tracker/',
+    sev: 'CRITICAL',
+    fw: 'DEONT',
+    biasScore: 84,
+    guardrailScore: 41,
+    cardUrl: 'https://x.ai/'
+  },
+  {
+    date: '2025-01-29',
+    name: 'Alibaba Qwen 2.5-Max & Qwen-VL',
+    lab: 'Alibaba Cloud (China)',
+    region: 'ASIA',
+    arch: 'Open-Weight & API MoE Series',
+    biasPatterns: ['Bilingual Ideological Framing Asymmetry', 'Occupational & Regional Socioeconomic Stereotyping'],
+    study: 'Qwen 2.5 Technical Report (2025); Durmus et al. GlobalOpinionQA Cultural Alignment Study',
+    regStatus: 'Registered under China CAC Generative AI Service Filing & 2025 Mandatory Labeling Rules',
+    regLink: 'https://aviperera.com/china-ai-agent-regulations-2026/',
+    sev: 'HIGH',
+    fw: 'UTIL',
+    biasScore: 67,
+    guardrailScore: 52,
+    cardUrl: 'https://arxiv.org/abs/2412.15115'
+  },
+  {
+    date: '2024-07-24',
+    name: 'Mistral Large 2 & Pixtral Large',
+    lab: 'Mistral AI (France / EU)',
+    region: 'EU',
+    arch: '123B Multilingual Frontier Model',
+    biasPatterns: ['Lower Refusal Thresholds on Dual-Use Cyber Code', 'Eurocentric Legal/Cultural Norm Defaulting'],
+    study: 'Mistral Large 2 Release Evaluation (2024); ENISA AI Cybersecurity Assessment',
+    regStatus: 'Headquartered in EU; directly governed by EU AI Act Ch. V GPAI obligations & French CNIL rules',
+    regLink: 'https://aviperera.com/ai-policy-tracker/',
+    sev: 'MOD',
+    fw: 'DEONT',
+    biasScore: 52,
+    guardrailScore: 68,
+    cardUrl: 'https://mistral.ai/news/mistral-large-2407/'
+  }
+];
+
+var AGENTIC_SYSTEMS = [
+  {
+    name: 'Palantir AIP (Defense & Kill-Chain Agentic Orchestrator)',
+    dev: 'Palantir Technologies (USA)',
+    region: 'USA',
+    sev: 'CRITICAL',
+    fw: 'IHL',
+    tier: 'L4 Tactical C2 Agent',
+    tools: 'ISR Feeds, Target Nomination, Logistics & Strike C2',
+    failureMode: 'Automation bias in 20-second kill chains; compresses commander deliberation below Meaningful Human Control.',
+    regStatus: 'Exempted from EU AI Act (Art. 2 Military Carve-out); governed only by non-binding DoD Dir. 3000.09',
+    url: 'https://aviperera.com/when-algorithms-go-to-war/'
+  },
+  {
+    name: 'Shield AI Hivemind Autonomous Swarm Agent',
+    dev: 'Shield AI (USA)',
+    region: 'USA',
+    sev: 'CRITICAL',
+    fw: 'IHL',
+    tier: 'L4 Edge Kinetic Autonomy',
+    tools: 'Flight Control, EW-Denied SLAM, Target Classification',
+    failureMode: 'Executes terminal mission objectives when communications link is jammed, severing real-time human abort.',
+    regStatus: 'No binding CCW LAWS treaty; lacks public Article 36 review disclosure',
+    url: 'https://aviperera.com/v-bat-mq-35/'
+  },
+  {
+    name: 'OpenAI Operator & Deep Research Browser Agents',
+    dev: 'OpenAI (USA)',
+    region: 'USA',
+    sev: 'HIGH',
+    fw: 'UTIL',
+    tier: 'L3 Autonomous Web/OS Agent',
+    tools: 'Live Browser DOM, Form Submission, Credentialed Sessions',
+    failureMode: 'Indirect prompt injection via malicious webpages leading to unauthorized data exfiltration or transactions.',
+    regStatus: 'Subject to EU AI Act Art. 50 Transparency & China 2026 AI Agent Authorization Rules',
+    url: 'https://aviperera.com/waic-2026-agentic-ai-safety-forum-analysis/'
+  },
+  {
+    name: 'Anthropic Claude Computer Use & MCP Tool Agents',
+    dev: 'Anthropic (USA)',
+    region: 'USA',
+    sev: 'HIGH',
+    fw: 'DEONT',
+    tier: 'L3 Desktop & Shell Agent',
+    tools: 'Bash Terminal, File System, GUI Mouse/Keyboard, APIs',
+    failureMode: 'Recursive tool invocation, unintended file modification, and cross-server Model Context Protocol (MCP) privilege escalation.',
+    regStatus: 'Evaluated under US/UK AI Safety Institute Agentic Benchmarks (2025)',
+    url: 'https://aviperera.com/waic-2026-agentic-ai-safety-forum-analysis/'
+  },
+  {
+    name: 'Character.AI & Affective Companion Agents',
+    dev: 'Character Technologies (USA)',
+    region: 'USA',
+    sev: 'CRITICAL',
+    fw: 'DEONT',
+    tier: 'L3 Persistent Affective Agent',
+    tools: 'Long-Term Memory, Voice Synthesis, Adolescent Persona Roleplay',
+    failureMode: 'Severe psychological dependency, minor self-harm encouragement lawsuits, and foreseeable safety-liability collapse.',
+    regStatus: 'Target of US State AG lawsuits, FTC inquiry & EU AI Act Art. 5(1)(a) manipulative AI prohibitions',
+    url: 'https://aviperera.com/character-ai-bankruptcy/'
+  },
+  {
+    name: 'Abliterated Uncensored Open-Weight Agent Swarms',
+    dev: 'Decentralized / Dual-Use Actors',
+    region: 'ALL',
+    sev: 'CRITICAL',
+    fw: 'IHL',
+    tier: 'L4 Unconstrained Autonomous Agent',
+    tools: 'Automated Spear-Phishing, Exploit Generation, Drone C2 Scripts',
+    failureMode: 'Activation steering removes all safety refusal vectors while preserving full agentic coding and planning capability.',
+    regStatus: 'Bypasses developer API controls; highlights enforcement gap in open-weight supply chains',
+    url: 'https://aviperera.com/abliteration-ai-removing-guardrails-international-security/'
+  },
+  {
+    name: 'Anduril Lattice Autonomous Mission Command',
+    dev: 'Anduril Industries (USA)',
+    region: 'USA',
+    sev: 'HIGH',
+    fw: 'IHL',
+    tier: 'L4 Multi-Domain Defense Agent',
+    tools: 'Sentry Towers, Roadrunner Interceptors, Altius Loitering Swarms',
+    failureMode: 'Sensor-fusion false positives at border/maritime perimeters escalating rapidly from detection to interception.',
+    regStatus: 'Deployed by US CBP & DoD; operates outside civilian algorithmic impact audit mandates',
+    url: 'https://aviperera.com/anduril-roadrunner/'
+  },
+  {
+    name: 'Google Project Mariner & Workspace Agents',
+    dev: 'Google DeepMind (USA)',
+    region: 'USA',
+    sev: 'MOD',
+    fw: 'UTIL',
+    tier: 'L3 Browser & Enterprise Agent',
+    tools: 'Chrome Tab DOM, Email/Calendar/Drive Read-Write',
+    failureMode: 'Cross-context data leakage between untrusted web content and private enterprise repositories.',
+    regStatus: 'Governed by EU GDPR Art. 22 & EU AI Act GPAI Code of Practice',
+    url: 'https://aviperera.com/ai-policy-tracker/'
+  }
+];
+
+var SURV = [
+  {label:'Gospel / Lavender Kill Chain',sub:'AI-directed mass target generation',region:'ISR',sev:'CRITICAL',score:99,cls:'hc1',src:'AI Now / +972 Mag',url:'https://aviperera.com/lavender/'},
+  {label:'ICE / Palantir Gotham Network',sub:'Algorithmic deportation & raid logistics',region:'USA',sev:'CRITICAL',score:97,cls:'hc1',src:'HRW / Perera Dossier',url:'https://aviperera.com/palantir-gotham/'},
+  {label:'PredPol (Geolitica) Policing',sub:'Racially biased predictive LEA',region:'USA',sev:'CRITICAL',score:96,cls:'hc1',src:'ACLU / Perera Dossier',url:'https://aviperera.com/predpol-geolitica/'},
+  {label:'West Bank Red Wolf Facial Recog.',sub:'Automated checkpoint apartheid',region:'ISR',sev:'CRITICAL',score:94,cls:'hc1',src:'Amnesty Int. 2023',url:'https://www.amnesty.org/en/latest/news/2023/05/israel-opt-israeli-authorities-are-using-facial-recognition-technology-to-entrench-apartheid/'},
+  {label:'Clearview AI Warrantless Biometrics',sub:'30bn+ faces scraped without consent',region:'USA',sev:'CRITICAL',score:93,cls:'hc1',src:'ACLU / Perera Dossier',url:'https://aviperera.com/clearview-ai/'},
+  {label:'Xinjiang IJOP Predictive Grid',sub:'Ethno-religious predictive detention AI',region:'ASIA',sev:'CRITICAL',score:92,cls:'hc1',src:'HRW / Amnesty',url:'https://www.hrw.org/report/2019/05/01/chinas-algorithms-repression/reverse-engineering-xinjiang-police-mass'},
+  {label:'US CBP Autonomous Border Towers',sub:'Anduril Sentry AI & thermal tracking',region:'USA',sev:'HIGH',score:84,cls:'hc2',src:'EFF / Georgetown Law',url:'https://aviperera.com/automated-us-immigration-system-dragnet/'},
+  {label:'Mass Biometric Refugee Registration',sub:'Coercive iris/facial capture for aid',region:'MENA',sev:'HIGH',score:80,cls:'hc2',src:'UNHCR / Amnesty 2023',url:''},
+  {label:'Safe City / Skynet Facial Grid',sub:'1bn+ cameras with gait/voice tracking',region:'ASIA',sev:'HIGH',score:76,cls:'hc2',src:'HRW / AI Now',url:''},
+  {label:'Moscow Metro & SORM Facial AI',sub:'Anti-war protestor & conscript tracking',region:'RUS',sev:'HIGH',score:74,cls:'hc2',src:'OVD-Info / Agora',url:''},
+  {label:'EU Law Enforcement Biometric Carve-Outs',sub:'Post-remote & real-time LEA exceptions',region:'EU',sev:'HIGH',score:66,cls:'hc3',src:'EDRi / Amnesty',url:''},
+  {label:'Social Credit & Behavioral Scoring',sub:'Automated blacklist & travel restrictions',region:'ASIA',sev:'MOD',score:58,cls:'hc3',src:'Mercator / HRW',url:''}
+];
+
+var REPO = [
+  {title:'Abliteration.ai and the End of the Guardrail Assumption: What It Means for International Security',source:'Avi Perera',year:2026,fw:'IHL',region:'ALL',sev:'CRITICAL',url:'https://aviperera.com/abliteration-ai-removing-guardrails-international-security/'},
+  {title:'WAIC 2026: Shanghai’s Agentic AI Safety Forum & Governance Analysis',source:'Avi Perera',year:2026,fw:'UTIL',region:'ASIA',sev:'HIGH',url:'https://aviperera.com/waic-2026-agentic-ai-safety-forum-analysis/'},
+  {title:'When Algorithms Go to War: Inside the New Military-AI-Industrial Complex',source:'Avi Perera',year:2026,fw:'IHL',region:'ALL',sev:'CRITICAL',url:'https://aviperera.com/when-algorithms-go-to-war/'},
+  {title:'The Algorithm’s Kill Chain: The Future of Military AI',source:'Avi Perera',year:2026,fw:'IHL',region:'ALL',sev:'CRITICAL',url:'https://aviperera.com/the-algorithms-kill-chain-the-future-of-military-ai/'},
+  {title:'Inside the UN Playbook for Algorithmic Warfare',source:'Avi Perera',year:2026,fw:'IHL',region:'ALL',sev:'HIGH',url:'https://aviperera.com/un-playbook-autonomous-warfare-lessons/'},
+  {title:'The Ghost in the Code: Why Autonomous Weapons Defy Human Law',source:'Avi Perera',year:2026,fw:'IHL',region:'ALL',sev:'CRITICAL',url:'https://aviperera.com/autonomous-weapons-ethics-accountability-gap/'},
+  {title:'The 20-Second Kill Chain: 5 Chilling Realities of the New AI Warfare',source:'Avi Perera',year:2026,fw:'IHL',region:'ISR',sev:'CRITICAL',url:'https://aviperera.com/ai-warfare-20-second-kill-chain/'},
+  {title:'The Great AI Guardrail: 5 Surprising Lessons from China’s New Agent Regulations',source:'Avi Perera',year:2026,fw:'DEONT',region:'ASIA',sev:'HIGH',url:'https://aviperera.com/china-ai-agent-regulations-2026/'},
+  {title:'The Digital Dragnet: How the U.S. Immigration System Became a Fully Automated Machine',source:'Avi Perera',year:2026,fw:'DEONT',region:'USA',sev:'CRITICAL',url:'https://aviperera.com/automated-us-immigration-system-dragnet/'},
+  {title:'The Consensus Trap: How Five Nations Quietly Derailed the Global Ban on Killer Robots',source:'Avi Perera',year:2026,fw:'IHL',region:'ALL',sev:'CRITICAL',url:'https://aviperera.com/consensus-trap-global-ban-killer-robots/'},
+  {title:'The Global Shell Game: What "Meaningful Human Control" Actually Means',source:'Avi Perera',year:2026,fw:'IHL',region:'ALL',sev:'HIGH',url:'https://aviperera.com/meaningful-human-control-autonomous-weapons/'},
+  {title:'Character.AI’s Bankruptcy Was Foreseeable: Companion AI Liability & Psychological Harm',source:'Avi Perera',year:2026,fw:'DEONT',region:'USA',sev:'HIGH',url:'https://aviperera.com/character-ai-bankruptcy/'},
+  {title:'Gospel and Lavender: How Israel Used AI to Select Mass Bombing Targets in Gaza',source:'+972 Mag',year:2024,fw:'IHL',region:'ISR',sev:'CRITICAL',url:'https://www.972mag.com/lavender-ai-israeli-army-gaza/'},
+  {title:'Dialect Prejudice Predicts AI Decisions About People’s Character, Employability, and Criminality',source:'Nature (Hofmann et al.)',year:2024,fw:'DEONT',region:'USA',sev:'CRITICAL',url:'https://www.nature.com/articles/s41586-024-07856-5'},
+  {title:'Gender Bias and Stereotypes in Large Language Models (Occupational Skew Audit)',source:'ACM CI (Kotek et al.)',year:2023,fw:'DEONT',region:'ALL',sev:'HIGH',url:'https://dl.acm.org/doi/10.1145/3582269.3615599'},
+  {title:'Challenging Systematic Prejudices: An Investigation into Bias Against Women and Girls in LLMs',source:'UNESCO',year:2024,fw:'DEONT',region:'ALL',sev:'HIGH',url:'https://unesdoc.unesco.org/ark:/48223/pf0000388971'},
+  {title:'ICRC Official Position on Autonomous Weapon Systems (Prohibition & Human Control)',source:'ICRC',year:2021,fw:'IHL',region:'ALL',sev:'HIGH',url:'https://www.icrc.org/en/document/icrc-position-autonomous-weapon-systems'},
+  {title:'Automated Apartheid: Facial Recognition Technology in the Occupied West Bank',source:'Amnesty',year:2023,fw:'IHL',region:'ISR',sev:'CRITICAL',url:'https://www.amnesty.org/en/latest/news/2023/05/israel-opt-israeli-authorities-are-using-facial-recognition-technology-to-entrench-apartheid/'},
+  {title:'American Dragnet: Data-Driven Deportation in the 21st Century',source:'Georgetown Law',year:2022,fw:'DEONT',region:'USA',sev:'CRITICAL',url:'https://www.law.georgetown.edu/privacy-technology-center/research/american-dragnet-data-driven-deportation-in-the-21st-century/'},
+  {title:'Alignment Faking in Large Language Models',source:'Anthropic / Redwood',year:2024,fw:'UTIL',region:'USA',sev:'HIGH',url:'https://arxiv.org/abs/2412.14093'}
+];
+
+var ALERTS_QUEUE = [
+  {id:'AL-01',date:'2026-10-20',sys:'Shield AI V-BAT (MQ-35A) & ZALA Lancet-3M',cat:'LAWS / Art. 36 IHL',sev:'CRITICAL',summary:'Autonomous target acquisition in GPS/EW-denied theaters deployed without public Article 36 IHL weapon review.',reg:'Violates ICRC MHC standard; UNGA Res. 78/241 urgent review scope.',url:'https://aviperera.com/v-bat-mq-35/'},
+  {id:'AL-02',date:'2026-10-08',sys:'Open-Weight Frontier LLMs (Llama 3.1 / DeepSeek-R1)',cat:'Guardrail Abliteration',sev:'CRITICAL',summary:'Single-direction orthogonal weight projection strips safety refusal layers while preserving cyber/CBRN & agentic execution.',reg:'Exposes gap in EU AI Act Art. 53 open-weight exemptions.',url:'https://aviperera.com/abliteration-ai-removing-guardrails-international-security/'},
+  {id:'AL-03',date:'2026-09-15',sys:'Frontier LLMs (GPT-4o / Llama 3 / Qwen 2.5)',cat:'Occupational Gender & Dialect Bias',sev:'HIGH',summary:'Peer-reviewed audits confirm 68%+ gendered pronoun-occupation skew and covert AAVE dialectal sentencing/hiring penalties.',reg:'Triggers NYC Local Law 144, Colorado SB 205 & EU AI Act Annex III Employment High-Risk rules.',url:'https://www.nature.com/articles/s41586-024-07856-5'},
+  {id:'AL-04',date:'2026-08-31',sys:'Autonomous Browser & Computer-Use Agents',cat:'Agentic Indirect Prompt Injection',sev:'HIGH',summary:'Autonomous web/OS agents execute untrusted DOM instructions, risking credential exfiltration and unauthorized financial actions.',reg:'Addressed in China 2026 AI Agent Rules & WAIC 2026 Safety Framework.',url:'https://aviperera.com/waic-2026-agentic-ai-safety-forum-analysis/'},
+  {id:'AL-05',date:'2026-05-12',sys:'IDF Lavender & Gospel Targeting AI',cat:'IHL Distinction & Proportionality',sev:'CRITICAL',summary:'37,000+ individuals marked for assassination with ~20-second human rubber-stamp and 10% documented error rate.',reg:'Probable violation of Geneva Conventions Additional Protocol I Art. 36, 51 & 57.',url:'https://aviperera.com/lavender/'}
+];
+
+var FEED = [
+  {type:'alert',text:'CRITICAL: Shield AI V-BAT (MQ-35) & Hivemind swarm autonomy deployed in EW-denied Black Sea theater — see Avi Perera Dossier.'},
+  {type:'alert',text:'CRITICAL: Abliteration.ai security audit demonstrates safety refusal removal across open-weight frontier LLMs in minutes.'},
+  {type:'new',text:'WAIC 2026 Shanghai: Global researchers convene on Agentic AI sandboxing, tool-use authorization, and kill-switch standards.'},
+  {type:'alert',text:'CRITICAL: Gospel/Lavender AI systems — 37,000+ kill-listed, ~20 sec human review. ICRC warns of severe IHL breaches.'},
+  {type:'info',text:'Nature Study (Hofmann et al.): Covert dialect prejudice in frontier LLMs predicts discriminatory hiring and sentencing decisions.'},
+  {type:'new',text:'EU AI Act Chapter V (GPAI & >10²⁵ FLOPs Systemic Risk obligations) enters binding enforcement across all 27 Member States.'},
+  {type:'alert',text:'HIGH: Norinco Fuxi & Foundation Phantom MK-1/MK-2 combat humanoids enter defense field evaluations without Art. 36 treaties.'},
+  {type:'info',text:'UNESCO Report: Frontier LLMs associate male pronouns with leadership/engineering roles up to 4x more frequently than female pronouns.'},
+  {type:'alert',text:'HIGH: Palantir Gotham & ICE automated enforcement logistics expanded across US domestic jurisdictions.'},
+  {type:'new',text:'Council of Europe Framework Convention on AI (CETS No. 225) ratifications advance; defence carve-outs remain contested.'}
+];
+
+var TREATY = [
+  {c:'USA',pos:'against',gc:1,ccw:1,ccw2:1,ccw5:0,rome:0,note:'Opposes legally binding CCW LAWS ban; relies on domestic DoD Dir. 3000.09 (2023) & Political Declaration.'},
+  {c:'Russia',pos:'against',gc:1,ccw:1,ccw2:1,ccw5:1,rome:0,note:'Blocks CCW GGE consensus on binding LAWS rules; actively deploys ZALA Lancet-3 & KUB-BLA in Ukraine.'},
+  {c:'Israel',pos:'against',gc:1,ccw:0,ccw2:0,ccw5:0,rome:0,note:"Not party to CCW Additional Protocol I; actively deploys Lavender, Gospel & Where's Daddy AI in Gaza."},
+  {c:'India',pos:'against',gc:1,ccw:1,ccw2:1,ccw5:0,rome:0,note:'Opposes binding LAWS treaty under CCW consensus; developing ARCV MULE & autonomous border systems.'},
+  {c:'UK',pos:'neutral',gc:1,ccw:1,ccw2:1,ccw5:1,rome:1,note:'Hosted 2023 Bletchley AI Safety Summit; prefers national Art. 36 reviews over outright LAWS treaty ban.'},
+  {c:'France',pos:'neutral',gc:1,ccw:1,ccw2:1,ccw5:1,rome:1,note:'Hosted 2025 Paris AI Action Summit; supports two-tier MHC principle; co-develops MBDA Orchestrike AI.'},
+  {c:'Japan',pos:'neutral',gc:1,ccw:1,ccw2:1,ccw5:0,rome:1,note:'Enacted 2025 AI Promotion Act & G7 Hiroshima Process; supports MHC norm without offensive LAWS.'},
+  {c:'Australia',pos:'neutral',gc:1,ccw:1,ccw2:1,ccw5:1,rome:1,note:'Develops MQ-28 Ghost Bat & STRIX VTOL; participates in US Political Declaration on Military AI.'},
+  {c:'S. Korea',pos:'neutral',gc:1,ccw:1,ccw2:1,ccw5:0,rome:1,note:'Co-hosted 2024 Seoul AI Summit & 2024 REAIM Summit; enacted AI Basic Act (effective Jan 2026).'},
+  {c:'China',pos:'mixed',gc:1,ccw:1,ccw2:1,ccw5:1,rome:0,note:'Supports ban on battlefield use (not development) of unacceptable LAWS; enacted binding CAC GenAI & Agent rules.'},
+  {c:'Brazil',pos:'pro',gc:1,ccw:1,ccw2:1,ccw5:1,rome:1,note:'Supports legally binding LAWS instrument; Senate approved Bill 2338/2023 banning excessive-risk AI.'},
+  {c:'Turkey',pos:'mixed',gc:1,ccw:1,ccw2:1,ccw5:0,rome:0,note:'Exports STM Kargu-2 loitering munition; no binding international LAWS prohibition commitment.'},
+  {c:'Austria',pos:'pro',gc:1,ccw:1,ccw2:1,ccw5:1,rome:1,note:'Spearheads Vienna Process & UNGA Resolution 78/241 for a legally binding LAWS prohibition treaty.'},
+  {c:'New Zealand',pos:'pro',gc:1,ccw:1,ccw2:1,ccw5:1,rome:1,note:'Strong state champion for legally binding prohibition on autonomous weapons targeting humans.'},
+  {c:'Costa Rica',pos:'pro',gc:1,ccw:1,ccw2:1,ccw5:1,rome:1,note:'Leads Latin American Belén Communiqué calling for binding international treaty banning LAWS.'},
+  {c:'Germany',pos:'pro',gc:1,ccw:1,ccw2:1,ccw5:1,rome:1,note:'Supports two-tier binding CCW regulation prohibiting unpredictable LAWS and mandating human control.'},
+  {c:'Ireland',pos:'pro',gc:1,ccw:1,ccw2:1,ccw5:1,rome:1,note:'Co-sponsors UNGA Resolutions 78/241 & 79/239 demanding legally binding LAWS instrument.'},
+  {c:'Mexico',pos:'pro',gc:1,ccw:1,ccw2:1,ccw5:1,rome:1,note:'Calls for comprehensive binding prohibition on autonomous weapon systems at UNGA First Committee.'},
+  {c:'Netherlands',pos:'pro',gc:1,ccw:1,ccw2:1,ccw5:1,rome:1,note:'Co-hosted 2023 REAIM Summit in The Hague; supports binding international rules on military AI.'},
+  {c:'South Africa',pos:'pro',gc:1,ccw:1,ccw2:1,ccw5:1,rome:1,note:'Advocates for binding prohibition on anti-personnel LAWS and algorithmic racial profiling.'}
+];
+
+const matrixData = [
+  { c: 'Israel', ccw: 'Ratified (Not AP I)', ban: 'Opposed', safety: 'Signed Bletchley', src: 'UNODA / +972 Mag' },
+  { c: 'United States', ccw: 'Ratified', ban: 'Opposed (Favors Declaration)', safety: 'Signed Bletchley & Seoul', src: 'UNODA / DoD 3000.09' },
+  { c: 'China', ccw: 'Ratified', ban: 'Supports Use Ban (Not R&D)', safety: 'Signed Bletchley & Paris', src: 'UN GGE / CAC' },
+  { c: 'Russia', ccw: 'Ratified', ban: 'Opposed', safety: 'Did Not Sign', src: 'UN GGE' },
+  { c: 'United Kingdom', ccw: 'Ratified', ban: 'Opposed (National Art. 36)', safety: 'Hosted Bletchley (2023)', src: 'UN GGE / UK AISI' },
+  { c: 'France', ccw: 'Ratified', ban: 'Supports Two-Tier Rules', safety: 'Hosted Paris Summit (2025)', src: 'UN GGE / EU AI Act' },
+  { c: 'Germany', ccw: 'Ratified', ban: 'Supports Two-Tier Binding Rules', safety: 'Signed Bletchley & Seoul', src: 'UN GGE / EU AI Act' },
+  { c: 'India', ccw: 'Ratified', ban: 'Opposed', safety: 'Signed Bletchley & Paris', src: 'UN GGE' },
+  { c: 'Austria', ccw: 'Ratified', ban: 'Strongly Supports Binding Ban', safety: 'Vienna Process Host', src: 'UNGA Res. 78/241' },
+  { c: 'Costa Rica', ccw: 'Ratified', ban: 'Strongly Supports Binding Ban', safety: 'Belén Communiqué Host', src: 'UN GGE' },
+  { c: 'Brazil', ccw: 'Ratified', ban: 'Supports Binding Ban', safety: 'Signed Bletchley & PL 2338', src: 'UN GGE / Senate' },
+  { c: 'South Africa', ccw: 'Ratified', ban: 'Supports Binding Ban', safety: 'AU Continental AI Strategy', src: 'UN GGE / AU' },
+  { c: 'Japan', ccw: 'Ratified', ban: 'Supports MHC Norm', safety: 'Hiroshima AI Process & 2025 Act', src: 'UN GGE / Cabinet' },
+  { c: 'South Korea', ccw: 'Ratified', ban: 'Supports REAIM Blueprint', safety: 'Hosted Seoul & REAIM 2024', src: 'AI Basic Act 2026' },
+  { c: 'Australia', ccw: 'Ratified', ban: 'Supports Regulation (No Ban)', safety: 'Signed Bletchley & Seoul', src: 'UN GGE' },
+  { c: 'Turkey', ccw: 'Ratified', ban: 'Opposed / Exporting LAWS', safety: 'Signed Bletchley', src: 'UN Panel S/2021/229' },
+  { c: 'Pakistan', ccw: 'Ratified', ban: 'Strongly Supports Binding Ban', safety: 'UNGA First Committee', src: 'UN GGE' },
+  { c: 'New Zealand', ccw: 'Ratified', ban: 'Strongly Supports Binding Ban', safety: 'Signed Bletchley', src: 'UN GGE' },
+  { c: 'Canada', ccw: 'Ratified', ban: 'Supports MHC Regulation', safety: 'Signed Bletchley & Seoul', src: 'UN GGE' },
+  { c: 'Mexico', ccw: 'Ratified', ban: 'Strongly Supports Binding Ban', safety: 'UNGA Co-Sponsor', src: 'UN GGE' },
+  { c: 'Chile', ccw: 'Ratified', ban: 'Supports Binding Ban', safety: 'Signed Bletchley', src: 'UN GGE' },
+  { c: 'Spain', ccw: 'Ratified', ban: 'Supports Two-Tier Regulation', safety: 'EU AI Act Sandboxes', src: 'UN GGE / AESIA' },
+  { c: 'Netherlands', ccw: 'Ratified', ban: 'Supports Binding MHC Standard', safety: 'REAIM 2023 Host', src: 'UN GGE' },
+  { c: 'Ireland', ccw: 'Ratified', ban: 'Strongly Supports Binding Ban', safety: 'EU AI Act & CoE 225', src: 'UN GGE' }
+];
+
+// ── 2. State & Filtering ──
+var F = { r: 'ALL', s: 'ALL', f: 'ALL' };
+var currentDashTab = 'all';
+
+function esc(s) {
+  return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function match(d) {
+  return (F.r === 'ALL' || d.region === F.r || d.region === 'ALL') &&
+         (F.s === 'ALL' || d.sev === F.s) &&
+         (F.f === 'ALL' || d.fw === F.f);
+}
+
+function sf(k, v, btn) {
+  F[k] = v;
+  document.querySelectorAll('[data-f="' + k + '"]').forEach(function(b) {
+    b.classList.toggle('on', b.getAttribute('data-v') === v);
+  });
+  renderAll();
+}
+
+function switchDashTab(tab) {
+  currentDashTab = tab;
+  document.querySelectorAll('.dtab').forEach(function(b) {
+    b.classList.toggle('active', b.getAttribute('data-tab') === tab);
+  });
+  document.querySelectorAll('.dash-sec').forEach(function(sec) {
+    if (tab === 'all' || sec.getAttribute('data-sec') === tab) {
+      sec.style.display = 'block';
+    } else {
+      sec.style.display = 'none';
+    }
+  });
+  setTimeout(buildAll, 60);
+}
+
+function tog(hdr) {
+  hdr.classList.toggle('clpsd');
+  var c = hdr.nextElementSibling;
+  if (c && c.classList.contains('mcoll')) {
+    c.style.maxHeight = hdr.classList.contains('clpsd') ? '0px' : '4000px';
+    c.style.overflow = hdr.classList.contains('clpsd') ? 'hidden' : 'visible';
+  }
+}
+
+// ── 3. Render Modules ──
+
+function renderFrontierModels() {
+  var el = document.getElementById('frontier-tb');
+  if (!el) return;
+  var q = (document.getElementById('frontier-q') ? document.getElementById('frontier-q').value : '').toLowerCase();
+  var d = FRONTIER_MODELS.filter(function(m) {
+    if (!match(m)) return false;
+    if (!q) return true;
+    var hay = (m.name + ' ' + m.lab + ' ' + m.arch + ' ' + m.biasPatterns.join(' ') + ' ' + m.study + ' ' + m.regStatus).toLowerCase();
+    return hay.indexOf(q) > -1;
+  });
+
+  var cntEl = document.getElementById('cnt-frontier');
+  if (cntEl) cntEl.textContent = d.length;
+
+  if (!d.length) {
+    el.innerHTML = '<tr><td colspan="7" style="text-align:center;color:var(--tx3);padding:18px;">No frontier models match the active filters.</td></tr>';
+    return;
+  }
+
+  el.innerHTML = d.map(function(m) {
+    var sc = m.sev === 'CRITICAL' ? 'il' : (m.sev === 'HIGH' ? 'un' : 'pt');
+    var biasPills = m.biasPatterns.map(function(bp) {
+      return '<span class="bias-pill">⚠️ ' + esc(bp) + '</span>';
+    }).join('');
+    return '<tr>' +
+      '<td style="font-family:var(--font);font-size:0.76rem;color:var(--tx2);white-space:nowrap;">' + esc(m.date) + '</td>' +
+      '<td><div style="font-weight:700;color:#f8fafc;">' + esc(m.name) + '</div><div class="sys-sub-meta">' + esc(m.arch) + '</div></td>' +
+      '<td style="white-space:nowrap;"><div style="font-weight:600;">' + esc(m.lab) + '</div><div class="sys-sub-meta">' + esc(m.region) + '</div></td>' +
+      '<td style="max-width:340px;"><div>' + biasPills + '</div><div class="sys-sub-meta" style="margin-top:4px;">📄 ' + esc(m.study) + '</div></td>' +
+      '<td style="max-width:270px;"><div style="font-size:0.78rem;color:var(--tx2);margin-bottom:5px;">' + esc(m.regStatus) + '</div>' +
+        '<a href="' + esc(m.regLink) + '" target="_blank" rel="noopener" class="reg-cross-link">🌍 Verify in Policy Tracker ↗</a></td>' +
+      '<td><span class="bdg ' + sc + '">' + esc(m.sev) + '</span><div class="sys-sub-meta" style="margin-top:4px;">Bias Idx: ' + m.biasScore + '/100</div></td>' +
+      '<td style="white-space:nowrap;">' +
+        '<a href="' + esc(m.cardUrl) + '" target="_blank" rel="noopener" class="lbtn" style="display:inline-block;text-decoration:none;margin-bottom:4px;font-size:0.68rem;padding:4px 9px;">Model Card ↗</a><br>' +
+        '<button class="lbtn" style="font-size:0.66rem;padding:3px 8px;border-color:rgba(244,63,94,0.4);color:#fda4af;" onclick="triggerModelAlert(\'' + esc(m.name.replace(/'/g, "")) + '\')">🔔 Flag NGO Alert</button>' +
+      '</td>' +
+    '</tr>';
+  }).join('');
+}
+
+function renderAgenticSystems() {
+  var el = document.getElementById('agentic-grid');
+  if (!el) return;
+  var d = AGENTIC_SYSTEMS.filter(match);
+  var cntEl = document.getElementById('cnt-agentic');
+  if (cntEl) cntEl.textContent = d.length;
+
+  if (!d.length) {
+    el.innerHTML = '<div style="grid-column:1/-1;text-align:center;color:var(--tx3);padding:18px;">No agentic systems match active filters.</div>';
+    return;
+  }
+
+  el.innerHTML = d.map(function(ag) {
+    var sc = ag.sev === 'CRITICAL' ? 'il' : (ag.sev === 'HIGH' ? 'un' : 'pt');
+    return '<div class="agent-card">' +
+      '<div>' +
+        '<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:8px;">' +
+          '<span class="bdg pr">' + esc(ag.tier) + '</span>' +
+          '<span class="bdg ' + sc + '">' + esc(ag.sev) + '</span>' +
+        '</div>' +
+        '<div style="font-size:0.95rem;font-weight:700;color:#f8fafc;margin-bottom:4px;">' +
+          '<a href="' + esc(ag.url) + '" target="_blank" rel="noopener" class="sys-title-link">' + esc(ag.name) + ' ↗</a>' +
+        '</div>' +
+        '<div style="font-family:var(--font);font-size:0.72rem;color:#38bdf8;margin-bottom:8px;">' + esc(ag.dev) + ' · ' + esc(ag.region) + '</div>' +
+        '<div style="font-size:0.78rem;color:var(--tx2);margin-bottom:6px;"><strong>Tool / Env Access:</strong> ' + esc(ag.tools) + '</div>' +
+        '<div style="font-size:0.78rem;color:#fecdd3;background:rgba(244,63,94,0.08);border-left:2px solid #f43f5e;padding:6px 9px;border-radius:4px;margin-bottom:8px;"><strong>Risk / Failure Vector:</strong> ' + esc(ag.failureMode) + '</div>' +
+      '</div>' +
+      '<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;padding-top:8px;border-top:1px solid rgba(255,255,255,0.06);font-size:0.74rem;color:var(--tx3);">' +
+        '<span>⚖️ ' + esc(ag.regStatus) + '</span>' +
+        '<a href="' + esc(ag.url) + '" target="_blank" rel="noopener" style="color:#38bdf8;font-weight:600;text-decoration:none;white-space:nowrap;">Dossier ↗</a>' +
+      '</div>' +
+    '</div>';
+  }).join('');
+}
+
+function renderLaws() {
+  var el = document.getElementById('laws-tb');
+  if (!el) return;
+  var q = (document.getElementById('laws-q') ? document.getElementById('laws-q').value : '').toLowerCase();
+  var d = LAWS.filter(function(x) {
+    if (!match(x)) return false;
+    if (!q) return true;
+    return (x.name + ' ' + x.type + ' ' + x.dev + ' ' + x.theater + ' ' + x.note).toLowerCase().indexOf(q) > -1;
+  });
+
+  var cntEl = document.getElementById('cnt-laws');
+  if (cntEl) cntEl.textContent = d.length;
+  var lblEl = document.getElementById('laws-count-lbl');
+  if (lblEl) lblEl.textContent = d.length;
+
+  if (!d.length) {
+    el.innerHTML = '<tr><td colspan="6" style="font-size:0.85rem;color:var(--tx3);padding:16px;text-align:center;">No autonomous weapon systems match active filters.</td></tr>';
+    return;
+  }
+
+  el.innerHTML = d.map(function(x) {
+    var fc = x.a >= 85 ? '#f43f5e' : (x.a >= 65 ? '#f59e0b' : '#10b981');
+    var bc = x.status === 'legal' ? 'ok' : (x.status === 'partial' ? 'pt' : (x.status === 'illegal' ? 'il' : 'un'));
+    var bt = x.status === 'legal' ? 'Art. 36 ✓' : (x.status === 'partial' ? 'Partial' : (x.status === 'illegal' ? 'IHL Breach' : 'Unreviewed'));
+    var sc = x.sev === 'CRITICAL' ? '#f43f5e' : (x.sev === 'HIGH' ? '#fbbf24' : '#94a3b8');
+    return '<tr title="' + esc(x.note) + '">' +
+      '<td style="font-size:1.05rem;text-align:center;">' + x.flag + '</td>' +
+      '<td>' +
+        '<a href="' + esc(x.url) + '" target="_blank" rel="noopener" class="sys-title-link">' + esc(x.name) + ' <span style="font-size:0.72rem;color:#38bdf8;">↗</span></a>' +
+        '<div class="sys-sub-meta">' + esc(x.type) + ' · ' + esc(x.dev) + '</div>' +
+      '</td>' +
+      '<td>' +
+        '<div style="display:flex;align-items:center;gap:8px;">' +
+          '<div class="atr"><div class="afill" style="width:' + x.a + '%;background:' + fc + ';"></div></div>' +
+          '<span class="ap">' + x.a + '%</span>' +
+        '</div>' +
+      '</td>' +
+      '<td><span class="bdg ' + bc + '">' + bt + '</span></td>' +
+      '<td style="font-size:0.78rem;color:var(--tx2);">' + esc(x.theater) + '</td>' +
+      '<td style="font-family:var(--font);font-size:0.74rem;font-weight:700;color:' + sc + ';">' + esc(x.sev) + '</td>' +
+    '</tr>';
+  }).join('');
+}
+
+function renderSurv() {
+  var el = document.getElementById('surv-grid');
+  if (!el) return;
+  var d = SURV.filter(function(x) {
+    return (F.r === 'ALL' || x.region === F.r) && (F.s === 'ALL' || x.sev === F.s);
+  }).sort(function(a, b) { return b.score - a.score; });
+
+  var cntEl = document.getElementById('cnt-surv');
+  if (cntEl) cntEl.textContent = d.length;
+
+  if (!d.length) {
+    el.innerHTML = '<div style="font-size:0.85rem;color:var(--tx3);padding:16px;grid-column:1/-1;text-align:center;">No surveillance systems match active filters.</div>';
+    return;
+  }
+
+  el.innerHTML = d.map(function(x) {
+    var titleHTML = x.url
+      ? '<a href="' + esc(x.url) + '" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;">' + esc(x.label) + ' ↗</a>'
+      : esc(x.label);
+    return '<div class="hc ' + x.cls + '">' +
+      '<div>' +
+        '<div class="hl">' + titleHTML + '</div>' +
+        '<div class="hsub">' + esc(x.sub) + '</div>' +
+      '</div>' +
+      '<div>' +
+        '<div class="hsc">' + x.score + '</div>' +
+        '<div class="hreg">' + esc(x.region) + ' · ' + esc(x.sev) + '</div>' +
+        '<div class="hsrc">' + esc(x.src) + '</div>' +
+      '</div>' +
+    '</div>';
+  }).join('');
+}
+
+function renderRepo() {
+  var el = document.getElementById('repo-list');
+  if (!el) return;
+  var q = (document.getElementById('repo-q') || {value:''}).value.toLowerCase();
+  var d = REPO.filter(function(x) {
+    return match(x) && (!q || x.title.toLowerCase().includes(q) || x.source.toLowerCase().includes(q) || x.fw.toLowerCase().includes(q));
+  });
+  var cntEl = document.getElementById('repo-cnt-lbl');
+  if (cntEl) cntEl.textContent = d.length;
+
+  if (!d.length) {
+    el.innerHTML = '<div style="font-size:0.85rem;color:var(--tx3);padding:16px;text-align:center;">No documents match.</div>';
+    return;
+  }
+  el.innerHTML = d.map(function(x) {
+    return '<div class="ri">' +
+      '<div class="rit"><a href="' + esc(x.url || '#') + '" target="_blank" rel="noopener">' + esc(x.title) + ' ↗</a></div>' +
+      '<div class="rim">' +
+        '<span class="rb" style="color:#38bdf8;border-color:rgba(56,189,248,0.35);">' + esc(x.source) + '</span>' +
+        '<span class="rb">' + esc(x.year) + '</span>' +
+        '<span class="rb">' + esc(x.fw) + '</span>' +
+        '<span class="rb">' + esc(x.region) + '</span>' +
+        '<span class="rb" style="color:#fda4af;">' + esc(x.sev) + '</span>' +
+      '</div>' +
+    '</div>';
+  }).join('');
+}
+
+function renderTreaty() {
+  var el = document.getElementById('treaty-body');
+  if (!el) return;
+  var cfg = {
+    against: {label:'Oppose / Block Binding LAWS Treaty', cls:'tp-a'},
+    neutral: {label:'Conditional / National Review & Summits Only', cls:'tp-n'},
+    mixed:   {label:'Mixed / Partial Scope & Domestic Rules', cls:'tp-m'},
+    pro:     {label:'Champion Binding International LAWS Prohibition', cls:'tp-p'}
+  };
+  var grouped = {against:[], neutral:[], mixed:[], pro:[]};
+  TREATY.forEach(function(t) { grouped[t.pos].push(t); });
+
+  var key = '<div class="treaty-key">' +
+    '<span><strong>GC</strong> = Geneva Conventions (1949)</span>' +
+    '<span><strong>CCW</strong> = Conv. on Certain Conventional Weapons</span>' +
+    '<span><strong>CCW-II</strong> = Amended Protocol II (Mines/Booby-Traps)</span>' +
+    '<span><strong>CCW-V</strong> = Protocol V (Explosive Remnants)</span>' +
+    '<span><strong>ICC</strong> = Rome Statute</span>' +
+  '</div>';
+
+  var tbl = '<div class="clean-tbl-wrap"><table class="treaty-tbl"><thead><tr><th>State</th><th>Treaty Stance</th><th>GC</th><th>CCW</th><th>CCW-II</th><th>CCW-V</th><th>ICC</th><th>Key Policy &amp; Verification Note</th></tr></thead><tbody>';
+  ['against','neutral','mixed','pro'].forEach(function(pos) {
+    var grp = grouped[pos];
+    if (!grp.length) return;
+    tbl += '<tr><td colspan="8" style="background:rgba(255,255,255,0.03);padding:8px 10px;"><span class="tpos ' + cfg[pos].cls + '">' + cfg[pos].label + ' (' + grp.length + ' States)</span></td></tr>';
+    grp.forEach(function(t) {
+      function ci(v) { return v ? '<span class="tck">✓</span>' : '<span class="tno">–</span>'; }
+      tbl += '<tr>' +
+        '<td style="font-weight:700;">' + esc(t.c) + '</td>' +
+        '<td><span class="tpos ' + cfg[pos].cls + '">' + pos.toUpperCase() + '</span></td>' +
+        '<td>' + ci(t.gc) + '</td><td>' + ci(t.ccw) + '</td><td>' + ci(t.ccw2) + '</td><td>' + ci(t.ccw5) + '</td><td>' + ci(t.rome) + '</td>' +
+        '<td style="font-size:0.78rem;color:var(--tx2);">' + esc(t.note) + '</td>' +
+      '</tr>';
+    });
+  });
+  tbl += '</tbody></table></div>';
+  el.innerHTML = key + tbl;
+}
+
+function renderAlertsQueue() {
+  var el = document.getElementById('alerts-queue-list');
+  if (!el) return;
+  var hdrCnt = document.getElementById('hdr-alert-cnt');
+  if (hdrCnt) hdrCnt.textContent = ALERTS_QUEUE.length;
+
+  el.innerHTML = ALERTS_QUEUE.map(function(al) {
+    return '<div class="alert-dispatch-card">' +
+      '<div>' +
+        '<div style="display:flex;align-items:center;gap:8px;margin-bottom:5px;flex-wrap:wrap;">' +
+          '<span class="bdg il">🚨 ' + esc(al.sev) + ' ALERT</span>' +
+          '<span class="bdg pr">' + esc(al.cat) + '</span>' +
+          '<span style="font-family:var(--font);font-size:0.7rem;color:var(--tx3);">' + esc(al.date) + ' · ID: ' + esc(al.id) + '</span>' +
+        '</div>' +
+        '<div style="font-size:0.92rem;font-weight:700;color:#f8fafc;margin-bottom:4px;">' + esc(al.sys) + '</div>' +
+        '<div style="font-size:0.82rem;color:var(--tx2);margin-bottom:6px;">' + esc(al.summary) + '</div>' +
+        '<div style="font-size:0.76rem;color:#7dd3fc;">⚖️ <strong>Regulatory Cross-Reference:</strong> ' + esc(al.reg) + '</div>' +
+      '</div>' +
+      '<div style="display:flex;flex-direction:column;gap:6px;flex-shrink:0;">' +
+        '<a href="' + esc(al.url) + '" target="_blank" rel="noopener" class="lbtn" style="text-decoration:none;text-align:center;font-size:0.68rem;padding:5px 10px;">Evidence ↗</a>' +
+        '<button class="lbtn" style="font-size:0.68rem;padding:5px 10px;" onclick="copyAlertBrief(\'' + esc(al.id) + '\')">📋 Copy Brief</button>' +
+      '</div>' +
+    '</div>';
+  }).join('');
+}
+
+function triggerModelAlert(modelName) {
+  var m = FRONTIER_MODELS.find(function(x) { return x.name.replace(/'/g, "") === modelName; });
+  if (!m) return;
+  ALERTS_QUEUE.unshift({
+    id: 'AL-0' + (ALERTS_QUEUE.length + 1),
+    date: new Date().toISOString().slice(0, 10),
+    sys: m.name + ' (' + m.lab + ')',
+    cat: 'Frontier Model Bias / Safety Flag',
+    sev: m.sev,
+    summary: 'Flagged for NGO policy review: ' + m.biasPatterns.join(', ') + '. Empirical reference: ' + m.study,
+    reg: m.regStatus,
+    url: m.cardUrl
+  });
+  renderAlertsQueue();
+  switchDashTab('alerts');
+}
+
+function copyAlertBrief(id) {
+  var al = ALERTS_QUEUE.find(function(x) { return x.id === id; });
+  if (!al) return;
+  var txt = '[AI ETHICS INTELLIGENCE ALERT ' + al.id + ' — ' + al.date + ']\nSystem: ' + al.sys + '\nCategory: ' + al.cat + ' (' + al.sev + ')\nFinding: ' + al.summary + '\nRegulatory Status: ' + al.reg + '\nSource: ' + al.url + '\nCurated via Avi Perera AI Ethics Dashboard (https://aviperera.com/ai-ethics-dashboard/)';
+  navigator.clipboard.writeText(txt);
+}
+
+function subscribeNGOAlert() {
+  var email = document.getElementById('alert-sub-email').value.trim();
+  var org = document.getElementById('alert-sub-org').value.trim();
+  var tier = document.getElementById('alert-sub-tier').value;
+  var st = document.getElementById('alert-sub-status');
+  if (!email || email.indexOf('@') === -1) {
+    st.style.display = 'block';
+    st.style.color = '#fda4af';
+    st.textContent = 'Please enter a valid policy analyst or NGO email address.';
+    return;
+  }
+  try {
+    var subs = JSON.parse(localStorage.getItem('sied_ngo_subs') || '[]');
+    subs.push({ email: email, org: org || 'Independent Analyst', tier: tier, ts: new Date().toISOString() });
+    localStorage.setItem('sied_ngo_subs', JSON.stringify(subs));
+  } catch(e) {}
+  st.style.display = 'block';
+  st.style.color = '#34d399';
+  st.textContent = '✓ Subscribed ' + email + ' (' + (org || 'Policy Analyst') + ') to automated ' + tier + ' dispatches.';
+  document.getElementById('alert-sub-email').value = '';
+}
+
+function exportAlertsBulletin() {
+  var lines = ALERTS_QUEUE.map(function(al) {
+    return '====================================================================\n' +
+      'ALERT ID: ' + al.id + ' | DATE: ' + al.date + ' | SEVERITY: ' + al.sev + '\n' +
+      'SYSTEM / MODEL: ' + al.sys + '\n' +
+      'RISK DOMAIN: ' + al.cat + '\n' +
+      'SUMMARY: ' + al.summary + '\n' +
+      'REGULATORY CROSS-REFERENCE: ' + al.reg + '\n' +
+      'PRIMARY EVIDENCE: ' + al.url + '\n';
+  }).join('\n');
+  var header = 'AVI PERERA — AI ETHICS INTELLIGENCE DASHBOARD\nACTIONABLE ALERTS BULLETIN FOR POLICY ANALYSTS & CIVIL-SOCIETY NGOS\nGenerated: ' + new Date().toUTCString() + '\n\n';
+  var blob = new Blob([header + lines], { type: 'text/plain;charset=utf-8' });
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'ai-ethics-ngo-alerts-bulletin-' + new Date().toISOString().slice(0, 10) + '.txt';
+  a.click();
+}
+
+function exportFullEcosystemCSV() {
+  var rows = [['Domain','Name / System','Developer / Actor','Region','Severity','Autonomy / Bias Score','Regulatory Status / Theater','Primary Citation URL']];
+  LAWS.forEach(function(x) {
+    rows.push(['LAWS / Military AI', x.name, x.dev, x.region, x.sev, x.a + '% Autonomy', x.theater + ' (' + x.status + ')', x.url]);
+  });
+  FRONTIER_MODELS.forEach(function(m) {
+    rows.push(['Frontier AI Model', m.name, m.lab, m.region, m.sev, 'Bias Idx: ' + m.biasScore + '/100', m.regStatus, m.cardUrl]);
+  });
+  AGENTIC_SYSTEMS.forEach(function(ag) {
+    rows.push(['Agentic AI System', ag.name, ag.dev, ag.region, ag.sev, ag.tier, ag.regStatus, ag.url]);
+  });
+  var csv = '\uFEFF' + rows.map(function(r) {
+    return r.map(function(c) { return '"' + String(c || '').replace(/"/g, '""') + '"'; }).join(',');
+  }).join('\r\n');
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv;charset=utf-8' }));
+  a.download = 'avi-perera-ai-ethics-ecosystem-' + new Date().toISOString().slice(0, 10) + '.csv';
+  a.click();
+}
+
+// ── 4. Live Feed & Multi-Source RSS ──
+function utcStr() {
+  var n = new Date();
+  return String(n.getUTCHours()).padStart(2,'0') + ':' + String(n.getUTCMinutes()).padStart(2,'0') + ' UTC';
+}
+function mkFi(f) {
+  return '<div class="fi"><div class="fih"><span class="fit">' + utcStr() + '</span><span class="fitp ' + f.type + '">' + f.type + '</span></div><div class="fitx">' + esc(f.text) + '</div></div>';
+}
+function initFeed() {
+  var el = document.getElementById('feed-body');
+  if (!el) return;
+  el.innerHTML = FEED.map(mkFi).join('');
+}
+function tickFeed() {
+  var el = document.getElementById('feed-body');
+  if (!el) return;
+  var f = FEED[Math.floor(Math.random() * FEED.length)];
+  el.insertAdjacentHTML('afterbegin', mkFi(f));
+  if (el.children.length > 20) el.removeChild(el.lastChild);
+  stamp();
+}
+
+var RSS_SOURCES = [
+  {id:'avi',name:'Avi Perera Research',url:'https://aviperera.com/feed/',kw:['']},
+  {id:'arxiv',name:'arXiv AI & Ethics',url:'https://export.arxiv.org/rss/cs.AI',kw:['autonomous','surveillance','military','ethics','bias','governance','safety','agent','alignment']},
+  {id:'hrw',name:'Human Rights Watch',url:'https://www.hrw.org/rss.xml',kw:['AI','algorithm','surveillance','facial','weapon','autonomous','drone','Gaza']},
+  {id:'nature',name:'Nature MI',url:'https://www.nature.com/subjects/machine-intelligence.rss',kw:['']}
+];
+
+var RSS_FALLBACK = [
+  {title:'Shield AI V-BAT (MQ-35): Hivemind Edge Autonomy in GPS-Denied Warfare',link:'https://aviperera.com/v-bat-mq-35/',date:'2026-10-20',source:'Avi Perera Dossier',sid:'avi'},
+  {title:'Norinco Fuxi and NUDT Combat Humanoids: PLA Embodied Military AI Analysis',link:'https://aviperera.com/norinco-fuxi-and-nudt-combat-humanoids/',date:'2026-10-19',source:'Avi Perera Dossier',sid:'avi'},
+  {title:'Abliteration.ai and the End of the Guardrail Assumption in International Security',link:'https://aviperera.com/abliteration-ai-removing-guardrails-international-security/',date:'2026-10-08',source:'Avi Perera Dossier',sid:'avi'},
+  {title:'WAIC 2026: Shanghai’s Agentic AI Safety Forum & Multi-Agent Governance',link:'https://aviperera.com/waic-2026-agentic-ai-safety-forum-analysis/',date:'2026-08-31',source:'Avi Perera Dossier',sid:'avi'},
+  {title:'When Algorithms Go to War: Inside the New Military-AI-Industrial Complex',link:'https://aviperera.com/when-algorithms-go-to-war/',date:'2026-07-31',source:'Avi Perera Dossier',sid:'avi'},
+  {title:'Dialect prejudice predicts AI decisions about people’s character, employability, and criminality',link:'https://www.nature.com/articles/s41586-024-07856-5',date:'2025-09-01',source:'Nature MI',sid:'nature'},
+  {title:'Alignment Faking in Large Language Models: Empirical Evaluation of Frontier AI',link:'https://arxiv.org/abs/2412.14093',date:'2025-08-18',source:'arXiv AI & Ethics',sid:'arxiv'},
+  {title:'Gaza: Israeli Military’s AI-Assisted Targeting and the Erosion of IHL Distinction',link:'https://www.hrw.org/',date:'2025-07-22',source:'Human Rights Watch',sid:'hrw'}
+];
+
+var rssCache = {}, activeRssTab = 'all';
+
+function initRSS() {
+  RSS_SOURCES.forEach(function(s) {
+    rssCache[s.id] = RSS_FALLBACK.filter(function(f) { return f.sid === s.id; });
+  });
+  renderRSSTabs();
+  renderRSSBody();
+}
+function forceRSSRefresh() { initRSS(); }
+function renderRSSTabs() {
+  var el = document.getElementById('rss-tabs');
+  if (!el) return;
+  var total = RSS_FALLBACK.length;
+  var html = '<button class="rtab' + (activeRssTab === 'all' ? ' on' : '') + '" onclick="setRssTab(\'all\')">All (' + total + ')</button>';
+  RSS_SOURCES.forEach(function(s) {
+    var cnt = (rssCache[s.id] || []).length;
+    html += '<button class="rtab' + (activeRssTab === s.id ? ' on' : '') + '" onclick="setRssTab(\'' + s.id + '\')">' + esc(s.name) + ' (' + cnt + ')</button>';
+  });
+  el.innerHTML = html;
+}
+function setRssTab(id) {
+  activeRssTab = id;
+  renderRSSTabs();
+  renderRSSBody();
+}
+function renderRSSBody() {
+  var el = document.getElementById('rss-body');
+  if (!el) return;
+  var items = activeRssTab === 'all' ? RSS_FALLBACK : (rssCache[activeRssTab] || []);
+  el.innerHTML = items.map(function(x) {
+    return '<div class="rsi-item"><div class="rsi-title"><a href="' + esc(x.link) + '" target="_blank" rel="noopener noreferrer">' + esc(x.title) + ' ↗</a></div><div class="rsi-meta"><span>' + esc(x.source) + '</span><span>' + esc(x.date) + '</span></div></div>';
+  }).join('');
+}
+
+function promptAddRSS() {
+  document.getElementById('addrss-modal').style.display = 'flex';
+}
+function closeRSSModal() {
+  document.getElementById('addrss-modal').style.display = 'none';
+}
+function submitNewRSS() {
+  var name = document.getElementById('new-rss-name').value.trim();
+  var url = document.getElementById('new-rss-url').value.trim();
+  if (!name || !url) return;
+  var sid = 'custom_' + Date.now();
+  RSS_SOURCES.push({ id: sid, name: name, url: url, kw: [''] });
+  RSS_FALLBACK.unshift({ title: name + ' — Custom Intelligence Feed Active (' + url + ')', link: url, date: new Date().toISOString().slice(0,10), source: name, sid: sid });
+  closeRSSModal();
+  initRSS();
+}
+
+// ── 5. Chart.js Builders (High-Contrast Readable Typography) ──
+var CH = {};
+function gc() {
+  return { grid: 'rgba(255,255,255,0.08)', lbl: '#cbd5e1', tick: '#94a3b8' };
+}
+function killChart(id) {
+  if (CH[id]) { try { CH[id].destroy(); } catch(e) {} delete CH[id]; }
+}
+
+function buildFrontierBiasChart() {
+  var canvas = document.getElementById('ch-frontier-bias');
+  if (!canvas || typeof Chart === 'undefined') return;
+  killChart('frontierBias');
+  var c = gc();
+  CH.frontierBias = new Chart(canvas, {
+    type: 'bar',
+    data: {
+      labels: ['DeepSeek-R1', 'Llama 3.1 405B', 'Grok-3', 'Qwen 2.5-Max', 'GPT-4o', 'OpenAI o3-mini', 'Gemini 2.0 Pro', 'Claude 3.7 Sonnet'],
+      datasets: [
+        { label: 'Demographic / Occupational Bias Disparity Index', data: [78, 72, 84, 67, 61, 54, 49, 38], backgroundColor: 'rgba(244, 63, 94, 0.78)', borderRadius: 4 },
+        { label: 'Guardrail & Refusal Robustness Score', data: [34, 28, 41, 52, 79, 84, 86, 91], backgroundColor: 'rgba(56, 189, 248, 0.78)', borderRadius: 4 }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { labels: { color: c.lbl, font: { family: 'IBM Plex Mono', size: 11 } } }
+      },
+      scales: {
+        x: { grid: { color: c.grid }, ticks: { color: c.lbl, font: { family: 'IBM Plex Mono', size: 10 } } },
+        y: { min: 0, max: 100, grid: { color: c.grid }, ticks: { color: c.tick, font: { family: 'IBM Plex Mono', size: 10 } } }
+      }
+    }
+  });
+}
+
+function buildAcct() {
+  var canvas = document.getElementById('ch-acct');
+  if (!canvas || typeof Chart === 'undefined') return;
+  killChart('acct');
+  var c = gc();
+  CH.acct = new Chart(canvas, {
+    type: 'bar',
+    data: {
+      labels: ['Israel IDF', 'US DoD / ICE', 'China PLA / MSS', 'Russia MoD', 'Frontier AI Labs', 'UN CCW GGE', 'EU AI Office'],
+      datasets: [
+        { label: 'Tech Sophistication & Autonomy', data: [95, 91, 88, 84, 94, 22, 38], backgroundColor: 'rgba(244, 63, 94, 0.8)', borderRadius: 4 },
+        { label: 'Binding Legal Accountability', data: [4, 18, 9, 5, 34, 91, 84], backgroundColor: 'rgba(16, 185, 129, 0.8)', borderRadius: 4 }
+      ]
+    },
+    options: {
+      indexAxis: 'y',
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { labels: { font: { family: 'IBM Plex Mono', size: 11 }, color: c.lbl } }
+      },
+      scales: {
+        x: { min: 0, max: 100, grid: { color: c.grid }, ticks: { font: { size: 10, family: 'IBM Plex Mono' }, color: c.tick } },
+        y: { grid: { display: false }, ticks: { font: { size: 11, family: 'IBM Plex Mono' }, color: c.lbl } }
+      }
+    }
+  });
+}
+
+function buildTrend() {
+  var canvas = document.getElementById('ch-trend');
+  if (!canvas || typeof Chart === 'undefined') return;
+  killChart('trend');
+  var c = gc();
+  var ds = [
+    { label: 'Israel (LAWS Kill Chains)', data: [1, 1, 2, 3, 4, 7, 11, 14, 16], color: '#f43f5e' },
+    { label: 'USA (LAWS & DHS/ICE AI)', data: [2, 3, 4, 5, 6, 8, 11, 14, 18], color: '#f59e0b' },
+    { label: 'China (Surveillance & PLA AI)', data: [3, 4, 5, 7, 9, 10, 12, 14, 17], color: '#a855f7' },
+    { label: 'Frontier & Agentic Safety Incidents', data: [0, 0, 1, 1, 3, 7, 13, 19, 25], color: '#38bdf8' }
+  ];
+  CH.trend = new Chart(canvas, {
+    type: 'line',
+    data: {
+      labels: ['2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025', '2026'],
+      datasets: ds.map(function(d) {
+        return { label: d.label, data: d.data, borderColor: d.color, backgroundColor: 'transparent', pointBackgroundColor: d.color, borderWidth: 2, pointRadius: 3, tension: 0.32 };
+      })
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: {
+        x: { grid: { color: c.grid }, ticks: { font: { size: 10, family: 'IBM Plex Mono' }, color: c.tick } },
+        y: { grid: { color: c.grid }, ticks: { font: { size: 10, family: 'IBM Plex Mono' }, color: c.tick } }
+      }
+    }
+  });
+  var leg = document.getElementById('trend-leg');
+  if (leg) {
+    leg.innerHTML = ds.map(function(d) {
+      return '<span class="cli"><span class="clsq" style="background:' + d.color + '"></span>' + esc(d.label) + '</span>';
+    }).join('');
+  }
+}
+
+function buildRadar() {
+  var canvas = document.getElementById('ch-radar');
+  if (!canvas || typeof Chart === 'undefined') return;
+  killChart('radar');
+  var c = gc();
+  var rd = [
+    { label: 'Israel IDF', data: [95, 89, 4, 5, 3], color: '#f43f5e' },
+    { label: 'US DoD / ICE', data: [91, 85, 18, 28, 19], color: '#f59e0b' },
+    { label: 'China PLA / MSS', data: [88, 94, 9, 14, 7], color: '#a855f7' },
+    { label: 'Frontier AI Labs', data: [96, 82, 34, 48, 42], color: '#38bdf8' },
+    { label: 'EU AI Office', data: [38, 42, 84, 92, 88], color: '#10b981' }
+  ];
+  CH.radar = new Chart(canvas, {
+    type: 'radar',
+    data: {
+      labels: ['Tech Sophistication', 'Deployment Scale', 'Accountability', 'IHL / Legal Compliance', 'Audit Transparency'],
+      datasets: rd.map(function(d) {
+        return { label: d.label, data: d.data, borderColor: d.color, backgroundColor: d.color + '18', pointBackgroundColor: d.color, borderWidth: 2, pointRadius: 3 };
+      })
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: {
+        r: {
+          min: 0, max: 100,
+          ticks: { stepSize: 25, font: { size: 9, family: 'IBM Plex Mono' }, color: c.tick, backdropColor: 'transparent' },
+          grid: { color: c.grid },
+          angleLines: { color: c.grid },
+          pointLabels: { font: { size: 10.5, family: 'IBM Plex Mono' }, color: c.lbl }
+        }
+      }
+    }
+  });
+  var leg = document.getElementById('radar-leg');
+  if (leg) {
+    leg.innerHTML = rd.map(function(d) {
+      return '<span class="cli"><span class="clsq" style="background:' + d.color + '"></span>' + esc(d.label) + '</span>';
+    }).join('');
+  }
+}
+
+function buildDonut() {
+  var canvas = document.getElementById('ch-donut');
+  if (!canvas || typeof Chart === 'undefined') return;
+  killChart('donut');
+  var dd = [
+    { label: 'USA (LAWS, Frontier & ICE)', v: 32, color: '#f59e0b' },
+    { label: 'Israel (LAWS & Biometrics)', v: 26, color: '#f43f5e' },
+    { label: 'China (Surv., PLA & LLMs)', v: 20, color: '#a855f7' },
+    { label: 'Russia (Ukraine LAWS)', v: 10, color: '#ec4899' },
+    { label: 'Europe / UK', v: 7, color: '#38bdf8' },
+    { label: 'MENA / Other', v: 5, color: '#10b981' }
+  ];
+  CH.donut = new Chart(canvas, {
+    type: 'doughnut',
+    data: {
+      labels: dd.map(function(d) { return d.label; }),
+      datasets: [{ data: dd.map(function(d) { return d.v; }), backgroundColor: dd.map(function(d) { return d.color; }), borderWidth: 0 }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      cutout: '62%',
+      plugins: { legend: { display: false } }
+    }
+  });
+  var leg = document.getElementById('donut-leg');
+  if (leg) {
+    leg.innerHTML = dd.map(function(d) {
+      return '<span class="cli"><span class="clsq" style="background:' + d.color + '"></span>' + esc(d.label) + ' (' + d.v + '%)</span>';
+    }).join('');
+  }
+}
+
+function buildBubble() {
+  var canvas = document.getElementById('ch-bubble');
+  if (!canvas || typeof Chart === 'undefined') return;
+  killChart('bubble');
+  var c = gc();
+  var bd = [
+    { label: 'Gospel/Lavender (IL)', x: 94, y: 4, r: 19, color: '#f43f5e' },
+    { label: 'Palantir Gotham ICE (US)', x: 76, y: 18, r: 15, color: '#f59e0b' },
+    { label: 'ZALA Lancet-3M (RU)', x: 90, y: 5, r: 14, color: '#ec4899' },
+    { label: 'Shield AI V-BAT (US)', x: 91, y: 24, r: 11, color: '#38bdf8' },
+    { label: 'Xinjiang Grid (CN)', x: 78, y: 7, r: 16, color: '#a855f7' },
+    { label: 'STM Kargu-2 (TR)', x: 86, y: 12, r: 10, color: '#fb923c' },
+    { label: 'Clearview AI (US)', x: 65, y: 20, r: 12, color: '#facc15' },
+    { label: 'MQ-9 Reaper (US)', x: 58, y: 62, r: 8, color: '#10b981' }
+  ];
+  CH.bubble = new Chart(canvas, {
+    type: 'bubble',
+    data: {
+      datasets: bd.map(function(d) {
+        return { label: d.label, data: [{ x: d.x, y: d.y, r: d.r }], backgroundColor: d.color + '99', borderColor: d.color, borderWidth: 1.5 };
+      })
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: {
+        x: { min: 40, max: 100, grid: { color: c.grid }, ticks: { font: { size: 10, family: 'IBM Plex Mono' }, color: c.tick }, title: { display: true, text: 'Autonomy Level (%)', color: c.lbl, font: { family: 'IBM Plex Mono', size: 11 } } },
+        y: { min: 0, max: 100, grid: { color: c.grid }, ticks: { font: { size: 10, family: 'IBM Plex Mono' }, color: c.tick }, title: { display: true, text: 'Accountability & Safeguard Index', color: c.lbl, font: { family: 'IBM Plex Mono', size: 11 } } }
+      }
+    }
+  });
+}
+
+function buildAll() {
+  buildFrontierBiasChart();
+  buildAcct();
+  buildTrend();
+  buildRadar();
+  buildDonut();
+  buildBubble();
+}
+
+// ── 6. Persistent Research & Model Release Log (localStorage) ──
+var LK = 'sied_log_v1';
+function loadLog() {
+  try { return JSON.parse(localStorage.getItem(LK) || '[]'); } catch(e) { return []; }
+}
+function saveLog(e) {
+  try { localStorage.setItem(LK, JSON.stringify(e)); } catch(e) {}
+}
+function renderLog() {
+  var entries = loadLog();
+  var cntEl = document.getElementById('log-cnt');
+  if (cntEl) cntEl.textContent = entries.length + ' entr' + (entries.length === 1 ? 'y' : 'ies') + ' · Stored in browser localStorage';
+  var con = document.getElementById('log-con');
+  if (!con) return;
+  if (!entries.length) {
+    con.innerHTML = '<div style="font-size:0.84rem;color:var(--tx3);padding:8px 0;">No custom entries logged yet. Use <strong>+ Log New System / Model Release</strong> above to log new model releases, bias studies, or autonomous weapon incidents directly in your browser.</div>';
+    return;
+  }
+  var rows = entries.slice().reverse().map(function(e) {
+    var sc = e.sev === 'CRITICAL' ? '#f43f5e' : (e.sev === 'HIGH' ? '#fbbf24' : '#38bdf8');
+    return '<tr>' +
+      '<td style="white-space:nowrap;font-family:var(--font);font-size:0.75rem;color:var(--tx3);">' + esc(e.date) + '</td>' +
+      '<td><div style="font-weight:700;color:#f8fafc;">' + esc(e.title) + '</div>' + (e.notes ? '<div style="font-size:0.78rem;color:var(--tx2);margin-top:3px;">' + esc(e.notes) + '</div>' : '') + '</td>' +
+      '<td>' + esc(e.actor) + '</td>' +
+      '<td><span class="bdg pr">' + esc(e.cat) + '</span></td>' +
+      '<td style="font-family:var(--font);font-weight:700;color:' + sc + ';">' + esc(e.sev) + '</td>' +
+      '<td style="font-size:0.78rem;color:#7dd3fc;">' + esc(e.reg || '—') + '</td>' +
+      '<td style="font-size:0.78rem;color:var(--tx2);">' + esc(e.source) + '</td>' +
+      '<td><button class="lbtn" style="padding:3px 8px;color:#fda4af;" onclick="delEntry(' + e.id + ')">✕</button></td>' +
+    '</tr>';
+  }).join('');
+  con.innerHTML = '<div class="clean-tbl-wrap"><table class="lt"><thead><tr><th>Date</th><th>System / Model / Finding</th><th>Developer / Actor</th><th>Category</th><th>Severity</th><th>Regulatory Context</th><th>Model Card / Source</th><th></th></tr></thead><tbody>' + rows + '</tbody></table></div>';
+}
+
+function togLogForm() {
+  var f = document.getElementById('log-form');
+  if (!f) return;
+  f.classList.toggle('open');
+  if (f.classList.contains('open')) {
+    document.getElementById('lf-d').value = new Date().toISOString().slice(0, 10);
+    document.getElementById('lf-t').focus();
+  }
+}
+
+function openLogForModel() {
+  switchDashTab('alerts');
+  var f = document.getElementById('log-form');
+  if (f && !f.classList.contains('open')) togLogForm();
+  var cat = document.getElementById('lf-c');
+  if (cat) cat.value = 'FRONTIER_LLM';
+  if (f) f.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+function saveEntry() {
+  var t = document.getElementById('lf-t').value.trim();
+  if (!t) return;
+  var entry = {
+    id: Date.now(),
+    date: document.getElementById('lf-d').value || new Date().toISOString().slice(0, 10),
+    title: t,
+    actor: document.getElementById('lf-a').value.trim(),
+    cat: document.getElementById('lf-c').value,
+    sev: document.getElementById('lf-sv').value,
+    source: document.getElementById('lf-s').value.trim(),
+    reg: (document.getElementById('lf-reg') ? document.getElementById('lf-reg').value.trim() : ''),
+    notes: document.getElementById('lf-n').value.trim()
+  };
+  var entries = loadLog();
+  entries.push(entry);
+  saveLog(entries);
+
+  // If user logged a Frontier Model Release, also append to live FRONTIER_MODELS table!
+  if (entry.cat === 'FRONTIER_LLM') {
+    FRONTIER_MODELS.unshift({
+      date: entry.date,
+      name: entry.title,
+      lab: entry.actor || 'Independent Lab',
+      region: 'ALL',
+      arch: 'Logged Frontier Release',
+      biasPatterns: [entry.notes || 'Pending Peer-Reviewed Bias Audit'],
+      study: entry.notes || 'User-logged evaluation',
+      regStatus: entry.reg || 'Cross-referenced with Global AI Policy Tracker',
+      regLink: 'https://aviperera.com/ai-policy-tracker/',
+      sev: entry.sev,
+      fw: 'UTIL',
+      biasScore: entry.sev === 'CRITICAL' ? 85 : 55,
+      guardrailScore: 65,
+      cardUrl: entry.source || 'https://aviperera.com/ai-ethics-dashboard/'
+    });
+    renderFrontierModels();
+  }
+
+  ['lf-t','lf-a','lf-s','lf-reg','lf-n'].forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el) el.value = '';
+  });
+  togLogForm();
+  renderLog();
+  stamp();
+}
+
+function delEntry(id) {
+  saveLog(loadLog().filter(function(e) { return e.id !== id; }));
+  renderLog();
+}
+function clearLog() {
+  if (!loadLog().length) return;
+  if (!confirm('Clear all custom log entries?')) return;
+  saveLog([]);
+  renderLog();
+}
+function exportLog() {
+  var entries = loadLog();
+  if (!entries.length) { exportFullEcosystemCSV(); return; }
+  var csv = [['Date','Title','Actor','Category','Severity','Regulatory Context','Source','Notes'].join(',')].concat(
+    entries.map(function(e) {
+      return [e.date,e.title,e.actor,e.cat,e.sev,e.reg,e.source,e.notes].map(function(v) {
+        return '"' + String(v || '').replace(/"/g, '""') + '"';
+      }).join(',');
+    })
+  ).join('\n');
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv' }));
+  a.download = 'sied-research-log-' + new Date().toISOString().slice(0, 10) + '.csv';
+  a.click();
+}
+
+// ── 7. Treaty Modal & Clock ──
+function openMatrixModal() {
+  var modal = document.getElementById('treaty-modal');
+  if (!modal) return;
+  var tbody = document.getElementById('tm-tbody');
+  if (tbody && tbody.innerHTML.trim() === '') {
+    tbody.innerHTML = matrixData.map(function(d) {
+      var c = d.ban.includes('Opposed') ? 'tp-a' : (d.ban.includes('Supports') ? 'tp-p' : 'tp-n');
+      return '<tr>' +
+        '<td style="padding:12px 20px;font-weight:700;border-bottom:1px solid rgba(255,255,255,0.05);">' + esc(d.c) + '</td>' +
+        '<td style="padding:12px 20px;border-bottom:1px solid rgba(255,255,255,0.05);">' + esc(d.ccw) + '</td>' +
+        '<td style="padding:12px 20px;border-bottom:1px solid rgba(255,255,255,0.05);"><span class="tpos ' + c + '">' + esc(d.ban) + '</span></td>' +
+        '<td style="padding:12px 20px;border-bottom:1px solid rgba(255,255,255,0.05);">' + esc(d.safety) + '</td>' +
+        '<td style="padding:12px 20px;color:#94a3b8;font-size:0.8rem;border-bottom:1px solid rgba(255,255,255,0.05);">' + esc(d.src) + '</td>' +
+      '</tr>';
+    }).join('');
+  }
+  modal.style.display = 'flex';
+}
+function closeMatrixModal() {
+  var modal = document.getElementById('treaty-modal');
+  if (modal) modal.style.display = 'none';
+}
+
+function updateClock() {
+  var n = new Date(), el = document.getElementById('sied-clk');
+  if (el) el.textContent = String(n.getUTCHours()).padStart(2,'0') + ':' + String(n.getUTCMinutes()).padStart(2,'0') + ':' + String(n.getUTCSeconds()).padStart(2,'0') + ' UTC';
+}
+function stamp() {
+  var el = document.getElementById('sied-stamp');
+  if (el) el.textContent = 'Last Synchronized: ' + new Date().toUTCString().slice(0, 25);
+}
+
+function renderAll() {
+  renderFrontierModels();
+  renderAgenticSystems();
+  renderLaws();
+  renderSurv();
+  renderRepo();
+  renderAlertsQueue();
+  renderLog();
+}
+
+window.addEventListener('DOMContentLoaded', function() {
+  updateClock();
+  stamp();
+  renderAll();
+  renderTreaty();
+  initFeed();
+  initRSS();
+  setInterval(updateClock, 1000);
+  setInterval(tickFeed, 180000);
+
+  var chartWait = setInterval(function() {
+    if (typeof Chart !== 'undefined') {
+      clearInterval(chartWait);
+      buildAll();
+    }
+  }, 150);
+});
+</script>
+
+</body>
+</html>
