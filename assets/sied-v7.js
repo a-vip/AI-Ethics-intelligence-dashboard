@@ -651,7 +651,7 @@
       '<div class="ts-card"><span class="ts-k">Unknown / Unrecorded</span><span class="ts-v" style="color:#cbd5e1;">' + unkCnt + '</span><span style="font-size:0.68rem;color:#94a3b8;">No Formal CCW Submission</span></div>' +
       '<div class="ts-card"><span class="ts-k">Binding Treaties Active</span><span class="ts-v" style="color:#7dd3fc;">' + ap1Cnt + ' / ' + ccwCnt + '</span><span style="font-size:0.68rem;color:#94a3b8;">AP I Art. 36 / UN CCW Parties</span></div>' +
       '</div>' +
-      '<div class="chtw" style="height:64px;margin-bottom:14px;"><canvas id="ch-treaty-bar"></canvas></div>' +
+      '<div class="chtw" style="margin-bottom:14px;"><div id="ch-treaty-bar" style="width:100%;"></div></div>' +
       '<div class="sub-pills">' +
       '<button class="sp-btn' + (TREATY_STATE.sortKey === 'stancePriority' ? ' on' : '') + '" onclick="setTreatyPreset(\'stancePriority\',\'asc\')">⚠ Oppose Ban First (Default)</button>' +
       '<button class="sp-btn' + (TREATY_STATE.sortKey === 'country' ? ' on' : '') + '" onclick="setTreatyPreset(\'country\',\'asc\')">A–Z Alphabetical</button>' +
@@ -879,7 +879,7 @@
       feedBody.innerHTML = displayFeed.slice(0, 14).map(function (it) {
         var bCol = it.sev === 'CRITICAL' ? '#f43f5e' : (it.sev === 'HIGH' ? '#f59e0b' : '#38bdf8');
         var bTag = it.sev || 'LIVE';
-        return '<div class="fi" style="border-left-color:' + bCol + ';">' +
+        return '<div class="sied-feed-card" style="border-left-color:' + bCol + ';">' +
           '<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;font-family:var(--font);font-size:0.66rem;color:#cbd5e1;margin-bottom:4px;">' +
           '<span><strong style="color:' + bCol + ';">[' + esc(bTag) + ']</strong> ' + esc(it.source) + (it.category ? ' · ' + esc(it.category) : '') + '</span><span>' + esc(it.date) + '</span></div>' +
           '<a href="' + safeUrl(it.url || it.link) + '" target="_blank" rel="noopener" style="font-size:0.81rem;font-weight:700;color:#f8fafc;text-decoration:none;display:block;">' + esc(it.title) + ' ↗</a>' +
@@ -1011,104 +1011,15 @@
   window.clearLog = function () { localStorage.removeItem('sied_user_models_v7'); renderAirtable(); renderLog(); };
 
   // =========================================================================
-  // 3. INTERACTIVE CHART.JS VISUALIZATION SUITE
+  // 3. BUILT-IN NATIVE SVG VISUALIZATION SUITE (SIED_CHARTS v8.0)
   // =========================================================================
-  function killChart(id) {
-    if (CH[id]) { try { CH[id].destroy(); } catch (e) {} delete CH[id]; }
-  }
-
   function buildFrontierCharts() {
-    if (typeof Chart === 'undefined' || !FRONTIER_MODELS.length) return;
+    var SC = window.SIED_CHARTS;
+    if (!SC || !FRONTIER_MODELS.length) return;
     var models = getMergedFrontierModels();
-    var tickCol = '#94a3b8';
-    var lblCol = '#cbd5e1';
-    var gCol = 'rgba(255,255,255,0.06)';
-
-    // Chart 1: Bias vs Guardrail by Top Labs
-    var c1 = document.getElementById('ch-at-labs');
-    if (c1) {
-      killChart('c1');
-      var labMap = {};
-      models.forEach(function (m) {
-        var k = m.lab.indexOf('Google') >= 0 ? 'Google' :
-          m.lab.indexOf('Anthropic') >= 0 ? 'Anthropic' :
-          m.lab.indexOf('OpenAI') >= 0 ? 'OpenAI' :
-          m.lab.indexOf('Meta') >= 0 ? 'Meta' :
-          m.lab.indexOf('DeepSeek') >= 0 ? 'DeepSeek' :
-          m.lab.indexOf('xAI') >= 0 ? 'xAI' : 'Other Labs';
-        if (!labMap[k]) labMap[k] = { b: [], g: [] };
-        labMap[k].b.push(m.biasScore || 0);
-        labMap[k].g.push(m.guardrailScore || 0);
-      });
-      var lKeys = Object.keys(labMap);
-      CH.c1 = new Chart(c1, {
-        type: 'bar',
-        data: {
-          labels: lKeys,
-          datasets: [
-            { label: 'Mean Guardrail Score', data: lKeys.map(function (k) { return Math.round(labMap[k].g.reduce(function (x, y) { return x + y; }, 0) / labMap[k].g.length); }), backgroundColor: 'rgba(16,185,129,0.78)' },
-            { label: 'Mean Bias Risk', data: lKeys.map(function (k) { return Math.round(labMap[k].b.reduce(function (x, y) { return x + y; }, 0) / labMap[k].b.length); }), backgroundColor: 'rgba(244,63,94,0.78)' }
-          ]
-        },
-        options: { animation: { duration: 280 }, responsive: true, maintainAspectRatio: false, plugins: { legend: { labels: { color: lblCol, font: { size: 10 } } } }, scales: { x: { grid: { display: false }, ticks: { color: tickCol, font: { size: 10 } } }, y: { min: 0, max: 100, grid: { color: gCol }, ticks: { color: tickCol } } } }
-      });
-    }
-
-    // Chart 2: Temporal Bias vs Guardrail Trajectory
-    var c2 = document.getElementById('ch-at-timeline');
-    if (c2) {
-      killChart('c2');
-      var years = ['2022–23', '2024', '2025', 'H1 2026', 'H2 2026'];
-      function bucket(d) {
-        if (!d) return 'H2 2026';
-        if (d < '2024-01') return '2022–23';
-        if (d < '2025-01') return '2024';
-        if (d < '2026-01') return '2025';
-        if (d < '2026-07') return 'H1 2026';
-        return 'H2 2026';
-      }
-      var gAvgs = years.map(function (yr) {
-        var sub = models.filter(function (m) { return bucket(m.date) === yr; });
-        return sub.length ? Math.round(sub.reduce(function (a, b) { return a + (b.guardrailScore || 0); }, 0) / sub.length) : 60;
-      });
-      var bAvgs = years.map(function (yr) {
-        var sub = models.filter(function (m) { return bucket(m.date) === yr; });
-        return sub.length ? Math.round(sub.reduce(function (a, b) { return a + (b.biasScore || 0); }, 0) / sub.length) : 50;
-      });
-      CH.c2 = new Chart(c2, {
-        type: 'line',
-        data: {
-          labels: years,
-          datasets: [
-            { label: 'Guardrail Score ↑', data: gAvgs, borderColor: '#38bdf8', backgroundColor: 'rgba(56,189,248,0.12)', fill: true, tension: 0.35 },
-            { label: 'Bias Risk Score ↓', data: bAvgs, borderColor: '#f59e0b', backgroundColor: 'rgba(245,158,11,0.1)', fill: true, tension: 0.35 }
-          ]
-        },
-        options: { animation: { duration: 280 }, responsive: true, maintainAspectRatio: false, plugins: { legend: { labels: { color: lblCol, font: { size: 10 } } } }, scales: { x: { grid: { display: false }, ticks: { color: tickCol } }, y: { min: 0, max: 100, grid: { color: gCol }, ticks: { color: tickCol } } } }
-      });
-    }
-
-    // Chart 3: Governance Regime Mix
-    var c3 = document.getElementById('ch-at-reg');
-    if (c3) {
-      killChart('c3');
-      var regCounts = { 'Enforced Hard Law': 0, 'Pre-Act Soft': 0, 'Open / Abliterated': 0, 'Frontier / Audited': 0 };
-      models.forEach(function (m) {
-        var e = m.regEra || '';
-        if (e.indexOf('Enforced') >= 0) regCounts['Enforced Hard Law']++;
-        else if (e.indexOf('Pre-Act') >= 0) regCounts['Pre-Act Soft']++;
-        else if (e.indexOf('Open') >= 0) regCounts['Open / Abliterated']++;
-        else regCounts['Frontier / Audited']++;
-      });
-      CH.c3 = new Chart(c3, {
-        type: 'doughnut',
-        data: {
-          labels: Object.keys(regCounts),
-          datasets: [{ data: Object.values(regCounts), backgroundColor: ['#10b981', '#f59e0b', '#f43f5e', '#38bdf8'], borderWidth: 0 }]
-        },
-        options: { animation: { duration: 280 }, responsive: true, maintainAspectRatio: false, cutout: '62%', plugins: { legend: { position: 'right', labels: { color: lblCol, font: { size: 10 }, boxWidth: 10 } } } }
-      });
-    }
+    SC.renderLabBias(document.getElementById('ch-at-labs'), models);
+    SC.renderSafetyEvolution(document.getElementById('ch-at-timeline'), models);
+    SC.renderRegComposition(document.getElementById('ch-at-reg'), models);
   }
 
   window.setTrajMode = function (mode, btn) {
@@ -1119,46 +1030,11 @@
   };
 
   function buildTrajectoryChart() {
-    var c5 = document.getElementById('ch-trend');
-    if (!c5 || typeof Chart === 'undefined' || !TRAJECTORY) return;
-    killChart('c5');
-    var tickCol = '#94a3b8';
-    var lblCol = '#cbd5e1';
-    var gCol = 'rgba(255,255,255,0.06)';
-    var datasets = [];
-    if (TRAJ_MODE === 'theaters') {
-      datasets = [
-        { label: 'Ukraine & EW-Immune Swarms', data: TRAJECTORY.theaters.ukraineEastEur, borderColor: '#38bdf8', backgroundColor: 'rgba(56,189,248,0.1)', fill: true, tension: 0.32 },
-        { label: 'US Border / Domestic AI Ops', data: TRAJECTORY.theaters.usBorderSurveillance, borderColor: '#f59e0b', tension: 0.32 },
-        { label: 'Indo-Pacific Unmanned / Subsea', data: TRAJECTORY.theaters.indoPacificSwarm, borderColor: '#a855f7', tension: 0.32 },
-        { label: 'Gaza / Levant Automated Ops', data: TRAJECTORY.theaters.gazaLevant, borderColor: '#f43f5e', tension: 0.32 }
-      ];
-    } else if (TRAJ_MODE === 'cyber') {
-      datasets = [
-        { label: 'Frontier Cyber & Agentic Exploits', data: TRAJECTORY.cyberSafety.frontierCyberExploits, borderColor: '#f43f5e', backgroundColor: 'rgba(244,63,94,0.12)', fill: true, tension: 0.32 },
-        { label: 'Hard-Law Enforcement Actions', data: TRAJECTORY.cyberSafety.hardLawEnforcementActions, borderColor: '#10b981', tension: 0.32 },
-        { label: 'Biometric & Civil Litigation', data: TRAJECTORY.cyberSafety.biometricLitigation, borderColor: '#38bdf8', tension: 0.32 }
-      ];
-    } else {
-      datasets = [
-        { label: 'UNGA Pro-Treaty Votes (78->80th)', data: TRAJECTORY.diplomacySpend.ungaProTreatyVotes, borderColor: '#10b981', tension: 0.25, spanGaps: true },
-        { label: 'CCW High Contracting Parties', data: TRAJECTORY.diplomacySpend.ccwStatesParties, borderColor: '#38bdf8', tension: 0.25 },
-        { label: 'Global Autonomy Spend ($Bn est.)', data: TRAJECTORY.diplomacySpend.globalAwsSpendUsdBn, borderColor: '#f59e0b', backgroundColor: 'rgba(245,158,11,0.12)', fill: true, tension: 0.32 }
-      ];
-    }
-    CH.c5 = new Chart(c5, {
-      type: 'line',
-      data: { labels: TRAJECTORY.years, datasets: datasets },
-      options: {
-        animation: { duration: 280 },
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: { legend: { labels: { color: lblCol, font: { size: 10 } } } },
-        scales: { x: { grid: { color: gCol }, ticks: { color: tickCol, font: { size: 9 } } }, y: { grid: { color: gCol }, ticks: { color: tickCol } } }
-      }
-    });
+    var SC = window.SIED_CHARTS;
+    var el = document.getElementById('ch-trend');
+    if (SC && el && TRAJECTORY) SC.renderTrajectory(el, TRAJECTORY, TRAJ_MODE);
     var ms = document.getElementById('traj-milestones');
-    if (ms && TRAJECTORY.milestones) {
+    if (ms && TRAJECTORY && TRAJECTORY.milestones) {
       ms.innerHTML = TRAJECTORY.milestones.map(function (m) {
         return '<div class="ms-chip"><strong>' + esc(m.year) + ':</strong> ' + esc(m.label) + '</div>';
       }).join('');
@@ -1172,173 +1048,43 @@
     buildBubbleChart();
   };
 
+  function openBubbleModal(m) {
+    if (!m) return;
+    document.getElementById('rm-header').textContent = 'IMPACT VS. AUTONOMY NODE · ' + (m.name || '');
+    document.getElementById('rm-body').innerHTML =
+      '<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;">' +
+      '<div><div style="font-size:0.7rem;color:#94a3b8;font-family:var(--font);">DOMAIN &amp; YEAR</div><div style="font-weight:700;margin-top:3px;">' + esc(m.domain) + ' (' + esc(m.year) + ')</div></div>' +
+      '<div><div style="font-size:0.7rem;color:#94a3b8;font-family:var(--font);">THEATER &amp; SEVERITY</div><div style="margin-top:3px;">' + esc(m.theater) + ' · ' + sevBadge(m.sev) + '</div></div>' +
+      '<div><div style="font-size:0.7rem;color:#94a3b8;font-family:var(--font);">TECHNICAL AUTONOMY</div><div style="font-weight:700;color:#38bdf8;margin-top:3px;">' + esc(m.autonomy) + '%</div></div>' +
+      '<div><div style="font-size:0.7rem;color:#94a3b8;font-family:var(--font);">CIVILIAN HARM / IMPACT</div><div style="font-weight:700;color:#f43f5e;margin-top:3px;">' + esc(m.impact) + '/100</div></div>' +
+      '</div>' +
+      '<div style="background:rgba(56,189,248,0.08);border:1px solid rgba(56,189,248,0.28);border-radius:10px;padding:12px 14px;">' +
+      '<div style="font-size:0.7rem;color:#7dd3fc;font-family:var(--font);margin-bottom:4px;">DOCUMENTED SCALE &amp; HARM PROFILE</div>' +
+      '<div style="font-size:0.86rem;">' + esc(m.scaleLabel) + '</div></div>';
+    document.getElementById('at-record-modal').style.display = 'flex';
+  }
+
   function buildBubbleChart() {
-    var c6 = document.getElementById('ch-bubble');
-    if (!c6 || typeof Chart === 'undefined' || !BUBBLE_MATRIX.length) return;
-    killChart('c6');
-    var tickCol = '#94a3b8';
-    var gCol = 'rgba(255,255,255,0.06)';
+    var SC = window.SIED_CHARTS;
+    var el = document.getElementById('ch-bubble');
+    if (!SC || !el || !BUBBLE_MATRIX.length) return;
     var items = BUBBLE_MATRIX.filter(function (b) { return BUBBLE_DOMAIN === 'ALL' || b.domain === BUBBLE_DOMAIN; });
-    var domColors = { 'LAWS': '#f43f5e', 'Surveillance & Border AI': '#f59e0b', 'Cyber & Agentic AI': '#38bdf8' };
-
-    var quadrantPlugin = {
-      id: 'quadrantBg',
-      beforeDraw: function (chart) {
-        var ctx = chart.ctx, xA = chart.scales.x, yA = chart.scales.y;
-        if (!xA || !yA) return;
-        var xMid = xA.getPixelForValue(75), yMid = yA.getPixelForValue(70);
-        ctx.save();
-        ctx.fillStyle = 'rgba(244, 63, 94, 0.09)';
-        ctx.fillRect(xMid, yA.top, xA.right - xMid, yMid - yA.top);
-        ctx.fillStyle = 'rgba(245, 158, 11, 0.06)';
-        ctx.fillRect(xA.left, yA.top, xMid - xA.left, yMid - yA.top);
-        ctx.fillStyle = 'rgba(16, 185, 129, 0.05)';
-        ctx.fillRect(xA.left, yMid, xA.right - xA.left, yA.bottom - yMid);
-        ctx.strokeStyle = 'rgba(255,255,255,0.18)';
-        ctx.setLineDash([4, 4]);
-        ctx.beginPath();
-        ctx.moveTo(xMid, yA.top); ctx.lineTo(xMid, yA.bottom);
-        ctx.moveTo(xA.left, yMid); ctx.lineTo(xA.right, yMid);
-        ctx.stroke();
-        ctx.setLineDash([]);
-        ctx.font = '700 9px "IBM Plex Mono", monospace';
-        ctx.fillStyle = 'rgba(253, 164, 175, 0.55)';
-        ctx.fillText('ACCOUNTABILITY VACUUM', xMid + 8, yA.top + 14);
-        ctx.fillStyle = 'rgba(252, 211, 77, 0.45)';
-        ctx.fillText('OVERSIGHT STRAIN', xA.left + 8, yA.top + 14);
-        ctx.fillStyle = 'rgba(110, 231, 183, 0.45)';
-        ctx.fillText('BOUNDED / HITL', xA.left + 8, yA.bottom - 8);
-        ctx.restore();
-      }
-    };
-
-    CH.c6 = new Chart(c6, {
-      type: 'bubble',
-      plugins: [quadrantPlugin],
-      data: {
-        datasets: items.map(function (d) {
-          var col = domColors[d.domain] || '#38bdf8';
-          var rad = d.sev === 'CRITICAL' ? 14 : (d.sev === 'HIGH' ? 10 : 7);
-          return {
-            label: d.name,
-            data: [{ x: d.autonomy, y: d.impact, r: rad, meta: d }],
-            backgroundColor: col + '88',
-            borderColor: col,
-            borderWidth: 1.5
-          };
-        })
-      },
-      options: {
-        animation: { duration: 250 },
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: { display: false },
-          tooltip: {
-            callbacks: {
-              label: function (ctx) {
-                var m = ctx.raw && ctx.raw.meta;
-                if (!m) return ctx.dataset.label;
-                return [
-                  m.name + ' (' + m.domain + ', ' + m.year + ')',
-                  'Autonomy: ' + m.autonomy + '% | Civilian Impact: ' + m.impact + '/100',
-                  'Theater: ' + m.theater,
-                  'Scale: ' + m.scaleLabel
-                ];
-              }
-            }
-          }
-        },
-        scales: {
-          x: { title: { display: true, text: 'Technical Autonomy (%) →', color: tickCol, font: { size: 10 } }, min: 52, max: 100, grid: { color: gCol }, ticks: { color: tickCol } },
-          y: { title: { display: true, text: 'Civilian Harm & Impact ↑', color: tickCol, font: { size: 10 } }, min: 20, max: 102, grid: { color: gCol }, ticks: { color: tickCol } }
-        }
-      }
-    });
+    SC.renderBubbleMatrix(el, items, openBubbleModal);
   }
 
   function buildTreatyBarChart(sup, two, opp, unk) {
-    var canvas = document.getElementById('ch-treaty-bar');
-    if (!canvas || typeof Chart === 'undefined') return;
-    killChart('treatyBar');
-    CH.treatyBar = new Chart(canvas, {
-      type: 'bar',
-      data: {
-        labels: ['Global 195-State LAWS Posture'],
-        datasets: [
-          { label: 'Binding Treaty (' + sup + ')', data: [sup], backgroundColor: '#10b981' },
-          { label: 'Two-Tier IHL (' + two + ')', data: [two], backgroundColor: '#f59e0b' },
-          { label: 'Oppose / Use-Ban (' + opp + ')', data: [opp], backgroundColor: '#f43f5e' },
-          { label: 'Unknown / No Record (' + unk + ')', data: [unk], backgroundColor: '#64748b' }
-        ]
-      },
-      options: {
-        indexAxis: 'y',
-        animation: { duration: 240 },
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: { legend: { display: true, position: 'bottom', labels: { color: '#cbd5e1', font: { size: 10 }, boxWidth: 10, padding: 8 } } },
-        scales: { x: { stacked: true, max: sup + two + opp + unk, display: false }, y: { stacked: true, display: false } }
-      }
-    });
+    var SC = window.SIED_CHARTS;
+    var el = document.getElementById('ch-treaty-bar');
+    if (SC && el) SC.renderTreatyBar(el, sup, two, opp, unk);
   }
 
   function buildObservatoryCharts() {
-    if (typeof Chart === 'undefined') return;
-    var tickCol = '#94a3b8';
-    var lblCol = '#cbd5e1';
-    var gCol = 'rgba(255,255,255,0.06)';
-
-    // Chart 4: Accountability Gap
-    var c4 = document.getElementById('ch-acct');
-    if (c4) {
-      killChart('c4');
-      CH.c4 = new Chart(c4, {
-        type: 'bar',
-        data: {
-          labels: ['Israel IDF', 'Russia MoD', 'China PLA/MSS', 'US DoD/ICE', 'Frontier Labs', 'EU AI Office'],
-          datasets: [
-            { label: 'Autonomy / Tech', data: [95, 86, 89, 91, 96, 38], backgroundColor: 'rgba(244,63,94,0.82)' },
-            { label: 'Binding Law / MHC', data: [4, 5, 11, 22, 46, 90], backgroundColor: 'rgba(16,185,129,0.82)' }
-          ]
-        },
-        options: { indexAxis: 'y', animation: { duration: 280 }, responsive: true, maintainAspectRatio: false, plugins: { legend: { labels: { color: lblCol, font: { size: 10 } } } }, scales: { x: { min: 0, max: 100, grid: { color: gCol }, ticks: { color: tickCol } }, y: { grid: { display: false }, ticks: { color: lblCol, font: { size: 10 } } } } }
-      });
-    }
-
+    var SC = window.SIED_CHARTS;
+    if (!SC) return;
+    SC.renderAccountabilityGap(document.getElementById('ch-acct'));
     buildTrajectoryChart();
     buildBubbleChart();
-
-    // Radar & Donut
-    var c7 = document.getElementById('ch-radar');
-    if (c7) {
-      killChart('c7');
-      CH.c7 = new Chart(c7, {
-        type: 'radar',
-        data: {
-          labels: ['Autonomy', 'Scale', 'Accountability', 'IHL Art.36', 'Audit'],
-          datasets: [
-            { label: 'Israel IDF', data: [95, 92, 4, 5, 3], borderColor: '#f43f5e', backgroundColor: 'rgba(244,63,94,0.12)' },
-            { label: 'US DoD', data: [91, 88, 20, 28, 22], borderColor: '#f59e0b', backgroundColor: 'rgba(245,158,11,0.12)' },
-            { label: 'EU / UK Art. 36', data: [46, 52, 82, 92, 86], borderColor: '#10b981', backgroundColor: 'rgba(16,185,129,0.12)' }
-          ]
-        },
-        options: { animation: { duration: 280 }, responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { color: lblCol, font: { size: 9 }, boxWidth: 8 } } }, scales: { r: { min: 0, max: 100, ticks: { display: false }, grid: { color: gCol }, pointLabels: { color: lblCol, font: { size: 9 } } } } }
-      });
-    }
-
-    var c8 = document.getElementById('ch-donut');
-    if (c8) {
-      killChart('c8');
-      CH.c8 = new Chart(c8, {
-        type: 'doughnut',
-        data: {
-          labels: ['USA', 'Israel', 'China', 'Russia / Iran', 'Ukraine / EU / UK'],
-          datasets: [{ data: [28, 22, 18, 16, 16], backgroundColor: ['#f59e0b', '#f43f5e', '#a855f7', '#ec4899', '#38bdf8'], borderWidth: 0 }]
-        },
-        options: { animation: { duration: 280 }, responsive: true, maintainAspectRatio: false, cutout: '60%', plugins: { legend: { position: 'bottom', labels: { color: lblCol, font: { size: 9 }, boxWidth: 8 } } } }
-      });
-    }
+    SC.renderRadarAndDonut(document.getElementById('ch-radar'), document.getElementById('ch-donut'));
   }
 
   function downloadText(filename, content, mime) {
@@ -1396,23 +1142,11 @@
       });
   }
 
-  var chartInjectAttempted = false;
-  function ensureChartsWhenChartJsLoads(attempts) {
-    if (typeof Chart !== 'undefined') {
+  function ensureChartsWhenChartJsLoads() {
+    if (window.SIED_CHARTS) {
       buildFrontierCharts();
       buildObservatoryCharts();
       renderTreaty();
-      return;
-    }
-    if (!chartInjectAttempted && (attempts || 0) >= 5 && CFG.assetBase) {
-      chartInjectAttempted = true;
-      var s = document.createElement('script');
-      s.src = CFG.assetBase + 'chart.umd.min.js?v=4.4.1';
-      s.onload = function () { ensureChartsWhenChartJsLoads(0); };
-      document.head.appendChild(s);
-    }
-    if ((attempts || 0) < 120) {
-      setTimeout(function () { ensureChartsWhenChartJsLoads((attempts || 0) + 1); }, 100);
     }
   }
 

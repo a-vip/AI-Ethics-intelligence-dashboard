@@ -9,9 +9,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.0.0/css/flag-icons.min.css" />
-<link rel="stylesheet" href="./assets/sied-v7.css?v=7.1.0" />
-<script src="./assets/chart.umd.min.js?v=4.4.1" data-no-optimize="1"></script>
-<script src="./assets/sied-seed-bundle.js?v=7.1.0" data-no-optimize="1"></script>
+<link rel="stylesheet" href="./assets/sied-v7.css?v=8.0.0" />
+<script src="./assets/sied-charts.js?v=8.0.0" data-no-optimize="1"></script>
+<script src="./assets/sied-seed-bundle.js?v=8.0.0" data-no-optimize="1"></script>
 <script data-no-optimize="1">
 window.SIED_CONFIG = {
   dataBase: './data/',
@@ -21,7 +21,7 @@ window.SIED_CONFIG = {
   env: 'github'
 };
 </script>
-<script src="./assets/sied-v7.js?v=7.1.0" defer data-no-optimize="1"></script>
+<script src="./assets/sied-v7.js?v=8.0.0" defer data-no-optimize="1"></script>
 <style>body{background:#050814;margin:0;padding:0;color:#f8fafc;font-family:'IBM Plex Sans',sans-serif;}</style>
 </head>
 <body><div id="primary" class="content-area">
@@ -32,7 +32,7 @@ window.SIED_CONFIG = {
     <div class="tb">
         <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
             <span class="tb-brand">AI Ethics Intelligence Dashboard</span>
-            <span class="tb-ver">v7.1 · Nov 16, 2026</span>
+            <span class="tb-ver">v8.0 · Nov 16, 2026</span>
         </div>
         <div class="tb-right">
             <span class="live-b"><span class="live-dot"></span>Live Registry &amp; Connectors</span>
@@ -180,9 +180,9 @@ window.SIED_CONFIG = {
         <div id="at-summary" style="padding:10px 22px;background:#0e1526;border-top:1px solid rgba(255,255,255,0.1);display:flex;gap:18px;flex-wrap:wrap;font-family:var(--font);font-size:0.74rem;color:#cbd5e1;"></div>
 
         <div class="at-charts-strip">
-            <div class="at-chart-box"><div class="at-chart-title">Lab Bias Risk vs. Guardrail Score</div><div class="chtw" style="height:230px;"><canvas id="ch-at-labs"></canvas></div></div>
-            <div class="at-chart-box"><div class="at-chart-title">Safety &amp; Bias Evolution (2022–Nov 2026)</div><div class="chtw" style="height:230px;"><canvas id="ch-at-timeline"></canvas></div></div>
-            <div class="at-chart-box"><div class="at-chart-title">Regulatory Status Composition</div><div class="chtw" style="height:230px;"><canvas id="ch-at-reg"></canvas></div></div>
+            <div class="at-chart-box"><div class="at-chart-title">Lab Bias Risk vs. Guardrail Score</div><div class="chtw"><div id="ch-at-labs"></div></div></div>
+            <div class="at-chart-box"><div class="at-chart-title">Safety &amp; Bias Evolution (2022–Nov 2026)</div><div class="chtw"><div id="ch-at-timeline"></div></div></div>
+            <div class="at-chart-box"><div class="at-chart-title">Regulatory Status Composition</div><div class="chtw"><div id="ch-at-reg"></div></div></div>
         </div>
     </section>
 
@@ -288,7 +288,7 @@ window.SIED_CONFIG = {
             <div style="display:flex;flex-direction:column;gap:20px;">
                 <div class="mod-card" style="margin-bottom:0;">
                     <div class="mh"><span class="mt">Accountability Gap: Autonomy vs. Binding Law</span></div>
-                    <div class="mb"><div class="chtw" style="height:240px;"><canvas id="ch-acct"></canvas></div></div>
+                    <div class="mb"><div class="chtw"><div id="ch-acct"></div></div></div>
                 </div>
                 <div class="mod-card" style="margin-bottom:0;">
                     <div class="mh">
@@ -300,7 +300,7 @@ window.SIED_CONFIG = {
                             <button class="sp-btn" onclick="setTrajMode('cyber',this)">Cyber &amp; Hard Law</button>
                             <button class="sp-btn" onclick="setTrajMode('diplomacy',this)">SIPRI Spend &amp; UNGA</button>
                         </div>
-                        <div class="chtw" style="height:245px;"><canvas id="ch-trend"></canvas></div>
+                        <div class="chtw"><div id="ch-trend"></div></div>
                         <div class="milestone-strip" id="traj-milestones"></div>
                     </div>
                 </div>
@@ -328,7 +328,7 @@ window.SIED_CONFIG = {
                         <button class="sp-btn" onclick="setBubbleDomain('Surveillance & Border AI',this)">Surveillance &amp; Border AI</button>
                         <button class="sp-btn" onclick="setBubbleDomain('Cyber & Agentic AI',this)">Cyber &amp; Agentic AI</button>
                     </div>
-                    <div class="chtw" style="height:280px;"><canvas id="ch-bubble"></canvas></div>
+                    <div class="chtw"><div id="ch-bubble"></div></div>
                     <div class="quad-legend">
                         <span class="cli"><span class="clsq" style="background:#f43f5e;"></span>Red Zone: Accountability Vacuum (&ge;75% Autonomy &amp; &ge;70 Impact)</span>
                         <span class="cli"><span class="clsq" style="background:#f59e0b;"></span>Amber Zone: Oversight Strain</span>
@@ -340,8 +340,8 @@ window.SIED_CONFIG = {
                 <div class="mh"><span class="mt">Multi-Actor IHL Radar &amp; Deployment Share</span></div>
                 <div class="mb">
                     <div class="radar-donut-grid">
-                        <div><div class="chtw" style="height:270px;"><canvas id="ch-radar"></canvas></div></div>
-                        <div><div class="chtw" style="height:270px;"><canvas id="ch-donut"></canvas></div></div>
+                        <div><div class="chtw"><div id="ch-radar"></div></div></div>
+                        <div><div class="chtw"><div id="ch-donut"></div></div></div>
                     </div>
                 </div>
             </div>
@@ -392,7 +392,7 @@ window.SIED_CONFIG = {
                         <span class="mt">📡 Live Ethics &amp; Security Stream</span>
                         <span class="live-b" id="rss-live-meta"><span class="live-dot"></span>AI-Filtered · 9 Sources</span>
                     </div>
-                    <div class="fb" id="feed-body"></div>
+                    <div class="sied-feed-list" id="feed-body"></div>
                 </div>
                 <div class="mod-card" style="margin-bottom:0;">
                     <div class="mh">
