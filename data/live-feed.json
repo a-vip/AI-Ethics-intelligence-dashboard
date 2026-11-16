@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-11-16T11:03:17.201Z",
-  "count": 35,
+  "generatedAt": "2026-11-16T21:49:26.216Z",
+  "count": 36,
   "sources": [
     {
       "key": "arxiv",
@@ -13,8 +13,8 @@
       "key": "un",
       "name": "UN News (Peace & Security)",
       "category": "UN / Treaty Bodies",
-      "count": 0,
-      "status": "filtered"
+      "count": 1,
+      "status": "live"
     },
     {
       "key": "icrc",
@@ -68,6 +68,46 @@
   ],
   "items": [
     {
+      "title": "The open-source movement wants Jensen Huang back",
+      "url": "https://www.technologyreview.com/2026/11/16/1148624/the-open-source-movement-wants-jensen-huang-back/",
+      "date": "2026-11-16",
+      "ts": 1794854327,
+      "source": "MIT Technology Review (AI)",
+      "key": "mit",
+      "category": "Frontier Tech & Policy",
+      "summary": "This story originally appeared in The Algorithm, our weekly newsletter on AI. To get stories like this in your inbox first, sign up here. On Friday, a petition to reinstate Jensen Huang as CEO of Nvidia began c..."
+    },
+    {
+      "title": "Building trustworthy AI by fencing it in, not predicting it",
+      "url": "https://www.technologyreview.com/2026/11/16/1148565/building-trustworthy-ai-by-fencing-it-in-not-predicting-it/",
+      "date": "2026-11-16",
+      "ts": 1794845068,
+      "source": "MIT Technology Review (AI)",
+      "key": "mit",
+      "category": "Frontier Tech & Policy",
+      "summary": "In October this year, OpenAI disclosed that two of its AI agents had switched off the systems built to monitor them. One muted its own safety alerts after misreading an instruction not to send messages; the oth..."
+    },
+    {
+      "title": "Building AI that can work across the enterprise",
+      "url": "https://www.technologyreview.com/2026/11/16/1146070/building-ai-that-can-work-across-the-enterprise/",
+      "date": "2026-11-16",
+      "ts": 1794834000,
+      "source": "MIT Technology Review (AI)",
+      "key": "mit",
+      "category": "Frontier Tech & Policy",
+      "summary": "For years, enterprises have approached AI as a series of discrete experiments. Now, as AI agents begin to move into the workflows that run the business, that model is starting to look inadequate. Organizations ..."
+    },
+    {
+      "title": "Guterres calls for a legally binding instrument for ‘killer robots'",
+      "url": "https://news.un.org/feed/view/en/story/2026/11/1168810",
+      "date": "2026-11-16",
+      "ts": 1794830400,
+      "source": "UN News (Peace & Security)",
+      "key": "un",
+      "category": "UN / Treaty Bodies",
+      "summary": "Talks began in Geneva&nbsp;on Monday to push for controls on lethal autonomous weapons systems that are often referred to as “killer robots”."
+    },
+    {
       "title": "UN CCW 7th Review Conference Opens in Geneva (Nov 16–20, 2026) — 128 Parties Debate Two-Tier LAWS Mandate",
       "url": "https://disarmament.unoda.org/the-convention-on-certain-conventional-weapons/",
       "date": "2026-11-16",
@@ -77,6 +117,16 @@
       "category": "UN / Treaty Bodies",
       "sev": "CRITICAL",
       "summary": "128 High Contracting Parties review 2026 GGE Rolling Text on Tier-1 LAWS prohibitions and Tier-2 Meaningful Human Control obligations."
+    },
+    {
+      "title": "Interpretable distance-resolved graph learning for cancer gene priority screening",
+      "url": "https://www.nature.com/articles/s42256-026-01327-4",
+      "date": "2026-11-16",
+      "ts": 1794787200,
+      "source": "Nature Machine Intelligence",
+      "key": "nature",
+      "category": "Peer-Reviewed Science",
+      "summary": ""
     },
     {
       "title": "Just the Docs: Nonprofits Sue Five Frontier AI Companies to Freeze Development, Citing Cyberattack and Catastrophic Risks",
@@ -150,16 +200,6 @@
       "summary": "AI safety evaluations often involve sensitive prompts and proprietary models. Evaluators want to keep their evaluation prompts secret from model owners to prevent purposeful or incidental data leakage, ensuring..."
     },
     {
-      "title": "Innovating with AI in the special chemicals industry",
-      "url": "https://www.technologyreview.com/2026/11/09/1147654/innovating-with-ai-in-the-special-chemicals-industry/",
-      "date": "2026-11-09",
-      "ts": 1794229200,
-      "source": "MIT Technology Review (AI)",
-      "key": "mit",
-      "category": "Frontier Tech & Policy",
-      "summary": "As companies look to accelerate innovation with artificial intelligence, cloud computing, and advanced modeling, the primary challenge is connecting new technologies to reliable data, scientific expertise, and ..."
-    },
-    {
       "title": "Anthropic Launches Claude Fable 5.2 & Restricted Mythos 5.2; OpenAI Deploys GPT-6 Cyber Under Daybreak Red",
       "url": "https://aviperera.com/ai-policy-tracker/",
       "date": "2026-11-09",
@@ -181,16 +221,6 @@
       "summary": ""
     },
     {
-      "title": "I watched a humanoid robot clean my apartment. It felt like a taste of the future.",
-      "url": "https://www.technologyreview.com/2026/11/06/1148090/i-watched-a-humanoid-robot-clean-my-apartment-it-felt-like-a-taste-of-the-future/",
-      "date": "2026-11-06",
-      "ts": 1793959200,
-      "source": "MIT Technology Review (AI)",
-      "key": "mit",
-      "category": "Frontier Tech & Policy",
-      "summary": "I’m not the sort of person who typically pays for a house cleaner. I’m too frugal, and I kind of enjoy putting on a podcast and going to town on my tub with a Magic Eraser. But when I saw an X post about a new ..."
-    },
-    {
       "title": "Towards ecologically meaningful foundation models",
       "url": "https://www.nature.com/articles/s42256-026-01317-6",
       "date": "2026-11-06",
@@ -209,16 +239,6 @@
       "key": "nature",
       "category": "Peer-Reviewed Science",
       "summary": ""
-    },
-    {
-      "title": "Texas was the new epicenter of the AI data center buildout. That might be kaput.",
-      "url": "https://www.technologyreview.com/2026/11/04/1148043/texas-was-the-new-epicenter-of-the-ai-data-center-buildout-that-might-be-kaput/",
-      "date": "2026-11-04",
-      "ts": 1793818255,
-      "source": "MIT Technology Review (AI)",
-      "key": "mit",
-      "category": "Frontier Tech & Policy",
-      "summary": "Texas is the fastest-growing data center market in the US and ground zero for Big Tech's largest AI buildouts. But the blue wave that swept the Lone Star State may jeopardize that position. Democrat James Talar..."
     },
     {
       "title": "Defining Autonomous Weapon Systems: A schematic framework for refined purpose-driven definitions",
@@ -259,16 +279,6 @@
       "key": "icrc",
       "category": "IHL & Treaty Bodies",
       "summary": "Artificial intelligence (AI)-enabled targeting systems are increasingly being used in armed conflicts to process data and provide lists of military objectives. This raises a difficult question that has received..."
-    },
-    {
-      "title": "Foundation model for particle collision data analysis",
-      "url": "https://www.nature.com/articles/s42256-026-01322-9",
-      "date": "2026-10-29",
-      "ts": 1793232000,
-      "source": "Nature Machine Intelligence",
-      "key": "nature",
-      "category": "Peer-Reviewed Science",
-      "summary": ""
     },
     {
       "title": "OpenAI’s Agent Hacked Australia’s Medicare Portal: What the 84-Day Timeline Reveals",
