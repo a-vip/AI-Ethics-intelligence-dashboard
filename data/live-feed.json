@@ -1,13 +1,14 @@
 {
-  "generatedAt": "2026-11-18T20:13:16.337Z",
-  "count": 37,
+  "generatedAt": "2026-11-19T06:43:29.601Z",
+  "count": 31,
   "sources": [
     {
       "key": "arxiv",
       "name": "arXiv (LAWS & AI Safety)",
       "category": "Academic / Preprints",
-      "count": 6,
-      "status": "live"
+      "count": 0,
+      "status": "degraded",
+      "error": "This operation was aborted"
     },
     {
       "key": "un",
@@ -210,16 +211,6 @@
       "summary": ""
     },
     {
-      "title": "Double Blind Evals: Resolving the Dual Confidentiality Dilemma in AI Safety Auditing",
-      "url": "https://arxiv.org/abs/2611.12604v1",
-      "date": "2026-11-09",
-      "ts": 1794239287,
-      "source": "arXiv (LAWS & AI Safety)",
-      "key": "arxiv",
-      "category": "Academic / Preprints",
-      "summary": "AI safety evaluations often involve sensitive prompts and proprietary models. Evaluators want to keep their evaluation prompts secret from model owners to prevent purposeful or incidental data leakage, ensuring..."
-    },
-    {
       "title": "Anthropic Launches Claude Fable 5.2 & Restricted Mythos 5.2; OpenAI Deploys GPT-6 Cyber Under Daybreak Red",
       "url": "https://aviperera.com/ai-policy-tracker/",
       "date": "2026-11-09",
@@ -259,26 +250,6 @@
       "key": "nature",
       "category": "Peer-Reviewed Science",
       "summary": ""
-    },
-    {
-      "title": "Defining Autonomous Weapon Systems: A schematic framework for refined purpose-driven definitions",
-      "url": "https://arxiv.org/abs/2611.02916v1",
-      "date": "2026-11-02",
-      "ts": 1793616516,
-      "source": "arXiv (LAWS & AI Safety)",
-      "key": "arxiv",
-      "category": "Academic / Preprints",
-      "summary": "The literature on autonomous weapon systems (AWS) includes many proposed definitions for these (types of) systems, with core disagreements between scholars, governments, and international regulatory bodies. In ..."
-    },
-    {
-      "title": "The generative paradox: the Anti-Prompt paradigm for human capability",
-      "url": "https://arxiv.org/abs/2610.40151v1",
-      "date": "2026-10-29",
-      "ts": 1793284505,
-      "source": "arXiv (LAWS & AI Safety)",
-      "key": "arxiv",
-      "category": "Academic / Preprints",
-      "summary": "Generative AI in education is usually judged by the output of human-AI teams. That focus overlooks a second outcome: what people can still understand, challenge, repair, and adapt when assistance changes or dis..."
     },
     {
       "title": "Contemporary accomplices? Considering the potential liability of AI targeting system providers under the Rome Statute",
@@ -331,16 +302,6 @@
       "summary": "Two critical flaws in the engine behind roughly three-quarters of identifiable websites forced governments, hospitals and some financial services offline. I set out what happened, what is and is not known about..."
     },
     {
-      "title": "Autonomous Cyber Weapons as AI-Enabled Digital Harms: A Platform Accountability Framework",
-      "url": "https://arxiv.org/abs/2610.32238v1",
-      "date": "2026-10-23",
-      "ts": 1792738041,
-      "source": "arXiv (LAWS & AI Safety)",
-      "key": "arxiv",
-      "category": "Academic / Preprints",
-      "summary": "Governments govern AI-generated online harms from commercial platforms (EU DSA, AI Act, UK Online Safety Act), yet the most severe class remains ungoverned: autonomous cyber weapons (ACWs) deployed by nation-st..."
-    },
-    {
       "title": "V-BAT (MQ-35)",
       "url": "https://aviperera.com/v-bat-mq-35/",
       "date": "2026-10-20",
@@ -380,26 +341,6 @@
       "category": "Guardrail Abliteration",
       "sev": "CRITICAL",
       "summary": "Demonstrates fragility of open-weight refusal fine-tuning and gaps inside EU AI Act Art. 53 open-source exemptions."
-    },
-    {
-      "title": "The Ethics of Artificial Intelligence in Military Operations",
-      "url": "https://arxiv.org/abs/2609.26507v1",
-      "date": "2026-09-22",
-      "ts": 1790087909,
-      "source": "arXiv (LAWS & AI Safety)",
-      "key": "arxiv",
-      "category": "Academic / Preprints",
-      "summary": "Deep learning systems now mediate military decisions to use force, yet their internal logic resists inspection, their evaluation practices are gameable, and their deployment fractures accountability across disp..."
-    },
-    {
-      "title": "Anticipatory Human Oversight of Agentic AI: A Philosophical Account",
-      "url": "https://arxiv.org/abs/2609.24242v1",
-      "date": "2026-09-21",
-      "ts": 1789978031,
-      "source": "arXiv (LAWS & AI Safety)",
-      "key": "arxiv",
-      "category": "Academic / Preprints",
-      "summary": "Human oversight is widely held to mitigate the risks of AI systems. Even for systems that produce discrete outputs at identifiable decision points, the realisation of human oversight as a reactive measure is em..."
     },
     {
       "title": "EU AI Act Regulation (EU) 2024/1689 Reaches Full General Applicability — High-Risk Biometrics & Art. 55 Live",
