@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-19T20:16:43.369Z",
+  "generatedAt": "2026-11-20T06:32:19.612Z",
   "count": 35,
   "sources": [
     {
@@ -67,6 +67,16 @@
     }
   ],
   "items": [
+    {
+      "title": "Crisis Governance at the Joints. Mapping the Ethical and Societal Territory of Crisis Management Technologies: The Case of Human-Swarm Teaming",
+      "url": "https://arxiv.org/abs/2611.25202v1",
+      "date": "2026-11-18",
+      "ts": 1795037132,
+      "source": "arXiv (LAWS & AI Safety)",
+      "key": "arxiv",
+      "category": "Academic / Preprints",
+      "summary": "Crisis and disaster governance increasingly relies on technologies that sense, classify and act faster than humans can. Drone swarms coordinated with human operators, known as human-swarm teaming, provide a pro..."
+    },
     {
       "title": "The AI Hype Index: AI is everywhere",
       "url": "https://www.technologyreview.com/2026/11/18/1148650/ai-hype-index-ai-is-everywhere/",
@@ -370,16 +380,6 @@
       "key": "arxiv",
       "category": "Academic / Preprints",
       "summary": "Deep learning systems now mediate military decisions to use force, yet their internal logic resists inspection, their evaluation practices are gameable, and their deployment fractures accountability across disp..."
-    },
-    {
-      "title": "Anticipatory Human Oversight of Agentic AI: A Philosophical Account",
-      "url": "https://arxiv.org/abs/2609.24242v1",
-      "date": "2026-09-21",
-      "ts": 1789978031,
-      "source": "arXiv (LAWS & AI Safety)",
-      "key": "arxiv",
-      "category": "Academic / Preprints",
-      "summary": "Human oversight is widely held to mitigate the risks of AI systems. Even for systems that produce discrete outputs at identifiable decision points, the realisation of human oversight as a reactive measure is em..."
     },
     {
       "title": "EU AI Act Regulation (EU) 2024/1689 Reaches Full General Applicability — High-Risk Biometrics & Art. 55 Live",
