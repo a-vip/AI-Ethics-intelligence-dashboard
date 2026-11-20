@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-20T06:32:19.612Z",
+  "generatedAt": "2026-11-20T19:48:11.885Z",
   "count": 35,
   "sources": [
     {
@@ -67,6 +67,26 @@
     }
   ],
   "items": [
+    {
+      "title": "The most misunderstood graph in AI just got a major update",
+      "url": "https://www.technologyreview.com/2026/11/20/1149399/the-most-misunderstood-graph-in-ai-just-got-a-major-update/",
+      "date": "2026-11-20",
+      "ts": 1795198515,
+      "source": "MIT Technology Review (AI)",
+      "key": "mit",
+      "category": "Frontier Tech & Policy",
+      "summary": "A new report from the AI evaluation nonprofit METR finds that some AI capabilities are continuing to improve along an exponential trajectory—but it also indicates that models aren’t quite as good at tasks that ..."
+    },
+    {
+      "title": "Enabling lab autonomy with reward functions and executable workflows",
+      "url": "https://www.nature.com/articles/s42256-026-01339-0",
+      "date": "2026-11-20",
+      "ts": 1795132800,
+      "source": "Nature Machine Intelligence",
+      "key": "nature",
+      "category": "Peer-Reviewed Science",
+      "summary": ""
+    },
     {
       "title": "Crisis Governance at the Joints. Mapping the Ethical and Societal Territory of Crisis Management Technologies: The Case of Human-Swarm Teaming",
       "url": "https://arxiv.org/abs/2611.25202v1",
@@ -136,16 +156,6 @@
       "key": "mit",
       "category": "Frontier Tech & Policy",
       "summary": "In October this year, OpenAI disclosed that two of its AI agents had switched off the systems built to monitor them. One muted its own safety alerts after misreading an instruction not to send messages; the oth..."
-    },
-    {
-      "title": "Building AI that can work across the enterprise",
-      "url": "https://www.technologyreview.com/2026/11/16/1146070/building-ai-that-can-work-across-the-enterprise/",
-      "date": "2026-11-16",
-      "ts": 1794834000,
-      "source": "MIT Technology Review (AI)",
-      "key": "mit",
-      "category": "Frontier Tech & Policy",
-      "summary": "For years, enterprises have approached AI as a series of discrete experiments. Now, as AI agents begin to move into the workflows that run the business, that model is starting to look inadequate. Organizations ..."
     },
     {
       "title": "Guterres calls for a legally binding instrument for ‘killer robots'",
@@ -235,16 +245,6 @@
       "url": "https://www.nature.com/articles/s42256-026-01317-6",
       "date": "2026-11-06",
       "ts": 1793923200,
-      "source": "Nature Machine Intelligence",
-      "key": "nature",
-      "category": "Peer-Reviewed Science",
-      "summary": ""
-    },
-    {
-      "title": "Fractal basin geometry and the limits to predictability and reproducibility in deep learning",
-      "url": "https://www.nature.com/articles/s42256-026-01336-3",
-      "date": "2026-11-05",
-      "ts": 1793836800,
       "source": "Nature Machine Intelligence",
       "key": "nature",
       "category": "Peer-Reviewed Science",
