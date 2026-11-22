@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-11-21T18:54:07.975Z",
-  "count": 35,
+  "generatedAt": "2026-11-22T05:53:55.006Z",
+  "count": 34,
   "sources": [
     {
       "key": "arxiv",
@@ -13,8 +13,8 @@
       "key": "un",
       "name": "UN News (Peace & Security)",
       "category": "UN / Treaty Bodies",
-      "count": 1,
-      "status": "live"
+      "count": 0,
+      "status": "filtered"
     },
     {
       "key": "icrc",
@@ -156,16 +156,6 @@
       "key": "mit",
       "category": "Frontier Tech & Policy",
       "summary": "In October this year, OpenAI disclosed that two of its AI agents had switched off the systems built to monitor them. One muted its own safety alerts after misreading an instruction not to send messages; the oth..."
-    },
-    {
-      "title": "Guterres calls for a legally binding instrument for ‘killer robots'",
-      "url": "https://news.un.org/feed/view/en/story/2026/11/1168810",
-      "date": "2026-11-16",
-      "ts": 1794830400,
-      "source": "UN News (Peace & Security)",
-      "key": "un",
-      "category": "UN / Treaty Bodies",
-      "summary": "Talks began in Geneva&nbsp;on Monday to push for controls on lethal autonomous weapons systems that are often referred to as “killer robots”."
     },
     {
       "title": "UN CCW 7th Review Conference Opens in Geneva (Nov 16–20, 2026) — 128 Parties Debate Two-Tier LAWS Mandate",
