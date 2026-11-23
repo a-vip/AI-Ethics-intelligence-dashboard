@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-11-23T06:43:07.591Z",
-  "count": 34,
+  "generatedAt": "2026-11-23T23:37:33.554Z",
+  "count": 36,
   "sources": [
     {
       "key": "arxiv",
@@ -27,15 +27,15 @@
       "key": "lieber",
       "name": "Lieber Institute (West Point)",
       "category": "Military & IHL Scholarship",
-      "count": 0,
-      "status": "filtered"
+      "count": 1,
+      "status": "live"
     },
     {
       "key": "justsec",
       "name": "Just Security",
       "category": "National Security & Law",
-      "count": 0,
-      "status": "filtered"
+      "count": 1,
+      "status": "live"
     },
     {
       "key": "nature",
@@ -67,6 +67,36 @@
     }
   ],
   "items": [
+    {
+      "title": "Algorithmic Friction and the Illusion of Positive Control",
+      "url": "https://lieber.westpoint.edu/algorithmic-friction-illusion-positive-control/",
+      "date": "2026-11-23",
+      "ts": 1795459554,
+      "source": "Lieber Institute (West Point)",
+      "key": "lieber",
+      "category": "Military & IHL Scholarship",
+      "summary": "The post Algorithmic Friction and the Illusion of Positive Control appeared first on Lieber Institute West Point ."
+    },
+    {
+      "title": "A legendary philosopher isn’t buying Anthropic’s consciousness argument",
+      "url": "https://www.technologyreview.com/2026/11/23/1149569/a-legendary-philosopher-isnt-buying-anthropics-consciousness-argument/",
+      "date": "2026-11-23",
+      "ts": 1795455368,
+      "source": "MIT Technology Review (AI)",
+      "key": "mit",
+      "category": "Frontier Tech & Policy",
+      "summary": "This story originally appeared in The Algorithm, our weekly newsletter on AI. To get stories like this in your inbox first, sign up here. Before going public last week, Anthropic named the possibility that AI c..."
+    },
+    {
+      "title": "The Myth of Inevitability: AI Safety, Industry Incentives, and the Role of Law",
+      "url": "https://www.justsecurity.org/163918/ai-safety-incentives-role-of-law/?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=ai-safety-incentives-role-of-law",
+      "date": "2026-11-23",
+      "ts": 1795443245,
+      "source": "Just Security",
+      "key": "justsec",
+      "category": "National Security & Law",
+      "summary": "Unless Congress acts on AI, states face a political opening — and a moral duty — to protect citizens' safety and well-being. The post The Myth of Inevitability: AI Safety, Industry Incentives, and the Role of L..."
+    },
     {
       "title": "The most misunderstood graph in AI just got a major update",
       "url": "https://www.technologyreview.com/2026/11/20/1149399/the-most-misunderstood-graph-in-ai-just-got-a-major-update/",
@@ -146,16 +176,6 @@
       "key": "mit",
       "category": "Frontier Tech & Policy",
       "summary": "This story originally appeared in The Algorithm, our weekly newsletter on AI. To get stories like this in your inbox first, sign up here. On Friday, a petition to reinstate Jensen Huang as CEO of Nvidia began c..."
-    },
-    {
-      "title": "Building trustworthy AI by fencing it in, not predicting it",
-      "url": "https://www.technologyreview.com/2026/11/16/1148565/building-trustworthy-ai-by-fencing-it-in-not-predicting-it/",
-      "date": "2026-11-16",
-      "ts": 1794845068,
-      "source": "MIT Technology Review (AI)",
-      "key": "mit",
-      "category": "Frontier Tech & Policy",
-      "summary": "In October this year, OpenAI disclosed that two of its AI agents had switched off the systems built to monitor them. One muted its own safety alerts after misreading an instruction not to send messages; the oth..."
     },
     {
       "title": "UN CCW 7th Review Conference Opens in Geneva (Nov 16–20, 2026) — 128 Parties Debate Two-Tier LAWS Mandate",
