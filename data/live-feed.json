@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-11-24T09:10:50.656Z",
-  "count": 36,
+  "generatedAt": "2026-11-24T22:08:20.671Z",
+  "count": 37,
   "sources": [
     {
       "key": "arxiv",
@@ -13,8 +13,8 @@
       "key": "un",
       "name": "UN News (Peace & Security)",
       "category": "UN / Treaty Bodies",
-      "count": 0,
-      "status": "filtered"
+      "count": 1,
+      "status": "live"
     },
     {
       "key": "icrc",
@@ -67,6 +67,26 @@
     }
   ],
   "items": [
+    {
+      "title": "Raising the stakes for enterprise networks with AI modernization",
+      "url": "https://www.technologyreview.com/2026/11/24/1148091/raising-the-stakes-for-enterprise-networks-with-ai-modernization/",
+      "date": "2026-11-24",
+      "ts": 1795533316,
+      "source": "MIT Technology Review (AI)",
+      "key": "mit",
+      "category": "Frontier Tech & Policy",
+      "summary": "Enterprise networks are under severe strain. As companies rush to deploy artificial intelligence, the technology is quickly becoming the biggest source of demand on the network. Now, agentic AI is adding to the..."
+    },
+    {
+      "title": "Security Council LIVE: Can conflict resolution keep pace as AI and drones reshape war?",
+      "url": "https://news.un.org/feed/view/en/story/2026/11/1168866",
+      "date": "2026-11-24",
+      "ts": 1795521600,
+      "source": "UN News (Peace & Security)",
+      "key": "un",
+      "category": "UN / Treaty Bodies",
+      "summary": "When the UN was founded in 1945, computers, the internet and satellites were the stuff of science fiction. Today, artificial intelligence (AI) is already assisting in targeting, drones are reshaping warfare and..."
+    },
     {
       "title": "Algorithmic Friction and the Illusion of Positive Control",
       "url": "https://lieber.westpoint.edu/algorithmic-friction-illusion-positive-control/",
@@ -166,16 +186,6 @@
       "key": "mit",
       "category": "Frontier Tech & Policy",
       "summary": "To access a report, click on the corresponding image below."
-    },
-    {
-      "title": "The open-source movement wants Jensen Huang back",
-      "url": "https://www.technologyreview.com/2026/11/16/1148624/the-open-source-movement-wants-jensen-huang-back/",
-      "date": "2026-11-16",
-      "ts": 1794854327,
-      "source": "MIT Technology Review (AI)",
-      "key": "mit",
-      "category": "Frontier Tech & Policy",
-      "summary": "This story originally appeared in The Algorithm, our weekly newsletter on AI. To get stories like this in your inbox first, sign up here. On Friday, a petition to reinstate Jensen Huang as CEO of Nvidia began c..."
     },
     {
       "title": "UN CCW 7th Review Conference Opens in Geneva (Nov 16–20, 2026) — 128 Parties Debate Two-Tier LAWS Mandate",
