@@ -1,14 +1,13 @@
 {
-  "generatedAt": "2026-11-27T07:35:57.177Z",
-  "count": 30,
+  "generatedAt": "2026-11-27T20:54:31.450Z",
+  "count": 36,
   "sources": [
     {
       "key": "arxiv",
       "name": "arXiv (LAWS & AI Safety)",
       "category": "Academic / Preprints",
-      "count": 0,
-      "status": "degraded",
-      "error": "This operation was aborted"
+      "count": 6,
+      "status": "live"
     },
     {
       "key": "un",
@@ -69,6 +68,46 @@
   ],
   "items": [
     {
+      "title": "Generating proteins with complex functions",
+      "url": "https://www.nature.com/articles/s42256-026-01330-9",
+      "date": "2026-11-27",
+      "ts": 1795737600,
+      "source": "Nature Machine Intelligence",
+      "key": "nature",
+      "category": "Peer-Reviewed Science",
+      "summary": ""
+    },
+    {
+      "title": "Exploring nonlinear body oscillations for natural quadruped gaits",
+      "url": "https://www.nature.com/articles/s42256-026-01320-x",
+      "date": "2026-11-27",
+      "ts": 1795737600,
+      "source": "Nature Machine Intelligence",
+      "key": "nature",
+      "category": "Peer-Reviewed Science",
+      "summary": ""
+    },
+    {
+      "title": "A long-context generative foundation model for versatile RNA design",
+      "url": "https://www.nature.com/articles/s42256-026-01321-w",
+      "date": "2026-11-27",
+      "ts": 1795737600,
+      "source": "Nature Machine Intelligence",
+      "key": "nature",
+      "category": "Peer-Reviewed Science",
+      "summary": ""
+    },
+    {
+      "title": "Generating proteins with computationally predicted functions and multiple states via multimodal diffusion",
+      "url": "https://www.nature.com/articles/s42256-026-01329-2",
+      "date": "2026-11-27",
+      "ts": 1795737600,
+      "source": "Nature Machine Intelligence",
+      "key": "nature",
+      "category": "Peer-Reviewed Science",
+      "summary": ""
+    },
+    {
       "title": "Accelerating inverse materials design using generative diffusion models with reinforcement learning",
       "url": "https://www.nature.com/articles/s42256-026-01334-5",
       "date": "2026-11-26",
@@ -87,6 +126,16 @@
       "key": "nature",
       "category": "Peer-Reviewed Science",
       "summary": ""
+    },
+    {
+      "title": "Unstable Action Boundaries in Lethal Drone Agents",
+      "url": "https://arxiv.org/abs/2611.34121v1",
+      "date": "2026-11-25",
+      "ts": 1795602218,
+      "source": "arXiv (LAWS & AI Safety)",
+      "key": "arxiv",
+      "category": "Academic / Preprints",
+      "summary": "Tool-using large language model (LLM) agents raise safety risks that are not captured by text-only refusal behavior, especially when tools can trigger high-impact actions. This concern is salient in military se..."
     },
     {
       "title": "AI is straining America’s open records systems",
@@ -139,14 +188,14 @@
       "summary": "A new report from the AI evaluation nonprofit METR finds that some AI capabilities are continuing to improve along an exponential trajectory—but it also indicates that models aren’t quite as good at tasks that ..."
     },
     {
-      "title": "Enabling lab autonomy with reward functions and executable workflows",
-      "url": "https://www.nature.com/articles/s42256-026-01339-0",
-      "date": "2026-11-20",
-      "ts": 1795132800,
-      "source": "Nature Machine Intelligence",
-      "key": "nature",
-      "category": "Peer-Reviewed Science",
-      "summary": ""
+      "title": "Crisis Governance at the Joints. Mapping the Ethical and Societal Territory of Crisis Management Technologies: The Case of Human-Swarm Teaming",
+      "url": "https://arxiv.org/abs/2611.25202v1",
+      "date": "2026-11-18",
+      "ts": 1795037132,
+      "source": "arXiv (LAWS & AI Safety)",
+      "key": "arxiv",
+      "category": "Academic / Preprints",
+      "summary": "Crisis and disaster governance increasingly relies on technologies that sense, classify and act faster than humans can. Drone swarms coordinated with human operators, known as human-swarm teaming, provide a pro..."
     },
     {
       "title": "The AI Hype Index: AI is everywhere",
@@ -167,16 +216,6 @@
       "key": "mit",
       "category": "Frontier Tech & Policy",
       "summary": "In a lab near Newark Airport in New Jersey, a team of around 30 experienced human sniffers are slowly working their way through every odor on Earth. Their careful notes—“nutty,” “peachy,” “marine”—are cross-ref..."
-    },
-    {
-      "title": "When AI-assisted criticism scales, peer review needs an obligation threshold",
-      "url": "https://www.nature.com/articles/s42256-026-01349-y",
-      "date": "2026-11-18",
-      "ts": 1794960000,
-      "source": "Nature Machine Intelligence",
-      "key": "nature",
-      "category": "Peer-Reviewed Science",
-      "summary": ""
     },
     {
       "title": "Research Reports",
@@ -200,16 +239,6 @@
       "summary": "128 High Contracting Parties review 2026 GGE Rolling Text on Tier-1 LAWS prohibitions and Tier-2 Meaningful Human Control obligations."
     },
     {
-      "title": "Interpretable distance-resolved graph learning for cancer gene priority screening",
-      "url": "https://www.nature.com/articles/s42256-026-01327-4",
-      "date": "2026-11-16",
-      "ts": 1794787200,
-      "source": "Nature Machine Intelligence",
-      "key": "nature",
-      "category": "Peer-Reviewed Science",
-      "summary": ""
-    },
-    {
       "title": "Google Releases Gemini 4 Hydrogen (Nov 12) & Carbon (Nov 10) with Runtime CoT Safety Monitors Under CA SB 53",
       "url": "https://deepmind.google/technologies/gemini/",
       "date": "2026-11-12",
@@ -221,14 +250,14 @@
       "summary": "Hydrogen trims agentic shortcut risk by 81% vs 3.8 Flash under CA TFAIA & EU AI Act Art. 51–55 Systemic Risk transparency."
     },
     {
-      "title": "Tensegrity continuum robots enable task-adaptive morphologies for cooperative behaviours",
-      "url": "https://www.nature.com/articles/s42256-026-01335-4",
-      "date": "2026-11-11",
-      "ts": 1794355200,
-      "source": "Nature Machine Intelligence",
-      "key": "nature",
-      "category": "Peer-Reviewed Science",
-      "summary": ""
+      "title": "Double Blind Evals: Resolving the Dual Confidentiality Dilemma in AI Safety Auditing",
+      "url": "https://arxiv.org/abs/2611.12604v1",
+      "date": "2026-11-09",
+      "ts": 1794239287,
+      "source": "arXiv (LAWS & AI Safety)",
+      "key": "arxiv",
+      "category": "Academic / Preprints",
+      "summary": "AI safety evaluations often involve sensitive prompts and proprietary models. Evaluators want to keep their evaluation prompts secret from model owners to prevent purposeful or incidental data leakage, ensuring..."
     },
     {
       "title": "Anthropic Launches Claude Fable 5.2 & Restricted Mythos 5.2; OpenAI Deploys GPT-6 Cyber Under Daybreak Red",
@@ -240,6 +269,26 @@
       "category": "Frontier Cyber Risk",
       "sev": "CRITICAL",
       "summary": "First frontier generation autonomously chaining zero-day exploits; general weights withheld and restricted to vetted cyber defenders."
+    },
+    {
+      "title": "Defining Autonomous Weapon Systems: A schematic framework for refined purpose-driven definitions",
+      "url": "https://arxiv.org/abs/2611.02916v1",
+      "date": "2026-11-02",
+      "ts": 1793616516,
+      "source": "arXiv (LAWS & AI Safety)",
+      "key": "arxiv",
+      "category": "Academic / Preprints",
+      "summary": "The literature on autonomous weapon systems (AWS) includes many proposed definitions for these (types of) systems, with core disagreements between scholars, governments, and international regulatory bodies. In ..."
+    },
+    {
+      "title": "The generative paradox: the Anti-Prompt paradigm for human capability",
+      "url": "https://arxiv.org/abs/2610.40151v1",
+      "date": "2026-10-29",
+      "ts": 1793284505,
+      "source": "arXiv (LAWS & AI Safety)",
+      "key": "arxiv",
+      "category": "Academic / Preprints",
+      "summary": "Generative AI in education is usually judged by the output of human-AI teams. That focus overlooks a second outcome: what people can still understand, challenge, repair, and adapt when assistance changes or dis..."
     },
     {
       "title": "Contemporary accomplices? Considering the potential liability of AI targeting system providers under the Rome Statute",
@@ -290,6 +339,16 @@
       "key": "avi",
       "category": "Sovereign Dossiers",
       "summary": "Two critical flaws in the engine behind roughly three-quarters of identifiable websites forced governments, hospitals and some financial services offline. I set out what happened, what is and is not known about..."
+    },
+    {
+      "title": "Autonomous Cyber Weapons as AI-Enabled Digital Harms: A Platform Accountability Framework",
+      "url": "https://arxiv.org/abs/2610.32238v1",
+      "date": "2026-10-23",
+      "ts": 1792738041,
+      "source": "arXiv (LAWS & AI Safety)",
+      "key": "arxiv",
+      "category": "Academic / Preprints",
+      "summary": "Governments govern AI-generated online harms from commercial platforms (EU DSA, AI Act, UK Online Safety Act), yet the most severe class remains ungoverned: autonomous cyber weapons (ACWs) deployed by nation-st..."
     },
     {
       "title": "V-BAT (MQ-35)",
