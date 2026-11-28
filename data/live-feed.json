@@ -1,13 +1,14 @@
 {
-  "generatedAt": "2026-11-27T20:54:31.450Z",
-  "count": 36,
+  "generatedAt": "2026-11-28T07:03:15.158Z",
+  "count": 30,
   "sources": [
     {
       "key": "arxiv",
       "name": "arXiv (LAWS & AI Safety)",
       "category": "Academic / Preprints",
-      "count": 6,
-      "status": "live"
+      "count": 0,
+      "status": "degraded",
+      "error": "This operation was aborted"
     },
     {
       "key": "un",
@@ -128,16 +129,6 @@
       "summary": ""
     },
     {
-      "title": "Unstable Action Boundaries in Lethal Drone Agents",
-      "url": "https://arxiv.org/abs/2611.34121v1",
-      "date": "2026-11-25",
-      "ts": 1795602218,
-      "source": "arXiv (LAWS & AI Safety)",
-      "key": "arxiv",
-      "category": "Academic / Preprints",
-      "summary": "Tool-using large language model (LLM) agents raise safety risks that are not captured by text-only refusal behavior, especially when tools can trigger high-impact actions. This concern is salient in military se..."
-    },
-    {
       "title": "AI is straining America’s open records systems",
       "url": "https://www.technologyreview.com/2026/11/25/1149702/ai-is-straining-americas-open-records-systems/",
       "date": "2026-11-25",
@@ -186,16 +177,6 @@
       "key": "mit",
       "category": "Frontier Tech & Policy",
       "summary": "A new report from the AI evaluation nonprofit METR finds that some AI capabilities are continuing to improve along an exponential trajectory—but it also indicates that models aren’t quite as good at tasks that ..."
-    },
-    {
-      "title": "Crisis Governance at the Joints. Mapping the Ethical and Societal Territory of Crisis Management Technologies: The Case of Human-Swarm Teaming",
-      "url": "https://arxiv.org/abs/2611.25202v1",
-      "date": "2026-11-18",
-      "ts": 1795037132,
-      "source": "arXiv (LAWS & AI Safety)",
-      "key": "arxiv",
-      "category": "Academic / Preprints",
-      "summary": "Crisis and disaster governance increasingly relies on technologies that sense, classify and act faster than humans can. Drone swarms coordinated with human operators, known as human-swarm teaming, provide a pro..."
     },
     {
       "title": "The AI Hype Index: AI is everywhere",
@@ -250,16 +231,6 @@
       "summary": "Hydrogen trims agentic shortcut risk by 81% vs 3.8 Flash under CA TFAIA & EU AI Act Art. 51–55 Systemic Risk transparency."
     },
     {
-      "title": "Double Blind Evals: Resolving the Dual Confidentiality Dilemma in AI Safety Auditing",
-      "url": "https://arxiv.org/abs/2611.12604v1",
-      "date": "2026-11-09",
-      "ts": 1794239287,
-      "source": "arXiv (LAWS & AI Safety)",
-      "key": "arxiv",
-      "category": "Academic / Preprints",
-      "summary": "AI safety evaluations often involve sensitive prompts and proprietary models. Evaluators want to keep their evaluation prompts secret from model owners to prevent purposeful or incidental data leakage, ensuring..."
-    },
-    {
       "title": "Anthropic Launches Claude Fable 5.2 & Restricted Mythos 5.2; OpenAI Deploys GPT-6 Cyber Under Daybreak Red",
       "url": "https://aviperera.com/ai-policy-tracker/",
       "date": "2026-11-09",
@@ -269,26 +240,6 @@
       "category": "Frontier Cyber Risk",
       "sev": "CRITICAL",
       "summary": "First frontier generation autonomously chaining zero-day exploits; general weights withheld and restricted to vetted cyber defenders."
-    },
-    {
-      "title": "Defining Autonomous Weapon Systems: A schematic framework for refined purpose-driven definitions",
-      "url": "https://arxiv.org/abs/2611.02916v1",
-      "date": "2026-11-02",
-      "ts": 1793616516,
-      "source": "arXiv (LAWS & AI Safety)",
-      "key": "arxiv",
-      "category": "Academic / Preprints",
-      "summary": "The literature on autonomous weapon systems (AWS) includes many proposed definitions for these (types of) systems, with core disagreements between scholars, governments, and international regulatory bodies. In ..."
-    },
-    {
-      "title": "The generative paradox: the Anti-Prompt paradigm for human capability",
-      "url": "https://arxiv.org/abs/2610.40151v1",
-      "date": "2026-10-29",
-      "ts": 1793284505,
-      "source": "arXiv (LAWS & AI Safety)",
-      "key": "arxiv",
-      "category": "Academic / Preprints",
-      "summary": "Generative AI in education is usually judged by the output of human-AI teams. That focus overlooks a second outcome: what people can still understand, challenge, repair, and adapt when assistance changes or dis..."
     },
     {
       "title": "Contemporary accomplices? Considering the potential liability of AI targeting system providers under the Rome Statute",
@@ -339,16 +290,6 @@
       "key": "avi",
       "category": "Sovereign Dossiers",
       "summary": "Two critical flaws in the engine behind roughly three-quarters of identifiable websites forced governments, hospitals and some financial services offline. I set out what happened, what is and is not known about..."
-    },
-    {
-      "title": "Autonomous Cyber Weapons as AI-Enabled Digital Harms: A Platform Accountability Framework",
-      "url": "https://arxiv.org/abs/2610.32238v1",
-      "date": "2026-10-23",
-      "ts": 1792738041,
-      "source": "arXiv (LAWS & AI Safety)",
-      "key": "arxiv",
-      "category": "Academic / Preprints",
-      "summary": "Governments govern AI-generated online harms from commercial platforms (EU DSA, AI Act, UK Online Safety Act), yet the most severe class remains ungoverned: autonomous cyber weapons (ACWs) deployed by nation-st..."
     },
     {
       "title": "V-BAT (MQ-35)",
